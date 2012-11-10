@@ -10,25 +10,43 @@
 
         <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1">
             <Menu IsMainMenu="True">
-                <MenuItem Header="_File">
+                <MenuItem Header="_Datei">
                     <MenuItem Name="menuOpenFolder" Header="_Stapel laden" Click="menuOpenFolder_Click" />
                     <MenuItem Name="menuExitProgram" Header="_Beenden" Click="menuExitProgram_Click" />
+                </MenuItem>
+                <MenuItem Header="_Einstellungen">
+                    <MenuItem Name="menuMouseSettings" Header="_Maus" />
                 </MenuItem>
             </Menu>
         </Border>
 
         <DockPanel LastChildFill="True" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <TextBlock Name="debugTxtBox" Margin="10,5,0,5">
-                    test321
+
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#15000040">
+                <TextBlock Name="debugTxtBox" Margin="10,5,0,5" Foreground="Red">
+                    Aktuell DebugTextBox. Final = Anzeige  von Bilderstapel und Dateinamen
                 </TextBlock>
             </StackPanel>
-            <Slider Height="23" Name="stackSlider"  DockPanel.Dock="Bottom" />
-            <Button Content="Dock=Left" DockPanel.Dock="Left"  />
-            <Button Content="Dock=Right" DockPanel.Dock="Right"/>
-            <Canvas Name="canvas">
-                <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />
-            </Canvas>
+            
+            <Slider Height="23" Name="stackSlider" Margin="2,0,2,0" DockPanel.Dock="Bottom" Background="#15000040" />
+            
+            <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
+                <Label Margin="2">Helligkeit</Label>
+                <Slider Name="slider1" Height="23" Width="100" Margin="2" Value="5" />
+                <Label Margin="2">Kontrast</Label>
+                <Slider Name="slider2" Height="23" Width="100" Margin="2" Value="5" />
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
+                <Label Margin="2">Innereienmarkierer</Label>               
+            </StackPanel>
+            
+            <Border BorderBrush="Black" BorderThickness="1,1,1,1">
+                <Canvas Name="canvas" Background="#6C005F5D">
+                    <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />                
+                </Canvas>
+            </Border>
+            
         </DockPanel>
     </Grid>
 </Window>
