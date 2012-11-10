@@ -29,6 +29,8 @@ namespace AP_HA
             TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             BitmapSource bitmapSource = decoder.Frames[0];
 
+            //Commitment Test
+
             imgControl.Source = bitmapSource;
         }
     }
