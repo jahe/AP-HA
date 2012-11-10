@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace AP_HA
 {
@@ -22,6 +23,13 @@ namespace AP_HA
         public MainWindow()
         {
             InitializeComponent();
+
+            //TIFF Decodierung
+            Stream imageStreamSource = new FileStream("C:\\abc.tif", FileMode.Open, FileAccess.Read, FileShare.Read);
+            TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            BitmapSource bitmapSource = decoder.Frames[0];
+
+            imgControl.Source = bitmapSource;
         }
     }
 }

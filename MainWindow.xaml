@@ -3,6 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="Second Commit" Height="23" HorizontalAlignment="Left" Margin="206,140,0,0" Name="button1" VerticalAlignment="Top" Width="100" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22" />
+            <RowDefinition Height="289*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Stapel laden" />
+                </MenuItem>
+            </Menu>
+        </Border>
+
+        <DockPanel LastChildFill="True" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <TextBlock Name="debugTxtBox" Margin="10,5,0,5">
+                    test321
+                </TextBlock>
+            </StackPanel>
+            <Slider Height="23" Name="slider1"  DockPanel.Dock="Bottom" />
+            <Button Content="Dock=Left" DockPanel.Dock="Left"/>
+            <Button Content="Dock=Right" DockPanel.Dock="Right"/>
+            <Canvas Name="canvas">
+                <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />
+            </Canvas>
+        </DockPanel>
     </Grid>
 </Window>
