@@ -33,5 +33,7 @@ namespace AP_HA
 
             imgControl.Source = bitmapSource;
         }
+
+    
     }
 }

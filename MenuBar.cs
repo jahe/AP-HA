@@ -40,6 +40,11 @@ namespace AP_HA
             }
         }
 
+        private void menuExitProgram_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
         private static int CountFiles(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
