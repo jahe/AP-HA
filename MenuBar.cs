@@ -17,30 +17,33 @@ using System.Windows.Forms;
 
 namespace AP_HA
 {
-    public partial class MainWindow
+    public partial class MainWindow //UNDER CONSTRUCTION
     {
         FolderBrowserDialog openFolderDialog;
+        DialogResult oFDResult;
+        PictureStack pictureStack;
 
-        private void menuOpenFolder_Click(object sender, RoutedEventArgs e)
+        private void menuOpenFolder_Click(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
         {
             openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Neuen Bildstapel auswählen";
-            openFolderDialog.ShowNewFolderButton = false;                          //Anwender verbieten neuen Ordner zu erstellen            
-            openFolderDialog.SelectedPath = @"C:\";                                //Vorgabe Pfad
+            openFolderDialog.ShowNewFolderButton = false;                           //Anwender verbieten neuen Ordner zu erstellen            
+            openFolderDialog.SelectedPath = @"C:\APHA\";                            //Vorgabe Pfad
 
-            DialogResult objResult = openFolderDialog.ShowDialog();
+            oFDResult = openFolderDialog.ShowDialog();
 
-            if (objResult == System.Windows.Forms.DialogResult.OK)
+            if (oFDResult == System.Windows.Forms.DialogResult.OK)                  //Wenn im Dialog OK-Button gedrückt wurde
             {
-                try                                                                //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
+                try                                                                 //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
                 {
-                    PictureStack pictureStack = new PictureStack(openFolderDialog.SelectedPath);
+                    pictureStack = new PictureStack(openFolderDialog.SelectedPath);
+                    debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.path + " befinden sich: " + pictureStack.pictureAmount + " Dateien";
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show("Der ausgewählte Ordner entspricht nicht den Anforderungen");
-                }
-                
+                    //TO DO Individuelle Ausgabe der Fehlermeldung durch Exceptions
+                    System.Windows.MessageBox.Show("Der ausgewählte Ordner entspricht nicht den Anforderungen o.ä.");
+                }                
             }
             else
             {
@@ -48,7 +51,7 @@ namespace AP_HA
             }
         }
 
-        private void menuExitProgram_Click(object sender, RoutedEventArgs e)
+        private void menuExitProgram_Click(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
         {
             System.Windows.Application.Current.Shutdown();
         }
