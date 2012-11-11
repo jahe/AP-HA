@@ -7,10 +7,6 @@ using System.IO;
 namespace AP_HA
 {
     /** Klasse zum Verwalten des Bilderstapels / Ordners,
-        mögliche Funktionen:
-            .list - gibt eine Liste der vorhandenen Dateien wieder
-            .nextImage - zeigt das nächste Bild des Stapels an (evtl für stackSlider)
-            .previousImage - s.o.
             ....
     **/
     
@@ -23,7 +19,6 @@ namespace AP_HA
     class PictureStack //UNDER CONSTRUCTION
     {
         private string path;                                    //Aktueller Pfad
-        private int pictureAmount;                              //Anzahl der im Ordner befindlichen Bilder
         private List<string> FileList;                          //Liste der im Ordner enthaltenen *.tif
 
         public PictureStack()                                   
@@ -36,11 +31,10 @@ namespace AP_HA
             if (list(path).Count() != 0)                        //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
             {                               
                 this.path = path;
-                this.pictureAmount = FileList.Count();
             }
             else
             {
-                //throw new invalidFolderException("Der gewählte Ordner enthält keine *.tif Dateien");
+                //TO DO throw new invalidFolderException("Der gewählte Ordner enthält keine *.tif Dateien");
                 System.Windows.Forms.MessageBox.Show("Der gewählte Ordner enthält keine *.tif Dateien");
             }
         }
@@ -52,7 +46,17 @@ namespace AP_HA
 
         public int getPictureAmount()
         {
-            return this.pictureAmount;
+            return this.FileList.Count();
+        }
+
+        public List<string> getPictureList()
+        {
+            return this.FileList;
+        }
+
+        public string getPictureFromList(int picNo)
+        {
+            return this.FileList[picNo];
         }
 
         private List<string> list(string path)

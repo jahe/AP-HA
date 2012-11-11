@@ -38,11 +38,12 @@ namespace AP_HA
                 {
                     pictureStack = new PictureStack(openFolderDialog.SelectedPath);
                     debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.getPath() + " befinden sich: " + pictureStack.getPictureAmount() + " *.tif Dateien";
+                    stackSlider.Maximum = pictureStack.getPictureAmount()-1;          //Stackslider an Bilderstapelgröße anpassen
                 }
                 catch
                 {
                     //TO DO Individuelle Ausgabe der Fehlermeldung durch Exceptions
-                    System.Windows.MessageBox.Show("Der ausgewählte Ordner entspricht nicht den Anforderungen o.ä.");
+                    debugTxtBox.Text = "Der ausgewählte Ordner entspricht nicht den Anforderungen o.ä.";
                 }                
             }
             else

@@ -24,17 +24,12 @@ namespace AP_HA
         {
             InitializeComponent();
 
-            //TIFF Decodierung Verschieben in PictureStack
-            Stream imageStreamSource = new FileStream("C:\\abc.tif", FileMode.Open, FileAccess.Read, FileShare.Read);
-            TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            BitmapSource bitmapSource = decoder.Frames[0];
-
-            //Commitment Test
-
-            imgControl.Source = bitmapSource;
+            
 
             
         }
+
+        
 
     
     }
