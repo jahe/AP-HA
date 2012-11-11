@@ -24,7 +24,7 @@
 
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#15000040">
                 <TextBlock Name="debugTxtBox" Margin="10,5,0,5" Foreground="Red">
-                    Aktuell DebugTextBox. Final = Anzeige  von Bilderstapel und Dateinamen
+                    Aktuell DebugTextBox
                 </TextBlock>
             </StackPanel>
             

@@ -32,7 +32,15 @@ namespace AP_HA
 
             if (objResult == System.Windows.Forms.DialogResult.OK)
             {
-                debugTxtBox.Text = "" + CountFiles(openFolderDialog.SelectedPath) + " Files ausgewählt in Ordner :" + openFolderDialog.SelectedPath;
+                try                                                                //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
+                {
+                    PictureStack pictureStack = new PictureStack(openFolderDialog.SelectedPath);
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Der ausgewählte Ordner entspricht nicht den Anforderungen");
+                }
+                
             }
             else
             {
@@ -43,12 +51,6 @@ namespace AP_HA
         private void menuExitProgram_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
-        }
-
-        private static int CountFiles(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-            return di.GetFiles().Length;
         }
     }
 }
