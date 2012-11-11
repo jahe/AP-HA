@@ -32,6 +32,8 @@ namespace AP_HA
             //Commitment Test
 
             imgControl.Source = bitmapSource;
+
+            
         }
 
     

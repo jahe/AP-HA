@@ -8,8 +8,7 @@ namespace AP_HA
 {
     /** Klasse zum Verwalten des Bilderstapels / Ordners,
         mögliche Funktionen:
-            .isValid - überprüft ob der Ordnerinhalt den Anforderungen entspricht
-            .count - gibt die Anzahl der Bilder im Ordner wieder
+            .list - gibt eine Liste der vorhandenen Dateien wieder
             .nextImage - zeigt das nächste Bild des Stapels an (evtl für stackSlider)
             .previousImage - s.o.
             ....
@@ -23,24 +22,26 @@ namespace AP_HA
    
     class PictureStack //UNDER CONSTRUCTION
     {
-        private string path;
-        private int pictureAmount;
+        private string path;                                    //Aktueller Pfad
+        private int pictureAmount;                              //Anzahl der im Ordner befindlichen Bilder
+        private List<string> FileList;                          //Liste der im Ordner enthaltenen *.tif
 
-        public PictureStack()
+        public PictureStack()                                   
         {
             //TO DO throw new noFolderException("Kein Ordner ausgewählt");
         }
 
-        public PictureStack(string path)
+        public PictureStack(string path)                        //Gültiger Konstruktor
         {
-            if (isValid(path))
-            {
+            if (list(path).Count() != 0)                        //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
+            {                               
                 this.path = path;
-                count(this.path);
+                this.pictureAmount = FileList.Count();
             }
             else
             {
-                //TO DO throw new invalidFolderException("Ordner entspricht nicht den Anforderungen");
+                //throw new invalidFolderException("Der gewählte Ordner enthält keine *.tif Dateien");
+                System.Windows.Forms.MessageBox.Show("Der gewählte Ordner enthält keine *.tif Dateien");
             }
         }
 
@@ -54,17 +55,19 @@ namespace AP_HA
             return this.pictureAmount;
         }
 
-        private bool isValid(string path)
+        private List<string> list(string path)
         {
-            //TO DO Logik zur Überprüfung des Ordnerinhalts implementieren
-            return true;
-        }
+            FileList = new List<string>();
 
-        private int count(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-            this.pictureAmount = di.GetFiles().Length;
-            return di.GetFiles().Length;
+            string[] Files = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
+
+            for (int i = 0; i < Files.Length; i++)
+            {
+                FileList.Add(Files[i].ToString());
+                //System.Windows.Forms.MessageBox.Show(Files[i].ToString());
+            }
+
+            return FileList;
         }
     }
 }
