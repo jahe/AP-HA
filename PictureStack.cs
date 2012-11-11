@@ -22,6 +22,7 @@ namespace AP_HA
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
 
         public PictureStack()
+
         {
             //TO DO throw new noFolderException("Kein Ordner ausgewählt");
 
