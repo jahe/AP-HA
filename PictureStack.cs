@@ -18,19 +18,24 @@ namespace AP_HA
    
     class PictureStack //UNDER CONSTRUCTION
     {
-        private string path;                                    //Aktueller Pfad
-        private List<string> FileList;                          //Liste der im Ordner enthaltenen *.tif
+        private string folderPath;                                    //Aktueller Pfad
+        private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
 
-        public PictureStack()                                   
+        public PictureStack()
         {
             //TO DO throw new noFolderException("Kein Ordner ausgewählt");
+
+            // --> Default-Konstruktor muss auch benutzbar sein
+            //     die Exception würde dann an einer anderen stelle geworfen werden
         }
 
         public PictureStack(string path)                        //Gültiger Konstruktor
         {
-            if (list(path).Count() != 0)                        //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
+            initFileList(path);
+
+            if (filePathList.Count() != 0)                        //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
             {                               
-                this.path = path;
+                this.folderPath = path;
             }
             else
             {
@@ -41,37 +46,35 @@ namespace AP_HA
 
         public string getPath()
         {
-            return this.path;
+            return this.folderPath;
         }
 
         public int getPictureAmount()
         {
-            return this.FileList.Count();
+            return this.filePathList.Count();
         }
 
         public List<string> getPictureList()
         {
-            return this.FileList;
+            return this.filePathList;
         }
 
         public string getPictureFromList(int picNo)
         {
-            return this.FileList[picNo];
+            return this.filePathList[picNo];
         }
 
-        private List<string> list(string path)
+        private void initFileList(string path)
         {
-            FileList = new List<string>();
+            filePathList = new List<string>();
 
-            string[] Files = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
+            string[] filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
 
-            for (int i = 0; i < Files.Length; i++)
+            for (int i = 0; i < filePaths.Length; i++)
             {
-                FileList.Add(Files[i].ToString());
+                filePathList.Add(filePaths[i].ToString());
                 //System.Windows.Forms.MessageBox.Show(Files[i].ToString());
             }
-
-            return FileList;
         }
     }
 }
