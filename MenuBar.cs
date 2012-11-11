@@ -38,7 +38,8 @@ namespace AP_HA
                 {
                     pictureStack = new PictureStack(openFolderDialog.SelectedPath);
                     debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.getPath() + " befinden sich: " + pictureStack.getPictureAmount() + " *.tif Dateien";
-                    stackSlider.Maximum = pictureStack.getPictureAmount()-1;          //Stackslider an Bilderstapelgröße anpassen
+                    stackSlider.IsEnabled = true;                                   //Stackslider "enablen"
+                    stackSlider.Maximum = pictureStack.getPictureAmount()-1;        //Stackslider an Bilderstapelgröße anpassen
                 }
                 catch
                 {
