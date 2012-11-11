@@ -37,7 +37,7 @@ namespace AP_HA
                 try                                                                 //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
                 {
                     pictureStack = new PictureStack(openFolderDialog.SelectedPath);
-                    debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.path + " befinden sich: " + pictureStack.pictureAmount + " Dateien";
+                    debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.getPath() + " befinden sich: " + pictureStack.getPictureAmount() + " Dateien";
                 }
                 catch
                 {

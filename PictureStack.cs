@@ -23,8 +23,8 @@ namespace AP_HA
    
     class PictureStack //UNDER CONSTRUCTION
     {
-        public string path;
-        public int pictureAmount;
+        private string path;
+        private int pictureAmount;
 
         public PictureStack()
         {
@@ -42,6 +42,16 @@ namespace AP_HA
             {
                 //TO DO throw new invalidFolderException("Ordner entspricht nicht den Anforderungen");
             }
+        }
+
+        public string getPath()
+        {
+            return this.path;
+        }
+
+        public int getPictureAmount()
+        {
+            return this.pictureAmount;
         }
 
         private bool isValid(string path)
