@@ -22,7 +22,8 @@ namespace AP_HA
     {
         public MainWindow()
         {
-            InitializeComponent();    
+            InitializeComponent();
+
         }   
     }
 }
