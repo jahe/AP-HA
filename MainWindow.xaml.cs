@@ -23,7 +23,15 @@ namespace AP_HA
         public MainWindow()
         {
             InitializeComponent();
+        }
 
-        }   
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!stackSlider.IsEnabled)
+                return;
+
+            int zoomSpeed = 3;
+            stackSlider.Value += zoomSpeed * e.Delta / Math.Abs(e.Delta);
+        }
     }
 }
