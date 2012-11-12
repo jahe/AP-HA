@@ -17,9 +17,19 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
+        int zoomSpeed = 5;
+
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             loadPicture((int)stackSlider.Value);
+        }
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!stackSlider.IsEnabled)
+                return;
+
+            stackSlider.Value += zoomSpeed * e.Delta / Math.Abs(e.Delta);
         }
     }
 }
