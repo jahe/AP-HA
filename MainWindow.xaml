@@ -25,15 +25,14 @@
             </ToolBarTray>
         </Border>
         
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#15000040">
-            <TextBlock Name="debugTxtBox" Margin="10,5,0,5" Foreground="Red">
-                Aktuell DebugTextBox
-            </TextBlock>
-        </StackPanel>
-
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
             <StatusBarItem>
                 <TextBlock>Bereit</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right">
+                    DebugTextBox
+                </TextBlock>
             </StatusBarItem>
         </StatusBar>
         
