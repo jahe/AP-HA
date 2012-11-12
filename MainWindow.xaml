@@ -14,16 +14,14 @@
             </MenuItem>
         </Menu>
 
-        <Border DockPanel.Dock="Top" BorderBrush="Black" BorderThickness="0.5">
-            <ToolBarTray Name="toolBarTray1" Background="#15000040">
-                <ToolBar Name="toolBar1" >
-                    <Button Content="ZoomIn" Name="btnZoomIn">
+        <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top">
+            <ToolBar Name="toolBar1" >
+                <Button Content="ZoomIn" Name="btnZoomIn">
                         
-                    </Button>
-                    <Button Content="ZoomOut" Name="btnZoomOut" />
-                </ToolBar>
-            </ToolBarTray>
-        </Border>
+                </Button>
+                <Button Content="ZoomOut" Name="btnZoomOut" />
+            </ToolBar>
+        </ToolBarTray>
         
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
             <StatusBarItem>
