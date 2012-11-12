@@ -40,15 +40,9 @@ namespace AP_HA
                     debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.getPath() + " befinden sich: " + pictureStack.getPictureAmount() + " *.tif Dateien";
                     stackSlider.IsEnabled = true;                                   //Stackslider "enablen"
                     stackSlider.Maximum = pictureStack.getPictureAmount()-1;        //Stackslider an Bilderstapelgröße anpassen
+                    stackSlider.Value = 0;
 
-                    //Initiales Laden des ersten Bildes UNDER CONSTRUCTION
-                    Stream imageStreamSource = new FileStream(pictureStack.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
-                    TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-                    BitmapSource bitmapSource = decoder.Frames[0];
-
-                    imgControl.Source = bitmapSource;
-                    debugTxtBox.Text = pictureStack.getPictureFromList(0);
-
+                    loadPicture(0);                 
                 }
                 catch(PictureStackException ex) 
                 {
