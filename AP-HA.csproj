@@ -56,6 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BrightnessSlider.cs" />
+    <Compile Include="ContrastSlider.cs" />
     <Compile Include="PictureStackException.cs" />
     <Compile Include="Stackslider.cs" />
     <Page Include="MainWindow.xaml">

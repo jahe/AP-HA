@@ -38,9 +38,9 @@
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Label Margin="2">Helligkeit</Label>
-            <Slider Name="slider1" Height="23" Width="100" Margin="2" Value="5" />
+            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" />
             <Label Margin="2">Kontrast</Label>
-            <Slider Name="slider2" Height="23" Width="100" Margin="2" Value="5" />
+            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
