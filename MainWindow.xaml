@@ -15,9 +15,10 @@
         </Menu>
 
         <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
-            <ToolBar Name="toolBar1" >
-                    <Button Content="ZoomIn" Name="btnZoomIn" Click="btnZoomIn_Click" />
-                    <Button Content="ZoomOut" Name="btnZoomOut" Click="btnZoomOut_Click" />
+            <ToolBar Name="toolBar1">
+                <Button Content="ZoomIn" Name="btnZoomIn" Click="btnZoomIn_Click" />
+                <Button Content="ZoomOut" Name="btnZoomOut" Click="btnZoomOut_Click" />
+            </ToolBar>
         </ToolBarTray>
         
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
