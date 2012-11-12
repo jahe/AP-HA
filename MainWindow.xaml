@@ -15,11 +15,9 @@
         </Menu>
 
         <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
-            <ToolBar Name="toolBar1" >
-                <Button Content="ZoomIn" Name="btnZoomIn">
-                        
-                </Button>
-                <Button Content="ZoomOut" Name="btnZoomOut" />
+            <ToolBar Name="toolBar1">
+                <Button Content="ZoomIn" Name="btnZoomIn" Click="btnZoomIn_Click" />
+                <Button Content="ZoomOut" Name="btnZoomOut" Click="btnZoomOut_Click" />
             </ToolBar>
         </ToolBarTray>
         
@@ -47,10 +45,12 @@
             <Label Margin="2">Innereienmarkierer</Label>
         </StackPanel>
 
-        <Border BorderBrush="Black" BorderThickness="1,1,1,1">
-            <Canvas Name="canvas" Background="#6C005F5D" Focusable="True">
-                <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />
-            </Canvas>
-        </Border>
+        <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+            <Border BorderBrush="Black" BorderThickness="1,1,1,1">
+                <Canvas Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
+                    <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />
+                </Canvas>
+            </Border>
+        </ScrollViewer>
     </DockPanel>
 </Window>
