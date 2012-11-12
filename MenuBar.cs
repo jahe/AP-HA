@@ -50,7 +50,7 @@ namespace AP_HA
                     debugTxtBox.Text = pictureStack.getPictureFromList(0);
 
                 }
-                catch(pictureStackException ex) 
+                catch(PictureStackException ex) 
                 {
                     debugTxtBox.Text = ex.Message;
                 }                

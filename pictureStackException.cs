@@ -5,10 +5,10 @@ using System.Text;
 
 namespace AP_HA
 {
-    public class pictureStackException : ApplicationException
+    public class PictureStackException : ApplicationException
     {
-        public pictureStackException() { }
-        public pictureStackException(string message) : base(message) { }
-        public pictureStackException(string message, Exception inner) : base(message, inner) { }
+        public PictureStackException() { }
+        public PictureStackException(string message) : base(message) { }
+        public PictureStackException(string message, Exception inner) : base(message, inner) { }
     }
 }

@@ -34,7 +34,7 @@ namespace AP_HA
             }
             else
             {
-                throw new pictureStackException("Der gewählte Ordner enthält keine *.tif Dateien");
+                throw new PictureStackException("Der gewählte Ordner enthält keine *.tif Dateien");
             }
         }
 
@@ -60,14 +60,23 @@ namespace AP_HA
 
         private void initFileList(string path)
         {
-            filePathList = new List<string>();
-
-            string[] filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
-
-            for (int i = 0; i < filePaths.Length; i++)
+            if (Directory.Exists(path))
             {
-                filePathList.Add(filePaths[i].ToString());
+                filePathList = new List<string>();
+
+                string[] filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
+
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    filePathList.Add(filePaths[i].ToString());
+                }
+
+                filePathList.Sort();
             }
+            else
+            {
+                throw new PictureStackException("Der ausgewählte Ordner konnte nicht gefunden werden");
+            }            
         }
     }
 }
