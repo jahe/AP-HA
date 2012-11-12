@@ -12,13 +12,12 @@ namespace AP_HA
     
     /** TO DO 
             Throw clauses einfügen
-            Funktionen einfügen
-            ...
+            Funktionen einfügen um nur bestimmten Bereich des Stapels anzuzeigen
     **/
    
     class PictureStack //UNDER CONSTRUCTION
     {
-        private string folderPath;                                    //Aktueller Pfad
+        private string folderPath;                                  //Aktueller Pfad
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
 
         public PictureStack()
@@ -30,11 +29,11 @@ namespace AP_HA
             //     die Exception würde dann an einer anderen stelle geworfen werden
         }
 
-        public PictureStack(string path)                        //Gültiger Konstruktor
+        public PictureStack(string path)                            //Gültiger Konstruktor
         {
             initFileList(path);
 
-            if (filePathList.Count() != 0)                        //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
+            if (filePathList.Count() != 0)                          //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
             {                               
                 this.folderPath = path;
             }
@@ -74,7 +73,6 @@ namespace AP_HA
             for (int i = 0; i < filePaths.Length; i++)
             {
                 filePathList.Add(filePaths[i].ToString());
-                //System.Windows.Forms.MessageBox.Show(Files[i].ToString());
             }
         }
     }

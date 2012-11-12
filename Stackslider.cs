@@ -24,6 +24,7 @@ namespace AP_HA
             BitmapSource bitmapSource = decoder.Frames[0];
 
             imgControl.Source = bitmapSource;
+            debugTxtBox.Text = pictureStack.getPictureFromList((int)stackSlider.Value);
         }
     }
 }
