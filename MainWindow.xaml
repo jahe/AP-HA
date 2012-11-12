@@ -14,7 +14,7 @@
             </MenuItem>
         </Menu>
 
-        <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top">
+        <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
             <ToolBar Name="toolBar1" >
                 <Button Content="ZoomIn" Name="btnZoomIn">
                         
