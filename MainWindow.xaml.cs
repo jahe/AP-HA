@@ -20,7 +20,7 @@ namespace AP_HA
     /// </summary>
     public partial class MainWindow : Window
     {
-        enum Tool { ZoomIn, ZoomOut };
+        enum Tool { ZoomIn, ZoomOut, Move };
         private Tool tool;
 
         public MainWindow()

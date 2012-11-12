@@ -18,6 +18,7 @@
             <ToolBar Name="toolBar1">
                 <Button Content="ZoomIn" Name="btnZoomIn" Click="btnZoomIn_Click" />
                 <Button Content="ZoomOut" Name="btnZoomOut" Click="btnZoomOut_Click" />
+                <Button Content="Verschieben" Name="btnMove" Click="btnMove_Click" />
             </ToolBar>
         </ToolBarTray>
         
@@ -45,7 +46,7 @@
             <Label Margin="2">Innereienmarkierer</Label>
         </StackPanel>
 
-        <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+        <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
             <Border BorderBrush="Black" BorderThickness="1,1,1,1">
                 <Canvas Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
                     <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />
