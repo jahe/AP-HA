@@ -37,31 +37,5 @@ namespace AP_HA
             imgControl.Source = bitmapSource;
             debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
         }
-
-        private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            switch (tool)
-            {
-                case Tool.ZoomIn:
-                    canvas.Height = canvas.ActualHeight + 50;
-                    canvas.Width = canvas.ActualWidth + 50;
-                    break;
-                case Tool.ZoomOut:
-                    canvas.Height = canvas.ActualHeight - 50;
-                    canvas.Width = canvas.ActualWidth - 50;
-                    break;
-            }
-
-        }
-
-        private void btnZoomIn_Click(object sender, RoutedEventArgs e)
-        {
-            tool = Tool.ZoomIn;
-        }
-
-        private void btnZoomOut_Click(object sender, RoutedEventArgs e)
-        {
-            tool = Tool.ZoomOut;
-        }
     }
 }

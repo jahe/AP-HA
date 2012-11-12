@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="BrightnessSlider.cs" />
     <Compile Include="ContrastSlider.cs" />
+    <Compile Include="Zoom.cs" />
     <Compile Include="PictureStackException.cs" />
     <Compile Include="Stackslider.cs" />
     <Page Include="MainWindow.xaml">
