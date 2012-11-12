@@ -19,12 +19,7 @@ namespace AP_HA
     {
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Stream imageStreamSource = new FileStream(pictureStack.getPictureFromList((int)stackSlider.Value), FileMode.Open, FileAccess.Read, FileShare.Read);
-            TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            BitmapSource bitmapSource = decoder.Frames[0];
-
-            imgControl.Source = bitmapSource;
-            debugTxtBox.Text = pictureStack.getPictureFromList((int)stackSlider.Value);
+            loadPicture((int)stackSlider.Value);
         }
     }
 }
