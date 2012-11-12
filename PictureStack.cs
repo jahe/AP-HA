@@ -11,7 +11,6 @@ namespace AP_HA
     **/
     
     /** TO DO 
-            Throw clauses einfügen
             Funktionen einfügen um nur bestimmten Bereich des Stapels anzuzeigen
     **/
    
@@ -21,12 +20,8 @@ namespace AP_HA
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
 
         public PictureStack()
-
         {
-            //TO DO throw new noFolderException("Kein Ordner ausgewählt");
-
-            // --> Default-Konstruktor muss auch benutzbar sein
-            //     die Exception würde dann an einer anderen stelle geworfen werden
+        
         }
 
         public PictureStack(string path)                            //Gültiger Konstruktor
@@ -39,8 +34,7 @@ namespace AP_HA
             }
             else
             {
-                //TO DO throw new invalidFolderException("Der gewählte Ordner enthält keine *.tif Dateien");
-                System.Windows.Forms.MessageBox.Show("Der gewählte Ordner enthält keine *.tif Dateien");
+                throw new pictureStackException("Der gewählte Ordner enthält keine *.tif Dateien");
             }
         }
 

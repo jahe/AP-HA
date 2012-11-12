@@ -50,10 +50,9 @@ namespace AP_HA
                     debugTxtBox.Text = pictureStack.getPictureFromList(0);
 
                 }
-                catch
+                catch(pictureStackException ex) 
                 {
-                    //TO DO Individuelle Ausgabe der Fehlermeldung durch Exceptions
-                    debugTxtBox.Text = "Der ausgewählte Ordner entspricht nicht den Anforderungen o.ä.";
+                    debugTxtBox.Text = ex.Message;
                 }                
             }
             else
