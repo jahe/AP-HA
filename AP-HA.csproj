@@ -58,6 +58,8 @@
     </ApplicationDefinition>
     <Compile Include="controls\BrightnessSlider.cs" />
     <Compile Include="controls\ContrastSlider.cs" />
+    <Compile Include="marks\Mark.cs" />
+    <Compile Include="marks\Marks.cs" />
     <Compile Include="toolbar\Move.cs" />
     <Compile Include="toolbar\Zoom.cs" />
     <Compile Include="pictureStack\PictureStackException.cs" />
@@ -104,6 +106,7 @@
   <ItemGroup>
     <Resource Include="icon\flughafensicherheit.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -26,6 +26,7 @@ namespace AP_HA
         public MainWindow()
         {
             InitializeComponent();
+            InitializeMarks();
         }
 
         public void loadPicture(int picNo)
