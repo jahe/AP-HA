@@ -62,12 +62,12 @@ namespace AP_HA
 
         private void menuCutBeforeCursor_Click(object sender, RoutedEventArgs e)    //Menü->Bearbeiten->Stapel beschneiden->Bilder vor cursor
         {
-            pictureStack.hidePictures((int)stackSlider.Value - 1, true);
+            stackSlider.Minimum = stackSlider.Value - 1;
         }
 
         private void menuCutAfterCursor_Click(object sender, RoutedEventArgs e)     //Menü->Bearbeiten->Stapel beschneiden->Bilder nach cursor
         {
-            pictureStack.hidePictures((int)stackSlider.Value + 1, false);
+            stackSlider.Maximum = stackSlider.Value + 1;
         }
     }
 }

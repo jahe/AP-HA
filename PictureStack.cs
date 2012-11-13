@@ -79,23 +79,5 @@ namespace AP_HA
                 throw new PictureStackException("Der ausgewählte Ordner konnte nicht gefunden werden");
             }            
         }
-
-        public void hidePictures(int picNo, bool direction)
-        {            
-            switch (direction)
-            {
-                case true:
-                {
-                    //Dateien vor Ordner löschen
-                    break;
-                }
-
-                case false:
-                {
-                    //Dateien nach cursor löschen
-                    break;
-                }
-            }
-        }
     }
 }
