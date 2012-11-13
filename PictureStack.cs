@@ -22,7 +22,7 @@ namespace AP_HA
 
         public PictureStack()
         {
-        
+
         }
 
         public PictureStack(string path)                            //Gültiger Konstruktor

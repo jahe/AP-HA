@@ -38,8 +38,6 @@ namespace AP_HA
             debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
         }
 
-        
-
-        
+             
     }
 }

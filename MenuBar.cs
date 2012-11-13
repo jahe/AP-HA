@@ -42,6 +42,8 @@ namespace AP_HA
                     stackSlider.Maximum = pictureStack.getPictureAmount()-1;        //Stackslider an Bilderstapelgröße anpassen
                     stackSlider.Value = 0;
                     menuCutStack.IsEnabled = true;
+                    ContrastSlider.IsEnabled = true;
+                    BrightnessSlider.IsEnabled = true;
                     loadPicture(0);                 
                 }
                 catch(PictureStackException ex) 
@@ -62,12 +64,21 @@ namespace AP_HA
 
         private void menuCutBeforeCursor_Click(object sender, RoutedEventArgs e)    //Menü->Bearbeiten->Stapel beschneiden->Bilder vor cursor
         {
-            stackSlider.Minimum = stackSlider.Value - 1;
+            stackSlider.Minimum = stackSlider.Value;
+            menuBackToOriginalCut.IsEnabled = true;
         }
 
         private void menuCutAfterCursor_Click(object sender, RoutedEventArgs e)     //Menü->Bearbeiten->Stapel beschneiden->Bilder nach cursor
         {
-            stackSlider.Maximum = stackSlider.Value + 1;
+            stackSlider.Maximum = stackSlider.Value;
+            menuBackToOriginalCut.IsEnabled = true;
+        }
+
+        private void menuBackToOriginalCut_Click(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
+        {
+            stackSlider.Minimum = 0;
+            stackSlider.Maximum = pictureStack.getPictureAmount() - 1;
+            menuBackToOriginalCut.IsEnabled = false;
         }
     }
 }

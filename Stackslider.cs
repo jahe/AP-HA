@@ -22,6 +22,25 @@ namespace AP_HA
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             loadPicture((int)stackSlider.Value);
+
+            if (stackSlider.Value == 0)
+            {
+                menuCutBeforeCursor.IsEnabled = false;
+                menuCutAfterCursor.IsEnabled = false;
+            }
+            else
+            {
+                menuCutBeforeCursor.IsEnabled = true;
+            }
+
+            if (stackSlider.Value == (double)pictureStack.getPictureAmount() - 1)
+            {
+                menuCutAfterCursor.IsEnabled = false;
+            }
+            else
+            {
+                menuCutAfterCursor.IsEnabled = true;
+            }
         }
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
