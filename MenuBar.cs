@@ -59,5 +59,15 @@ namespace AP_HA
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void menuCutBeforeCursor_Click(object sender, RoutedEventArgs e)    //Menü->Bearbeiten->Stapel beschneiden->Bilder vor cursor
+        {
+            pictureStack.hidePictures((int)stackSlider.Value - 1, true);
+        }
+
+        private void menuCutAfterCursor_Click(object sender, RoutedEventArgs e)     //Menü->Bearbeiten->Stapel beschneiden->Bilder nach cursor
+        {
+            pictureStack.hidePictures((int)stackSlider.Value + 1, false);
+        }
     }
 }

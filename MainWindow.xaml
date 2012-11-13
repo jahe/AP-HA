@@ -11,8 +11,8 @@
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
                 <MenuItem Name="menuCutStack" Header="_Stapel beschneiden" IsEnabled="False" >
-                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder vor Cursor entfernen" />
-                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder nach Cursor entfernen" />
+                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder vor Cursor entfernen" Click="menuCutBeforeCursor_Click" />
+                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder nach Cursor entfernen" Click="menuCutAfterCursor_Click" />
                 </MenuItem>
             </MenuItem>           
             <MenuItem Header="_Einstellungen">

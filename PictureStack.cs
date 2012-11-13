@@ -18,6 +18,7 @@ namespace AP_HA
     {
         private string folderPath;                                  //Aktueller Ordnerpfad
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
+        private string[] filePaths;
 
         public PictureStack()
         {
@@ -64,7 +65,7 @@ namespace AP_HA
             {
                 filePathList = new List<string>();
 
-                string[] filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
+                filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
 
                 for (int i = 0; i < filePaths.Length; i++)
                 {
@@ -79,9 +80,22 @@ namespace AP_HA
             }            
         }
 
-        public void removePictureFromStack()
-        {
+        public void hidePictures(int picNo, bool direction)
+        {            
+            switch (direction)
+            {
+                case true:
+                {
+                    //Dateien vor Ordner löschen
+                    break;
+                }
 
+                case false:
+                {
+                    //Dateien nach cursor löschen
+                    break;
+                }
+            }
         }
     }
 }
