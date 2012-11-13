@@ -56,12 +56,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BrightnessSlider.cs" />
-    <Compile Include="ContrastSlider.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="Zoom.cs" />
-    <Compile Include="PictureStackException.cs" />
-    <Compile Include="Stackslider.cs" />
+    <Compile Include="controls\BrightnessSlider.cs" />
+    <Compile Include="controls\ContrastSlider.cs" />
+    <Compile Include="toolbar\Move.cs" />
+    <Compile Include="toolbar\Zoom.cs" />
+    <Compile Include="pictureStack\PictureStackException.cs" />
+    <Compile Include="controls\Stackslider.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,8 +76,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuBar.cs" />
-    <Compile Include="PictureStack.cs" />
+    <Compile Include="menubar\MenuBar.cs" />
+    <Compile Include="pictureStack\PictureStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
