@@ -16,7 +16,7 @@ namespace AP_HA
    
     class PictureStack //UNDER CONSTRUCTION
     {
-        private string folderPath;                                  //Aktueller Pfad
+        private string folderPath;                                  //Aktueller Ordnerpfad
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
 
         public PictureStack()
@@ -77,6 +77,11 @@ namespace AP_HA
             {
                 throw new PictureStackException("Der ausgewählte Ordner konnte nicht gefunden werden");
             }            
+        }
+
+        public void removePictureFromStack()
+        {
+
         }
     }
 }

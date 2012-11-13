@@ -41,12 +41,12 @@ namespace AP_HA
                     stackSlider.IsEnabled = true;                                   //Stackslider "enablen"
                     stackSlider.Maximum = pictureStack.getPictureAmount()-1;        //Stackslider an Bilderstapelgröße anpassen
                     stackSlider.Value = 0;
-
+                    menuCutStack.IsEnabled = true;
                     loadPicture(0);                 
                 }
                 catch(PictureStackException ex) 
                 {
-                    debugTxtBox.Text = ex.Message;
+                    System.Windows.Forms.MessageBox.Show(ex.Message);                   
                 }                
             }
             else

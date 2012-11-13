@@ -9,9 +9,15 @@
                 <MenuItem Name="menuOpenFolder" Header="_Stapel laden" Click="menuOpenFolder_Click" />
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="menuExitProgram_Click" />
             </MenuItem>
+            <MenuItem Name="menuEdit" Header="_Bearbeiten">
+                <MenuItem Name="menuCutStack" Header="_Stapel beschneiden" IsEnabled="False" >
+                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder vor Cursor entfernen" />
+                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder nach Cursor entfernen" />
+                </MenuItem>
+            </MenuItem>           
             <MenuItem Header="_Einstellungen">
                 <MenuItem Name="menuMouseSettings" Header="_Maus" />
-            </MenuItem>
+            </MenuItem>           
         </Menu>
 
         <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
