@@ -51,8 +51,7 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
-            <Label Margin="5
-                   " FontWeight="Bold">Innereienmarkierer</Label>
+            <Label Margin="5" FontWeight="Bold">Innereienmarkierer</Label>
             <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Margin="5">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
