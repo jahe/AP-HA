@@ -100,8 +100,8 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
-            <Label Margin="5" FontWeight="Bold">Innereienmarkierer</Label>
-            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Margin="5">
+            <Label Margin="5,0" FontWeight="Bold">Innereienmarkierer</Label>
+            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Margin="5,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <DockPanel Width="150">
