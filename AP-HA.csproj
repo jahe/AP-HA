@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +61,12 @@
     <Compile Include="controls\ContrastSlider.cs" />
     <Compile Include="marks\Mark.cs" />
     <Compile Include="marks\Marks.cs" />
+    <Compile Include="menubar\BackToOriginalCut.cs" />
+    <Compile Include="menubar\CloseFolder.cs" />
+    <Compile Include="menubar\CutAfterCursor.cs" />
+    <Compile Include="menubar\CutBeforeCursor.cs" />
+    <Compile Include="menubar\ExitProgram.cs" />
+    <Compile Include="menubar\OpenFolder.cs" />
     <Compile Include="toolbar\Move.cs" />
     <Compile Include="toolbar\Zoom.cs" />
     <Compile Include="pictureStack\PictureStackException.cs" />
@@ -78,7 +85,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="menubar\MenuBar.cs" />
     <Compile Include="pictureStack\PictureStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

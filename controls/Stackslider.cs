@@ -33,7 +33,7 @@ namespace AP_HA
                 menuCutBeforeCursor.IsEnabled = true;
             }
 
-            if (stackSlider.Value == (double)pictureStack.getPictureAmount() - 1)
+            if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
             {
                 menuCutAfterCursor.IsEnabled = false;
             }
