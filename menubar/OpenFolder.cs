@@ -40,6 +40,7 @@ namespace AP_HA
                     ContrastSlider.IsEnabled = true;
                     BrightnessSlider.IsEnabled = true;
                     stackSlider.IsEnabled = true;
+                    menuCloseFolder.IsEnabled = true;
                     stackSlider.Maximum = pictureStack.PictureAmount - 1;
                     stackSlider.Value = 0;
                     loadPicture(0);

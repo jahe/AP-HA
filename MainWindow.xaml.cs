@@ -37,8 +37,6 @@ namespace AP_HA
 
             imgControl.Source = bitmapSource;
             debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
-        }
-
-             
+        }             
     }
 }

@@ -60,5 +60,11 @@ namespace AP_HA
                 throw new PictureStackException("Der ausgewählte Ordner konnte nicht gefunden werden");
             }            
         }
+
+        public void stackReset()
+        {
+            filePathList = new List<string>();
+            folderPath = null;
+        }
     }
 }
