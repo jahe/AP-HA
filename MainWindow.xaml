@@ -114,8 +114,8 @@
             </ListBox>
             
             <StackPanel Orientation="Horizontal">
-                <TextBox Height="23" Name="textBox1" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
-                <Button Content="+" Width="20" Height="20" Name="button1" DockPanel.Dock="Right" FontWeight="Bold" />
+                <TextBox Height="23" Name="markNameTextBox" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
+                <Button Content="+" Width="20" Height="20" Name="addMarkToListbutton" FontWeight="Bold" Click="addMarkToListbutton_Click" />
             </StackPanel>
         </StackPanel>
 

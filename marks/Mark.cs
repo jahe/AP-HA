@@ -21,5 +21,10 @@ namespace AP_HA
             get { return visible; }
             set { visible = value; }
         }
+
+        public Mark()
+        {
+            Visible = true;
+        }
     }
 }
