@@ -6,19 +6,13 @@ using System.IO;
 
 namespace AP_HA
 {
-    /** Klasse zum Verwalten des Bilderstapels / Ordners,
-            ....
-    **/
-    
-    /** TO DO 
-    **/
-   
-    class PictureStack //UNDER CONSTRUCTION
+    class PictureStack
     {
         private string folderPath;                                  //Aktueller Ordnerpfad
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
         private string[] filePaths;
 
+        #region Constructors
         public PictureStack()
         {
 
@@ -37,11 +31,7 @@ namespace AP_HA
                 throw new PictureStackException("Der gewählte Ordner enthält keine *.tif Dateien");
             }
         }
-
-        public string Path
-        {
-            get { return this.folderPath; }
-        }
+        #endregion
 
         public int PictureAmount
         {
@@ -58,15 +48,12 @@ namespace AP_HA
             if (Directory.Exists(path))
             {
                 filePathList = new List<string>();
-
                 filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
 
                 for (int i = 0; i < filePaths.Length; i++)
                 {
                     filePathList.Add(filePaths[i].ToString());
                 }
-
-                filePathList.Sort();
             }
             else
             {
