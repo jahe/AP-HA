@@ -19,7 +19,7 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private void menuBackToOriginalCut_Click(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
+        private void backToOriginalCut(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
         {
             stackSlider.Minimum = 0;
             stackSlider.Maximum = pictureStack.PictureAmount - 1;

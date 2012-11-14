@@ -19,7 +19,7 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private void menuExitProgram_Click(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
+        private void exitProgram(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
         {
             System.Windows.Application.Current.Shutdown();
         }

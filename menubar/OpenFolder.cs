@@ -22,7 +22,7 @@ namespace AP_HA
         DialogResult oFDResult;
         PictureStack pictureStack;
 
-        private void menuOpenFolder_Click(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
+        private void openFolder(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
         {
             openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Neuen Bildstapel auswählen";
