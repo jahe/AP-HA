@@ -7,11 +7,11 @@
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
                 <MenuItem Name="menuOpenFolder" Header="_Stapel laden" Click="menuOpenFolder_Click" />
-                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" Click="menuCloseFolder_Click" IsEnabled="False" />
+                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" Click="menuCloseFolder_Click" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}" />
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="menuExitProgram_Click" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
-                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="False" >
+                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}">
                     <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="menuCutBeforeCursor_Click" IsEnabled="False" />
                     <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="menuCutAfterCursor_Click"  IsEnabled="True"/>
                     <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="menuBackToOriginalCut_Click"  IsEnabled="False"/>
@@ -45,9 +45,9 @@
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Label Margin="2">Helligkeit</Label>
-            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="False" />
+            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}" />
             <Label Margin="2">Kontrast</Label>
-            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="False" />
+            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">

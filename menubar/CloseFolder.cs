@@ -19,12 +19,9 @@ namespace AP_HA
     public partial class MainWindow
     {
         private void menuCloseFolder_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             stackSlider.Value = 0;
             stackSlider.IsEnabled = false;
-            BrightnessSlider.IsEnabled = false;
-            ContrastSlider.IsEnabled = false;
-            menuCutStack.IsEnabled = false;
             imgControl.Source = null;
             debugTxtBox.Text = null;
             pictureStack.stackReset();
