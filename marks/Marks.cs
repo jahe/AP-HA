@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AP_HA
 {
@@ -30,6 +31,13 @@ namespace AP_HA
                 marks.Add(new Mark() { Name = name });
                 markNameTextBox.Clear();
             }
+        }
+
+        private void removeMarkFromList(object sender, RoutedEventArgs e)
+        {
+            Button button = ((Button) sender);
+            Mark mark = button.DataContext as Mark;
+            marks.Remove(mark);
         }
     }
 }

@@ -107,7 +107,7 @@
                         <DockPanel Width="150">
                             <CheckBox IsChecked="{Binding Visible}" Margin="6" />
                             <Label Content="{Binding Name}" />
-                            <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" />
+                            <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" />
                         </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
