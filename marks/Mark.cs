@@ -8,6 +8,7 @@ namespace AP_HA
     class Mark
     {
         string name;
+        bool visible;
 
         public string Name
         {
@@ -15,9 +16,10 @@ namespace AP_HA
             set { name = value; }
         }
 
-        public override string ToString()
+        public bool Visible
         {
-            return Name;
+            get { return visible; }
+            set { visible = value; }
         }
     }
 }
