@@ -27,23 +27,22 @@ namespace AP_HA
         {
             openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Neuen Bildstapel auswählen";
-            openFolderDialog.ShowNewFolderButton = false;                           //Anwender verbieten neuen Ordner zu erstellen            
-            openFolderDialog.SelectedPath = @"C:\APHA\";                            //Vorgabe Pfad
+            openFolderDialog.ShowNewFolderButton = false;                                       
+            openFolderDialog.SelectedPath = @"C:\APHA\";                            
 
             oFDResult = openFolderDialog.ShowDialog();
 
-            if (oFDResult == System.Windows.Forms.DialogResult.OK)                  //Wenn im Dialog OK-Button gedrückt wurde
+            if (oFDResult == System.Windows.Forms.DialogResult.OK)                  
             {
-                try                                                                 //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
+                try     //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
                 {
                     pictureStack = new PictureStack(openFolderDialog.SelectedPath);
-                    debugTxtBox.Text = "Im gewählten Ordner " + pictureStack.getPath() + " befinden sich: " + pictureStack.getPictureAmount() + " *.tif Dateien";
-                    stackSlider.IsEnabled = true;                                   //Stackslider "enablen"
-                    stackSlider.Maximum = pictureStack.getPictureAmount()-1;        //Stackslider an Bilderstapelgröße anpassen
-                    stackSlider.Value = 0;
                     menuCutStack.IsEnabled = true;
                     ContrastSlider.IsEnabled = true;
                     BrightnessSlider.IsEnabled = true;
+                    stackSlider.IsEnabled = true;                                   
+                    stackSlider.Maximum = pictureStack.PictureAmount-1;        
+                    stackSlider.Value = 0;                   
                     loadPicture(0);                 
                 }
                 catch(PictureStackException ex) 
@@ -77,7 +76,7 @@ namespace AP_HA
         private void menuBackToOriginalCut_Click(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
         {
             stackSlider.Minimum = 0;
-            stackSlider.Maximum = pictureStack.getPictureAmount() - 1;
+            stackSlider.Maximum = pictureStack.PictureAmount - 1;
             menuBackToOriginalCut.IsEnabled = false;
         }
     }

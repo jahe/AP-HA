@@ -11,7 +11,6 @@ namespace AP_HA
     **/
     
     /** TO DO 
-            Funktionen einfügen um nur bestimmten Bereich des Stapels anzuzeigen
     **/
    
     class PictureStack //UNDER CONSTRUCTION
@@ -25,11 +24,11 @@ namespace AP_HA
 
         }
 
-        public PictureStack(string path)                            //Gültiger Konstruktor
+        public PictureStack(string path)                            
         {
             initFileList(path);
 
-            if (filePathList.Count() != 0)                          //Überprüfen ob *.tif im Ordner vorhanden, gleichzeitiges Füllen der FileList
+            if (filePathList.Count() != 0)                          
             {                               
                 this.folderPath = path;
             }
@@ -39,19 +38,14 @@ namespace AP_HA
             }
         }
 
-        public string getPath()
+        public string Path
         {
-            return this.folderPath;
+            get { return this.folderPath; }
         }
 
-        public int getPictureAmount()
+        public int PictureAmount
         {
-            return this.filePathList.Count();
-        }
-
-        public List<string> getPictureList()
-        {
-            return this.filePathList;
+            get { return this.filePathList.Count(); }
         }
 
         public string getPictureFromList(int picNo)
