@@ -101,13 +101,13 @@
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
             <Label Margin="5,0" FontWeight="Bold">Innereienmarkierer</Label>
-            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Margin="5,0">
+            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <DockPanel Width="150">
                             <CheckBox IsChecked="{Binding Visible}" Margin="6" />
-                            <Label Content="{Binding Name}" />
-                            <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" />
+                            <Label Content="{Binding Name}" MaxWidth="86" />
+                            <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" Margin="0,0,16,0" />
                         </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
