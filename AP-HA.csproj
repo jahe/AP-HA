@@ -71,6 +71,7 @@
     <Compile Include="toolbar\Zoom.cs" />
     <Compile Include="pictureStack\PictureStackException.cs" />
     <Compile Include="controls\Stackslider.cs" />
+    <Compile Include="util\SingleRandom.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
