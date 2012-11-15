@@ -19,7 +19,7 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private void menuCutAfterCursor_Click(object sender, RoutedEventArgs e)     //Menü->Bearbeiten->Stapel beschneiden->Bilder nach cursor
+        private void cutAfterCursor(object sender, RoutedEventArgs e)     //Menü->Bearbeiten->Stapel beschneiden->Bilder nach cursor
         {
             stackSlider.Maximum = stackSlider.Value;
             menuBackToOriginalCut.IsEnabled = true;

@@ -6,43 +6,33 @@
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuOpenFolder" Header="_Stapel laden" Click="menuOpenFolder_Click">
+                <MenuItem Name="menuOpenFolder" Header="_Stapel laden" ToolTip="Neuen Stapel laden" Click="openFolder">
                     <MenuItem.Icon>
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" Click="menuCloseFolder_Click" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}">
+                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Name="menuExitProgram" Header="_Beenden" Click="menuExitProgram_Click" />
+                <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
                 <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}">
-                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="menuCutBeforeCursor_Click" IsEnabled="False">
-                        <MenuItem.ToolTip>
-                            <ToolTip>
-                                Blendet die Bilder vor dem aktuellen Bild aus
-                            </ToolTip>
-                        </MenuItem.ToolTip>
+                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="butBeforeCursor" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBefore.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="menuCutAfterCursor_Click"  IsEnabled="False">
-                        <MenuItem.ToolTip>
-                            <ToolTip>
-                                Blendet alle Bilder hinter dem aktuellen Bild aus
-                            </ToolTip>
-                        </MenuItem.ToolTip>
+                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="menuBackToOriginalCut_Click"  IsEnabled="False">
+                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="False">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                         </MenuItem.Icon>
@@ -56,20 +46,20 @@
 
         <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
             <ToolBar Name="toolBar0">
-                <Button Name="btnOpenFolder" Click="menuOpenFolder_Click" >
-                    <Image Width="25" Height="25" Source="/AP-HA;component/icon/openFolder.png"></Image>
+                <Button Name="btnOpenFolder" Click="openFolder" >
+                    <Image Width="25" Height="25" Source="/AP-HA;component/icon/openFolder.png" ToolTip="{Binding Path=ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnCloseFolder" Click="menuCloseFolder_Click" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCloseFolder}">
-                    <Image Width="21" Height="21" Source="/AP-HA;component/icon/closeFolder.png"></Image>
+                <Button  Name="btnCloseFolder" Click="closeFolder" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCloseFolder}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                    <Image Width="21" Height="21" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
-                <Button  Name="btnCutBefore" Click="menuCutBeforeCursor_Click" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCutBeforeCursor}">
-                    <Image Width="21" Height="21" Source="/AP-HA;component/icon/CutButtonBefore.png"></Image>
+                <Button  Name="btnCutBefore" Click="butBeforeCursor" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCutBeforeCursor}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
+                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" />
                 </Button>
-                <Button  Name="btnCutAfter"  Click="menuCutAfterCursor_Click" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCutAfterCursor}">
-                    <Image Width="21" Height="21" Source="/AP-HA;component/icon/CutButtonAfter.png"></Image>
+                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCutAfterCursor}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
+                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonAfter.png" />
                 </Button>
-                <Button  Name="btnCutBackToOriginal" Click="menuBackToOriginalCut_Click" IsEnabled="{Binding Path=IsEnabled, ElementName=menuBackToOriginalCut}">
-                    <Image Width="21" Height="21" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png"></Image>
+                <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding Path=IsEnabled, ElementName=menuBackToOriginalCut}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
+                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
             </ToolBar>
             <ToolBar Name="toolBar1">
