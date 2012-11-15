@@ -1,9 +1,12 @@
-﻿<Window x:Class="AP_HA.MainWindow"
+﻿<Window x:Class="AP_HA.MainWindow" x:Name="This"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="JPBM-BodyViewer" Width="800" Height="600" MinWidth="400" MinHeight="400" Icon="/AP-HA;component/icon/flughafensicherheit.ico" MouseWheel="Window_MouseWheel">
 
     <DockPanel LastChildFill="True">
+        <DockPanel.DataContext>
+            <Binding ElementName="This" />
+        </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
                 <MenuItem Name="menuOpenFolder" Header="_Stapel laden" ToolTip="Neuen Stapel laden" Click="openFolder">
@@ -11,7 +14,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}">
+                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder" IsEnabled="{Binding Path=StackIsLoaded}">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
@@ -20,19 +23,19 @@
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
-                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}">
-                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="butBeforeCursor" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" IsEnabled="False">
+                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding Path=StackIsLoaded}">
+                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="cutBeforeCursor" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableLeft}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBefore.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="False">
+                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableLeft}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="False">
+                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding Path=StackCutted}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                         </MenuItem.Icon>
@@ -49,16 +52,16 @@
                 <Button Name="btnOpenFolder" Click="openFolder" >
                     <Image Width="25" Height="25" Source="/AP-HA;component/icon/openFolder.png" ToolTip="{Binding Path=ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnCloseFolder" Click="closeFolder" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCloseFolder}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                <Button  Name="btnCloseFolder" Click="closeFolder" IsEnabled="{Binding Path=StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
                     <Image Width="22" Height="22" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
-                <Button  Name="btnCutBefore" Click="butBeforeCursor" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCutBeforeCursor}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
+                <Button  Name="btnCutBefore" Click="cutBeforeCursor" IsEnabled="{Binding Path=CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" />
                 </Button>
-                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding Path=IsEnabled, ElementName=menuCutAfterCursor}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
+                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding Path=CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonAfter.png" />
                 </Button>
-                <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding Path=IsEnabled, ElementName=menuBackToOriginalCut}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
+                <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding Path=StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
             </ToolBar>
@@ -79,14 +82,18 @@
                 </TextBlock>
             </StatusBarItem>
         </StatusBar>
-        
-        <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="False" SmallChange="1" Foreground="Blue" BorderBrush="Red" />
+
+        <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding Path=StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
+            <Slider.DataContext>
+                <Binding ElementName="This" />
+            </Slider.DataContext>
+        </Slider>
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Label Margin="2" FontWeight="Bold">Helligkeit</Label>
-            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}" />
+            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=StackIsLoaded}" />
             <Label Margin="2" FontWeight="Bold">Kontrast</Label>
-            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=IsEnabled, ElementName=stackSlider}" />
+            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=StackIsLoaded}" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">

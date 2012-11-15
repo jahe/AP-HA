@@ -13,14 +13,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace AP_HA
 {
-    public partial class MainWindow
+    
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         FolderBrowserDialog openFolderDialog;
         DialogResult oFDResult;
         PictureStack pictureStack;
+
+        
 
         private void openFolder(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
         {
@@ -36,7 +40,7 @@ namespace AP_HA
                 try     //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
                 {
                     pictureStack = new PictureStack(openFolderDialog.SelectedPath);
-                    stackSlider.IsEnabled = true;
+                    stackLoaded(true);
                     stackSlider.Maximum = pictureStack.PictureAmount - 1;
                     stackSlider.Value = 0;
                     loadPicture(0);

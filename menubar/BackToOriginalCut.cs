@@ -23,7 +23,7 @@ namespace AP_HA
         {
             stackSlider.Minimum = 0;
             stackSlider.Maximum = pictureStack.PictureAmount - 1;
-            menuBackToOriginalCut.IsEnabled = false;
+            stackCutted(false);
         }
     }
 }

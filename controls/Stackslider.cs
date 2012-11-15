@@ -25,21 +25,21 @@ namespace AP_HA
 
             if (stackSlider.Value == 0)
             {
-                menuCutBeforeCursor.IsEnabled = false;
-                menuCutAfterCursor.IsEnabled = false;
+                isCutableRight(true);
+                isCutableLeft(false);
             }
             else
             {
-                menuCutBeforeCursor.IsEnabled = true;
+                isCutableLeft(true);
             }
 
             if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
             {
-                menuCutAfterCursor.IsEnabled = false;
+                isCutableRight(false);
             }
             else
             {
-                menuCutAfterCursor.IsEnabled = true;
+                isCutableRight(true);
             }
         }
 
