@@ -23,7 +23,7 @@ namespace AP_HA
             stackSlider.Value = 0;
             StackIsLoaded = false;
             imgControl.Source = null;
-            debugTxtBox.Text = null;
+            debugTxtBox.Text = "Bitte einen Stapel öffnen";
             pictureStack.stackReset();
         }
     }

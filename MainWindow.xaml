@@ -29,13 +29,13 @@
                             <Image Source="/AP-HA;component/icon/CutButtonBefore.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableLeft}">
+                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableRight}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding Path=StackCutted}">
+                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding Path=StackIsCutted}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                         </MenuItem.Icon>
@@ -55,18 +55,20 @@
                 <Button  Name="btnCloseFolder" Click="closeFolder" IsEnabled="{Binding Path=StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
                     <Image Width="22" Height="22" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
+                
                 <Button  Name="btnCutBefore" Click="cutBeforeCursor" IsEnabled="{Binding Path=CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
-                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" />
+                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png"  />                  
                 </Button>
-                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding Path=CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
+                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding Path=CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonAfter.png" />
                 </Button>
                 <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding Path=StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
+                
             </ToolBar>
-            <ToolBar Name="toolBar1">
-                <Button Content="ZoomIn" Name="btnZoomIn"  Click="btnZoomIn_Click" />
+            <ToolBar Name="toolBar1" IsEnabled="{Binding Path=StackIsLoaded}">
+                <Button Content="ZoomIn" Name="btnZoomIn"  Click="btnZoomIn_Click"  />
                 <Button Content="ZoomOut" Name="btnZoomOut" Click="btnZoomOut_Click" />
                 <Button Content="Verschieben" Name="btnMove" Click="btnMove_Click" />
             </ToolBar>
@@ -77,16 +79,11 @@
                 <TextBlock>Bereit</TextBlock>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right">
-                    DebugTextBox
-                </TextBlock>
+                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>
             </StatusBarItem>
         </StatusBar>
 
         <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding Path=StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
-            <Slider.DataContext>
-                <Binding ElementName="This" />
-            </Slider.DataContext>
         </Slider>
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
@@ -120,7 +117,7 @@
         <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
             <Border BorderBrush="Black" BorderThickness="1,1,1,1">
                 <Canvas Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
-                    <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform" />
+                    <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform"  />
                 </Canvas>
             </Border>
         </ScrollViewer>

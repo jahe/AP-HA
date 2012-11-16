@@ -25,7 +25,6 @@ namespace AP_HA
 
             if (stackSlider.Value == 0)
             {
-                CutableRight = true;
                 CutableLeft = false;
             }
             else

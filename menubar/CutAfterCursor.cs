@@ -22,7 +22,6 @@ namespace AP_HA
         private void cutAfterCursor(object sender, RoutedEventArgs e)     //Menü->Bearbeiten->Stapel beschneiden->Bilder nach cursor
         {
             stackSlider.Maximum = stackSlider.Value;
-            menuBackToOriginalCut.IsEnabled = true;
             StackIsCutted = true;
         }
     }

@@ -13,8 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace AP_HA
 {
@@ -32,10 +30,6 @@ namespace AP_HA
             InitializeMarks();
         }
 
-        Stream imageStreamSource;
-        TiffBitmapDecoder decoder;
-        BitmapSource bitmapSource;
-
         #region Programmstatus für UI-Elemente
         
         /// <summary>
@@ -51,7 +45,7 @@ namespace AP_HA
         /// <param name="propertyName">Name des Propertys, dessen Wert sich verändert hat</param>
         private void OnPropertyChanged(string propertyName)
         {
-            var handler = PropertyChanged;
+            var handler = PropertyChanged;  // PropertyChanged direkt abfragen führt zu Speicherproblemen!
 
             if (handler != null)
             {
@@ -63,13 +57,22 @@ namespace AP_HA
         private bool _stackIsLoaded = false;
         public bool StackIsLoaded
         {
+<<<<<<< HEAD
+            get { return this.stackIsLoaded; }
+        }
+
+        public void stackLoaded(bool stats)
+        {
+            stackIsLoaded = stats;
+            //OnPropertyChanged("StackIsLoaded");
+=======
             get { return _stackIsLoaded; }
             set
             {
                 _stackIsLoaded = value;
                 OnPropertyChanged("StackIsLoaded");
-                CutableRight = value;
             }
+>>>>>>> 48d78346f1c127e53a6468ca340348a748a3151c
         }
         #endregion
 
@@ -99,7 +102,7 @@ namespace AP_HA
         }
         #endregion
 
-        #region Status Bilder am Ende können ausgeblendet werden
+        #region Status Bilder am Anfang können ausgeblendet werden
         private bool _cutableRight = false;
         public bool CutableRight
         {
@@ -115,9 +118,9 @@ namespace AP_HA
 
         public void loadPicture(int picNo)
         {
-            imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);
-            decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            bitmapSource = decoder.Frames[0];
+            Stream imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);
+            TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            BitmapSource bitmapSource = decoder.Frames[0];
 
             imgControl.Source = bitmapSource;
             debugTxtBox.Text = pictureStack.getPictureFromList(picNo);

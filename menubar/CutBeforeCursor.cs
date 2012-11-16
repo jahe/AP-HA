@@ -22,7 +22,6 @@ namespace AP_HA
         private void cutBeforeCursor(object sender, RoutedEventArgs e)    //Menü->Bearbeiten->Stapel beschneiden->Bilder vor cursor
         {
             stackSlider.Minimum = stackSlider.Value;
-            menuBackToOriginalCut.IsEnabled = true;
             StackIsCutted = true;
         }
     }
