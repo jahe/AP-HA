@@ -23,7 +23,7 @@ namespace AP_HA
         {
             stackSlider.Minimum = stackSlider.Value;
             menuBackToOriginalCut.IsEnabled = true;
-            stackCutted(true);
+            StackIsCutted = true;
         }
     }
 }

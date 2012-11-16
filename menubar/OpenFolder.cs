@@ -38,7 +38,7 @@ namespace AP_HA
                 try     //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
                 {
                     pictureStack = new PictureStack(openFolderDialog.SelectedPath);
-                    stackLoaded(true);
+                    StackIsLoaded = true;
                     stackSlider.Maximum = pictureStack.PictureAmount - 1;
                     stackSlider.Value = 0;
                     loadPicture(0);

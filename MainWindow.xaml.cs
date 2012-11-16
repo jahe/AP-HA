@@ -24,88 +24,88 @@ namespace AP_HA
         enum Tool { ZoomIn, ZoomOut, Move };
         private Tool tool;
 
-        #region Programmstatus für UI-Elemente
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        #region Status Stapel geladen
-
-        private bool stackIsLoaded = false;
-
-        public bool StackIsLoaded
-        {
-            get { return this.stackIsLoaded; }
-        }
-
-        public void stackLoaded(bool stats)
-        {
-            stackIsLoaded = stats;
-            //OnPropertyChanged("StackIsLoaded");
-        }
-        #endregion
-
-        #region Status Bilder wurden ausgeblendet
-
-        private bool stackIsCutted = false;
-
-        public bool StackIsCutted
-        {
-            get { return this.stackIsCutted; }
-        }
-
-        public void stackCutted(bool stats)
-        {
-            stackIsCutted = stats;
-            OnPropertyChanged("StackIsCutted");
-        }
-        #endregion
-
-        #region Status Bilder am Anfang können ausgeblendet werden
-
-        private bool cutableLeft = false;
-
-        public bool CutableLeft
-        {
-            get { return this.cutableLeft; }
-        }
-
-        public void isCutableLeft(bool stats)
-        {
-            cutableLeft = stats;
-            OnPropertyChanged("CutableLeft");
-        }
-        #endregion
-
-        #region Status Bilder am Anfang können ausgeblendet werden
-
-        private bool cutableRight = false;
-
-        public bool CutableRight
-        {
-            get { return this.cutableRight; }
-        }
-
-        public void isCutableRight(bool stats)
-        {
-            cutableRight = stats;
-            OnPropertyChanged("CutableRight");
-        }
-        #endregion       
-        #endregion
-
         public MainWindow()
         {
             InitializeComponent();
             InitializeMarks();
         }
+
+        #region Programmstatus für UI-Elemente
+        
+        /// <summary>
+        /// Event, was default-mäßig von XAML abonniert wird
+        /// und somit geänderte Property-Werte mitbekommt
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Invoke-Methode: Ruft die abonnierten Methoden des Events PropertyChanged auf
+        /// --> Property xyz hat sich geändert. Aktualisiere mal den Wert!
+        /// </summary>
+        /// <param name="propertyName">Name des Propertys, dessen Wert sich verändert hat</param>
+        private void OnPropertyChanged(string propertyName)
+        {
+            var handler = PropertyChanged;  // PropertyChanged direkt abfragen führt zu Speicherproblemen!
+
+            if (handler != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #region Status Stapel geladen
+        private bool _stackIsLoaded = false;
+        public bool StackIsLoaded
+        {
+            get { return _stackIsLoaded; }
+            set
+            {
+                _stackIsLoaded = value;
+            OnPropertyChanged("StackIsLoaded");
+                OnPropertyChanged("StackIsLoaded");
+            }
+        }
+        #endregion
+
+        #region Status Bilder wurden ausgeblendet
+        private bool _stackIsCutted = false;
+        public bool StackIsCutted
+        {
+            get { return _stackIsCutted; }
+            set
+            {
+                _stackIsCutted = value;
+                OnPropertyChanged("StackIsCutted");
+            }
+        }
+        #endregion
+
+        #region Status Bilder am Anfang können ausgeblendet werden
+        private bool _cutableLeft = false;
+        public bool CutableLeft
+        {
+            get { return _cutableLeft; }
+            set
+            {
+                _cutableLeft = value;
+                OnPropertyChanged("CutableLeft");
+            }
+        }
+        #endregion
+
+        #region Status Bilder am Anfang können ausgeblendet werden
+        private bool _cutableRight = false;
+        public bool CutableRight
+        {
+            get { return _cutableRight; }
+            set
+            {
+                _cutableRight = value;
+                OnPropertyChanged("CutableRight");
+            }
+        }
+        #endregion
+        #endregion
 
         public void loadPicture(int picNo)
         {
