@@ -25,21 +25,21 @@ namespace AP_HA
 
             if (stackSlider.Value == 0)
             {
-                isCutableRight(true);
-                isCutableLeft(false);
+                CutableRight = true;
+                CutableLeft = false;
             }
             else
             {
-                isCutableLeft(true);
+                CutableLeft = true;
             }
 
             if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
             {
-                isCutableRight(false);
+                CutableRight = false;
             }
             else
             {
-                isCutableRight(true);
+                CutableRight = true;
             }
         }
 

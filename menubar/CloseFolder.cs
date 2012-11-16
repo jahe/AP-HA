@@ -21,7 +21,7 @@ namespace AP_HA
         private void closeFolder(object sender, RoutedEventArgs e)
         {
             stackSlider.Value = 0;
-            stackLoaded(false);
+            StackIsLoaded = false;
             imgControl.Source = null;
             debugTxtBox.Text = null;
             pictureStack.stackReset();
