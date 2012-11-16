@@ -18,13 +18,11 @@ using System.ComponentModel;
 namespace AP_HA
 {
     
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow
     {
         FolderBrowserDialog openFolderDialog;
         DialogResult oFDResult;
         PictureStack pictureStack;
-
-        
 
         private void openFolder(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
         {

@@ -48,7 +48,7 @@ namespace AP_HA
         public void stackLoaded(bool stats)
         {
             stackIsLoaded = stats;
-            OnPropertyChanged("StackIsLoaded");
+            //OnPropertyChanged("StackIsLoaded");
         }
         #endregion
 
