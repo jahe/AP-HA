@@ -18,7 +18,12 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private void closeFolder(object sender, RoutedEventArgs e)
+        private void closeFolder_Click(object sender, RoutedEventArgs e)
+        {
+            closeFolder();
+        }
+
+        private void closeFolder()
         {
             stackSlider.Value = 0;
             StackIsLoaded = false;

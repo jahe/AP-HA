@@ -10,6 +10,12 @@ namespace AP_HA
         private List<string> _strings;
         private List<int> _numbers;
 
+        #region Constructors
+        public StringSorter()
+        {
+
+        }
+
         public StringSorter(string str)
         {
             _strings = new List<string>();
@@ -40,6 +46,7 @@ namespace AP_HA
                 isNumber = !isNumber;
             }
         }
+        #endregion
 
         public int CompareTo(StringSorter other)
         {

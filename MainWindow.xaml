@@ -14,7 +14,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder" IsEnabled="{Binding Path=StackIsLoaded}">
+                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder_Click" IsEnabled="{Binding Path=StackIsLoaded}">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
@@ -52,7 +52,7 @@
                 <Button Name="btnOpenFolder" Click="openFolder" >
                     <Image Width="25" Height="25" Source="/AP-HA;component/icon/openFolder.png" ToolTip="{Binding Path=ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnCloseFolder" Click="closeFolder" IsEnabled="{Binding Path=StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                <Button  Name="btnCloseFolder" Click="closeFolder_Click" IsEnabled="{Binding Path=StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
                     <Image Width="22" Height="22" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
                 

@@ -21,8 +21,16 @@ namespace AP_HA
 
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            loadPicture((int)stackSlider.Value);
-
+            try
+            {
+                loadPicture((int)stackSlider.Value);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message+" \nDer aktuelle Stapel wird geschlossen");
+                closeFolder();
+            }
+            
             if (stackSlider.Value == 0)
             {
                 CutableLeft = false;

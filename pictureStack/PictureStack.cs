@@ -41,7 +41,14 @@ namespace AP_HA
 
         public string getPictureFromList(int picNo)
         {
-            return this.filePathList[picNo];
+            if (picNo < filePathList.Count() && picNo >= 0)
+            {
+                return this.filePathList[picNo];
+            }
+            else
+            {
+                throw new PictureStackException("Zu ladende Bildnummer größer als Bildmenge");
+            }           
         }
 
         private void initFileList(string path)
