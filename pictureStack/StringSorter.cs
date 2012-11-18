@@ -35,6 +35,7 @@ namespace AP_HA
                 {
                     _strings.Add(str.Substring(position, len));
                 }
+
                 position += len;
                 isNumber = !isNumber;
             }
@@ -56,7 +57,11 @@ namespace AP_HA
                 if (index < _numbers.Count && index < other._numbers.Count)
                 {
                     result = _numbers[index].CompareTo(other._numbers[index]);
-                    if (result != 0) return result;
+                    
+                    if (result != 0)
+                    {
+                        return result;
+                    } 
                 }
 
                 index++;
