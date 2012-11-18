@@ -17,7 +17,7 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        int zoomSpeed = 5;
+        int zoomSpeed = 1;
 
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -27,17 +27,13 @@ namespace AP_HA
             {
                 CutableLeft = false;
             }
-            else
-            {
-                CutableLeft = true;
-            }
-
-            if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
+            else if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
             {
                 CutableRight = false;
             }
             else
             {
+                CutableLeft = true;
                 CutableRight = true;
             }
         }

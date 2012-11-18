@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Windows.Documents;
 
 namespace AP_HA
 {
@@ -49,11 +50,13 @@ namespace AP_HA
             {
                 filePathList = new List<string>();
                 filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
-
+                
                 for (int i = 0; i < filePaths.Length; i++)
                 {
                     filePathList.Add(filePaths[i].ToString());
                 }
+
+                filePathList.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
             }
             else
             {
