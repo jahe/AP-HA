@@ -7,7 +7,6 @@ namespace AP_HA
 {
     public class StringSorter : IComparable<StringSorter>
     {
-
         private List<string> _strings;
         private List<int> _numbers;
 
@@ -22,10 +21,12 @@ namespace AP_HA
             while (position < str.Length)
             {
                 int len = 0;
+
                 while (position + len < str.Length && Char.IsDigit(str[position + len]) == isNumber)
                 {
                     len++;
                 }
+                
                 if (isNumber)
                 {
                     _numbers.Add(int.Parse(str.Substring(position, len)));
@@ -42,6 +43,7 @@ namespace AP_HA
         public int CompareTo(StringSorter other)
         {
             int index = 0;
+
             while (index < _strings.Count && index < other._strings.Count)
             {
                 int result = _strings[index].CompareTo(other._strings[index]);
@@ -59,6 +61,7 @@ namespace AP_HA
 
                 index++;
             }
+
             return 0;
         }
     }
