@@ -99,7 +99,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <DockPanel Width="150">
-                            <Rectangle Width="12" Height="12" Fill="{Binding BrushColor}" />
+                            <Rectangle Width="12" Height="12" Fill="{Binding BrushColor}" MouseLeftButtonDown="changeMarkColor" />
                             <CheckBox IsChecked="{Binding Visible}" Margin="6" />
                             <Label Content="{Binding Name}" MaxWidth="74" />
                             <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" Margin="0,0,16,0" />

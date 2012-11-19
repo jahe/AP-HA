@@ -1,7 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace AP_HA
 {
@@ -31,6 +34,30 @@ namespace AP_HA
                 marks.Add(new Mark() { Name = name });
                 markNameTextBox.Clear();
             }
+        }
+
+        private void changeMarkColor(object sender, RoutedEventArgs e)
+        {
+            Color newColor = getColorFromDialog();
+
+            Rectangle rect = ((Rectangle)sender);
+            Mark mark = rect.DataContext as Mark;
+            mark.BrushColor = new SolidColorBrush(newColor);
+        }
+
+        private Color getColorFromDialog()
+        {
+            System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
+            colorDialog.AllowFullOpen = true;
+            colorDialog.ShowDialog();
+
+            Color newColor = new Color();
+            newColor.A = colorDialog.Color.A;
+            newColor.B = colorDialog.Color.B;
+            newColor.G = colorDialog.Color.G;
+            newColor.R = colorDialog.Color.R;
+
+            return newColor;
         }
 
         private void removeMarkFromList(object sender, RoutedEventArgs e)
