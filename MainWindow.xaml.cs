@@ -32,10 +32,6 @@ namespace AP_HA
             InitializeMarks();
         }
 
-        Stream imageStreamSource;
-        TiffBitmapDecoder decoder;
-        BitmapSource bitmapSource;
-
         #region Programmstatus für UI-Elemente
         
         /// <summary>

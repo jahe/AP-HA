@@ -16,6 +16,10 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
+        Stream imageStreamSource;
+        TiffBitmapDecoder decoder;
+        BitmapSource bitmapSource;
+
         public void loadPicture(int picNo)
         {
             imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);

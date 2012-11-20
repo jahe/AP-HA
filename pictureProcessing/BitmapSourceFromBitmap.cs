@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+
 namespace AP_HA
 {
     public partial class MainWindow
@@ -21,10 +22,7 @@ namespace AP_HA
             BitmapSource bitSrc = null;
             var hBitmap = bitmap.GetHbitmap();
 
-            bitSrc = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                hBitmap,
-                IntPtr.Zero, Int32Rect.Empty,
-                   System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+            bitSrc = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
             return bitSrc;
         }

@@ -23,13 +23,11 @@ namespace AP_HA
             ColorMatrix TempMatrix = new ColorMatrix();
 
             TempMatrix.Matrix = new float[][]{
-
-                        new float[] {1, 0, 0, 0, 0},
-                        new float[] {0, 1, 0, 0, 0},
-                        new float[] {0, 0, 1, 0, 0},
-                        new float[] {0, 0, 0, 1, 0},
-                        new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
-                        };
+                                new float[] {1, 0, 0, 0, 0},
+                                new float[] {0, 1, 0, 0, 0},
+                                new float[] {0, 0, 1, 0, 0},
+                                new float[] {0, 0, 0, 1, 0},
+                                new float[] {FinalValue, FinalValue, FinalValue, 1, 1} };
 
             return TempMatrix.Apply(Image);
         }
