@@ -22,10 +22,11 @@ namespace AP_HA
         public int ImageBrightness
         {
             get { return _imageBrightness; }
+
             set
             {
                 _imageBrightness = value;
-                //OnPropertyChanged("StackIsLoaded");
+
                 if (StackIsLoaded)
                 {
                     loadPicture((int)stackSlider.Value);
