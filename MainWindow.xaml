@@ -91,6 +91,8 @@
             <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="5" Value="0" ValueChanged="BrightnessSlider_ValueChanged" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" IsEnabled="{Binding UserBrightness}" SmallChange="1" Minimum="-255" />
             <CheckBox Content="Kontrast" Height="16" Name="checkBoxContrast" Margin="5" FontWeight="Bold" IsEnabled="{Binding StackIsLoaded}" Checked="checkBoxContrast_Checked" Unchecked="checkBoxContrast_Unchecked" />
             <Slider Name="ContrastSlider" Height="23" Width="100" Margin="5" Value="0" ValueChanged="ContrastSlider_ValueChanged" Maximum="8" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding UserContrast}" Minimum="0" />
+            <Label FontWeight="Bold" Content="Zoom" />
+            <Slider Name="zoomSlider" Height="23" Width="100" Margin="5" Value="1" Maximum="5" TickFrequency="0.01" IsEnabled="True" Minimum="0.1" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
@@ -115,9 +117,12 @@
         </StackPanel>
 
         <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
-            <Border BorderBrush="Black" BorderThickness="1,1,1,1">
-                <Canvas Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
-                    <Image Name="imgControl" Height="{Binding Path=ActualHeight, ElementName=canvas}" Width="{Binding Path=ActualWidth, ElementName=canvas}"  Stretch="Uniform"  />
+            <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="1,1,1,1" Background="#eee">
+                <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
+                    <Canvas.LayoutTransform>
+                        <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
+                    </Canvas.LayoutTransform>
+                    <Image Name="imgControl" Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth}"  Stretch="Uniform"  />
                 </Canvas>
             </Border>
         </ScrollViewer>
