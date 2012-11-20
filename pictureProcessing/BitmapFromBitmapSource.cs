@@ -20,9 +20,9 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private System.Drawing.Bitmap BitmapFromBitmapSource(BitmapSource bitmapsource)
+        private Bitmap BitmapFromBitmapSource(BitmapSource bitmapsource)
         {
-            System.Drawing.Bitmap bitmap;
+            Bitmap bitmap;
             
             using (MemoryStream outStream = new MemoryStream())
             {
@@ -30,7 +30,7 @@ namespace AP_HA
 
                 enc.Frames.Add(BitmapFrame.Create(bitmapsource));
                 enc.Save(outStream);
-                bitmap = new System.Drawing.Bitmap(outStream);
+                bitmap = new Bitmap(outStream);
             }
 
             return bitmap;
