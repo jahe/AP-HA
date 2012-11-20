@@ -43,6 +43,7 @@ namespace AP_HA
                 if (StackIsLoaded)
                 {
                     loadPicture((int)stackSlider.Value);
+                    OnPropertyChanged("ImageBrightness");
                 }                
             }
         }
