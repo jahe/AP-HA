@@ -24,7 +24,7 @@ namespace AP_HA
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         enum Tool { ZoomIn, ZoomOut, Move };
-        private Tool tool;
+        private Tool? tool = null;
 
         public MainWindow()
         {

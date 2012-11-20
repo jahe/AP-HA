@@ -19,6 +19,7 @@ namespace AP_HA
     {
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             Point mousePos = e.GetPosition(scrollViewer);
             double verticalShift = 0.0;
             double horizontalShift = 0.0;
@@ -26,23 +27,39 @@ namespace AP_HA
             double mousePosOffsetX = mousePos.X * 100 / scrollViewer.ViewportWidth;
             double mousePosOffsetY = mousePos.Y * 100 / scrollViewer.ViewportHeight;
 
-            verticalShift = mousePosOffsetY * 50 / 100;
-            horizontalShift = mousePosOffsetX * 50 / 100;
-            
+            double oldCanvasWidth = canvas.ActualWidth * canvasScaler.ScaleX;
+            double oldCanvasHeight = canvas.ActualHeight * canvasScaler.ScaleY;
+            double newCanvasWidth;
+            double newCanvasHeight;
+            double deltaX;
+            double deltaY;
+
+            /*
             switch (tool)
             {
                 case Tool.ZoomIn:
-                    canvas.Height = canvas.ActualHeight + 50;
-                    canvas.Width = canvas.ActualWidth + 50;
+                    canvasScaler.ScaleX += 0.1;
+                    canvasScaler.ScaleY += 0.1;
+
+                    newCanvasWidth = canvas.ActualWidth * canvasScaler.ScaleX;
+                    newCanvasHeight = canvas.ActualHeight * canvasScaler.ScaleY;
+
+                    deltaX = newCanvasWidth - oldCanvasWidth;
+                    deltaY = newCanvasHeight - oldCanvasHeight;
+
+                    verticalShift = mousePosOffsetY * deltaY / 100;
+                    horizontalShift = mousePosOffsetX * deltaX / 100;
 
                     scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset + horizontalShift);
                     scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset + verticalShift);
                     break;
+
                 case Tool.ZoomOut:
-                    canvas.Height = canvas.ActualHeight - 50;
-                    canvas.Width = canvas.ActualWidth - 50;
+                    canvasScaler.ScaleX -= 0.1;
+                    canvasScaler.ScaleY -= 0.1;
                     break;
             }
+             * */
         }
 
         private void btnZoomIn_Click(object sender, RoutedEventArgs e)

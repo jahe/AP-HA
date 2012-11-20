@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Documents;
+using System.Windows.Media.Imaging;
 
 namespace AP_HA
 {
@@ -12,6 +13,16 @@ namespace AP_HA
         private string folderPath;                                  //Aktueller Ordnerpfad
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
         private string[] filePaths;
+        public double Height
+        {
+            get;
+            private set;
+        }
+        public double Width
+        {
+            get;
+            private set;
+        }
 
         #region Constructors
         public PictureStack()
@@ -64,6 +75,20 @@ namespace AP_HA
                 }
 
                 filePathList.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
+
+                try
+                {
+                    FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                    BitmapSource bmpSrc = decoder.Frames[0];
+
+                    Height = bmpSrc.PixelHeight;
+                    Width = bmpSrc.PixelWidth;
+                }
+                catch (Exception e)
+                {
+                }
+                
             }
             else
             {

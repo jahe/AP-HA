@@ -53,6 +53,8 @@ namespace AP_HA
                     StackIsLoaded = true;
                     stackSlider.Maximum = pictureStack.PictureAmount - 1;
                     stackSlider.Value = 0;
+                    canvas.Width = pictureStack.Width;
+                    canvas.Height = pictureStack.Height;
                     loadPicture(0);
                 }
                 catch (PictureStackException ex)
