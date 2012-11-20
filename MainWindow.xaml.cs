@@ -66,9 +66,9 @@ namespace AP_HA
             get { return _stackIsLoaded; }
             set
             {
-                _stackIsLoaded = value;
-                OnPropertyChanged("StackIsLoaded");
-                CutableRight = value;
+                _stackIsLoaded = value; 
+                OnPropertyChanged("StackIsLoaded"); 
+                CutableRight = value;                
             }
         }
         #endregion
@@ -119,8 +119,36 @@ namespace AP_HA
             decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             bitmapSource = decoder.Frames[0];
 
-            imgControl.Source = bitmapSource;
+            Bitmap temp = BitmapFromBitmapSource(bitmapSource);
+
+            temp = AdjustBrightness(temp, ImageBrightness);
+
+            imgControl.Source = BitmapSourceFromBitmap(temp);
             debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
         }
+
+
+    public static Bitmap AdjustBrightness(Bitmap Image, int Value)
+    {
+        float FinalValue = (float)Value / 255.0f;
+
+        ColorMatrix TempMatrix = new ColorMatrix();
+
+        TempMatrix.Matrix = new float[][]{
+
+                        new float[] {1, 0, 0, 0, 0},
+                        new float[] {0, 1, 0, 0, 0},
+                        new float[] {0, 0, 1, 0, 0},
+                        new float[] {0, 0, 0, 1, 0},
+                        new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
+                        };
+
+        return TempMatrix.Apply(Image);
+    }
+
+
+        
+
+
     }
 }

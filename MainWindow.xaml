@@ -14,7 +14,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder_Click" IsEnabled="{Binding Path=StackIsLoaded}">
+                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
@@ -23,19 +23,19 @@
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
-                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding Path=StackIsLoaded}">
+                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding StackIsLoaded}">
                     <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="cutBeforeCursor" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableLeft}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBefore.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableRight}">
+                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="{Binding CutableRight}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding Path=StackIsCutted}">
+                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsCutted}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                         </MenuItem.Icon>
@@ -50,24 +50,24 @@
         <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
             <ToolBar Name="toolBar0">
                 <Button Name="btnOpenFolder" Click="openFolder" >
-                    <Image Width="25" Height="25" Source="/AP-HA;component/icon/openFolder.png" ToolTip="{Binding Path=ToolTip, ElementName=menuOpenFolder}"></Image>
+                    <Image Width="25" Height="25" Source="/AP-HA;component/icon/openFolder.png" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnCloseFolder" Click="closeFolder_Click" IsEnabled="{Binding Path=StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                <Button  Name="btnCloseFolder" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
                     <Image Width="22" Height="22" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
                 
-                <Button  Name="btnCutBefore" Click="cutBeforeCursor" IsEnabled="{Binding Path=CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
+                <Button  Name="btnCutBefore" Click="cutBeforeCursor" IsEnabled="{Binding CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png"  />                  
                 </Button>
-                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding Path=CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
+                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonAfter.png" />
                 </Button>
-                <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding Path=StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
+                <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
                 
             </ToolBar>
-            <ToolBar Name="toolBar1" IsEnabled="{Binding Path=StackIsLoaded}">
+            <ToolBar Name="toolBar1" IsEnabled="{Binding StackIsLoaded}">
                 <Button Content="ZoomIn" Name="btnZoomIn"  Click="btnZoomIn_Click"  />
                 <Button Content="ZoomOut" Name="btnZoomOut" Click="btnZoomOut_Click" />
                 <Button Content="Verschieben" Name="btnMove" Click="btnMove_Click" />
@@ -88,14 +88,14 @@
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Label Margin="2" FontWeight="Bold">Helligkeit</Label>
-            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=StackIsLoaded}" />
+            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" IsEnabled="{Binding Path=StackIsLoaded}" SmallChange="1" />
             <Label Margin="2" FontWeight="Bold">Kontrast</Label>
             <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=StackIsLoaded}" />
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
             <Label Margin="5,0" FontWeight="Bold">Innereienmarkierer</Label>
-            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <DockPanel Width="150">
