@@ -68,6 +68,7 @@
     <Compile Include="menubar\ExitProgram.cs" />
     <Compile Include="menubar\OpenFolder.cs" />
     <Compile Include="pictureProcessing\AdjustBrightness.cs" />
+    <Compile Include="pictureProcessing\AdjustContrast.cs" />
     <Compile Include="pictureProcessing\BitmapFromBitmapSource.cs" />
     <Compile Include="pictureProcessing\BitmapSourceFromBitmap.cs" />
     <Compile Include="pictureProcessing\ColorMatrix.cs" />

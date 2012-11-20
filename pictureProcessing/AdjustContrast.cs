@@ -16,17 +16,17 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        public static Bitmap AdjustBrightness(Bitmap Image, int Value)
+        public static Bitmap AdjustContrast(Bitmap Image, double value)
         {
-            float FinalValue = (float)Value / 255.0f;
-
+            float FinalValue = (float)(1 - value) / 2;
+            float tempValue = (float)value;
             ColorMatrix TempMatrix = new ColorMatrix();
 
             TempMatrix.Matrix = new float[][]{
-                                new float[] {1, 0, 0, 0, 0},
-                                new float[] {0, 1, 0, 0, 0},
-                                new float[] {0, 0, 1, 0, 0},
-                                new float[] {0, 0, 0, 1, 0},
+                                new float[] {tempValue, 0, 0, 0, 0},
+                                new float[] {0, tempValue, 0, 0, 0},
+                                new float[] {0, 0, tempValue, 0, 0},
+                                new float[] {0, 0, 0, tempValue, 0},
                                 new float[] {FinalValue, FinalValue, FinalValue, 1, 1} };
 
             return TempMatrix.Apply(Image);
