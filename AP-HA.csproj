@@ -57,8 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="controls\BrightnessSlider.cs" />
-    <Compile Include="controls\ContrastSlider.cs" />
+    <Compile Include="controls\Brightness.cs" />
+    <Compile Include="controls\Contrast.cs" />
     <Compile Include="marks\Mark.cs" />
     <Compile Include="marks\Marks.cs" />
     <Compile Include="menubar\BackToOriginalCut.cs" />

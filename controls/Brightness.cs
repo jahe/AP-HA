@@ -18,6 +18,19 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
+        #region Properties
+        private bool _userBrightness = false;
+        public bool UserBrightness
+        {
+            get { return _userBrightness; }
+
+            set 
+            {   _userBrightness = value;
+                loadPicture((int)stackSlider.Value);
+                OnPropertyChanged("UserBrightness");
+            }
+        }
+
         private int _imageBrightness = 100;
         public int ImageBrightness
         {
@@ -32,6 +45,17 @@ namespace AP_HA
                     loadPicture((int)stackSlider.Value);
                 }                
             }
+        }
+        #endregion
+
+        private void checkBoxBrightness_Checked(object sender, RoutedEventArgs e)
+        {
+            UserBrightness = true;
+        }
+
+        private void checkBoxBrightness_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UserBrightness = false;
         }
 
         private void BrightnessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

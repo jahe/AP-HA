@@ -31,5 +31,21 @@ namespace AP_HA
 
             return TempMatrix.Apply(Image);
         }
+
+        public static Bitmap AdjustContrast(Bitmap Image, double value)
+        {
+            float FinalValue = (float)(1 - value) / 2;
+            float tempValue = (float)value;
+            ColorMatrix TempMatrix = new ColorMatrix();
+
+            TempMatrix.Matrix = new float[][]{
+                                new float[] {tempValue, 0, 0, 0, 0},
+                                new float[] {0, tempValue, 0, 0, 0},
+                                new float[] {0, 0, tempValue, 0, 0},
+                                new float[] {0, 0, 0, tempValue, 0},
+                                new float[] {FinalValue, FinalValue, FinalValue, 1, 1} };
+
+            return TempMatrix.Apply(Image);
+        }
     }
 }

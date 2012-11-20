@@ -1,17 +1,11 @@
-﻿#region Usings
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-
-#endregion
-
 
 namespace AP_HA
 {
     public class ColorMatrix
     {
         #region Constructors
-
         public ColorMatrix()
         {
 

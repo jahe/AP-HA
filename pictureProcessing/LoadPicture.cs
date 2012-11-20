@@ -26,11 +26,26 @@ namespace AP_HA
             decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             bitmapSource = decoder.Frames[0];
 
-            Bitmap temp = BitmapFromBitmapSource(bitmapSource);
+            if (UserBrightness || UserContrast)
+            {
+                Bitmap temp = BitmapFromBitmapSource(bitmapSource);
 
-            temp = AdjustBrightness(temp, ImageBrightness);
+                if (UserBrightness)
+                {
+                    temp = AdjustBrightness(temp, ImageBrightness);
+                }
+                if (UserContrast)
+                {
+                    temp = AdjustContrast(temp, ImageContrast);
+                }
 
-            imgControl.Source = BitmapSourceFromBitmap(temp);
+                imgControl.Source = BitmapSourceFromBitmap(temp);
+            }
+            else
+            {
+                imgControl.Source = bitmapSource;
+            }
+                        
             debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
         }
     }

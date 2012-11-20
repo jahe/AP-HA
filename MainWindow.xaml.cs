@@ -32,7 +32,7 @@ namespace AP_HA
             InitializeMarks();
         }
 
-        #region Programmstatus für UI-Elemente
+        #region Properties für UI-Binding
         
         /// <summary>
         /// Event, was default-mäßig von XAML abonniert wird
@@ -54,20 +54,6 @@ namespace AP_HA
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        #region Status Stapel geladen
-        private bool _stackIsLoaded = false;
-        public bool StackIsLoaded
-        {
-            get { return _stackIsLoaded; }
-            set
-            {
-                _stackIsLoaded = value; 
-                OnPropertyChanged("StackIsLoaded"); 
-                CutableRight = value;                
-            }
-        }
-        #endregion
 
         #region Status Bilder wurden ausgeblendet
         private bool _stackIsCutted = false;
@@ -106,7 +92,7 @@ namespace AP_HA
                 OnPropertyChanged("CutableRight");
             }
         }
-        #endregion
-        #endregion
+        #endregion        
+        #endregion        
     }
 }

@@ -16,13 +16,24 @@ using System.Windows.Forms;
 using System.ComponentModel;
 
 namespace AP_HA
-{
-    
+{   
     public partial class MainWindow
     {
         FolderBrowserDialog openFolderDialog;
         DialogResult oFDResult;
         PictureStack pictureStack;
+
+        private bool _stackIsLoaded = false;
+        public bool StackIsLoaded
+        {
+            get { return _stackIsLoaded; }
+            set
+            {
+                _stackIsLoaded = value;
+                OnPropertyChanged("StackIsLoaded");
+                CutableRight = value;
+            }
+        }
 
         private void openFolder(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
         {
