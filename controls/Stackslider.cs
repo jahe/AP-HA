@@ -28,7 +28,7 @@ namespace AP_HA
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message+" \nDer aktuelle Stapel wird geschlossen");
-                closeFolder();
+                refreshSession();
             }
             
             if (stackSlider.Value == 0)
