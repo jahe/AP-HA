@@ -11,6 +11,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System;
 
 namespace AP_HA
 {
@@ -22,31 +23,39 @@ namespace AP_HA
 
         public void loadPicture(int picNo)
         {
-            imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);
-            decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            bitmapSource = decoder.Frames[0];
-
-            if (UserBrightness || UserContrast)
+            try
             {
-                Bitmap temp = BitmapFromBitmapSource(bitmapSource);
+                imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);
+                decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                bitmapSource = decoder.Frames[0];
 
-                if (UserBrightness)
+                if (UserBrightness || UserContrast)
                 {
-                    temp = AdjustBrightness(temp, ImageBrightness);
+                    Bitmap temp = BitmapFromBitmapSource(bitmapSource);
+
+                    if (UserBrightness)
+                    {
+                        temp = AdjustBrightness(temp, ImageBrightness);
+                    }
+                    if (UserContrast)
+                    {
+                        temp = AdjustContrast(temp, ImageContrast);
+                    }
+
+                    imgControl.Source = BitmapSourceFromBitmap(temp);
                 }
-                if (UserContrast)
+                else
                 {
-                    temp = AdjustContrast(temp, ImageContrast);
+                    imgControl.Source = bitmapSource;
                 }
 
-                imgControl.Source = BitmapSourceFromBitmap(temp);
+                debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
             }
-            else
+            catch (Exception e)
             {
-                imgControl.Source = bitmapSource;
+                MessageBox.Show("Fehler bei der Bild(de)codierung\n "+e.Message+" \n Aktueller Stapel muss geschlossen werden");
+                refreshSession();
             }
-                        
-            debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
         }
     }
 }
