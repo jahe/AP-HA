@@ -94,5 +94,21 @@ namespace AP_HA
         }
         #endregion        
         #endregion        
+
+        private void refreshSession()
+        {
+            stackSlider.Value = 0;
+            StackIsLoaded = false;
+            StackIsCutted = false;
+            imgControl.Source = null;
+            debugTxtBox.Text = "Bitte einen Stapel öffnen";
+            checkBoxBrightness.IsChecked = false;
+            checkBoxContrast.IsChecked = false;
+
+            if (pictureStack != null)
+            {
+                pictureStack.stackReset();
+            }
+        }
     }
 }

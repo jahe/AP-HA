@@ -20,16 +20,7 @@ namespace AP_HA
     {
         private void closeFolder_Click(object sender, RoutedEventArgs e)
         {
-            closeFolder();
-        }
-
-        private void closeFolder()
-        {
-            stackSlider.Value = 0;
-            StackIsLoaded = false;
-            imgControl.Source = null;
-            debugTxtBox.Text = "Bitte einen Stapel öffnen";
-            pictureStack.stackReset();
+            refreshSession();
         }
     }
 }
