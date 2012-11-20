@@ -75,12 +75,14 @@
         </ToolBarTray>
         
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
+                <StatusBarItem>
+                    <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>                   
+                </StatusBarItem>
+                <Separator />
             <StatusBarItem>
-                <TextBlock>Bereit</TextBlock>
+                <TextBlock Name="brightnessTxtBox" Foreground="Red" TextAlignment="Right" Text="Helligkeit: 100"></TextBlock>
             </StatusBarItem>
-            <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>
-            </StatusBarItem>
+            <Separator />
         </StatusBar>
 
         <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding Path=StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
