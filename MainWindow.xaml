@@ -88,7 +88,7 @@
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Label Margin="2" FontWeight="Bold">Helligkeit</Label>
-            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" IsEnabled="{Binding Path=StackIsLoaded}" SmallChange="1" />
+            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" IsEnabled="{Binding Path=StackIsLoaded}" SmallChange="1" Minimum="-255" />
             <Label Margin="2" FontWeight="Bold">Kontrast</Label>
             <Slider Name="ContrastSlider" Height="23" Width="100" Margin="2" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding Path=StackIsLoaded}" />
         </StackPanel>
