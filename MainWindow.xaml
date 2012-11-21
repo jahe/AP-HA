@@ -97,9 +97,9 @@
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <CheckBox Content="Helligkeit" Height="16" Name="checkBoxBrightness" Margin="5" FontWeight="Bold" IsEnabled="{Binding StackIsLoaded}" Checked="checkBoxBrightness_Checked" Unchecked="checkBoxBrightness_Unchecked" />
-            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="5" Value="0" ValueChanged="BrightnessSlider_ValueChanged" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" IsEnabled="{Binding UserBrightness}" SmallChange="1" Minimum="-255" />
+            <Slider Name="BrightnessSlider" Height="23" Width="100" Margin="5" Value="-1" ValueChanged="BrightnessSlider_ValueChanged" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" IsEnabled="{Binding UserBrightness}" SmallChange="1" Minimum="-255" />
             <CheckBox Content="Kontrast" Height="16" Name="checkBoxContrast" Margin="5" FontWeight="Bold" IsEnabled="{Binding StackIsLoaded}" Checked="checkBoxContrast_Checked" Unchecked="checkBoxContrast_Unchecked" />
-            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="5" Value="0" ValueChanged="ContrastSlider_ValueChanged" Maximum="8" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding UserContrast}" Minimum="0" />
+            <Slider Name="ContrastSlider" Height="23" Width="100" Margin="5" Value="1" ValueChanged="ContrastSlider_ValueChanged" Maximum="8" IsSnapToTickEnabled="True" TickFrequency="0.01" IsEnabled="{Binding UserContrast}" Minimum="0" />
             <CheckBox Content="Zoom" FontWeight="Bold" Height="16" IsEnabled="{Binding StackIsLoaded}" Name="checkBoxZoom" Margin="5" />
             <Slider Name="zoomSlider" Height="23" Width="100" Margin="5" Value="1" Maximum="5" TickFrequency="0.01" IsEnabled="True" Minimum="0.1" />
         </StackPanel>
