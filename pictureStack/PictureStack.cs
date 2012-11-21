@@ -58,7 +58,7 @@ namespace AP_HA
             }
             else
             {
-                throw new PictureStackException("Zu ladende Bildnummer größer als Bildmenge");
+                throw new PictureStackException("Zu ladende Bildnummer größer als Bildmenge oder negativ");
             }           
         }
 
@@ -87,7 +87,7 @@ namespace AP_HA
                 }
                 catch (Exception e)
                 {
-                    throw new PictureStackException("Fehler bei der Bildstapelverarbeitung\n "+e.Message);
+                    throw new PictureStackException("Fehler bei der Bildstapelverarbeitung\n"+e.Message);
                 }
                 
             }

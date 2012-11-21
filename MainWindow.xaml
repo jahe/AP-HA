@@ -75,12 +75,12 @@
         </ToolBarTray>
         
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
-                <StatusBarItem>
-                    <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>                   
-                </StatusBarItem>
-                <Separator />
             <StatusBarItem>
-               <TextBlock Name="brightnessTxtBox" Foreground="Red" TextAlignment="Right" Text="Helligkeit: 100"></TextBlock>
+                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>                   
+            </StatusBarItem>
+           <Separator />
+            <StatusBarItem>
+               <TextBlock Name="brightnessTxtBox" Foreground="Red" TextAlignment="Right" Text="100"></TextBlock>
             </StatusBarItem>
             <Separator />
             <StatusBarItem>

@@ -53,7 +53,7 @@ namespace AP_HA
             }
             catch (Exception e)
             {
-                MessageBox.Show("Fehler bei der Bild(de)codierung\n "+e.Message+" \n Aktueller Stapel muss geschlossen werden");
+                MessageBox.Show("Fehler bei der Bild(de)codierung\n"+e.Message+"\nAktueller Stapel muss geschlossen werden");
                 refreshSession();
             }
         }
