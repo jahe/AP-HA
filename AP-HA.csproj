@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="controls\Brightness.cs" />
     <Compile Include="controls\Contrast.cs" />
+    <Compile Include="pictureProcessing\ImageFuncs.cs" />
     <Compile Include="marks\Mark.cs" />
     <Compile Include="marks\Marks.cs" />
     <Compile Include="menubar\BackToOriginalCut.cs" />
@@ -67,10 +68,6 @@
     <Compile Include="menubar\CutBeforeCursor.cs" />
     <Compile Include="menubar\ExitProgram.cs" />
     <Compile Include="menubar\OpenFolder.cs" />
-    <Compile Include="pictureProcessing\AdjustBrightness.cs" />
-    <Compile Include="pictureProcessing\AdjustContrast.cs" />
-    <Compile Include="pictureProcessing\BitmapFromBitmapSource.cs" />
-    <Compile Include="pictureProcessing\BitmapSourceFromBitmap.cs" />
     <Compile Include="pictureProcessing\ColorMatrix.cs" />
     <Compile Include="pictureProcessing\LoadPicture.cs" />
     <Compile Include="pictureStack\StringSorter.cs" />

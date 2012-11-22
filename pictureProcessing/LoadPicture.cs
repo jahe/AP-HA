@@ -17,43 +17,40 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        Stream imageStreamSource;
-        TiffBitmapDecoder decoder;
-        BitmapSource bitmapSource;
+        BitmapSource stackImage;
 
         public void loadPicture(int picNo)
         {
             try
             {
-                imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);
-                decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-                bitmapSource = decoder.Frames[0];
+                stackImage = ImageFuncs.getImgFromPath(pictureStack.getPictureFromList(picNo));
 
                 if (UserBrightness || UserContrast)
                 {
-                    Bitmap temp = BitmapFromBitmapSource(bitmapSource);
+                    Bitmap temp = ImageFuncs.BitmapFromBitmapSource(stackImage);
 
                     if (UserBrightness)
                     {
-                        temp = AdjustBrightness(temp, ImageBrightness);
+                        temp = ImageFuncs.AdjustBrightness(temp, ImageBrightness);
                     }
                     if (UserContrast)
                     {
-                        temp = AdjustContrast(temp, ImageContrast);
+                        temp = ImageFuncs.AdjustContrast(temp, ImageContrast);
                     }
 
-                    imgControl.Source = BitmapSourceFromBitmap(temp);
+                    imgControl.Source = ImageFuncs.BitmapSourceFromBitmap(temp);
+                    temp.Dispose();
                 }
                 else
                 {
-                    imgControl.Source = bitmapSource;
+                    imgControl.Source = stackImage;
                 }
 
                 debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
             }
             catch (Exception e)
             {
-                MessageBox.Show("Fehler bei der Bild(de)codierung\n"+e.Message+"\nAktueller Stapel muss geschlossen werden");
+                MessageBox.Show("Fehler bei der Bild(de)codierung\n" + e.Message + "\nAktueller Stapel muss geschlossen werden");
                 refreshSession();
             }
         }
