@@ -80,7 +80,7 @@
             </StatusBarItem>
            <Separator />
             <StatusBarItem>
-               <TextBlock Name="brightnessTxtBox" Foreground="Red" TextAlignment="Right" Text="100"></TextBlock>
+               <TextBlock Name="brightnessTxtBox" Foreground="Red" TextAlignment="Right" Text="Helligkeit: 100"></TextBlock>
             </StatusBarItem>
             <Separator />
             <StatusBarItem>

@@ -104,6 +104,9 @@ namespace AP_HA
             debugTxtBox.Text = "Bitte einen Stapel öffnen";
             checkBoxBrightness.IsChecked = false;
             checkBoxContrast.IsChecked = false;
+            checkBoxZoom.IsChecked = false;
+            BrightnessSlider.Value = -1;
+            ContrastSlider.Value = 1;
 
             if (pictureStack != null)
             {
