@@ -81,6 +81,7 @@
             </StatusBarItem>
         </StatusBar>
 
+        
         <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
         </Slider>
         
@@ -88,12 +89,11 @@
         <!-- #       Dock.LEFT      # -->
         <!-- ######################## -->
         
-        <StackPanel x:Name="AdjustControls" IsEnabled="False" DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
-            <Separator Margin="0"/>
-            
-            <Expander IsExpanded="True">
+        <StackPanel x:Name="AdjustControls" IsEnabled="False" DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040" Opacity="1">
+            <Border BorderThickness="5" CornerRadius="10" BorderBrush="#FFDBA735" Margin="5">
+                <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
                 <Expander.Header>
-                    <TextBlock>
+                    <TextBlock Foreground="White" FontWeight="Normal">
                         <TextBlock.Text>
                             <Binding ElementName="BrightnessSlider" Path="Value" StringFormat="Helligkeit: {0:f2}" />
                         </TextBlock.Text>
@@ -101,43 +101,52 @@
                 </Expander.Header>
                 <StackPanel Orientation="Horizontal">
                     <Slider Name="BrightnessSlider" Height="23" Width="100" Value="0.0"  Maximum="1" IsSnapToTickEnabled="True" TickFrequency="0.01"  SmallChange="1" Minimum="-1" />
-                    <Button Name="ResetBrightnessBtn" Content="0.0" Click="ResetBrightnessBtn_Click" />
+                    <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
+                    <Button Name="ResetBrightnessBtn" Click="ResetBrightnessBtn_Click" Content="&gt;&lt;" Margin="0" BorderBrush="#00000000" Background="#00000000" BorderThickness="0" Padding="0" />
+                    </Border>
                 </StackPanel>
             </Expander>
+            </Border>
 
-            <Separator />
 
-            <Expander IsExpanded="True">
-                <Expander.Header>
-                    <TextBlock>
+            <Border BorderThickness="5" CornerRadius="10" BorderBrush="#FFDBA735" Margin="5">
+                <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
+                    <Expander.Header>
+                        <TextBlock Foreground="White">
                         <TextBlock.Text>
                             <Binding ElementName="ContrastSlider" Path="Value" StringFormat="Kontrast: {0:f2}" />
                         </TextBlock.Text>
-                    </TextBlock>
-                </Expander.Header>
-                <StackPanel Orientation="Horizontal">
-                    <Slider Name="ContrastSlider" Height="23" Width="100" Value="1"  Maximum="4" IsSnapToTickEnabled="True" TickFrequency="0.01" Minimum="0" />
-                    <Button Name="ResetContrastBtn" Content="1.0" Click="ResetContrastBtn_Click" />
-                </StackPanel>
-            </Expander>
+                        </TextBlock>
+                    </Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Name="ContrastSlider" Height="23" Width="100" Value="1"  Maximum="4" IsSnapToTickEnabled="True" TickFrequency="0.01" Minimum="0" />
+                        <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
+                        <Button Name="ResetContrastBtn" Content="&gt;&lt;" Click="ResetContrastBtn_Click" Padding="0" BorderThickness="0" />
+                        </Border>
+                        </StackPanel>
+                </Expander>
+            </Border>
 
-            <Separator />
 
-            <Expander IsExpanded="True">
-                <Expander.Header>
-                    <TextBlock>
+            <Border BorderThickness="5" CornerRadius="10" BorderBrush="#FFDBA735" Margin="5">
+                <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
+                    <Expander.Header>
+                        <TextBlock Foreground="White">
                         <TextBlock.Text>
                             <Binding ElementName="zoomSlider" Path="Value" StringFormat=" {0:f2}x Zoom" />
                         </TextBlock.Text>
-                    </TextBlock>
-                </Expander.Header>
-                <StackPanel Orientation="Horizontal">
-                    <Slider Name="zoomSlider" Height="23" Width="100" Value="1" Maximum="5" TickFrequency="0.01" IsEnabled="True" Minimum="0.1" />
-                    <Button Name="ResetZoomBtn" Content="1.0x" Click="ResetZoomBtn_Click" />
-                </StackPanel>
-            </Expander>
-            
-            <Separator />
+                        </TextBlock>
+                    </Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Name="zoomSlider" Height="23" Width="100" Value="1" Maximum="5" TickFrequency="0.01" IsEnabled="True" Minimum="0.1" />
+                        <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
+                        <Button Name="ResetZoomBtn" Content="&gt;&lt;" Click="ResetZoomBtn_Click" Height="17" Width="17" BorderThickness="0" />
+                        </Border>
+                        </StackPanel>
+                </Expander>
+            </Border>
+
+
         </StackPanel>
 
 
