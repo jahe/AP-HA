@@ -42,10 +42,10 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-            </MenuItem>           
+            </MenuItem>
             <MenuItem Header="_Einstellungen">
                 <MenuItem Name="menuMouseSettings" Header="_Maus" />
-            </MenuItem>           
+            </MenuItem>
         </Menu>
 
         <ToolBarTray Name="toolBarTray1" Background="#15000040" DockPanel.Dock="Top" Height="40">
@@ -56,9 +56,9 @@
                 <Button  Name="btnCloseFolder" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
                     <Image Width="22" Height="22" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
-                
+
                 <Button  Name="btnCutBefore" Click="cutBeforeCursor" IsEnabled="{Binding CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
-                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png"  />                  
+                    <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBefore.png"  />
                 </Button>
                 <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonAfter.png" />
@@ -66,7 +66,7 @@
                 <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="19" Height="19" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
-                
+
             </ToolBar>
             <ToolBar Name="toolBar1" IsEnabled="{Binding StackIsLoaded}">
                 <Button Content="ZoomIn" Name="btnZoomIn"  Click="btnZoomIn_Click"  />
@@ -74,42 +74,46 @@
                 <Button Content="Verschieben" Name="btnMove" Click="btnMove_Click" />
             </ToolBar>
         </ToolBarTray>
-        
-        <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
-            <StatusBarItem>
-                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>                   
-            </StatusBarItem>
-        </StatusBar>
 
-        
-        <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
-        </Slider>
-        
+        <StackPanel DockPanel.Dock="Bottom" Background="#15000040">
+            <Border BorderThickness="3" CornerRadius="5" BorderBrush="#FFDBA735" Margin="5">
+                <StackPanel Background="#FFDBA735" Orientation="Vertical" Width="{Binding}">
+                    <Slider  Height="23" Name="stackSlider" Background="#FFDBA735" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red" Margin="1,3,1,0" Width="763">
+                    </Slider>
+                </StackPanel>
+            </Border>
+            <StatusBar  Name="statusBar" Background="LightGray">
+                <StatusBarItem>
+                    <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+        </StackPanel>
+
         <!-- ######################## -->
         <!-- #       Dock.LEFT      # -->
         <!-- ######################## -->
-        
+
         <StackPanel x:Name="AdjustControls" IsEnabled="False" DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040" Opacity="1">
-            <Border BorderThickness="5" CornerRadius="10" BorderBrush="#FFDBA735" Margin="5">
+            <Border BorderThickness="3" CornerRadius="5" BorderBrush="#FFDBA735" Margin="5">
                 <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
-                <Expander.Header>
-                    <TextBlock Foreground="White" FontWeight="Normal">
+                    <Expander.Header>
+                        <TextBlock Foreground="White" FontWeight="Normal">
                         <TextBlock.Text>
                             <Binding ElementName="BrightnessSlider" Path="Value" StringFormat="Helligkeit: {0:f2}" />
                         </TextBlock.Text>
-                    </TextBlock>
-                </Expander.Header>
-                <StackPanel Orientation="Horizontal">
-                    <Slider Name="BrightnessSlider" Height="23" Width="100" Value="0.0"  Maximum="1" IsSnapToTickEnabled="True" TickFrequency="0.01"  SmallChange="1" Minimum="-1" />
-                    <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
-                    <Button Name="ResetBrightnessBtn" Click="ResetBrightnessBtn_Click" Content="&gt;&lt;" Margin="0" BorderBrush="#00000000" Background="#00000000" BorderThickness="0" Padding="0" />
-                    </Border>
-                </StackPanel>
-            </Expander>
+                        </TextBlock>
+                    </Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Name="BrightnessSlider" Height="23" Width="100" Value="0.0"  Maximum="1" IsSnapToTickEnabled="True" TickFrequency="0.01"  SmallChange="1" Minimum="-1" />
+                        <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
+                            <Button Name="ResetBrightnessBtn" Click="ResetBrightnessBtn_Click" Content="&gt;&lt;" Margin="0" BorderBrush="#00000000" Background="#00000000" BorderThickness="0" Padding="0" />
+                        </Border>
+                    </StackPanel>
+                </Expander>
             </Border>
 
 
-            <Border BorderThickness="5" CornerRadius="10" BorderBrush="#FFDBA735" Margin="5">
+            <Border BorderThickness="3" CornerRadius="5" BorderBrush="#FFDBA735" Margin="5">
                 <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
                     <Expander.Header>
                         <TextBlock Foreground="White">
@@ -121,14 +125,14 @@
                     <StackPanel Orientation="Horizontal">
                         <Slider Name="ContrastSlider" Height="23" Width="100" Value="1"  Maximum="4" IsSnapToTickEnabled="True" TickFrequency="0.01" Minimum="0" />
                         <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
-                        <Button Name="ResetContrastBtn" Content="&gt;&lt;" Click="ResetContrastBtn_Click" Padding="0" BorderThickness="0" />
+                            <Button Name="ResetContrastBtn" Content="&gt;&lt;" Click="ResetContrastBtn_Click" Padding="0" BorderThickness="0" />
                         </Border>
-                        </StackPanel>
+                    </StackPanel>
                 </Expander>
             </Border>
 
 
-            <Border BorderThickness="5" CornerRadius="10" BorderBrush="#FFDBA735" Margin="5">
+            <Border BorderThickness="3" CornerRadius="5" BorderBrush="#FFDBA735" Margin="5">
                 <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
                     <Expander.Header>
                         <TextBlock Foreground="White">
@@ -140,13 +144,11 @@
                     <StackPanel Orientation="Horizontal">
                         <Slider Name="zoomSlider" Height="23" Width="100" Value="1" Maximum="5" TickFrequency="0.01" IsEnabled="True" Minimum="0.1" />
                         <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
-                        <Button Name="ResetZoomBtn" Content="&gt;&lt;" Click="ResetZoomBtn_Click" Height="17" Width="17" BorderThickness="0" />
+                            <Button Name="ResetZoomBtn" Content="&gt;&lt;" Click="ResetZoomBtn_Click" Height="17" Width="17" BorderThickness="0" />
                         </Border>
-                        </StackPanel>
+                    </StackPanel>
                 </Expander>
             </Border>
-
-
         </StackPanel>
 
 
@@ -155,24 +157,37 @@
         <!-- ######################## -->
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
-            <Label Margin="5,0" FontWeight="Bold">Innereienmarkierer</Label>
-            <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel Width="150">
-                            <Rectangle Width="12" Height="12" Fill="{Binding BrushColor}" MouseLeftButtonDown="changeMarkColor" />
-                            <CheckBox IsChecked="{Binding Visible}" Margin="6" />
-                            <Label Content="{Binding Name}" MaxWidth="74" />
-                            <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" Margin="0,0,16,0" />
-                        </DockPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            
-            <StackPanel Orientation="Horizontal">
-                <TextBox Height="23" Name="markNameTextBox" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
-                <Button Content="+" Width="20" Height="20" Name="addMarkToListbutton" FontWeight="Bold" Click="addMarkToListbutton_Click" />
-            </StackPanel>
+            <Border BorderThickness="3" CornerRadius="5" BorderBrush="#FFDBA735" Margin="5">
+                <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
+                    <Expander.Header>
+                        <TextBlock Foreground="White">
+                        <TextBlock.Text>
+                            Innereienmarkierer
+                        </TextBlock.Text>
+                        </TextBlock>
+                    </Expander.Header>
+                    <StackPanel>
+                        <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel Width="150">
+                                        <Rectangle Width="12" Height="12" Fill="{Binding BrushColor}" MouseLeftButtonDown="changeMarkColor" />
+                                        <CheckBox IsChecked="{Binding Visible}" Margin="6" />
+                                        <Label Content="{Binding Name}" MaxWidth="74" />
+                                        <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" Margin="0,0,16,0" />
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Height="23" Name="markNameTextBox" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
+                            <Button Content="+" Width="20" Height="20" Name="addMarkToListbutton" FontWeight="Bold" Click="addMarkToListbutton_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+            </Border>
         </StackPanel>
 
         <!-- ######################## -->
@@ -180,7 +195,7 @@
         <!-- ######################## -->
 
         <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
-            <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="1,1,1,1" Background="#eee">
+            <Border x:Name="canvasWrapper" BorderBrush="black" BorderThickness="1" Background="#eee">
                 <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
                     <Canvas.LayoutTransform>
                         <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
