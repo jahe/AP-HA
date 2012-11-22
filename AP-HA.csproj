@@ -147,6 +147,13 @@
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon\cursor_move.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon\Zoom_In.png" />
+    <Resource Include="icon\Zoom_Out.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
