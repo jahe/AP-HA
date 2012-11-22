@@ -24,27 +24,7 @@ namespace AP_HA
             try
             {
                 stackImage = ImageFuncs.getImgFromPath(pictureStack.getPictureFromList(picNo));
-
-                if (UserBrightness || UserContrast)
-                {
-                    Bitmap temp = ImageFuncs.BitmapFromBitmapSource(stackImage);
-
-                    if (UserBrightness)
-                    {
-                        temp = ImageFuncs.AdjustBrightness(temp, ImageBrightness);
-                    }
-                    if (UserContrast)
-                    {
-                        temp = ImageFuncs.AdjustContrast(temp, ImageContrast);
-                    }
-
-                    imgControl.Source = ImageFuncs.BitmapSourceFromBitmap(temp);
-                    temp.Dispose();
-                }
-                else
-                {
-                    imgControl.Source = stackImage;
-                }
+                imgControl.Source = stackImage;
 
                 debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
             }

@@ -19,7 +19,7 @@ namespace AP_HA
         public FirstEffect()
         {
             PixelShader pixelShader = new PixelShader();
-            pixelShader.UriSource = new Uri("/AP-HA;component/FirstEffect.ps", UriKind.Relative);
+            pixelShader.UriSource = new Uri("/AP-HA;component/PixelShader/FirstEffect.ps", UriKind.Relative);
             this.PixelShader = pixelShader;
 
             this.UpdateShaderValue(InputProperty);

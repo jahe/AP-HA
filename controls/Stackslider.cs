@@ -21,15 +21,15 @@ namespace AP_HA
 
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //try
-            //{
+            try
+            {
                 loadPicture((int)stackSlider.Value);
-            //}
-            //catch (Exception ex)
-            //{
-            //    System.Windows.Forms.MessageBox.Show(ex.Message+" \nDer aktuelle Stapel wird geschlossen");
-            //    refreshSession();
-            //}
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message+" \nDer aktuelle Stapel wird geschlossen");
+                refreshSession();
+            }
             
             if (stackSlider.Value == 0)
             {

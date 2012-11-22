@@ -11,41 +11,6 @@ namespace AP_HA
 {
     public static class ImageFuncs
     {
-        // --------- Adjust-Functions ------------
-
-        public static Bitmap AdjustBrightness(Bitmap Image, int Value)
-        {
-            float FinalValue = (float)Value / 255.0f;
-
-            ColorMatrix TempMatrix = new ColorMatrix();
-
-            TempMatrix.Matrix = new float[][]{
-                                new float[] {1, 0, 0, 0, 0},
-                                new float[] {0, 1, 0, 0, 0},
-                                new float[] {0, 0, 1, 0, 0},
-                                new float[] {0, 0, 0, 1, 0},
-                                new float[] {FinalValue, FinalValue, FinalValue, 1, 1} };
-
-            return TempMatrix.Apply(Image);
-        }
-
-        public static Bitmap AdjustContrast(Bitmap Image, double value)
-        {
-            float FinalValue = (float)(1 - value) / 2;
-            float tempValue = (float)value;
-            ColorMatrix TempMatrix = new ColorMatrix();
-
-            TempMatrix.Matrix = new float[][]{
-                                new float[] {tempValue, 0, 0, 0, 0},
-                                new float[] {0, tempValue, 0, 0, 0},
-                                new float[] {0, 0, tempValue, 0, 0},
-                                new float[] {0, 0, 0, tempValue, 0},
-                                new float[] {FinalValue, FinalValue, FinalValue, 1, 1} };
-
-            return TempMatrix.Apply(Image);
-        }
-
-        // ----------------------------------------
         public static BitmapSource getImgFromPath(string path)
         {
             Stream imgStreamSource;
