@@ -24,7 +24,7 @@ namespace AP_HA
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         enum Tool { ZoomIn, ZoomOut, Move };
-        private Tool? tool = null;
+        private Tool? tool = Tool.Move;
 
         public MainWindow()
         {
@@ -97,21 +97,38 @@ namespace AP_HA
 
         private void refreshSession()
         {
+            AdjustControls.IsEnabled = false;
             stackSlider.Value = 0;
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
             debugTxtBox.Text = "Bitte einen Stapel öffnen";
-            checkBoxBrightness.IsChecked = false;
-            checkBoxContrast.IsChecked = false;
-            checkBoxZoom.IsChecked = false;
-            BrightnessSlider.Value = -1;
-            ContrastSlider.Value = 1;
+            //checkBoxBrightness.IsChecked = false;
+            //checkBoxContrast.IsChecked = false;
+            //checkBoxZoom.IsChecked = false;
+            BrightnessSlider.Value = 0.0;
+            ContrastSlider.Value = 1.0;
+            zoomSlider.Value = 1.0;
 
             if (pictureStack != null)
             {
                 pictureStack.stackReset();
             }
+        }
+
+        private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BrightnessSlider.Value = 0.0;
+        }
+
+        private void ResetContrastBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContrastSlider.Value = 1.0;
+        }
+
+        private void ResetZoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            zoomSlider.Value = 1.0;
         }
     }
 }
