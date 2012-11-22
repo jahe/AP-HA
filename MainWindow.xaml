@@ -79,18 +79,6 @@
             <StatusBarItem>
                 <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>                   
             </StatusBarItem>
-           <Separator />
-            <StatusBarItem>
-               <TextBlock Name="brightnessTxtBox" Foreground="Red" TextAlignment="Right" Text="Helligkeit: 100"></TextBlock>
-            </StatusBarItem>
-            <Separator />
-            <StatusBarItem>
-                <TextBlock Name="contrastTxtBox" Foreground="Red" TextAlignment="Right" Text="Kontrast: 100"></TextBlock>
-            </StatusBarItem>
-            <Separator />
-            <StatusBarItem>
-                <TextBlock Name="zoomTxtBox" Foreground="Red" TextAlignment="Right" Text="Zoom: 100"></TextBlock>
-            </StatusBarItem>
         </StatusBar>
 
         <Slider DockPanel.Dock="Bottom" Height="23" Name="stackSlider" Margin="2,0,2,0" Background="#15000040" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">

@@ -23,31 +23,5 @@ namespace AP_HA
 
             return img;
         }
-
-        public static Bitmap BitmapFromBitmapSource(BitmapSource bitmapsource)
-        {
-            Bitmap bitmap;
-
-            using (MemoryStream outStream = new MemoryStream())
-            {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-
-                enc.Frames.Add(BitmapFrame.Create(bitmapsource));
-                enc.Save(outStream);
-                bitmap = new Bitmap(outStream);
-            }
-
-            return bitmap;
-        }
-
-        public static BitmapSource BitmapSourceFromBitmap(Bitmap bitmap)
-        {
-            BitmapSource bitSrc = null;
-            var hBitmap = bitmap.GetHbitmap();
-
-            bitSrc = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-            return bitSrc;
-        }
     }
 }
