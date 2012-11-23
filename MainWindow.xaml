@@ -12,12 +12,12 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuCreateProjekt" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen">
+                <MenuItem Name="menuCreateProject" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen">
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuOpenFolder" Header="_Stapel laden" ToolTip="Neuen Stapel laden" Click="openFolder">
+                <MenuItem Name="menuOpenFolder" Header="_Projekt laden" ToolTip="Vorhandenes Projekt öffnen" Click="openFolder">
                     <MenuItem.Icon>
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
@@ -62,13 +62,13 @@
 
         <ToolBarTray Name="toolBarTray1" Background="#9CAAC1" DockPanel.Dock="Top" Margin="0,0,0,5">
             <ToolBar Name="toolBar0" Background="#BCC7D8" Margin="0,1,0,1">
-                <Button Name="btnCreateObject" Width="22" Height="22" >
+                <Button Name="btnCreateProject" Width="22" Height="22" >
                     <Image Width="14" Height="14" Source="/AP-HA;component/icon/createProject.ico" ToolTip="{Binding ToolTip, ElementName=menuCreateProject}"></Image>
                 </Button>
                 <Button Name="btnOpenFolder" Width="22" Height="22" Click="openFolder" >
-                    <Image Width="15" Height="15" Source="file:///C:/Users/marcus/Documents/Visual%20Studio%202010/Projects/AP-HA/AP-HA/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
                 </Button>
                 <Button  Name="btnCloseFolder" Width="22" Height="22" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
