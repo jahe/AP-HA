@@ -90,8 +90,8 @@
                 <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <Border DockPanel.Dock="Bottom" Margin="5,3,5,3" BorderThickness="3" BorderBrush="#FFDBA735" CornerRadius="5" Background="#FFDBA735">
-            <Slider  Height="23" Name="stackSlider" Margin="0,3,0,0" Background="#FFDBA735" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
+        <Border DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5">
+            <Slider  Height="23" Name="stackSlider" Margin="5,4,5,0" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
         </Slider>
         </Border>
 
@@ -101,7 +101,7 @@
 
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Border BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5,0">
-                <StackPanel x:Name="AdjustControls" IsEnabled="False" Orientation="Vertical">
+                <StackPanel x:Name="AdjustControls" IsEnabled="{Binding StackIsLoaded}" Orientation="Vertical">
                     <Label Padding="5 2 5 2" Background="#45597C" Content="Tools:" Foreground="White" FontWeight="Bold" />
                     
                     <Border BorderThickness="0" CornerRadius="5" Margin="5">
@@ -171,35 +171,40 @@
         <!-- ######################## -->
 
         <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Background="#15000040">
-            <Border BorderThickness="0" CornerRadius="3" BorderBrush="#FFDBA735" Margin="5,0">
-                <Expander IsExpanded="True" Background="#FFDBA735" Margin="0" BorderThickness="0">
-                    <Expander.Header>
-                        <TextBlock Foreground="White" FontWeight="Normal">
+            <Border BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5,0">
+                <StackPanel x:Name="markControls" IsEnabled="{Binding StackIsLoaded}" Orientation="Vertical">
+                    <Label Padding="5 2 5 2" Background="#45597C" Content="Tools:" Foreground="White" FontWeight="Bold" />
+                    <Border BorderThickness="0" CornerRadius="5" Margin="5">
+                        <Expander IsEnabled="{Binding StackIsLoaded}"  Margin="0" BorderThickness="0">
+                            <Expander.Header>
+                                <TextBlock Foreground="White" FontWeight="Normal">
                         <TextBlock.Text>
                             Innereienmarkierer
                         </TextBlock.Text>
-                        </TextBlock>
-                    </Expander.Header>
-                    <StackPanel>
-                        <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <DockPanel Width="150">
-                                        <Rectangle Width="12" Height="12" Fill="{Binding BrushColor}" MouseLeftButtonDown="changeMarkColor" />
-                                        <CheckBox IsChecked="{Binding Visible}" Margin="6" />
-                                        <Label Content="{Binding Name}" MaxWidth="74" />
-                                        <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" Margin="0,0,16,0" />
-                                    </DockPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                </TextBlock>
+                            </Expander.Header>
+                            <StackPanel>
+                                <ListBox Height="160" Name="marksListBox" Width="160" IsSynchronizedWithCurrentItem="True" Margin="5,0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel Width="150">
+                                                <Rectangle Width="12" Height="12" Fill="{Binding BrushColor}" MouseLeftButtonDown="changeMarkColor" />
+                                                <CheckBox IsChecked="{Binding Visible}" Margin="6" />
+                                                <Label Content="{Binding Name}" MaxWidth="74" />
+                                                <Button Content="-" Width="20" Height="20" HorizontalAlignment="Right" FontWeight="Bold" Click="removeMarkFromList" Margin="0,0,16,0" />
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Height="23" Name="markNameTextBox" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
-                            <Button Content="+" Width="20" Height="20" Name="addMarkToListbutton" FontWeight="Bold" Click="addMarkToListbutton_Click" />
-                        </StackPanel>
-                    </StackPanel>
-                </Expander>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Height="23" Name="markNameTextBox" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
+                                    <Button Content="+" Width="20" Height="20" Name="addMarkToListbutton" FontWeight="Bold" Click="addMarkToListbutton_Click" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Expander>
+                    </Border>
+                </StackPanel>        
             </Border>
         </StackPanel>
 

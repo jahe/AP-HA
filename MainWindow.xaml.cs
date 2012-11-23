@@ -97,15 +97,12 @@ namespace AP_HA
 
         private void refreshSession()
         {
-            AdjustControls.IsEnabled = false;
+            //AdjustControls.IsEnabled = false;
             stackSlider.Value = 0;
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
             debugTxtBox.Text = "Bitte einen Stapel öffnen";
-            //checkBoxBrightness.IsChecked = false;
-            //checkBoxContrast.IsChecked = false;
-            //checkBoxZoom.IsChecked = false;
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
