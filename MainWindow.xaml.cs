@@ -127,5 +127,10 @@ namespace AP_HA
         {
             zoomSlider.Value = 1.0;
         }
+
+        private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

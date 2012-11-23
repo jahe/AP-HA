@@ -90,9 +90,9 @@
                 <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <Border DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5">
-            <Slider  Height="23" Name="stackSlider" Margin="5,4,5,0" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" BorderBrush="Red">
-        </Slider>
+        <Border DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5" Background="#45597C">
+            <Slider  Height="22" Name="stackSlider" Margin="5,4,5,0" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" Background="#45597C" AutoToolTipPlacement="TopLeft" ToolTip="Scrollen durch den Stapel" AutoToolTipPrecision="0">
+            </Slider>
         </Border>
 
         <!-- ######################## -->
@@ -102,8 +102,8 @@
         <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Background="#15000040">
             <Border BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5,0">
                 <StackPanel x:Name="AdjustControls" IsEnabled="{Binding StackIsLoaded}" Orientation="Vertical">
-                    <Label Padding="5 2 5 2" Background="#45597C" Content="Tools:" Foreground="White" FontWeight="Bold" />
-                    
+                    <Label Padding="5 2 5 2" Background="#45597C" Content="Ansicht:" Foreground="White" FontWeight="Bold" />
+
                     <Border BorderThickness="0" CornerRadius="5" Margin="5">
                         <Expander IsExpanded="False" Margin="0" BorderThickness="0">
                             <Expander.Header>
@@ -114,14 +114,12 @@
                                 </TextBlock>
                             </Expander.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Slider Name="BrightnessSlider" Height="23" Width="100" Value="0.0"  Maximum="1" IsSnapToTickEnabled="True" TickFrequency="0.01"  SmallChange="1" Minimum="-1" />
-                                <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
-                                    <Button Name="ResetBrightnessBtn" Click="ResetBrightnessBtn_Click" Content="&gt;&lt;" />
-                                </Border>
+                                <Slider Name="BrightnessSlider" Height="23" Width="100" Value="0.0"  Maximum="1" IsSnapToTickEnabled="True" TickFrequency="0.01"  SmallChange="1" Minimum="-1"/>
+                                <Button Name="ResetBrightnessBtn" Click="ResetBrightnessBtn_Click" Content="&gt;&lt;" />
                             </StackPanel>
                         </Expander>
                     </Border>
-                    
+
                     <Separator />
 
                     <Border BorderThickness="0" CornerRadius="5" Margin="5">
@@ -179,7 +177,7 @@
                             <Expander.Header>
                                 <TextBlock Foreground="White" FontWeight="Normal">
                         <TextBlock.Text>
-                            Innereienmarkierer
+                            Markierer
                         </TextBlock.Text>
                                 </TextBlock>
                             </Expander.Header>
@@ -204,7 +202,7 @@
                             </StackPanel>
                         </Expander>
                     </Border>
-                </StackPanel>        
+                </StackPanel>
             </Border>
         </StackPanel>
 
