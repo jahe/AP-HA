@@ -209,7 +209,7 @@
         <!-- ######################## -->
         <!-- #      Dock.CENTER     # -->
         <!-- ######################## -->
-        <Border BorderThickness="2" BorderBrush="#FFFFE8A6" CornerRadius="3">
+        <Border BorderThickness="2" BorderBrush="#999" CornerRadius="3">
             <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
                 <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#eee">
                     <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
