@@ -151,8 +151,11 @@
     <Resource Include="icon\cursor_move.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon\Zoom_In.png" />
-    <Resource Include="icon\Zoom_Out.png" />
+    <Resource Include="icon\crop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon\zoom-in.png" />
+    <Resource Include="icon\zoom-out.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
