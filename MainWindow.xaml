@@ -12,9 +12,19 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
+                <MenuItem Name="menuCreateProjekt" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen">
+                    <MenuItem.Icon>
+                        <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Name="menuOpenFolder" Header="_Stapel laden" ToolTip="Neuen Stapel laden" Click="openFolder">
                     <MenuItem.Icon>
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuellen Stapel speichern" IsEnabled="{Binding StackIsLoaded}">
+                    <MenuItem.Icon>
+                        <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}">
@@ -52,21 +62,27 @@
 
         <ToolBarTray Name="toolBarTray1" Background="#9CAAC1" DockPanel.Dock="Top" Margin="0,0,0,5">
             <ToolBar Name="toolBar0" Background="#BCC7D8" Margin="0,1,0,1">
-                <Button Name="btnOpenFolder" Click="openFolder" >
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/openFolder.png" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
+                <Button Name="btnCreateObject" Width="22" Height="22" >
+                    <Image Width="14" Height="14" Source="/AP-HA;component/icon/createProject.ico" ToolTip="{Binding ToolTip, ElementName=menuCreateProject}"></Image>
                 </Button>
-                <Button  Name="btnCloseFolder" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png" />
+                <Button Name="btnOpenFolder" Width="22" Height="22" Click="openFolder" >
+                    <Image Width="15" Height="15" Source="file:///C:/Users/marcus/Documents/Visual%20Studio%202010/Projects/AP-HA/AP-HA/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-
-                <Button  Name="btnCutBefore" Click="cutBeforeCursor" IsEnabled="{Binding CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/CutButtonBefore.png"  />
+                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
                 </Button>
-                <Button  Name="btnCutAfter"  Click="cutAfterCursor" IsEnabled="{Binding CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/CutButtonAfter.png" />
+                <Button  Name="btnCloseFolder" Width="22" Height="22" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                    <Image Width="17" Height="17" Source="file:///C:/Users/marcus/Documents/Visual%20Studio%202010/Projects/AP-HA/AP-HA/icon/closeFolder.ico" />
                 </Button>
-                <Button  Name="btnCutBackToOriginal" Click="backToOriginalCut" IsEnabled="{Binding StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
+                <Separator Background="#FF888888" Margin="3,1"></Separator>
+                <Button  Name="btnCutBefore" Width="22" Height="22" Click="cutBeforeCursor" IsEnabled="{Binding CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonBefore.png"  />
+                </Button>
+                <Button  Name="btnCutAfter" Width="22" Height="22" Click="cutAfterCursor" IsEnabled="{Binding CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonAfter.png" />
+                </Button>
+                <Button  Name="btnCutBackToOriginal" Width="22" Height="22" Click="backToOriginalCut" IsEnabled="{Binding StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
 
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
