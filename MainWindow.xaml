@@ -149,9 +149,7 @@
                             </Expander.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Slider Name="ContrastSlider" Height="23" Width="100" Value="1"  Maximum="4" IsSnapToTickEnabled="True" TickFrequency="0.01" Minimum="0" />
-                                <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
-                                    <Button Name="ResetContrastBtn" Content="&gt;&lt;" Click="ResetContrastBtn_Click" />
-                                </Border>
+                                <Button Name="ResetContrastBtn" Content="&gt;&lt;" Click="ResetContrastBtn_Click" />
                             </StackPanel>
                         </Expander>
                     </Border>
@@ -169,9 +167,7 @@
                             </Expander.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Slider Name="zoomSlider" Height="23" Width="100" Value="1" Maximum="5" TickFrequency="0.01" IsEnabled="True" Minimum="0.1" />
-                                <Border CornerRadius="10" BorderThickness="3" BorderBrush="White" Margin="2">
-                                    <Button Name="ResetZoomBtn" Content="&gt;&lt;" Click="ResetZoomBtn_Click" />
-                                </Border>
+                                <Button Name="ResetZoomBtn" Content="&gt;&lt;" Click="ResetZoomBtn_Click" />
                             </StackPanel>
                         </Expander>
                     </Border>
