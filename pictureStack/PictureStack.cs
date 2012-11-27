@@ -88,8 +88,7 @@ namespace AP_HA
                 catch (Exception e)
                 {
                     throw new PictureStackException("Fehler bei der Bildstapelverarbeitung\n"+e.Message);
-                }
-                
+                }                
             }
             else
             {
