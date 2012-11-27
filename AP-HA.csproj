@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OpenProject.xaml.cs">
+      <DependentUpon>OpenProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PixelShader\FirstEffect.cs" />
     <Compile Include="pictureProcessing\ImageFuncs.cs" />
     <Compile Include="marks\Mark.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="menubar\OpenFolder.cs" />
     <Compile Include="pictureProcessing\LoadPicture.cs" />
     <Compile Include="pictureStack\StringSorter.cs" />
+    <Compile Include="project\Project.cs" />
     <Compile Include="toolbar\Move.cs" />
     <Compile Include="toolbar\Zoom.cs" />
     <Compile Include="pictureStack\PictureStackException.cs" />
@@ -86,6 +90,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OpenProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="pictureStack\PictureStack.cs" />
@@ -146,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="project\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />
