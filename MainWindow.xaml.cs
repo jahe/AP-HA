@@ -23,13 +23,30 @@ namespace AP_HA
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        enum Tool { ZoomIn, ZoomOut, Move };
+        enum Tool { ZoomIn, ZoomOut, Move, None };
+
+        enum Wheel { Up, Down, None };
+        enum MouseMovement { Left, Up, Right, Down, None };
+
         private Tool? tool = Tool.Move;
+        private List<Key> keys;
+        private List<MouseButton> mouseButtons;
+        private Wheel mouseWheel;
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeMarks();
+
+            keys = new List<Key>();
+            mouseButtons = new List<MouseButton>();
+            mouseWheel = Wheel.None;
+
+            this.KeyDown += new KeyEventHandler(OnKeyDown);                         // KeyDown Event abonieren
+            this.KeyUp += new KeyEventHandler(OnKeyUp);                             // KeyUp Event abonieren
+            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown); // MouseDown Event abonieren
+            this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);   // MouseUp Event abonieren
+            this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
         }
 
         #region Properties für UI-Binding
@@ -131,6 +148,46 @@ namespace AP_HA
         private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            this.debugTxtBox.Text = e.Key.ToString();
+
+            if (!keys.Contains(e.Key))
+                keys.Add(e.Key);
+        }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            this.debugTxtBox.Text = e.Key.ToString();
+
+            keys.Remove(e.Key);
+        }
+
+        private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.debugTxtBox.Text = e.ChangedButton.ToString();
+
+            if (!mouseButtons.Contains(e.ChangedButton))
+                mouseButtons.Add(e.ChangedButton);
+        }
+
+        private void OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            mouseButtons.Remove(e.ChangedButton);
+        }
+
+        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+                mouseWheel = Wheel.Up;
+            else if (e.Delta < 0)
+                mouseWheel = Wheel.Down;
+            else
+                mouseWheel = Wheel.None;
+
+            this.debugTxtBox.Text = mouseWheel.ToString();
         }
     }
 }

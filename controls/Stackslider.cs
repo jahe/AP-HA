@@ -17,7 +17,7 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        int zoomSpeed = 1;
+        private int zoomSpeed = 1;
 
         private void stackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
