@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AP_HA.project
+namespace AP_HA
 {
-    class Project
+    public class Project
     {
+        #region Constructors
+        public Project()
+        {
+
+        }
+        
         public Project(PictureStack pS)
         {
             //neuen Projektordner aus pS erstellen
@@ -16,12 +22,11 @@ namespace AP_HA.project
         {
             //vorhandenes ProjektZip öffnen
         }
+        #endregion
 
         public void createProjectZip()
         {
             //
         }
-
-
     }
 }

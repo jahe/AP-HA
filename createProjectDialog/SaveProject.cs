@@ -10,13 +10,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 namespace AP_HA
 {
     public partial class CreateProjectDialog
     {
         private void cPDsaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Project newProject = new Project();
         }
     }
 }
