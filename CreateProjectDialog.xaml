@@ -1,0 +1,37 @@
+﻿<Window x:Class="AP_HA.CreateProjectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Neues Projekt erstellen" Height="198" Width="224" Background="#FF293955" Focusable="False" ResizeMode="NoResize" Topmost="True">
+    <Grid>
+
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Stapelinformationen:" Height="28" Name="headLine" Foreground="White" Width="226" Background="#FF45597C" FontWeight="Bold" />
+            </StackPanel>
+            <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Bilderanzahl:" Foreground="White" Height="28" Name="cpDpicAmountHeader" />
+                    <Label Content="00" Foreground="White" Height="28" Name="cPDPicAmount" />
+                </StackPanel>
+            </Border>
+            <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Stapelname:" Foreground="White" Height="28" Name="label3" />
+                    <Label Content="name" Foreground="White" Height="28" Name="label4" />
+                </StackPanel>
+            </Border>
+            <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Auflösung:" Foreground="White" Height="28" Name="label5" />
+                    <Label Content="00" Foreground="White" Height="28" Name="label6" />
+                    <Label Content="00" Foreground="White" Height="28" Name="label7" />
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal" Height="48">
+                <Button Content="Cancel" Height="23" Name="button1" Width="75" />
+                <Button Content="Speichern" Height="23" Name="button2" Width="75" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

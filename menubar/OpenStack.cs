@@ -35,7 +35,7 @@ namespace AP_HA
             }
         }
 
-        private void openFolder(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
+        private void openStack(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
         {
             openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Neuen Bildstapel auswählen";

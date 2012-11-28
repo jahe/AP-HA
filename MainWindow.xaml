@@ -12,22 +12,38 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuCreateProject" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen" >
+                <MenuItem Name="menuOpenStack" Header="_Neuen Stapel laden" ToolTip="Neuen Bilderstapel öffnen" Click="openStack" >
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuOpenFolder" Header="_Projekt laden" ToolTip="Vorhandenes Projekt öffnen" Click="openFolder">
+                <MenuItem Name="menuCreateProject" Header="_Projekt aus aktuellem Stapel erstellen" ToolTip="Neues Projekt erstellen" IsEnabled="{Binding StackIsLoaded}" Click="menuCreateProject_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menuCloseStack" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" IsEnabled="{Binding StackIsLoaded}">
+                    <MenuItem.Icon>
+                        <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="menuOpenFolder" Header="_Projekt laden" ToolTip="Vorhandenes Projekt öffnen" >
                     <MenuItem.Icon>
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuellen Stapel speichern" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseFolder" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuSaveProjectAs" Header="_Projekt speichern unter" ToolTip="Aktuelles Projekt speichern unter" IsEnabled="{Binding StackIsLoaded}">
+                    <MenuItem.Icon>
+                        <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menuCloseProject" Header="_Projekt beenden" ToolTip="Aktuelles Projekt beenden" IsEnabled="{Binding StackIsLoaded}">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
@@ -65,7 +81,7 @@
                 <Button Name="btnCreateProject" Width="22" Height="22" >
                     <Image Width="14" Height="14" Source="/AP-HA;component/icon/createProject.ico" ToolTip="{Binding ToolTip, ElementName=menuCreateProject}"></Image>
                 </Button>
-                <Button Name="btnOpenFolder" Width="22" Height="22" Click="openFolder" >
+                <Button Name="btnOpenStack" Width="22" Height="22" Click="openStack" >
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
                 <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}">
@@ -119,7 +135,6 @@
             <Border BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5,0">
                 <StackPanel x:Name="AdjustControls" IsEnabled="{Binding StackIsLoaded}" Orientation="Vertical">
                     <Label Padding="5 2 5 2" Background="#45597C" Content="Ansicht:" Foreground="White" FontWeight="Bold" />
-
                     <Border BorderThickness="0" CornerRadius="5" Margin="5">
                         <Expander IsExpanded="False" Margin="0" BorderThickness="0">
                             <Expander.Header>

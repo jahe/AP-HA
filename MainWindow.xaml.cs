@@ -131,8 +131,6 @@ namespace AP_HA
         private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
         {
 
-        }
-
-        
+        }       
     }
 }

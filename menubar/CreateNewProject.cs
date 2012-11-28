@@ -9,18 +9,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Windows.Forms;
 
 namespace AP_HA
 {
-    /// <summary>
-    /// Interaktionslogik für OpenProject.xaml
-    /// </summary>
-    public partial class OpenProject : Window
+    public partial class MainWindow
     {
-        public OpenProject()
+        private void menuCreateProject_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            CreateProjectDialog op = new CreateProjectDialog(pictureStack.PictureAmount);
+            op.Show();
         }
     }
 }
