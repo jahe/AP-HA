@@ -8,11 +8,24 @@ using System.Windows.Media.Imaging;
 
 namespace AP_HA
 {
-    class PictureStack
+    public class PictureStack
     {
         private string folderPath;                                  //Aktueller Ordnerpfad
+        private string folderName;
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
         private string[] filePaths;
+
+        public string FolderName
+        {
+            get { return this.folderName; }
+            set { this.folderName = value; }
+        }
+
+        public string FolderPath
+        {
+            get { return this.folderPath; }
+            private set { this.folderPath = value; }
+        }
         public double Height
         {
             get;
@@ -31,12 +44,13 @@ namespace AP_HA
         }
 
         public PictureStack(string path)                            
-        {
+        {           
             initFileList(path);
 
             if (filePathList.Count() != 0)                          
             {                               
-                this.folderPath = path;
+                FolderPath = path;
+                FolderName = Path.GetFileName(path);
             }
             else
             {

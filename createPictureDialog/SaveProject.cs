@@ -9,18 +9,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
-using System.Windows.Forms;
-
 namespace AP_HA
 {
-    public partial class MainWindow
+    public partial class CreateProjectDialog
     {
-        private void menuCreateProject_Click(object sender, RoutedEventArgs e)
+        private void cPDsaveButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateProjectDialog op = new CreateProjectDialog(pictureStack);
+
         }
     }
 }

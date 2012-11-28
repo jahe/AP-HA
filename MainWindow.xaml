@@ -21,10 +21,10 @@
             <MenuItem Header="_Datei">
                 <MenuItem Name="menuOpenStack" Header="_Neuen Stapel laden" ToolTip="Neuen Bilderstapel öffnen" Click="openStack" >
                     <MenuItem.Icon>
-                        <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
+                        <Image Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCreateProject" Header="_Projekt aus aktuellem Stapel erstellen" ToolTip="Neues Projekt erstellen" IsEnabled="{Binding StackIsLoaded}" Click="menuCreateProject_Click">
+                <MenuItem Name="menuCreateProject" Header="_Projekt aus aktuellem Stapel erstellen" ToolTip="Neues Projekt aus geöffnetem Stapel erstellen" IsEnabled="{Binding StackIsLoaded}" Click="menuCreateProject_Click">
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>

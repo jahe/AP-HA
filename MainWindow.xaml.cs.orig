@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace AP_HA
 {
@@ -21,16 +23,33 @@ namespace AP_HA
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        enum Tool { ZoomIn, ZoomOut, Move };
-        private Tool tool;
+        enum Tool { ZoomIn, ZoomOut, Move, None };
+
+        enum Wheel { Up, Down, None };
+        enum MouseMovement { Left, Up, Right, Down, None };
+
+        private Tool? tool = Tool.Move;
+        private List<Key> keys;
+        private List<MouseButton> mouseButtons;
+        private Wheel mouseWheel;
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeMarks();
+
+            keys = new List<Key>();
+            mouseButtons = new List<MouseButton>();
+            mouseWheel = Wheel.None;
+
+            this.KeyDown += new KeyEventHandler(OnKeyDown);                         // KeyDown Event abonieren
+            this.KeyUp += new KeyEventHandler(OnKeyUp);                             // KeyUp Event abonieren
+            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown); // MouseDown Event abonieren
+            this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);   // MouseUp Event abonieren
+            this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
         }
 
-        #region Programmstatus für UI-Elemente
+        #region Properties für UI-Binding
         
         /// <summary>
         /// Event, was default-mäßig von XAML abonniert wird
@@ -45,36 +64,13 @@ namespace AP_HA
         /// <param name="propertyName">Name des Propertys, dessen Wert sich verändert hat</param>
         private void OnPropertyChanged(string propertyName)
         {
-            var handler = PropertyChanged;  // PropertyChanged direkt abfragen führt zu Speicherproblemen!
+            var handler = PropertyChanged;
 
             if (handler != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        #region Status Stapel geladen
-        private bool _stackIsLoaded = false;
-        public bool StackIsLoaded
-        {
-<<<<<<< HEAD
-            get { return this.stackIsLoaded; }
-        }
-
-        public void stackLoaded(bool stats)
-        {
-            stackIsLoaded = stats;
-            //OnPropertyChanged("StackIsLoaded");
-=======
-            get { return _stackIsLoaded; }
-            set
-            {
-                _stackIsLoaded = value;
-                OnPropertyChanged("StackIsLoaded");
-            }
->>>>>>> 48d78346f1c127e53a6468ca340348a748a3151c
-        }
-        #endregion
 
         #region Status Bilder wurden ausgeblendet
         private bool _stackIsCutted = false;
@@ -102,7 +98,7 @@ namespace AP_HA
         }
         #endregion
 
-        #region Status Bilder am Anfang können ausgeblendet werden
+        #region Status Bilder am Ende können ausgeblendet werden
         private bool _cutableRight = false;
         public bool CutableRight
         {
@@ -113,17 +109,89 @@ namespace AP_HA
                 OnPropertyChanged("CutableRight");
             }
         }
-        #endregion
-        #endregion
+        #endregion        
+        #endregion        
 
-        public void loadPicture(int picNo)
+        private void refreshSession()
         {
-            Stream imageStreamSource = new FileStream(pictureStack.getPictureFromList(picNo), FileMode.Open, FileAccess.Read, FileShare.Read);
-            TiffBitmapDecoder decoder = new TiffBitmapDecoder(imageStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            BitmapSource bitmapSource = decoder.Frames[0];
+            //AdjustControls.IsEnabled = false;
+            stackSlider.Value = 0;
+            StackIsLoaded = false;
+            StackIsCutted = false;
+            imgControl.Source = null;
+            debugTxtBox.Text = "Bitte einen Stapel öffnen";
+            BrightnessSlider.Value = 0.0;
+            ContrastSlider.Value = 1.0;
+            zoomSlider.Value = 1.0;
 
-            imgControl.Source = bitmapSource;
-            debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
+            if (pictureStack != null)
+            {
+                pictureStack.stackReset();
+            }
         }
+
+        private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BrightnessSlider.Value = 0.0;
+        }
+
+        private void ResetContrastBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContrastSlider.Value = 1.0;
+        }
+
+        private void ResetZoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            zoomSlider.Value = 1.0;
+        }
+
+        private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+
+<<<<<<< HEAD
+        }       
+=======
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            this.debugTxtBox.Text = e.Key.ToString();
+
+            if (!keys.Contains(e.Key))
+                keys.Add(e.Key);
+        }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            this.debugTxtBox.Text = e.Key.ToString();
+
+            keys.Remove(e.Key);
+        }
+
+        private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.debugTxtBox.Text = e.ChangedButton.ToString();
+
+            if (!mouseButtons.Contains(e.ChangedButton))
+                mouseButtons.Add(e.ChangedButton);
+        }
+
+        private void OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            mouseButtons.Remove(e.ChangedButton);
+        }
+
+        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+                mouseWheel = Wheel.Up;
+            else if (e.Delta < 0)
+                mouseWheel = Wheel.Down;
+            else
+                mouseWheel = Wheel.None;
+
+            this.debugTxtBox.Text = mouseWheel.ToString();
+        }
+>>>>>>> a7d8896ae4b8c3dbb7f82936eaee9f4d9842045d
     }
 }

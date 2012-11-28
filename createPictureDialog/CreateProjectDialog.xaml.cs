@@ -18,10 +18,21 @@ namespace AP_HA
     /// </summary>
     public partial class CreateProjectDialog : Window
     {
-        public CreateProjectDialog(int picAmount)
+        #region Constructos
+        public CreateProjectDialog()
+        {
+
+        }
+        
+        public CreateProjectDialog(PictureStack ps)
         {
             InitializeComponent();
-            cPDPicAmount.Content = picAmount.ToString();
+            cPDPicAmount.Content = ps.PictureAmount;
+            cPDStackName.Content = ps.FolderName;
+            cPDWidth.Content = ps.Width;
+            cPDHeight.Content = ps.Height;
+            this.Show();
         }
+        #endregion
     }
 }
