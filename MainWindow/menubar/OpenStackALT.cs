@@ -19,9 +19,7 @@ namespace AP_HA
 {   
     public partial class MainWindow
     {
-
-
-        private bool _stackIsLoaded = false;
+        private bool _stackIsLoaded = true;
         public bool StackIsLoaded
         {
             get { return _stackIsLoaded; }
