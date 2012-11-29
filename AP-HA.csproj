@@ -58,7 +58,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\SaveProject.cs" />
-    <Compile Include="menubar\CreateNewProject.cs" />
+    <Compile Include="util\Enums.cs" />
+    <Compile Include="MainWindow\Funcs.cs" />
+    <Compile Include="MainWindow\Handler.cs" />
+    <Compile Include="MainWindow\menubar\CreateNewProject.cs" />
     <Compile Include="createProjectDialog\CreateProjectDialog.xaml.cs">
       <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -66,22 +69,25 @@
     <Compile Include="pictureProcessing\ImageFuncs.cs" />
     <Compile Include="marks\Mark.cs" />
     <Compile Include="marks\Marks.cs" />
-    <Compile Include="menubar\BackToOriginalCut.cs" />
-    <Compile Include="menubar\CloseFolder.cs" />
-    <Compile Include="menubar\CutAfterCursor.cs" />
-    <Compile Include="menubar\CutBeforeCursor.cs" />
-    <Compile Include="menubar\ExitProgram.cs" />
-    <Compile Include="menubar\OpenStack.cs" />
-    <Compile Include="pictureProcessing\LoadPicture.cs" />
+    <Compile Include="MainWindow\menubar\BackToOriginalCut.cs" />
+    <Compile Include="MainWindow\menubar\CloseFolder.cs" />
+    <Compile Include="MainWindow\menubar\CutAfterCursor.cs" />
+    <Compile Include="MainWindow\menubar\CutBeforeCursor.cs" />
+    <Compile Include="MainWindow\menubar\ExitProgram.cs" />
+    <Compile Include="MainWindow\menubar\OpenStack.cs" />
+    <Compile Include="MainWindow\LoadPicture.cs" />
     <Compile Include="pictureStack\StringSorter.cs" />
     <Compile Include="project\Project.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="toolbar\Move.cs" />
-    <Compile Include="toolbar\Zoom.cs" />
+    <Compile Include="ShortCut\ShortCut.cs" />
+    <Compile Include="ShortCut\ShortCutEngine.cs" />
+    <Compile Include="ShortCut\ShortCutEventArgs.cs" />
+    <Compile Include="MainWindow\Move.cs" />
+    <Compile Include="MainWindow\Zoom.cs" />
     <Compile Include="pictureStack\PictureStackException.cs" />
-    <Compile Include="controls\Stackslider.cs" />
+    <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -163,7 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="project\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />

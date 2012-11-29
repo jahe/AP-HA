@@ -57,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="createProjectDialog\SaveProject.cs" />
+    <Compile Include="menubar\CreateNewProject.cs" />
+    <Compile Include="createProjectDialog\CreateProjectDialog.xaml.cs">
+      <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PixelShader\FirstEffect.cs" />
     <Compile Include="pictureProcessing\ImageFuncs.cs" />
     <Compile Include="marks\Mark.cs" />
@@ -66,9 +71,16 @@
     <Compile Include="menubar\CutAfterCursor.cs" />
     <Compile Include="menubar\CutBeforeCursor.cs" />
     <Compile Include="menubar\ExitProgram.cs" />
-    <Compile Include="menubar\OpenFolder.cs" />
+    <Compile Include="menubar\OpenStack.cs" />
     <Compile Include="pictureProcessing\LoadPicture.cs" />
     <Compile Include="pictureStack\StringSorter.cs" />
+<<<<<<< HEAD
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+=======
+    <Compile Include="project\Project.cs" />
+>>>>>>> c4489b0a8f536d5a427802c400a89cd1c20975a7
     <Compile Include="toolbar\Move.cs" />
     <Compile Include="toolbar\Zoom.cs" />
     <Compile Include="pictureStack\PictureStackException.cs" />
@@ -86,6 +98,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+<<<<<<< HEAD
+    <Page Include="Settings.xaml">
+=======
+    <Page Include="createProjectDialog\CreateProjectDialog.xaml">
+>>>>>>> c4489b0a8f536d5a427802c400a89cd1c20975a7
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="pictureStack\PictureStack.cs" />
@@ -146,7 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="project\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />
@@ -169,12 +188,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-<<<<<<< HEAD
-    <PreBuildEvent>
-    </PreBuildEvent>
-=======
     <PreBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\xsd.exe" /c /language:CS "$(ProjectDir)IO\Project.xsd" /outputdir:"$(ProjectDir)IO" /namespace:AP_HA /edb"</PreBuildEvent>
->>>>>>> 318e76630112cdad30ba1cb94ec920491bd82d0a
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
