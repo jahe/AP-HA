@@ -1,0 +1,36 @@
+﻿<Window x:Class="AP_HA.CreateProjectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Neues Projekt erstellen" Height="198" Width="224" Background="#FF293955" Focusable="False" ResizeMode="NoResize" Topmost="True" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Stapelinformationen:" Height="28" Name="headLine" Foreground="White" Width="226" Background="#FF45597C" FontWeight="Bold" />
+            </StackPanel>
+            <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Bilderanzahl:" Foreground="White" Height="28" Name="cPDpicAmountHeader" />
+                    <Label Content="00" Foreground="White" Height="28" Name="cPDPicAmount" />
+                </StackPanel>
+            </Border>
+            <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Stapelname:" Foreground="White" Height="28" Name="cPDStackNameHeader" />
+                    <Label Content="name" Foreground="White" Height="28" Name="cPDStackName" />
+                </StackPanel>
+            </Border>
+            <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Auflösung:" Foreground="White" Height="28" Name="cPDResolutionHeader" />
+                    <Label Content="00" Foreground="White" Height="28" Name="cPDHeight" />
+                    <Label Content="x" Foreground="White" Height="28" Name="heightToWidth" />
+                    <Label Content="00" Foreground="White" Height="28" Name="cPDWidth" />
+                    
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal" Height="48">
+                <Button Content="Speichern" Height="23" Name="cPDsaveButton" Width="75" Click="cPDsaveButton_Click" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

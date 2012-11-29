@@ -8,11 +8,22 @@ using System.Windows.Media.Imaging;
 
 namespace AP_HA
 {
-    class PictureStack
+    public class PictureStack
     {
         private string folderPath;                                  //Aktueller Ordnerpfad
+        private string folderName;
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
         private string[] filePaths;
+        public string FolderName
+        {
+            get { return this.folderName; }
+            set { this.folderName = value; }
+        }
+        public string FolderPath
+        {
+            get { return this.folderPath; }
+            private set { this.folderPath = value; }
+        }
         public double Height
         {
             get;
@@ -23,6 +34,10 @@ namespace AP_HA
             get;
             private set;
         }
+        public int PictureAmount
+        {
+            get { return this.filePathList.Count(); }
+        }
 
         #region Constructors
         public PictureStack()
@@ -31,24 +46,10 @@ namespace AP_HA
         }
 
         public PictureStack(string path)                            
-        {
+        {           
             initFileList(path);
-
-            if (filePathList.Count() != 0)                          
-            {                               
-                this.folderPath = path;
-            }
-            else
-            {
-                throw new PictureStackException("Der gewählte Ordner enthält keine *.tif Dateien");
-            }
         }
         #endregion
-
-        public int PictureAmount
-        {
-            get { return this.filePathList.Count(); }
-        }
 
         public string getPictureFromList(int picNo)
         {
@@ -75,19 +76,29 @@ namespace AP_HA
                 }
 
                 filePathList.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
-
-                try
+                
+                if (filePathList.Count() != 0)
                 {
-                    FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
-                    TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-                    BitmapSource bmpSrc = decoder.Frames[0];
+                    FolderPath = path;
+                    FolderName = Path.GetFileName(path);
 
-                    Height = bmpSrc.PixelHeight;
-                    Width = bmpSrc.PixelWidth;
+                    try
+                    {
+                        FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
+                        TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                        BitmapSource bmpSrc = decoder.Frames[0];
+
+                        Height = bmpSrc.PixelHeight;
+                        Width = bmpSrc.PixelWidth;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new PictureStackException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
+                    }
                 }
-                catch (Exception e)
+                else
                 {
-                    throw new PictureStackException("Fehler bei der Bildstapelverarbeitung\n"+e.Message);
+                    throw new PictureStackException("Der gewählte Ordner enthält keine *.tif Dateien");
                 }                
             }
             else

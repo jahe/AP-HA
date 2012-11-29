@@ -57,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="createProjectDialog\SaveProject.cs" />
+    <Compile Include="menubar\CreateNewProject.cs" />
+    <Compile Include="createProjectDialog\CreateProjectDialog.xaml.cs">
+      <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PixelShader\FirstEffect.cs" />
     <Compile Include="pictureProcessing\ImageFuncs.cs" />
     <Compile Include="marks\Mark.cs" />
@@ -66,9 +71,10 @@
     <Compile Include="menubar\CutAfterCursor.cs" />
     <Compile Include="menubar\CutBeforeCursor.cs" />
     <Compile Include="menubar\ExitProgram.cs" />
-    <Compile Include="menubar\OpenFolder.cs" />
+    <Compile Include="menubar\OpenStack.cs" />
     <Compile Include="pictureProcessing\LoadPicture.cs" />
     <Compile Include="pictureStack\StringSorter.cs" />
+    <Compile Include="project\Project.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -90,6 +96,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="createProjectDialog\CreateProjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
