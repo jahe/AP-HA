@@ -18,10 +18,10 @@ namespace AP_HA
     /// </summary>
     public partial class CreateProjectDialog : Window
     {
-        #region Constructos
+        #region Constructors
         public CreateProjectDialog()
         {
-            this.Show();
+            this.ShowDialog();
         }
         
         public CreateProjectDialog(PictureStack ps)
@@ -31,7 +31,7 @@ namespace AP_HA
             cPDStackName.Content = ps.FolderName;
             cPDWidth.Content = ps.Width;
             cPDHeight.Content = ps.Height;
-            this.Show();
+            this.ShowDialog();
         }
         #endregion
     }

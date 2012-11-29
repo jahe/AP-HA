@@ -18,9 +18,11 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
+        CreateProjectDialog createProjectDialog;
+        
         private void menuCreateProject_Click(object sender, RoutedEventArgs e)
         {
-            CreateProjectDialog op = new CreateProjectDialog(pictureStack);
+            createProjectDialog = new CreateProjectDialog(pictureStack);
         }
     }
 }
