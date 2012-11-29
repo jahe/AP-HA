@@ -79,7 +79,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Einstellungen">
-                <MenuItem Name="menuMouseSettings" Header="_Maus" />
+                <MenuItem Name="menuMouseSettings" Header="_Maus" Click="menuMouseSettings_Click" />
             </MenuItem>
         </Menu>
 
