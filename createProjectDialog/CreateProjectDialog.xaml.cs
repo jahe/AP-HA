@@ -9,7 +9,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.ComponentModel;
 
 namespace AP_HA
 {
@@ -17,22 +20,31 @@ namespace AP_HA
     /// Interaktionslogik für OpenProject.xaml
     /// </summary>
     public partial class CreateProjectDialog : Window
-    {
-        #region Constructos
+    {      
+
+        #region Constructors
         public CreateProjectDialog()
         {
-            this.Show();
+            InitializeComponent();
+            this.ShowDialog();
         }
         
         public CreateProjectDialog(PictureStack ps)
         {
             InitializeComponent();
-            cPDPicAmount.Content = ps.PictureAmount;
-            cPDStackName.Content = ps.FolderName;
-            cPDWidth.Content = ps.Width;
-            cPDHeight.Content = ps.Height;
-            this.Show();
+            this.ShowDialog();
         }
         #endregion
+
+        //Properties einfügen + Binding wie in MainWindow
+        //StackPath
+        //SavePath
+        //
+
+        private void cPDBtnOK_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+       
     }
 }

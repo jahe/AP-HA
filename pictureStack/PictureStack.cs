@@ -111,6 +111,8 @@ namespace AP_HA
         {
             filePathList = new List<string>();
             folderPath = null;
+            Height = 0;
+            Width = 0;
         }
     }
 }

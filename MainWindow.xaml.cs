@@ -172,10 +172,10 @@ namespace AP_HA
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
 
-            if (pictureStack != null)
+           /** if (pictureStack != null)
             {
                 pictureStack.stackReset();
-            }
+            }**/
         }
 
         private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)

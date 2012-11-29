@@ -57,6 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
+    <Compile Include="createProjectDialog\OpenStack.cs" />
     <Compile Include="createProjectDialog\SaveProject.cs" />
     <Compile Include="util\Enums.cs" />
     <Compile Include="MainWindow\Funcs.cs" />
@@ -74,7 +76,7 @@
     <Compile Include="MainWindow\menubar\CutAfterCursor.cs" />
     <Compile Include="MainWindow\menubar\CutBeforeCursor.cs" />
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />
-    <Compile Include="MainWindow\menubar\OpenStack.cs" />
+    <Compile Include="MainWindow\menubar\OpenStackALT.cs" />
     <Compile Include="MainWindow\LoadPicture.cs" />
     <Compile Include="pictureStack\StringSorter.cs" />
     <Compile Include="project\Project.cs" />

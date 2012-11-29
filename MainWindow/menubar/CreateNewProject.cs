@@ -17,10 +17,21 @@ using System.Windows.Forms;
 namespace AP_HA
 {
     public partial class MainWindow
-    {
+    {       
         private void menuCreateProject_Click(object sender, RoutedEventArgs e)
         {
-            CreateProjectDialog op = new CreateProjectDialog(pictureStack);
+            CreateProjectDialog createProjectDialog = new CreateProjectDialog();
+
+            if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
+            {
+                //Project/PictureStack erstellen mit den Daten aus dem createProjectDialog
+                System.Windows.Forms.MessageBox.Show("Ok Button wurde gedrückt");
+            }
+            else
+            {
+                //createProjectDialog wurde abgebrochen = keine Aktion
+                System.Windows.Forms.MessageBox.Show("createProjectDialog wurde abgebrochen");
+            }
         }
     }
 }

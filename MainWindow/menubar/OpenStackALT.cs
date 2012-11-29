@@ -12,18 +12,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using Microsoft.Win32;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace AP_HA
-{
+{   
     public partial class MainWindow
     {
-        private void backToOriginalCut(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
+        private bool _stackIsLoaded = true;
+        public bool StackIsLoaded
         {
-            stackSlider.Minimum = 0;
-            //stackSlider.Maximum = pictureStack.PictureAmount - 1;
-            StackIsCutted = false;
+            get { return _stackIsLoaded; }
+            set
+            {
+                _stackIsLoaded = value;
+                OnPropertyChanged("StackIsLoaded");
+                CutableRight = value;
+            }
         }
+
+        
     }
 }

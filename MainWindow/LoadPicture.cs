@@ -23,10 +23,10 @@ namespace AP_HA
         {
             try
             {
-                stackImage = ImageFuncs.getImgFromPath(pictureStack.getPictureFromList(picNo));
+                //stackImage = ImageFuncs.getImgFromPath(pictureStack.getPictureFromList(picNo));
                 imgControl.Source = stackImage;
 
-                debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
+                //debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
             }
             catch (Exception e)
             {
