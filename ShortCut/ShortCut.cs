@@ -60,6 +60,11 @@ namespace AP_HA
             MouseWheelDirection = wheelDir;
         }
 
+        public void register(MouseMoveDirection moveDir)
+        {
+            MoveDirection = moveDir;
+        }
+
         public bool Remove(Key k)
         {
             return Keys.Remove(k);

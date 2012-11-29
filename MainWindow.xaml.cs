@@ -42,6 +42,7 @@ namespace AP_HA
             this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown); // MouseDown Event abonieren
             this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);   // MouseUp Event abonieren
             this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
+            this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
 
             sc = new ShortCut();
             scEngine = new ShortCutEngine();
@@ -59,11 +60,13 @@ namespace AP_HA
             zoomOutSc.Execute += new ExecuteHandler(zoomOut);
 
             ShortCut scrollInSc = new ShortCut("Scroll In");
-            scrollInSc.register(Wheel.Up);
+            scrollInSc.register(Key.LeftCtrl);
+            scrollInSc.register(MouseMoveDirection.Up);
             scrollInSc.Execute += new ExecuteHandler(scrollIn);
 
             ShortCut scrollOutSc = new ShortCut("Scroll Out");
-            scrollOutSc.register(Wheel.Down);
+            scrollOutSc.register(Key.LeftCtrl);
+            scrollOutSc.register(MouseMoveDirection.Down);
             scrollOutSc.Execute += new ExecuteHandler(scrollOut);
 
             ShortCut incBrightnessSc = new ShortCut("Increase Brightness");
