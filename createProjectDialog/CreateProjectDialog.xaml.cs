@@ -21,7 +21,7 @@ namespace AP_HA
         #region Constructos
         public CreateProjectDialog()
         {
-
+            this.Show();
         }
         
         public CreateProjectDialog(PictureStack ps)
