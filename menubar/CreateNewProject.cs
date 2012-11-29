@@ -17,12 +17,10 @@ using System.Windows.Forms;
 namespace AP_HA
 {
     public partial class MainWindow
-    {
-        CreateProjectDialog createProjectDialog;
-        
+    {       
         private void menuCreateProject_Click(object sender, RoutedEventArgs e)
         {
-            createProjectDialog = new CreateProjectDialog(pictureStack);
+            CreateProjectDialog createProjectDialog = new CreateProjectDialog();
         }
     }
 }

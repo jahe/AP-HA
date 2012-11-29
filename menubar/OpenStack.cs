@@ -19,9 +19,7 @@ namespace AP_HA
 {   
     public partial class MainWindow
     {
-        FolderBrowserDialog openFolderDialog;
-        DialogResult oFDResult;
-        PictureStack pictureStack;
+
 
         private bool _stackIsLoaded = false;
         public bool StackIsLoaded
@@ -35,38 +33,6 @@ namespace AP_HA
             }
         }
 
-        private void openStack(object sender, RoutedEventArgs e)         //Menü->Datei->Stapel laden
-        {
-            openFolderDialog = new FolderBrowserDialog();
-            openFolderDialog.Description = "Neuen Bildstapel auswählen";
-            openFolderDialog.ShowNewFolderButton = false;
-            openFolderDialog.SelectedPath = @"C:\APHA\";
-
-            oFDResult = openFolderDialog.ShowDialog();
-
-            if (oFDResult == System.Windows.Forms.DialogResult.OK)
-            {
-                try     //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
-                {
-                    refreshSession();
-                    AdjustControls.IsEnabled = true;
-                    pictureStack = new PictureStack(openFolderDialog.SelectedPath);
-                    StackIsLoaded = true;
-                    stackSlider.Maximum = pictureStack.PictureAmount - 1;
-                    stackSlider.Value = 0;
-                    canvas.Width = pictureStack.Width;
-                    canvas.Height = pictureStack.Height;
-                    loadPicture(0);
-                }
-                catch (PictureStackException ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                debugTxtBox.Text = "Es wurde kein Ordner ausgewählt";
-            }
-        }
+        
     }
 }

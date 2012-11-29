@@ -19,14 +19,14 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuOpenStack" Header="_Neuen Stapel laden" ToolTip="Neuen Bilderstapel öffnen" Click="openStack" >
+                <MenuItem Name="menuOpenStack" Header="_Neuen Stapel laden" ToolTip="Neuen Bilderstapel öffnen">
                     <MenuItem.Icon>
                         <Image Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCreateProject" Header="_Projekt aus aktuellem Stapel erstellen" ToolTip="Neues Projekt aus geöffnetem Stapel erstellen" IsEnabled="{Binding StackIsLoaded}" Click="menuCreateProject_Click">
+                <MenuItem Name="menuCreateProject" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen" Click="menuCreateProject_Click">
                     <MenuItem.Icon>
-                        <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
+                        <Image Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Name="menuCloseStack" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" IsEnabled="{Binding StackIsLoaded}">
@@ -88,7 +88,7 @@
                 <Button Name="btnCreateProject" Width="22" Height="22" >
                     <Image Width="14" Height="14" Source="/AP-HA;component/icon/createProject.ico" ToolTip="{Binding ToolTip, ElementName=menuCreateProject}"></Image>
                 </Button>
-                <Button Name="btnOpenStack" Width="22" Height="22" Click="openStack" >
+                <Button Name="btnOpenStack" Width="22" Height="22"  >
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
                 <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}">

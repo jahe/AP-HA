@@ -22,7 +22,7 @@ namespace AP_HA
         private void backToOriginalCut(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
         {
             stackSlider.Minimum = 0;
-            stackSlider.Maximum = pictureStack.PictureAmount - 1;
+            //stackSlider.Maximum = pictureStack.PictureAmount - 1;
             StackIsCutted = false;
         }
     }

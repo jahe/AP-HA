@@ -5,18 +5,18 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Stapelinformationen:" Height="28" Name="headLine" Foreground="White" Width="226" Background="#FF45597C" FontWeight="Bold" />
+                <Label Content="Neues Projekt:" Height="28" Name="headLine" Foreground="White" Width="226" Background="#FF45597C" FontWeight="Bold" />
             </StackPanel>
             <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Bilderanzahl:" Foreground="White" Height="28" Name="cPDpicAmountHeader" />
-                    <Label Content="00" Foreground="White" Height="28" Name="cPDPicAmount" />
+                    <Label Content="Pfad zum Bilderstapel" Foreground="White" Height="28" Name="cPDpicAmountHeader" />
+                    <Button Content="Button" Height="23" Name="button1" Width="75" Click="openStack" />
                 </StackPanel>
             </Border>
             <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Stapelname:" Foreground="White" Height="28" Name="cPDStackNameHeader" />
-                    <Label Content="name" Foreground="White" Height="28" Name="cPDStackName" />
+                    <Label Content="Speichern unter:" Foreground="White" Height="28" Name="cPDStackNameHeader" />
+                    <Button Content="Button" Height="23" Name="button2" Width="75" />
                 </StackPanel>
             </Border>
             <Border BorderThickness="0,0,0,1" BorderBrush="#999" CornerRadius="3">

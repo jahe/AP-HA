@@ -35,10 +35,10 @@ namespace AP_HA
             {
                 CutableLeft = false;
             }
-            else if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
+            /**else if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
             {
                 CutableRight = false;
-            }
+            }**/
             else
             {
                 CutableLeft = true;
