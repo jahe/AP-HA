@@ -189,5 +189,12 @@ namespace AP_HA
 
             this.debugTxtBox.Text = mouseWheel.ToString();
         }
+
+        private void menuMouseSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settingWindow = new Settings();
+            settingWindow.Show();
+
+        }
     }
 }
