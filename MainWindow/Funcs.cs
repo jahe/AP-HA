@@ -32,5 +32,25 @@ namespace AP_HA
 
             stackSlider.Value -= 1;
         }
+
+        private void incContrast()
+        {
+            ContrastSlider.Value += 0.1;
+        }
+
+        private void decContrast()
+        {
+            ContrastSlider.Value -= 0.1;
+        }
+
+        private void incBrightness()
+        {
+            BrightnessSlider.Value += 0.1;
+        }
+
+        private void decBrightness()
+        {
+            BrightnessSlider.Value -= 0.1;
+        }
     }
 }

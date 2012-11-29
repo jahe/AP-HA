@@ -65,12 +65,36 @@ namespace AP_HA
             ShortCut scrollOutSc = new ShortCut("Scroll Out");
             scrollOutSc.register(Wheel.Down);
             scrollOutSc.Execute += new ExecuteHandler(scrollOut);
+
+            ShortCut incBrightnessSc = new ShortCut("Increase Brightness");
+            incBrightnessSc.register(Key.B);
+            incBrightnessSc.register(Wheel.Up);
+            incBrightnessSc.Execute += new ExecuteHandler(incBrightness);
+
+            ShortCut decBrightnessSc = new ShortCut("Decrease Brightness");
+            decBrightnessSc.register(Key.B);
+            decBrightnessSc.register(Wheel.Down);
+            decBrightnessSc.Execute += new ExecuteHandler(decBrightness);
+
+            ShortCut incContrastSc = new ShortCut("Increase Contrast");
+            incContrastSc.register(Key.C);
+            incContrastSc.register(Wheel.Up);
+            incContrastSc.Execute += new ExecuteHandler(incContrast);
+
+            ShortCut decContrastSc = new ShortCut("Decrease Contrast");
+            decContrastSc.register(Key.C);
+            decContrastSc.register(Wheel.Down);
+            decContrastSc.Execute += new ExecuteHandler(decContrast);
             
             // ***** Shortcuts der Engine hinzufügen *****
             scEngine.addShortCut(zoomInSc);
             scEngine.addShortCut(zoomOutSc);
             scEngine.addShortCut(scrollInSc);
             scEngine.addShortCut(scrollOutSc);
+            scEngine.addShortCut(incBrightnessSc);
+            scEngine.addShortCut(decBrightnessSc);
+            scEngine.addShortCut(incContrastSc);
+            scEngine.addShortCut(decContrastSc);
         }
 
         #region Properties für UI-Binding
