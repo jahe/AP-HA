@@ -15,38 +15,62 @@ using System.IO;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace AP_HA
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        enum Tool { ZoomIn, ZoomOut, Move, None };
-
-        enum Wheel { Up, Down, None };
-        enum MouseMovement { Left, Up, Right, Down, None };
-
+        private delegate void ShortCutHandler(object sender, ShortCutEventArgs e);
+        private event ShortCutHandler ShortCutChanged;
+        private ShortCutEngine scEngine;
+        private ShortCut sc;
         private Tool? tool = Tool.Move;
-        private List<Key> keys;
-        private List<MouseButton> mouseButtons;
-        private Wheel mouseWheel;
+        private Settings settingsWindow;
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeMarks();
 
-            keys = new List<Key>();
-            mouseButtons = new List<MouseButton>();
-            mouseWheel = Wheel.None;
-
-            this.KeyDown += new KeyEventHandler(OnKeyDown);                         // KeyDown Event abonieren
-            this.KeyUp += new KeyEventHandler(OnKeyUp);                             // KeyUp Event abonieren
+            this.PreviewKeyDown += new KeyEventHandler(OnKeyDown);                         // KeyDown Event abonieren
+            this.PreviewKeyUp += new KeyEventHandler(OnKeyUp);                             // KeyUp Event abonieren
             this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown); // MouseDown Event abonieren
             this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);   // MouseUp Event abonieren
             this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
+
+            sc = new ShortCut();
+            scEngine = new ShortCutEngine();
+            ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
+
+            // ********* Shortcuts erzeugen ***********
+            ShortCut zoomInSc = new ShortCut("Zoom In");
+            zoomInSc.register(Key.LeftCtrl);
+            zoomInSc.register(Wheel.Up);
+            zoomInSc.Execute += new ExecuteHandler(zoomIn);
+
+            ShortCut zoomOutSc = new ShortCut("Zoom Out");
+            zoomOutSc.register(Key.LeftCtrl);
+            zoomOutSc.register(Wheel.Down);
+            zoomOutSc.Execute += new ExecuteHandler(zoomOut);
+
+            ShortCut scrollInSc = new ShortCut("Scroll In");
+            scrollInSc.register(Wheel.Up);
+            scrollInSc.Execute += new ExecuteHandler(scrollIn);
+
+            ShortCut scrollOutSc = new ShortCut("Scroll Out");
+            scrollOutSc.register(Wheel.Down);
+            scrollOutSc.Execute += new ExecuteHandler(scrollOut);
+            
+            // ***** Shortcuts der Engine hinzufügen *****
+            scEngine.addShortCut(zoomInSc);
+            scEngine.addShortCut(zoomOutSc);
+            scEngine.addShortCut(scrollInSc);
+            scEngine.addShortCut(scrollOutSc);
         }
 
         #region Properties für UI-Binding
@@ -145,56 +169,10 @@ namespace AP_HA
             zoomSlider.Value = 1.0;
         }
 
-        private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            this.debugTxtBox.Text = e.Key.ToString();
-
-            if (!keys.Contains(e.Key))
-                keys.Add(e.Key);
-        }
-
-        private void OnKeyUp(object sender, KeyEventArgs e)
-        {
-            this.debugTxtBox.Text = e.Key.ToString();
-
-            keys.Remove(e.Key);
-        }
-
-        private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.debugTxtBox.Text = e.ChangedButton.ToString();
-
-            if (!mouseButtons.Contains(e.ChangedButton))
-                mouseButtons.Add(e.ChangedButton);
-        }
-
-        private void OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            mouseButtons.Remove(e.ChangedButton);
-        }
-
-        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (e.Delta > 0)
-                mouseWheel = Wheel.Up;
-            else if (e.Delta < 0)
-                mouseWheel = Wheel.Down;
-            else
-                mouseWheel = Wheel.None;
-
-            this.debugTxtBox.Text = mouseWheel.ToString();
-        }
-
         private void menuMouseSettings_Click(object sender, RoutedEventArgs e)
         {
-            Settings settingWindow = new Settings();
-            settingWindow.Show();
-
+            settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
         }
     }
 }

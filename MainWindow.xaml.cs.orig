@@ -148,9 +148,6 @@ namespace AP_HA
         private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
         {
 
-<<<<<<< HEAD
-        }       
-=======
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -191,7 +188,17 @@ namespace AP_HA
                 mouseWheel = Wheel.None;
 
             this.debugTxtBox.Text = mouseWheel.ToString();
+<<<<<<< HEAD
         }
->>>>>>> a7d8896ae4b8c3dbb7f82936eaee9f4d9842045d
+
+        private void menuMouseSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settingWindow = new Settings();
+            settingWindow.Show();
+
+        }
+=======
+        }       
+>>>>>>> c4489b0a8f536d5a427802c400a89cd1c20975a7
     }
 }
