@@ -24,13 +24,17 @@ namespace AP_HA
 
             if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
-                Project newProject = new Project(createProjectDialog.NewProjectName);
-                newProject.initFileList(createProjectDialog.StackPath);
-            }
-            else
-            {
-                //createProjectDialog wurde abgebrochen = keine Aktion
-                System.Windows.Forms.MessageBox.Show("createProjectDialog wurde abgebrochen");
+                try
+                {
+                    Project newProject = new Project(createProjectDialog.NewProjectName);
+                    newProject.initFileListFromStack(createProjectDialog.StackPath);
+                    newProject.createProjectZip(createProjectDialog.SaveProjectPath);
+                }
+                catch (ProjectException pe)
+                {
+                    System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + pe.Message);
+                    //TO DO Programm refreshen
+                }               
             }
         }
     }

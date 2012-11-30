@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="createProjectDialog\OpenStackFolder.cs" />
+    <Compile Include="project\ProjectException.cs" />
     <Compile Include="util\Enums.cs" />
     <Compile Include="MainWindow\Funcs.cs" />
     <Compile Include="MainWindow\Handler.cs" />

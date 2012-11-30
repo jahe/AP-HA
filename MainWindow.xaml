@@ -18,19 +18,9 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuOpenStack" Header="_Neuen Stapel laden" ToolTip="Neuen Bilderstapel öffnen">
-                    <MenuItem.Icon>
-                        <Image Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png"></Image>
-                    </MenuItem.Icon>
-                </MenuItem>
                 <MenuItem Name="menuCreateProject" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen" Click="menuCreateProject_Click">
                     <MenuItem.Icon>
-                        <Image Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png"></Image>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Name="menuCloseStack" Header="_Stapel Beenden" ToolTip="Aktuellen Stapel beenden" IsEnabled="{Binding StackIsLoaded}">
-                    <MenuItem.Icon>
-                        <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
+                        <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />

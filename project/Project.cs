@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
+using System.IO.Packaging;
+using System.Security.Permissions;
 
 namespace AP_HA
 {
@@ -47,8 +49,6 @@ namespace AP_HA
             get { return this._projectName; }
             private set { this._projectName = value; }
         }
-
-
         #endregion
 
         #region Constructors
@@ -68,12 +68,16 @@ namespace AP_HA
         //}
         #endregion
 
-        public void createProjectZip()
+        public void createProjectZip(string path)
         {
-            //
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(path);
+
+            string fileName = System.IO.Path.Combine(d.FullName, ProjectName);
+            
+            Package.Open(fileName, FileMode.Create);
         }
 
-        public void initFileList(string path)
+        public void initFileListFromStack(string path)
         {
             if (Directory.Exists(path))
             {
@@ -90,7 +94,6 @@ namespace AP_HA
                 if (filePathList.Count() != 0)
                 {
                     FolderPath = path;
-                    FolderName = Path.GetFileName(path);
 
                     try
                     {
@@ -103,17 +106,17 @@ namespace AP_HA
                     }
                     catch (Exception e)
                     {
-                        //throw new FolderDoesNotExistException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
+                        throw new ProjectException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
                     }
                 }
                 else
                 {
-                    //throw new FolderDoesNotExistException("Der gewählte Ordner enthält keine *.tif Dateien");
+                    throw new ProjectException("Der gewählte Ordner enthält keine *.tif Dateien");
                 }
             }
             else
             {
-                //throw new FolderDoesNotExistException("Der ausgewählte Ordner konnte nicht gefunden werden");
+                throw new ProjectException("Der ausgewählte Ordner konnte nicht gefunden werden");
             }
         }
 

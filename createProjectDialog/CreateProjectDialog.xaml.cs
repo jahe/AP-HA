@@ -83,7 +83,7 @@ namespace AP_HA
         }
         #endregion
 
-        private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions
+        private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions, bei Fehler Änderung der Borderbrush
         {
             if (!Directory.Exists(StackPath))
             {
