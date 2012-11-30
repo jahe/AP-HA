@@ -19,7 +19,7 @@ namespace AP_HA
 {
     public partial class CreateProjectDialog
     {
-        private void openStack(object sender, RoutedEventArgs e)         //CreateProjectDialog->Stapel öffnen
+        private void openStackFolder(object sender, RoutedEventArgs e)         //CreateProjectDialog->Stapel öffnen
         {
             FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Neuen Bildstapel auswählen";
@@ -30,19 +30,12 @@ namespace AP_HA
 
             if (oFDResult == System.Windows.Forms.DialogResult.OK)
             {
-                try     //Abfangen wenn Ordner keine geforderten Bilder enthält oder leer ist; != .tif....
-                {
-                    //ALT pictureStack = new PictureStack(openFolderDialog.SelectedPath); 
-                    //NEU Property StackPath = openFolderDialog.SelectedPath
-                }
-                catch (PictureStackException ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                }
+                StackPath = openFolderDialog.SelectedPath;
+                NewProjectName = System.IO.Path.GetFileName(StackPath);
             }
             else
             {
-                //debugTxtBox.Text = "Es wurde kein Ordner ausgewählt";
+                //Es wurde kein Ordner ausgewählt
             }
         }
     }

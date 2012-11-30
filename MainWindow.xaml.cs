@@ -32,6 +32,7 @@ namespace AP_HA
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
 
+        #region Constructors
         public MainWindow()
         {
             InitializeComponent();
@@ -72,9 +73,10 @@ namespace AP_HA
             scEngine.addShortCut(scrollInSc);
             scEngine.addShortCut(scrollOutSc);
         }
+        #endregion
 
         #region Properties für UI-Binding
-        
+
         /// <summary>
         /// Event, was default-mäßig von XAML abonniert wird
         /// und somit geänderte Property-Werte mitbekommt
@@ -105,6 +107,20 @@ namespace AP_HA
             {
                 _stackIsCutted = value;
                 OnPropertyChanged("StackIsCutted");
+            }
+        }
+        #endregion
+
+        #region Wenn Stapel geladen wurde
+        private bool _stackIsLoaded = true;
+        public bool StackIsLoaded
+        {
+            get { return _stackIsLoaded; }
+            set
+            {
+                _stackIsLoaded = value;
+                OnPropertyChanged("StackIsLoaded");
+                CutableRight = value;
             }
         }
         #endregion

@@ -58,8 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
-    <Compile Include="createProjectDialog\OpenStack.cs" />
-    <Compile Include="createProjectDialog\SaveProject.cs" />
+    <Compile Include="createProjectDialog\OpenStackFolder.cs" />
     <Compile Include="util\Enums.cs" />
     <Compile Include="MainWindow\Funcs.cs" />
     <Compile Include="MainWindow\Handler.cs" />
@@ -76,9 +75,8 @@
     <Compile Include="MainWindow\menubar\CutAfterCursor.cs" />
     <Compile Include="MainWindow\menubar\CutBeforeCursor.cs" />
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />
-    <Compile Include="MainWindow\menubar\OpenStackALT.cs" />
     <Compile Include="MainWindow\LoadPicture.cs" />
-    <Compile Include="pictureStack\StringSorter.cs" />
+    <Compile Include="project\StringSorter.cs" />
     <Compile Include="project\Project.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -88,7 +86,6 @@
     <Compile Include="ShortCut\ShortCutEventArgs.cs" />
     <Compile Include="MainWindow\Move.cs" />
     <Compile Include="MainWindow\Zoom.cs" />
-    <Compile Include="pictureStack\PictureStackException.cs" />
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
     <Page Include="MainWindow.xaml">
@@ -113,7 +110,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pictureStack\PictureStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -171,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="pictureStack\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />

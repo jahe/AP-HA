@@ -1,4 +1,5 @@
 ﻿<Window x:Class="AP_HA.CreateProjectDialog"
+        x:Name="this"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Neues Projekt erstellen" Height="268" Width="492" Background="#FF293955" Focusable="False" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
@@ -6,29 +7,32 @@
         
         <Border DockPanel.Dock="Top" BorderThickness="1,1,1,0" BorderBrush="#999" CornerRadius="3" Margin="5">
             <DockPanel LastChildFill="True">
-                <StatusBar DockPanel.Dock="Bottom">
-                    <ProgressBar Height="10" Name="progressBar1" Width="100" />
+                <DockPanel.DataContext>
+                    <Binding ElementName="this" />
+                </DockPanel.DataContext>
+                <StatusBar DockPanel.Dock="Bottom" Height="20">
+                    <Label Content="Bereit" Padding="0" FontSize="10"></Label>
                 </StatusBar>
                 <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="White" Background="#FF45597C" Height="22" Padding="3">Bitte Stapel auswählen</Label>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="150" Margin="3"></TextBox>
-                            <Button Content="...." Height="23" Margin="3" Name="cPDBtnOpenStack" Width="32" Click="openStack" />
+                            <TextBox Name="cPDTBxStackPath" Width="240" Text="{Binding StackPath}" Margin="3" />
+                            <Button Content="...." Height="23" Margin="3" Name="cPDBtnOpenStack" Width="32" Click="openStackFolder" />
                         </StackPanel>
                     </StackPanel>
                     <Separator />
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="White" Background="#FF45597C" Height="22" Padding="3">Bitte einen Namen angeben:</Label>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="150" Margin="3" Height="23"></TextBox>
+                            <TextBox Name="cPDTBxProjectName" Width="150" Margin="3" Height="23" Text="{Binding NewProjectName}"/>
                         </StackPanel>
                     </StackPanel>
                     <Separator />
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="White" Background="#FF45597C" Height="22" Padding="3" Content="Bitte Zielverzeichnis auswählen"></Label>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Margin="3" Width="150"></TextBox>
+                            <TextBox Name="cPDTBxSaveProjectPath" Margin="3" Width="240" Text="{Binding SaveProjectPath}" />
                             <Button Content="...." Margin="3" Height="23" Name="cPDBtnChooseSaveFolder" Width="32" Click="chooseSaveFolder" />
                         </StackPanel>
                     </StackPanel>

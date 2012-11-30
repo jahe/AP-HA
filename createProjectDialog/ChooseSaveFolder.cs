@@ -30,18 +30,11 @@ namespace AP_HA
 
             if (oFDResult == System.Windows.Forms.DialogResult.OK)
             {
-                try 
-                {
-                    //refreshSession();
-                }
-                catch (PictureStackException ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                }
+                SaveProjectPath = openFolderDialog.SelectedPath;
             }
             else
             {
-                //debugTxtBox.Text = "Es wurde kein Ordner ausgewählt";
+                //Es wurde kein Ordner ausgewählt
             }
         }
     }

@@ -24,8 +24,8 @@ namespace AP_HA
 
             if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
-                //Project/PictureStack erstellen mit den Daten aus dem createProjectDialog
-                System.Windows.Forms.MessageBox.Show("Ok Button wurde gedrückt");
+                Project newProject = new Project(createProjectDialog.NewProjectName);
+                newProject.initFileList(createProjectDialog.StackPath);
             }
             else
             {
