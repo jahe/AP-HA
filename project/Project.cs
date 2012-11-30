@@ -80,26 +80,13 @@ namespace AP_HA
 
         public void loadStackInZip(string destinationPath)
         {
-            DirectoryInfo d = System.IO.Directory.CreateDirectory(folderPath);
-
-            
-
             DirectoryInfo d2 = System.IO.Directory.CreateDirectory(destinationPath);
 
             string projectZipPath = System.IO.Path.Combine(d2.FullName, ProjectName + ".zip");
 
-            // Convert system path and file names to Part URIs. In this example 
-            // Uri partUriDocument /* /Content/Document.xml */ =
-            //     PackUriHelper.CreatePartUri( 
-            //         new Uri("Content\Document.xml", UriKind.Relative));
-            // Uri partUriResource /* /Resources/Image1.jpg */ =
-            //     PackUriHelper.CreatePartUri( 
-            //         new Uri("Resources\Image1.jpg", UriKind.Relative));
-
                 // Create the Package 
                 using (Package package = Package.Open(projectZipPath, FileMode.Create))
                 {
-
                     for (int i = 0; i < filePaths.Length; i++)
                     {
                         string fileName = System.IO.Path.Combine(filePaths[i]);
@@ -112,7 +99,7 @@ namespace AP_HA
                         using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
                         {
                             CopyStream(fileStream, packagePartResource.GetStream());
-                        }// end:using(fileStream) - Close and dispose fileStream. 
+                        }
                     }
                 }
         }
