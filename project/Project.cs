@@ -16,6 +16,7 @@ namespace AP_HA
         private string folderName;
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
         private string[] filePaths;
+        private Package zip;
 
         #region Properties
         public string FolderName
@@ -74,7 +75,55 @@ namespace AP_HA
 
             string fileName = System.IO.Path.Combine(d.FullName, ProjectName+".zip");
             
-            Package.Open(fileName, FileMode.Create);
+            zip = Package.Open(fileName, FileMode.Create);
+        }
+
+        public void loadStackInZip(string destinationPath)
+        {
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(folderPath);
+
+            
+
+            DirectoryInfo d2 = System.IO.Directory.CreateDirectory(destinationPath);
+
+            string projectZipPath = System.IO.Path.Combine(d2.FullName, ProjectName + ".zip");
+
+            // Convert system path and file names to Part URIs. In this example 
+            // Uri partUriDocument /* /Content/Document.xml */ =
+            //     PackUriHelper.CreatePartUri( 
+            //         new Uri("Content\Document.xml", UriKind.Relative));
+            // Uri partUriResource /* /Resources/Image1.jpg */ =
+            //     PackUriHelper.CreatePartUri( 
+            //         new Uri("Resources\Image1.jpg", UriKind.Relative));
+
+                // Create the Package 
+                using (Package package = Package.Open(projectZipPath, FileMode.Create))
+                {
+
+                    for (int i = 0; i < filePaths.Length; i++)
+                    {
+                        string fileName = System.IO.Path.Combine(filePaths[i]);
+                        Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(fileName, UriKind.Relative));
+
+                        // Add a Resource Part to the Package
+                        PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                        // Copy the data to the Resource Part 
+                        using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                        {
+                            CopyStream(fileStream, packagePartResource.GetStream());
+                        }// end:using(fileStream) - Close and dispose fileStream. 
+                    }
+                }
+        }
+
+        private static void CopyStream(Stream source, Stream target)
+        {
+            const int bufSize = 0x1000;
+            byte[] buf = new byte[bufSize];
+            int bytesRead = 0;
+            while ((bytesRead = source.Read(buf, 0, bufSize)) > 0)
+                target.Write(buf, 0, bytesRead);
         }
 
         public void initFileListFromStack(string path)

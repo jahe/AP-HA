@@ -83,7 +83,7 @@ namespace AP_HA
         }
         #endregion
 
-        private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions, bei Fehler Änderung der Borderbrush
+        private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions; bei Fehler, Änderung der Borderbrush
         {
             DirectoryInfo d = System.IO.Directory.CreateDirectory(SaveProjectPath);
             string fileName = System.IO.Path.Combine(d.FullName, NewProjectName+".zip");
@@ -94,7 +94,7 @@ namespace AP_HA
             }
             else if (Directory.GetFiles(StackPath, "*.tif", SearchOption.TopDirectoryOnly).Length < 1)
             {
-                MessageBox.Show("Der ausgewählte Stapelpfad enthält keine geeigneten Daten. TIFF benötigt");
+                MessageBox.Show("Der ausgewählte Stapelpfad enthält keine geeigneten Daten. \nTIFF benötigt");
             }
             else if (NewProjectName.Length <= 1)
             {
