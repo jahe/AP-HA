@@ -84,16 +84,16 @@ namespace AP_HA
             string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName + ".zip");
 
             // Create the Package 
+            
             using (Package package = Package.Open(projectZipPath, FileMode.Create))
             {
                 for (int i = 0; i < filePaths.Length; i++)
                 {
-                    string fileName = System.IO.Path.Combine(filePaths[i]);
-                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(Path.GetFileName(fileName), UriKind.Relative));
+                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(Path.GetFileName(filePaths[i]), UriKind.Relative));
 
                     PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
-                    using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                    using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
                     {
                         CopyStream(fileStream, packagePartResource.GetStream());
                     }
