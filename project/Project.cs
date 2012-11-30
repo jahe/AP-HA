@@ -72,7 +72,7 @@ namespace AP_HA
         {
             DirectoryInfo d = System.IO.Directory.CreateDirectory(path);
 
-            string fileName = System.IO.Path.Combine(d.FullName, ProjectName);
+            string fileName = System.IO.Path.Combine(d.FullName, ProjectName+".zip");
             
             Package.Open(fileName, FileMode.Create);
         }

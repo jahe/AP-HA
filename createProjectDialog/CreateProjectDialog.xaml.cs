@@ -85,6 +85,9 @@ namespace AP_HA
 
         private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions, bei Fehler Änderung der Borderbrush
         {
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(SaveProjectPath);
+            string fileName = System.IO.Path.Combine(d.FullName, NewProjectName+".zip");
+            
             if (!Directory.Exists(StackPath))
             {
                 MessageBox.Show("Der angegebene Stapelpfad wurde nicht gefunden");
@@ -101,9 +104,13 @@ namespace AP_HA
             {
                 MessageBox.Show("Der angegebene Zielpfad wurde nicht gefunden");
             }
+            else if (File.Exists(fileName))
+            {
+                MessageBox.Show("Der gewünschte Projektname existiert bereits in dem gewünschten Zielverzeichnis.\nBitte Namen oder Zielverzeichnis ändern");
+            }
             else
             {
-                MessageBox.Show("Aus dem Ordner: " + StackPath + " wird das Projekt mit dem Namen " + NewProjectName + " in " + SaveProjectPath + " erstellt");
+                MessageBox.Show("Aus dem Ordner: " + StackPath + " wird eine Zip-Datei mit dem Namen " + NewProjectName + " in " + SaveProjectPath + " erstellt");
                 DialogResult = true;
             }           
         }      
