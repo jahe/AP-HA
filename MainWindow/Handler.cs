@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Windows;
 
 namespace AP_HA
 {
@@ -60,6 +61,55 @@ namespace AP_HA
             shootScChanged();
 
             sc.register(Wheel.None);
+        }
+
+        private Point? lastMovePoint;
+        private int moveCounter = 0;
+
+        private void OnPreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (moveCounter < 20)
+                moveCounter++;
+            else
+            {
+                moveCounter = 0;
+                Point mousePos = e.GetPosition(this);
+
+                if (lastMovePoint != null)
+                {
+                    double deltaX = mousePos.X - lastMovePoint.Value.X;
+                    double deltaY = mousePos.Y - lastMovePoint.Value.Y;
+
+                    MouseMoveDirection moveDir = MouseMoveDirection.None;
+
+                    if (Math.Abs(deltaX) > Math.Abs(deltaY))        // Maus ist eher zur Seite gegangen
+                    {
+                        if (deltaX < 0)
+                            moveDir = MouseMoveDirection.Left;
+                        else
+                            moveDir = MouseMoveDirection.Right;
+                    }
+                    else if (Math.Abs(deltaX) < Math.Abs(deltaY))
+                    {
+                        if (deltaY < 0)
+                            moveDir = MouseMoveDirection.Up;
+                        else
+                            moveDir = MouseMoveDirection.Down;
+                    }
+
+                    Trace.WriteLine(moveDir.ToString());
+
+                    sc.register(moveDir);
+                    shootScChanged();
+                    sc.register(MouseMoveDirection.None);
+
+                    lastMovePoint = mousePos;
+                }
+                else
+                {
+                    lastMovePoint = mousePos;
+                }
+            }
         }
     }
 }
