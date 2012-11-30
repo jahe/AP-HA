@@ -28,7 +28,6 @@ namespace AP_HA
                 {
                     Project newProject = new Project(createProjectDialog.NewProjectName);
                     newProject.initFileListFromStack(createProjectDialog.StackPath);
-                    //newProject.createProjectZip(createProjectDialog.SaveProjectPath);
                     newProject.loadStackInZip(createProjectDialog.SaveProjectPath);
                 }
                 catch (ProjectException pe)

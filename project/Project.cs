@@ -43,7 +43,7 @@ namespace AP_HA
         {
             get { return this.filePathList.Count(); }
         }
-     
+
         private string _projectName;
         public string ProjectName
         {
@@ -57,7 +57,7 @@ namespace AP_HA
         {
 
         }
-        
+
         public Project(string name)
         {
             ProjectName = name;
@@ -65,7 +65,7 @@ namespace AP_HA
 
         //public Project(String zipPath)
         //{
-            //vorhandenes ProjektZip öffnen
+        //vorhandenes ProjektZip öffnen
         //}
         #endregion
 
@@ -83,25 +83,22 @@ namespace AP_HA
             DirectoryInfo d = System.IO.Directory.CreateDirectory(destinationPath);
             string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName + ".zip");
 
-                // Create the Package 
-                using (Package package = Package.Open(projectZipPath, FileMode.Create))
+            // Create the Package 
+            using (Package package = Package.Open(projectZipPath, FileMode.Create))
+            {
+                for (int i = 0; i < filePaths.Length; i++)
                 {
-                    for (int i = 0; i < filePaths.Length; i++)
+                    string fileName = System.IO.Path.Combine(filePaths[i]);
+                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(Path.GetFileName(fileName), UriKind.Relative));
+
+                    PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                    using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
                     {
-                        string fileName = System.IO.Path.Combine(filePaths[i]);
-                        Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(Path.GetFileName(fileName), UriKind.Relative));
-
-                        // Add a Resource Part to the Package
-                        
-                        PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
-
-                        // Copy the data to the Resource Part 
-                        using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-                        {
-                            CopyStream(fileStream, packagePartResource.GetStream());
-                        } 
+                        CopyStream(fileStream, packagePartResource.GetStream());
                     }
                 }
+            }
         }
 
         private static void CopyStream(Stream source, Stream target)
