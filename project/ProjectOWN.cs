@@ -13,46 +13,14 @@ namespace AP_HA
 {
     public partial class HausarbeitAPProjectCT
     {
-        private string folderPath;                                  //Aktueller Ordnerpfad
-        private string folderName;
         private List<string> filePathList;                          //Liste der im Ordner enthaltenen *.tif
         private string[] filePaths;
 
         #region Properties
-        public string FolderName
-        {
-            get { return this.folderName; }
-            set { this.folderName = value; }
-        }
-        /**[XmlIgnore()]
-        public string FolderPath
-        {
-            get { return this.folderPath; }
-            set { this.folderPath = value; }
-        }**/
-        
-        /**public double Height
-        {
-            get;
-            set;
-        }
-        public double Width
-        {
-            get;
-            set;
-        }**/
-        /**
-        public int PictureAmount
-        {
-            get { return this.filePathList.Count(); }
-        }**/
 
-        private string _projectName;
-        public string ProjectName
-        {
-            get { return this._projectName; }
-            set { this._projectName = value; }
-        }
+        //private string _projectName;
+        [XmlIgnore()]
+        public string ProjectName { get; set; }
         #endregion
 
         #region Constructors
@@ -66,25 +34,22 @@ namespace AP_HA
             ProjectName = name;
         }
 
-        //public Project(String zipPath)
-        //{
-        //vorhandenes ProjektZip öffnen
-        //}
         #endregion
 
-        public void loadStackInZip(string destinationPath, string projectName)
+        public void loadStackInZip(string sourcePath, string targetPath)
         {
-            DirectoryInfo d = System.IO.Directory.CreateDirectory(destinationPath);
-            string projectZipPath = System.IO.Path.Combine(d.FullName, projectName + ".zip");
+            initFileListFromStack(sourcePath);
+
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);
+            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName + ".zip");
 
             using (Package package = Package.Open(projectZipPath, FileMode.Create))
             {
                 for (int i = 0; i < filePaths.Length; i++)
                 {
-                    int newfileNo = i;
-                    int zeroLength = totalLayers.ToString("D").Length;
+                    int fileNameLength = totalLayers.ToString("D").Length;
                     
-                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(((i.ToString("D" + zeroLength.ToString()))+".tif"), UriKind.Relative));
+                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(((i.ToString("D" + fileNameLength.ToString()))+".tif"), UriKind.Relative));
 
                     PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
@@ -107,7 +72,7 @@ namespace AP_HA
             }              
         }
 
-        public void initFileListFromStack(string path)
+        private void initFileListFromStack(string path)
         {
             if (Directory.Exists(path))
             {
@@ -123,7 +88,6 @@ namespace AP_HA
 
                 if (filePathList.Count() != 0)
                 {
-                    //FolderPath = path;
                     totalLayers = filePathList.Count();
 
                     try
