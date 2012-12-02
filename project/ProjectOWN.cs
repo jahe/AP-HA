@@ -7,6 +7,7 @@ using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using System.IO.Packaging;
 using System.Security.Permissions;
+using System.Xml.Serialization;
 
 namespace AP_HA
 {
@@ -23,31 +24,34 @@ namespace AP_HA
             get { return this.folderName; }
             set { this.folderName = value; }
         }
+        /**[XmlIgnore()]
         public string FolderPath
         {
             get { return this.folderPath; }
-            private set { this.folderPath = value; }
-        }
-        public double Height
+            set { this.folderPath = value; }
+        }**/
+        
+        /**public double Height
         {
             get;
-            private set;
+            set;
         }
         public double Width
         {
             get;
-            private set;
-        }
+            set;
+        }**/
+        /**
         public int PictureAmount
         {
             get { return this.filePathList.Count(); }
-        }
+        }**/
 
         private string _projectName;
         public string ProjectName
         {
             get { return this._projectName; }
-            private set { this._projectName = value; }
+            set { this._projectName = value; }
         }
         #endregion
 
@@ -56,11 +60,40 @@ namespace AP_HA
         {
 
         }
-        #endregion
 
         public HausarbeitAPProjectCT(string name)
         {
             ProjectName = name;
+        }
+
+        //public Project(String zipPath)
+        //{
+        //vorhandenes ProjektZip öffnen
+        //}
+        #endregion
+
+        public void loadStackInZip(string destinationPath, string projectName)
+        {
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(destinationPath);
+            string projectZipPath = System.IO.Path.Combine(d.FullName, projectName + ".zip");
+
+            using (Package package = Package.Open(projectZipPath, FileMode.Create))
+            {
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    int newfileNo = i;
+                    int zeroLength = totalLayers.ToString("D").Length;
+                    
+                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(((i.ToString("D" + zeroLength.ToString()))+".tif"), UriKind.Relative));
+
+                    PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                    using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                    {
+                        CopyStream(fileStream, packagePartResource.GetStream());
+                    }
+                }
+            }
         }
 
         private static void CopyStream(Stream source, Stream target)
@@ -90,7 +123,8 @@ namespace AP_HA
 
                 if (filePathList.Count() != 0)
                 {
-                    FolderPath = path;
+                    //FolderPath = path;
+                    totalLayers = filePathList.Count();
 
                     try
                     {
@@ -98,8 +132,8 @@ namespace AP_HA
                         TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         BitmapSource bmpSrc = decoder.Frames[0];
 
-                        Height = bmpSrc.PixelHeight;
-                        Width = bmpSrc.PixelWidth;
+                        height = bmpSrc.PixelHeight;
+                        width = bmpSrc.PixelWidth;
                     }
                     catch (Exception e)
                     {

@@ -26,8 +26,13 @@ namespace AP_HA
             {
                 try
                 {
-                    HausarbeitAPProjectCT newProject = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
-                    newProject.SaveToFile("test");
+                    DirectoryInfo d = System.IO.Directory.CreateDirectory(createProjectDialog.SaveProjectPath);
+                    string projectZipPath = System.IO.Path.Combine(d.FullName, "project.xml");
+                    
+                    HausarbeitAPProjectCT newProject = new HausarbeitAPProjectCT();
+                    newProject.initFileListFromStack(createProjectDialog.StackPath);
+                    newProject.loadStackInZip(createProjectDialog.SaveProjectPath, createProjectDialog.NewProjectName);
+                    newProject.SaveToFile(projectZipPath);
                 }
                 catch (ProjectException pe)
                 {
@@ -36,5 +41,7 @@ namespace AP_HA
                 }               
             }
         }
+
+
     }
 }
