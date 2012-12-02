@@ -26,9 +26,8 @@ namespace AP_HA
             {
                 try
                 {
-                    Project newProject = new Project(createProjectDialog.NewProjectName);
-                    newProject.initFileListFromStack(createProjectDialog.StackPath);
-                    newProject.loadStackInZip(createProjectDialog.SaveProjectPath);
+                    HausarbeitAPProjectCT newProject = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
+                    newProject.SaveToFile("test");
                 }
                 catch (ProjectException pe)
                 {

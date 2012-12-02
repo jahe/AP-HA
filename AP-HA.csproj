@@ -59,6 +59,8 @@
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="createProjectDialog\OpenStackFolder.cs" />
+    <Compile Include="project\HausarbeitAPProjectCT.cs" />
+    <Compile Include="project\Project.cs" />
     <Compile Include="project\ProjectException.cs" />
     <Compile Include="util\Enums.cs" />
     <Compile Include="MainWindow\Funcs.cs" />
@@ -78,7 +80,7 @@
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />
     <Compile Include="MainWindow\LoadPicture.cs" />
     <Compile Include="project\StringSorter.cs" />
-    <Compile Include="project\Project.cs" />
+    <Compile Include="project\ProjectOWN.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
