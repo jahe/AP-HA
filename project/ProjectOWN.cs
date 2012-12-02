@@ -17,8 +17,6 @@ namespace AP_HA
         private string[] filePaths;
 
         #region Properties
-
-        //private string _projectName;
         [XmlIgnore()]
         public string ProjectName { get; set; }
         #endregion
@@ -47,9 +45,7 @@ namespace AP_HA
             {
                 for (int i = 0; i < filePaths.Length; i++)
                 {
-                    int fileNameLength = totalLayers.ToString("D").Length;
-                    
-                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri(((i.ToString("D" + fileNameLength.ToString()))+".tif"), UriKind.Relative));
+                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString())+".tif"), UriKind.Relative));
 
                     PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
