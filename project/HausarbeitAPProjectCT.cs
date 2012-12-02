@@ -35,7 +35,7 @@ namespace AP_HA
             x.Serialize(stream, this);
         }
 
-        public static object LoadFromFile(string fileName)
+        /**public static object LoadFromFile(string fileName)
         {
             HausarbeitAPProjectCT deserializedXMLFile;
             using (Package zip = Package.Open(fileName, FileMode.Open, FileAccess.Read)) //Zip-Datei zum lesen öffnen
@@ -51,7 +51,7 @@ namespace AP_HA
                 }
             }
             return null;
-        }
+        }**/
 
         //Wenn man die Project-Klasse um Properties erweitern möchte, aber
         //diese nicht mit in die XML-Datei schreiben will, kann man ihnen

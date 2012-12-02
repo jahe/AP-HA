@@ -34,7 +34,7 @@ namespace AP_HA
 
         #endregion
 
-        public void loadStackInZip(string sourcePath, string targetPath)
+        public void createZipFromStack(string sourcePath, string targetPath)
         {
             initFileListFromStack(sourcePath);
 
@@ -43,10 +43,13 @@ namespace AP_HA
 
             using (Package package = Package.Open(projectZipPath, FileMode.Create))
             {
-                for (int i = 0; i < filePaths.Length; i++)
-                {
-                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString())+".tif"), UriKind.Relative));
+                Uri FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
+                PackagePart part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                this.SaveToStream(part.GetStream());
 
+                for (int i = 0; i < filePaths.Length; i++)
+                {                   
+                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString())+".tif"), UriKind.Relative));
                     PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
                     using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))

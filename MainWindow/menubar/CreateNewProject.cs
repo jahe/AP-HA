@@ -30,8 +30,7 @@ namespace AP_HA
                     string projectZipPath = System.IO.Path.Combine(d.FullName, "project.xml");
                     
                     HausarbeitAPProjectCT newProject = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
-                    newProject.loadStackInZip(createProjectDialog.StackPath, createProjectDialog.SaveProjectPath);
-                    newProject.SaveToFile(projectZipPath);
+                    newProject.createZipFromStack(createProjectDialog.StackPath, createProjectDialog.SaveProjectPath);
                 }
                 catch (ProjectException pe)
                 {
