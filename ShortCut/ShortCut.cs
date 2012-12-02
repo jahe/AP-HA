@@ -6,9 +6,8 @@ using System.Windows.Input;
 
 namespace AP_HA
 {
-    public delegate void ExecuteHandler();
-
-    class ShortCut
+    [Serializable()]
+    public class ShortCut
     {
         public String Name { get; private set; }
         private List<Key> Keys { get; set; }
@@ -16,7 +15,7 @@ namespace AP_HA
         private Wheel MouseWheelDirection { get; set; }
         private MouseMoveDirection MoveDirection { get; set; }
 
-        public event ExecuteHandler Execute;
+        public event Action Execute;
 
         public ShortCut()
         {

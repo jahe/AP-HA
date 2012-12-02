@@ -16,13 +16,14 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
+//using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AP_HA
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private delegate void ShortCutHandler(object sender, ShortCutEventArgs e);
@@ -31,74 +32,14 @@ namespace AP_HA
         private ShortCut sc;
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
+        private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
         #region Constructors
         public MainWindow()
         {
             InitializeComponent();
             InitializeMarks();
-
-            this.PreviewKeyDown += new KeyEventHandler(OnKeyDown);                         // KeyDown Event abonieren
-            this.PreviewKeyUp += new KeyEventHandler(OnKeyUp);                             // KeyUp Event abonieren
-            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown); // MouseDown Event abonieren
-            this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);   // MouseUp Event abonieren
-            this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
-            this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
-
-            sc = new ShortCut();
-            scEngine = new ShortCutEngine();
-            ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
-
-            // ********* Shortcuts erzeugen ***********
-            ShortCut zoomInSc = new ShortCut("Zoom In");
-            zoomInSc.register(Key.LeftCtrl);
-            zoomInSc.register(Wheel.Up);
-            zoomInSc.Execute += new ExecuteHandler(zoomIn);
-
-            ShortCut zoomOutSc = new ShortCut("Zoom Out");
-            zoomOutSc.register(Key.LeftCtrl);
-            zoomOutSc.register(Wheel.Down);
-            zoomOutSc.Execute += new ExecuteHandler(zoomOut);
-
-            ShortCut scrollInSc = new ShortCut("Scroll In");
-            scrollInSc.register(Key.LeftCtrl);
-            scrollInSc.register(MouseMoveDirection.Up);
-            scrollInSc.Execute += new ExecuteHandler(scrollIn);
-
-            ShortCut scrollOutSc = new ShortCut("Scroll Out");
-            scrollOutSc.register(Key.LeftCtrl);
-            scrollOutSc.register(MouseMoveDirection.Down);
-            scrollOutSc.Execute += new ExecuteHandler(scrollOut);
-
-            ShortCut incBrightnessSc = new ShortCut("Increase Brightness");
-            incBrightnessSc.register(Key.B);
-            incBrightnessSc.register(Wheel.Up);
-            incBrightnessSc.Execute += new ExecuteHandler(incBrightness);
-
-            ShortCut decBrightnessSc = new ShortCut("Decrease Brightness");
-            decBrightnessSc.register(Key.B);
-            decBrightnessSc.register(Wheel.Down);
-            decBrightnessSc.Execute += new ExecuteHandler(decBrightness);
-
-            ShortCut incContrastSc = new ShortCut("Increase Contrast");
-            incContrastSc.register(Key.C);
-            incContrastSc.register(Wheel.Up);
-            incContrastSc.Execute += new ExecuteHandler(incContrast);
-
-            ShortCut decContrastSc = new ShortCut("Decrease Contrast");
-            decContrastSc.register(Key.C);
-            decContrastSc.register(Wheel.Down);
-            decContrastSc.Execute += new ExecuteHandler(decContrast);
-            
-            // ***** Shortcuts der Engine hinzufügen *****
-            scEngine.addShortCut(zoomInSc);
-            scEngine.addShortCut(zoomOutSc);
-            scEngine.addShortCut(scrollInSc);
-            scEngine.addShortCut(scrollOutSc);
-            scEngine.addShortCut(incBrightnessSc);
-            scEngine.addShortCut(decBrightnessSc);
-            scEngine.addShortCut(incContrastSc);
-            scEngine.addShortCut(decContrastSc);
+            InitializeShortcuts();
         }
         #endregion
 
@@ -178,6 +119,95 @@ namespace AP_HA
         }
         #endregion        
         #endregion        
+
+        private void registerShortcutFuncs()
+        {
+            if (scEngine != null)
+            {
+                // HIER VLLT NOCH ALLE EVENTS DER SCs DEABONNIEREN ( also = null setzen )
+                scEngine.getShortcutFromName("Zoom In").Execute += zoomIn;
+                scEngine.getShortcutFromName("Zoom Out").Execute += zoomOut;
+                scEngine.getShortcutFromName("Scroll In").Execute += scrollIn;
+                scEngine.getShortcutFromName("Scroll Out").Execute += scrollOut;
+                scEngine.getShortcutFromName("Increase Brightness").Execute += incBrightness;
+                scEngine.getShortcutFromName("Decrease Brightness").Execute += decBrightness;
+                scEngine.getShortcutFromName("Increase Contrast").Execute +=  incContrast;
+                scEngine.getShortcutFromName("Decrease Contrast").Execute += decContrast;
+            }
+        }
+
+        private static void createDefaultSce(String destFolderPath)
+        {
+            ShortCutEngine tempSce = new ShortCutEngine();
+
+            // ********* Shortcuts erzeugen ***********
+            ShortCut zoomInSc = new ShortCut("Zoom In");
+            zoomInSc.register(Key.LeftCtrl);
+            zoomInSc.register(Wheel.Up);
+
+            ShortCut zoomOutSc = new ShortCut("Zoom Out");
+            zoomOutSc.register(Key.LeftCtrl);
+            zoomOutSc.register(Wheel.Down);
+
+            ShortCut scrollInSc = new ShortCut("Scroll In");
+            scrollInSc.register(Key.LeftCtrl);
+            scrollInSc.register(MouseMoveDirection.Up);
+
+            ShortCut scrollOutSc = new ShortCut("Scroll Out");
+            scrollOutSc.register(Key.LeftCtrl);
+            scrollOutSc.register(MouseMoveDirection.Down);
+
+            ShortCut incBrightnessSc = new ShortCut("Increase Brightness");
+            incBrightnessSc.register(Key.B);
+            incBrightnessSc.register(Wheel.Up);
+
+            ShortCut decBrightnessSc = new ShortCut("Decrease Brightness");
+            decBrightnessSc.register(Key.B);
+            decBrightnessSc.register(Wheel.Down);
+
+            ShortCut incContrastSc = new ShortCut("Increase Contrast");
+            incContrastSc.register(Key.C);
+            incContrastSc.register(Wheel.Up);
+
+            ShortCut decContrastSc = new ShortCut("Decrease Contrast");
+            decContrastSc.register(Key.C);
+            decContrastSc.register(Wheel.Down);
+
+            // ***** Shortcuts der Engine hinzufügen *****
+            tempSce.addShortCut(zoomInSc);
+            tempSce.addShortCut(zoomOutSc);
+            tempSce.addShortCut(scrollInSc);
+            tempSce.addShortCut(scrollOutSc);
+            tempSce.addShortCut(incBrightnessSc);
+            tempSce.addShortCut(decBrightnessSc);
+            tempSce.addShortCut(incContrastSc);
+            tempSce.addShortCut(decContrastSc);
+
+            tempSce.Serialize(destFolderPath + @"\default.sce");
+        }
+
+        private void InitializeShortcuts()
+        {
+            sc = new ShortCut();    // actual Shortcut, der gerade im MainWindow gedrückt/aktiv ist
+            
+            this.PreviewKeyDown += new KeyEventHandler(OnKeyDown);
+            this.PreviewKeyUp += new KeyEventHandler(OnKeyUp);
+            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown);
+            this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);
+            this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
+            this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
+
+            String SceFilePath = rootAppFolder + @"\default.sce";
+
+            if (!File.Exists(SceFilePath))
+            {
+                File.Copy(rootAppFolder + @"\ShortCut\default.sce", SceFilePath);
+            }
+
+            scEngine = ShortCutEngine.Deserialize(SceFilePath);
+            registerShortcutFuncs();
+            ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
+        }
 
         private void refreshSession()
         {

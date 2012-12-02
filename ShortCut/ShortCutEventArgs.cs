@@ -5,9 +5,14 @@ using System.Text;
 
 namespace AP_HA
 {
-    class ShortCutEventArgs : EventArgs
+    public class ShortCutEventArgs : EventArgs
     {
         public ShortCut Shortcut { get; set; }
+
+        public ShortCutEventArgs()
+        {
+
+        }
 
         public ShortCutEventArgs(ShortCut sc)
         {
