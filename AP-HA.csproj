@@ -59,6 +59,11 @@
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="createProjectDialog\OpenStackFolder.cs" />
+    <Compile Include="LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="project\HausarbeitAPProjectCT.cs" />
+    <Compile Include="project\Project.cs" />
     <Compile Include="project\ProjectException.cs" />
     <Compile Include="util\Enums.cs" />
     <Compile Include="MainWindow\Funcs.cs" />
@@ -78,7 +83,7 @@
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />
     <Compile Include="MainWindow\LoadPicture.cs" />
     <Compile Include="project\StringSorter.cs" />
-    <Compile Include="project\Project.cs" />
+    <Compile Include="project\ProjectOWN.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -89,6 +94,10 @@
     <Compile Include="MainWindow\Zoom.cs" />
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
+    <Page Include="LoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,7 +179,6 @@
     <Resource Include="icon\undo_selected.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="pictureStack\" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\safeProject.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

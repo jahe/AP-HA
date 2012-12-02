@@ -40,8 +40,6 @@ namespace AP_HA
             }
         }
 
-        
-
         public void register(Key k)
         {
             if (!Keys.Contains(k))
