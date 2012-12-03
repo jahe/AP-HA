@@ -104,7 +104,6 @@
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />
     <Compile Include="MainWindow\LoadPicture.cs" />
     <Compile Include="project\StringSorter.cs" />
-    <Compile Include="project\ProjectOWN.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>

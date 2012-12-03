@@ -39,7 +39,10 @@ namespace AP_HA
                     //XML Datei erstellen
                     newProject.SaveToFile(newWorkspace.TempFolder + @"\project.xml");
                     //newProject.createZipFromStack(createProjectDialog.StackPath, newWorkspace.Name);
-                }
+
+                    loadPicture(0);
+                    stackSlider.Maximum = newProject.totalLayers - 1;
+                }               
                 catch (ProjectException pe)
                 {
                     System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + pe.Message);

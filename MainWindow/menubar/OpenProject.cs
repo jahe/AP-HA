@@ -30,6 +30,8 @@ namespace AP_HA
                 //Workspace in temp anlegen
                 newWorkspace = new Workspace(newOpenFileDialog.FileName);
                 newWorkspace.createWorkspacefromZip(newOpenFileDialog.FileName);
+                loadPicture(0);
+                stackSlider.Maximum = newProject.totalLayers - 1;
             }           
         }
     }

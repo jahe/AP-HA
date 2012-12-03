@@ -63,9 +63,7 @@ namespace AP_HA
         }
 
         public void createZipFromStack(string sourcePath, string targetPath)
-        {
-            initFileListFromStack(sourcePath);
-            
+        {         
             DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);
             string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName + ".zip");
 
@@ -86,6 +84,8 @@ namespace AP_HA
                     }                                        
                 }
             }
+
+            initFileListFromStack(targetPath);
         }
 
         private static void CopyStream(Stream source, Stream target)
@@ -139,6 +139,18 @@ namespace AP_HA
             else
             {
                 throw new ProjectException("Der ausgewählte Ordner konnte nicht gefunden werden");
+            }
+        }
+
+        public string getPictureFromList(int picNo)
+        {
+            if (picNo < filePathList.Count() && picNo >= 0)
+            {
+                return this.filePathList[picNo];
+            }
+            else
+            {
+                return "Fehler";
             }
         }
 
