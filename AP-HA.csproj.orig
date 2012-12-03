@@ -15,6 +15,21 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -57,8 +72,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="createProjectDialog\SaveProject.cs" />
-    <Compile Include="menubar\CreateNewProject.cs" />
+    <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
+    <Compile Include="createProjectDialog\OpenStackFolder.cs" />
+    <Compile Include="LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow\menubar\SaveProject.cs" />
+    <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
+    <Compile Include="marks\Drawing.cs" />
+    <Compile Include="createWorkspace\Workspace.cs" />
+    <Compile Include="MainWindow\menubar\OpenProject.cs" />
+    <Compile Include="project\HausarbeitAPProjectCT.cs" />
+    <Compile Include="project\Project.cs" />
+    <Compile Include="project\ProjectException.cs" />
+    <Compile Include="ShortCut\ShortCutSetter.cs" />
+    <Compile Include="util\Enums.cs" />
+    <Compile Include="MainWindow\Funcs.cs" />
+    <Compile Include="MainWindow\Handler.cs" />
+    <Compile Include="MainWindow\menubar\CreateNewProject.cs" />
     <Compile Include="createProjectDialog\CreateProjectDialog.xaml.cs">
       <DependentUpon>CreateProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -66,26 +97,29 @@
     <Compile Include="pictureProcessing\ImageFuncs.cs" />
     <Compile Include="marks\Mark.cs" />
     <Compile Include="marks\Marks.cs" />
-    <Compile Include="menubar\BackToOriginalCut.cs" />
-    <Compile Include="menubar\CloseFolder.cs" />
-    <Compile Include="menubar\CutAfterCursor.cs" />
-    <Compile Include="menubar\CutBeforeCursor.cs" />
-    <Compile Include="menubar\ExitProgram.cs" />
-    <Compile Include="menubar\OpenStack.cs" />
-    <Compile Include="pictureProcessing\LoadPicture.cs" />
-    <Compile Include="pictureStack\StringSorter.cs" />
-<<<<<<< HEAD
+    <Compile Include="MainWindow\menubar\BackToOriginalCut.cs" />
+    <Compile Include="MainWindow\menubar\CloseFolder.cs" />
+    <Compile Include="MainWindow\menubar\CutAfterCursor.cs" />
+    <Compile Include="MainWindow\menubar\CutBeforeCursor.cs" />
+    <Compile Include="MainWindow\menubar\ExitProgram.cs" />
+    <Compile Include="MainWindow\LoadPicture.cs" />
+    <Compile Include="project\StringSorter.cs" />
+    <Compile Include="project\ProjectOWN.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-=======
-    <Compile Include="project\Project.cs" />
->>>>>>> c4489b0a8f536d5a427802c400a89cd1c20975a7
-    <Compile Include="toolbar\Move.cs" />
-    <Compile Include="toolbar\Zoom.cs" />
-    <Compile Include="pictureStack\PictureStackException.cs" />
-    <Compile Include="controls\Stackslider.cs" />
+    <Compile Include="ShortCut\ShortCut.cs" />
+    <Compile Include="ShortCut\ShortCutEngine.cs" />
+    <Compile Include="ShortCut\ShortCutEventArgs.cs" />
+    <Compile Include="MainWindow\Move.cs" />
+    <Compile Include="MainWindow\Zoom.cs" />
+    <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
+    <Compile Include="util\ZipProcessor.cs" />
+    <Page Include="LoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,17 +132,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-<<<<<<< HEAD
     <Page Include="Settings.xaml">
-=======
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="createProjectDialog\CreateProjectDialog.xaml">
->>>>>>> c4489b0a8f536d5a427802c400a89cd1c20975a7
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pictureStack\PictureStack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,6 +159,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+<<<<<<< HEAD
+    <Compile Include="ShortCut\default.sce">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+=======
+>>>>>>> 910bde4bd8064f013ec3ccbb2606e9fdf25a4c7d
+    <Resource Include="icon\pen.png" />
+    <Resource Include="icon\eraser.png" />
     <Resource Include="PixelShader\FirstEffect.ps" />
     <None Include="IO\Project.xsd">
       <SubType>Designer</SubType>
@@ -165,7 +206,7 @@
     <Resource Include="icon\undo_selected.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="pictureStack\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />
@@ -185,6 +226,31 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon\safeProject.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
