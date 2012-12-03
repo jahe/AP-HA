@@ -40,7 +40,7 @@ namespace AP_HA
             InitializeComponent();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
-            InitializeShortcuts();
+            //InitializeShortcuts();
         }
         #endregion
 
@@ -248,5 +248,9 @@ namespace AP_HA
             settingsWindow = new Settings();
             settingsWindow.ShowDialog();
         }
+
+
+
+
     }
 }

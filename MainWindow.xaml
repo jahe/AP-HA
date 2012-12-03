@@ -30,7 +30,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
