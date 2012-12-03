@@ -18,13 +18,13 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuCreateProject" Header="_Neues Projekt erstellen" ToolTip="Neues Projekt erstellen" Click="menuCreateProject_Click">
+                <MenuItem Name="menuCreateProject" Header="_Neues Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuCreateProject_Click">
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Name="menuOpenFolder" Header="_Projekt laden" ToolTip="Vorhandenes Projekt öffnen" >
+                <MenuItem Name="menuOpenProject" Header="_Projekt laden" ToolTip="Vorhandenes Projekt öffnen" Click="menuOpenProject_Click">
                     <MenuItem.Icon>
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
