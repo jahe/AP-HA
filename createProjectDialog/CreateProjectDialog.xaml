@@ -10,8 +10,8 @@
                 <DockPanel.DataContext>
                     <Binding ElementName="this" />
                 </DockPanel.DataContext>
-                <StatusBar DockPanel.Dock="Bottom" Height="20">
-                    <Label Content="Bereit" Padding="0" FontSize="10"></Label>
+                <StatusBar DockPanel.Dock="Bottom" Height="18">
+                    <Label Name="status" Content="Bereit" Padding="0" FontSize="10"></Label>
                 </StatusBar>
                 <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
@@ -38,7 +38,7 @@
                     </StackPanel>
                     <Separator />
                     <Button Content="OK" IsDefault="True" Height="23" Name="cPDBtnOK" Width="75" Click="cPDBtnOK_Click" />
-                </StackPanel>               
+                </StackPanel>
             </DockPanel>
         </Border>
             

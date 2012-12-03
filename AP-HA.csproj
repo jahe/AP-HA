@@ -59,9 +59,6 @@
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="createProjectDialog\OpenStackFolder.cs" />
-    <Compile Include="LoadingWindow.xaml.cs">
-      <DependentUpon>LoadingWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="project\HausarbeitAPProjectCT.cs" />
     <Compile Include="project\Project.cs" />
     <Compile Include="project\ProjectException.cs" />
@@ -94,10 +91,6 @@
     <Compile Include="MainWindow\Zoom.cs" />
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
-    <Page Include="LoadingWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

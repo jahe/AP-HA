@@ -17,7 +17,8 @@ using System.Windows.Forms;
 namespace AP_HA
 {
     public partial class MainWindow
-    {       
+    {
+        HausarbeitAPProjectCT newProject;
         private void menuCreateProject_Click(object sender, RoutedEventArgs e)
         {
             CreateProjectDialog createProjectDialog = new CreateProjectDialog();
@@ -29,7 +30,7 @@ namespace AP_HA
                     DirectoryInfo d = System.IO.Directory.CreateDirectory(createProjectDialog.SaveProjectPath);
                     string projectZipPath = System.IO.Path.Combine(d.FullName, "project.xml");
                     
-                    HausarbeitAPProjectCT newProject = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
+                    newProject = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
                     newProject.createZipFromStack(createProjectDialog.StackPath, createProjectDialog.SaveProjectPath);
                 }
                 catch (ProjectException pe)
@@ -39,7 +40,5 @@ namespace AP_HA
                 }               
             }
         }
-
-
     }
 }

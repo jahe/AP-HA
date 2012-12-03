@@ -110,7 +110,6 @@ namespace AP_HA
             }
             else
             {
-                MessageBox.Show("Aus dem Ordner: " + StackPath + " wird eine Zip-Datei mit dem Namen " + NewProjectName + " in " + SaveProjectPath + " erstellt");
                 DialogResult = true;
             }           
         }      
