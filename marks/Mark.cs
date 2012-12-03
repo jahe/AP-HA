@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Runtime.CompilerServices;
@@ -26,7 +27,15 @@ namespace AP_HA
         public bool Visible
         {
             get { return visible; }
-            set { visible = value; }
+            set {
+                visible = value;
+
+                // change visibility of existing polylines
+                foreach (Polyline pl in polylines)
+                {
+                    pl.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
+                }
+            }
         }
 
         public SolidColorBrush BrushColor
