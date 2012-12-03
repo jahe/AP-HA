@@ -28,8 +28,8 @@ namespace AP_HA
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 //Workspace in temp anlegen
-                newWorkspace = new Workspace(newOpenFileDialog.FileName);
-                newWorkspace.createWorkspacefromZip(newOpenFileDialog.FileName);
+                Workspace newWorkspace = new Workspace(newOpenFileDialog.FileName);
+                //newWorkspace.createWorkspacefromZip(newOpenFileDialog.FileName);
             }           
         }
     }

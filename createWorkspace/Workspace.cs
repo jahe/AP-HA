@@ -32,7 +32,7 @@ namespace AP_HA
 
         public void createWorkspacefromZip(string zipPath)
         {
-            ZipFile.ExtractToDirectory(zipPath, TempFolder);
+            ZipProcessor.extractToDirectory(zipPath, TempFolder);
         }
         
         public void copyStackFolder(string sourceFolder)
@@ -42,7 +42,7 @@ namespace AP_HA
           
             if (!dir.Exists)
             {
-                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceFolder);
+                //throw new DirectoryNotFoundException("Der Quellpfad wurde nicht gefunden:\n" + sourceFolder);
             }
 
             if (!Directory.Exists(TempFolder))

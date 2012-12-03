@@ -85,8 +85,8 @@ namespace AP_HA
 
         private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions; bei Fehler, Änderung der Borderbrush
         {
-            DirectoryInfo d = System.IO.Directory.CreateDirectory(SaveProjectPath);
-            string fileName = System.IO.Path.Combine(d.FullName, NewProjectName+".zip");
+            //DirectoryInfo d = System.IO.Directory.CreateDirectory(SaveProjectPath);
+            //string fileName = System.IO.Path.Combine(d.FullName, NewProjectName+".zip");
             
             if (!Directory.Exists(StackPath))
             {
@@ -100,14 +100,14 @@ namespace AP_HA
             {
                 MessageBox.Show("Der angegebene Projektname ist zu kurz");
             }
-            else if (!Directory.Exists(SaveProjectPath))
-            {
-                MessageBox.Show("Der angegebene Zielpfad wurde nicht gefunden");
-            }
-            else if (File.Exists(fileName))
-            {
-                MessageBox.Show("Der gewünschte Projektname existiert bereits in dem gewünschten Zielverzeichnis.\nBitte Namen oder Zielverzeichnis ändern");
-            }
+            //else if (!Directory.Exists(SaveProjectPath))
+            //{
+                //MessageBox.Show("Der angegebene Zielpfad wurde nicht gefunden");
+            //}
+            //else if (File.Exists(fileName))
+            //{
+                //MessageBox.Show("Der gewünschte Projektname existiert bereits in dem gewünschten Zielverzeichnis.\nBitte Namen oder Zielverzeichnis ändern");
+            //}
             else
             {
                 DialogResult = true;

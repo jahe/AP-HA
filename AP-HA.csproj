@@ -108,6 +108,7 @@
     <Compile Include="MainWindow\Zoom.cs" />
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
+    <Compile Include="util\ZipProcessor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
