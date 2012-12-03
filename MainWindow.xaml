@@ -19,7 +19,7 @@
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuCreateProject" Header="_Neues Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuCreateProject_Click">
+                <MenuItem Name="menuCreateProject" Header="_Neues Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuOpenStack">
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
@@ -30,12 +30,12 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuSaveProjectAs" Header="_Projekt speichern unter" ToolTip="Aktuelles Projekt speichern unter" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuSaveProjectAs" Header="_Projekt speichern unter" ToolTip="Aktuelles Projekt speichern unter" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProjectAs_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
@@ -85,7 +85,7 @@
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
                 </Button>
                 <Button  Name="btnCloseFolder" Width="22" Height="22" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
-                    <Image Width="17" Height="17" Source="file:///C:/Users/marcus/Documents/Visual%20Studio%202010/Projects/AP-HA/AP-HA/icon/closeFolder.ico" />
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
                 <Button  Name="btnCutBefore" Width="22" Height="22" Click="cutBeforeCursor" IsEnabled="{Binding CutableLeft}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutBeforeCursor}">

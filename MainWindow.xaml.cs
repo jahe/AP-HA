@@ -40,7 +40,7 @@ namespace AP_HA
             InitializeComponent();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
-            InitializeShortcuts();
+            //InitializeShortcuts();
         }
         #endregion
 
