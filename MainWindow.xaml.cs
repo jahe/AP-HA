@@ -248,9 +248,5 @@ namespace AP_HA
             settingsWindow = new Settings();
             settingsWindow.ShowDialog();
         }
-
-
-
-
     }
 }

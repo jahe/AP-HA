@@ -35,7 +35,7 @@
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuSaveProjectAs" Header="_Projekt speichern unter" ToolTip="Aktuelles Projekt speichern unter" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuSaveProjectAs" Header="_Projekt speichern unter" ToolTip="Aktuelles Projekt speichern unter" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProjectAs_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>

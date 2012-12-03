@@ -78,6 +78,7 @@
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\menubar\SaveProject.cs" />
+    <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
     <Compile Include="marks\Drawing.cs" />
     <Compile Include="createWorkspace\Workspace.cs" />
     <Compile Include="MainWindow\menubar\OpenProject.cs" />
