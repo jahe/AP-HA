@@ -235,7 +235,7 @@
                                     <TextBlock Foreground="White" FontWeight="Normal" Margin="5,8,20,0">
                                         <TextBlock.Text>Markierungsdicke</TextBlock.Text>
                                     </TextBlock>
-                                    <TextBox Height="23" Name="penStrokeWidth" DockPanel.Dock="Left" Padding="1" Width="40" Margin="5" Text="20" />
+                                    <TextBox Height="23" Name="penStrokeThickness" DockPanel.Dock="Left" Padding="1" Width="40" Margin="5" Text="20" />
                                 </StackPanel>
                             </StackPanel>
                         </Expander>
