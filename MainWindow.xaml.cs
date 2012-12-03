@@ -245,7 +245,7 @@ namespace AP_HA
 
         private void menuMouseSettings_Click(object sender, RoutedEventArgs e)
         {
-            settingsWindow = new Settings();
+            settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
         }
     }

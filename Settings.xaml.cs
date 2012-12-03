@@ -22,9 +22,9 @@ namespace AP_HA
 
         private Grid grid;
 
-        public Settings()
+        public Settings(ShortCutEngine sce)
         {
-            scEngine = ShortCutEngine.Deserialize(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + @"\default.sce");
+            scEngine = sce;
             
             InitializeComponent();
             InitializePresentation();
