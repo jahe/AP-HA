@@ -17,7 +17,7 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private Point? lastDragPoint;           // ? um den Point "nullable" zu machen
+        private Point? lastPoint;           // ? um den Point "nullable" zu machen
 
         private void btnMove_Click(object sender, RoutedEventArgs e)
         {
@@ -34,9 +34,13 @@ namespace AP_HA
                     if (mousePos.X <= scrollViewer.ViewportWidth && mousePos.Y < scrollViewer.ViewportHeight)
                     {
                         scrollViewer.Cursor = Cursors.SizeAll;
-                        lastDragPoint = mousePos;
+                        lastPoint = mousePos;
                         Mouse.Capture(scrollViewer);
                     }
+                    break;
+
+                case Tool.Pen:
+                    penMouseLeftButtonDown(sender, e);
                     break;
 
                 default:
@@ -46,21 +50,27 @@ namespace AP_HA
 
         private void scrollViewer_MouseMove(object sender, MouseEventArgs e)
         {
+            
+
             switch (tool)
             {
                 case Tool.Move:
-                    if (lastDragPoint != null)
+                    Point posNow = e.GetPosition(scrollViewer);
+
+                    if (lastPoint != null)
                     {
-                        Point posNow = e.GetPosition(scrollViewer);
+                        double dX = posNow.X - lastPoint.Value.X;
+                        double dY = posNow.Y - lastPoint.Value.Y;
 
-                        double dX = posNow.X - lastDragPoint.Value.X;
-                        double dY = posNow.Y - lastDragPoint.Value.Y;
-
-                        lastDragPoint = posNow;
+                        lastPoint = posNow;
 
                         scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - dX);
                         scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - dY);
                     }
+                    break;
+
+                case Tool.Pen:
+                    penMouseMove(sender, e);
                     break;
 
                 default:
@@ -75,7 +85,11 @@ namespace AP_HA
                 case Tool.Move:
                     scrollViewer.Cursor = Cursors.Arrow;
                     scrollViewer.ReleaseMouseCapture();
-                    lastDragPoint = null;
+                    lastPoint = null;
+                    break;
+
+                case Tool.Pen:
+                    penMouseLeftButtonUp(sender, e);
                     break;
 
                 default:

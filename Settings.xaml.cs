@@ -37,10 +37,12 @@ namespace AP_HA
             RowDefinition row0 = new RowDefinition();
             ColumnDefinition col0 = new ColumnDefinition();
             ColumnDefinition col1 = new ColumnDefinition();
+            ColumnDefinition col2 = new ColumnDefinition();
 
             grid.RowDefinitions.Add(row0);
             grid.ColumnDefinitions.Add(col0);
             grid.ColumnDefinitions.Add(col1);
+            grid.ColumnDefinitions.Add(col2);
 
             TextBlock funcHead = new TextBlock();
             funcHead.FontWeight = FontWeights.Bold;
@@ -66,15 +68,18 @@ namespace AP_HA
 
                     TextBlock funcName = new TextBlock();
                     funcName.Text = sc.Name;
-
                     Grid.SetColumn(funcName, 0);
                     Grid.SetRow(funcName, scEngine.ShortCuts.IndexOf(sc) + 1);
 
                     TextBlock shortcutText = new TextBlock();
                     shortcutText.Text = sc.ToString();
-
                     Grid.SetColumn(shortcutText, 1);
                     Grid.SetRow(shortcutText, scEngine.ShortCuts.IndexOf(sc) + 1);
+
+                    Button setShortcut = new Button();
+                    setShortcut.Tag = sc;
+                    setShortcut.Content = "Neu";
+                    setShortcut.Click += new RoutedEventHandler(setShortcut_Click);
 
                     grid.Children.Add(funcName);
                     grid.Children.Add(shortcutText);
@@ -82,6 +87,11 @@ namespace AP_HA
             }
 
             ShortcutTab.Content = grid;
+        }
+
+        private void setShortcut_Click(object sender, RoutedEventArgs e)
+        {
+            ShortCut sc = (ShortCut)((Button)sender).Tag;
         }
     }
 }
