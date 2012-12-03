@@ -20,7 +20,7 @@ namespace AP_HA
     {
         HausarbeitAPProjectCT newProject;
         Workspace newWorkspace;
-        private void menuCreateProject_Click(object sender, RoutedEventArgs e)
+        private void menuOpenStack(object sender, RoutedEventArgs e)
         {
             CreateProjectDialog createProjectDialog = new CreateProjectDialog();
 
@@ -28,9 +28,6 @@ namespace AP_HA
             {
                 try
                 {
-                    //DirectoryInfo d = System.IO.Directory.CreateDirectory(createProjectDialog.SaveProjectPath);
-                    //string projectZipPath = System.IO.Path.Combine(d.FullName, "project.xml");
-
                     //Workspace in temp anlegen
                     newWorkspace = new Workspace(createProjectDialog.NewProjectName);
                     //Bilder in Workspace kopieren und umbennen
@@ -42,8 +39,6 @@ namespace AP_HA
                     //XML Datei erstellen
                     newProject.SaveToFile(newWorkspace.TempFolder + @"\project.xml");
                     //newProject.createZipFromStack(createProjectDialog.StackPath, newWorkspace.Name);
-
-
                 }
                 catch (ProjectException pe)
                 {

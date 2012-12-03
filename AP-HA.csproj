@@ -77,6 +77,8 @@
     <Compile Include="LoadingWindow.xaml.cs">
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\menubar\SaveProject.cs" />
+    <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
     <Compile Include="marks\Drawing.cs" />
     <Compile Include="createWorkspace\Workspace.cs" />
     <Compile Include="MainWindow\menubar\OpenProject.cs" />
@@ -158,7 +160,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="ShortCut\default.sce">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Resource Include="icon\pen.png" />
     <Resource Include="icon\eraser.png" />
