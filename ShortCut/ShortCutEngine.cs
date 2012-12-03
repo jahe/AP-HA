@@ -12,16 +12,20 @@ namespace AP_HA
     [Serializable()]
     public class ShortCutEngine
     {
-        private List<ShortCut> shortCuts;
+        public List<ShortCut> ShortCuts
+        {
+            get;
+            set;
+        }
 
         public ShortCutEngine()
         {
-            shortCuts = new List<ShortCut>();
+            ShortCuts = new List<ShortCut>();
         }
 
         public void onShortCutChanged(object sender, ShortCutEventArgs e)
         {
-            foreach (ShortCut sc in shortCuts)
+            foreach (ShortCut sc in ShortCuts)
             {
                 if (sc.matches(e.Shortcut))
                     sc.executeFunction();
@@ -30,17 +34,17 @@ namespace AP_HA
 
         public void addShortCut(ShortCut sc)
         {
-            shortCuts.Add(sc);
+            ShortCuts.Add(sc);
         }
 
         public void removeShortCut(ShortCut sc)
         {
-            shortCuts.Remove(sc);
+            ShortCuts.Remove(sc);
         }
 
         public void setEvent(String func, Action e)
         {
-            foreach (ShortCut sc in shortCuts)
+            foreach (ShortCut sc in ShortCuts)
             {
                 if (sc.Name == func)
                     sc.Execute += e;
@@ -49,7 +53,7 @@ namespace AP_HA
 
         public ShortCut getShortcutFromName(String funcName)
         {
-            foreach (ShortCut sc in shortCuts)
+            foreach (ShortCut sc in ShortCuts)
             {
                 if (sc.Name == funcName)
                     return sc;
@@ -69,10 +73,14 @@ namespace AP_HA
 
         public static ShortCutEngine Deserialize(String filepath)
         {
+            ShortCutEngine sce;
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(filepath, FileMode.Open);
 
-            return (ShortCutEngine) formatter.Deserialize(stream);
+            sce = (ShortCutEngine) formatter.Deserialize(stream);
+            stream.Close();
+
+            return sce;
         }
     }
 }

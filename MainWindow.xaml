@@ -199,9 +199,9 @@
                         <Expander IsEnabled="{Binding StackIsLoaded}"  Margin="0" BorderThickness="0">
                             <Expander.Header>
                                 <TextBlock Foreground="White" FontWeight="Normal">
-                        <TextBlock.Text>
-                            Markierer
-                        </TextBlock.Text>
+                                    <TextBlock.Text>
+                                        Markierer
+                                    </TextBlock.Text>
                                 </TextBlock>
                             </Expander.Header>
                             <StackPanel>

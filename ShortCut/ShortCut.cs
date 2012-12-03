@@ -32,6 +32,33 @@ namespace AP_HA
             Name = name;
         }
 
+        public override string ToString()
+        {
+            String retValue = "";
+
+            foreach (Key k in Keys)
+            {
+                retValue += k.ToString() + " + ";
+            }
+
+            foreach (MouseButton mb in MouseButtons)
+            {
+                retValue += mb.ToString() + " + ";
+            }
+
+            if (MouseWheelDirection != Wheel.None)
+            {
+                retValue += "MouseWheel" + MouseWheelDirection.ToString() + " + ";
+            }
+
+            if (MoveDirection != MouseMoveDirection.None)
+            {
+                retValue += "MouseMovement" + MoveDirection.ToString();
+            }
+
+            return retValue;
+        }
+
         public void executeFunction()
         {
             if (Execute != null)
