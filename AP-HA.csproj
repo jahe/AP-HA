@@ -104,7 +104,6 @@
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />
     <Compile Include="MainWindow\LoadPicture.cs" />
     <Compile Include="project\StringSorter.cs" />
-    <Compile Include="project\ProjectOWN.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -202,9 +201,7 @@
   <ItemGroup>
     <Resource Include="icon\undo_selected.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="pictureStack\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />
   </ItemGroup>

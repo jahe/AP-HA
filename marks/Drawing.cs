@@ -38,7 +38,8 @@ namespace AP_HA
             myPolyline.StrokeThickness = Convert.ToInt32(penStrokeThickness.Text);
             myPolyline.FillRule = FillRule.EvenOdd;
 
-            // add path
+            // add polyline
+            activeMark.AddPolyline(myPolyline);
             polylineStack.Push(myPolyline);
             canvas.Children.Add(myPolyline);
         }
