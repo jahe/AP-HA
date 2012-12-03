@@ -25,8 +25,6 @@ namespace AP_HA
 
             sc.register(e.Key);
 
-            Debug.WriteLine(e.Key.ToString() + " wurde gedrückt");
-
             shootScChanged();
         }
 
@@ -64,51 +62,42 @@ namespace AP_HA
         }
 
         private Point? lastMovePoint;
-        private int moveCounter = 0;
 
         private void OnPreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (moveCounter < 20)
-                moveCounter++;
+            Point mousePos = e.GetPosition(this);
+
+            if (lastMovePoint != null)
+            {
+                double deltaX = mousePos.X - lastMovePoint.Value.X;
+                double deltaY = mousePos.Y - lastMovePoint.Value.Y;
+
+                MouseMoveDirection moveDir = MouseMoveDirection.None;
+
+                if (Math.Abs(deltaX) > Math.Abs(deltaY))        // Maus ist eher zur Seite gegangen
+                {
+                    if (deltaX < 0)
+                        moveDir = MouseMoveDirection.Left;
+                    else
+                        moveDir = MouseMoveDirection.Right;
+                }
+                else if (Math.Abs(deltaX) < Math.Abs(deltaY))
+                {
+                    if (deltaY < 0)
+                        moveDir = MouseMoveDirection.Up;
+                    else
+                        moveDir = MouseMoveDirection.Down;
+                }
+
+                sc.register(moveDir);
+                shootScChanged();
+                sc.register(MouseMoveDirection.None);
+
+                lastMovePoint = mousePos;
+            }
             else
             {
-                moveCounter = 0;
-                Point mousePos = e.GetPosition(this);
-
-                if (lastMovePoint != null)
-                {
-                    double deltaX = mousePos.X - lastMovePoint.Value.X;
-                    double deltaY = mousePos.Y - lastMovePoint.Value.Y;
-
-                    MouseMoveDirection moveDir = MouseMoveDirection.None;
-
-                    if (Math.Abs(deltaX) > Math.Abs(deltaY))        // Maus ist eher zur Seite gegangen
-                    {
-                        if (deltaX < 0)
-                            moveDir = MouseMoveDirection.Left;
-                        else
-                            moveDir = MouseMoveDirection.Right;
-                    }
-                    else if (Math.Abs(deltaX) < Math.Abs(deltaY))
-                    {
-                        if (deltaY < 0)
-                            moveDir = MouseMoveDirection.Up;
-                        else
-                            moveDir = MouseMoveDirection.Down;
-                    }
-
-                    //Trace.WriteLine(moveDir.ToString());
-
-                    sc.register(moveDir);
-                    shootScChanged();
-                    sc.register(MouseMoveDirection.None);
-
-                    lastMovePoint = mousePos;
-                }
-                else
-                {
-                    lastMovePoint = mousePos;
-                }
+                lastMovePoint = mousePos;
             }
         }
     }
