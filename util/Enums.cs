@@ -5,7 +5,10 @@ using System.Text;
 
 namespace AP_HA
 {
-    enum Wheel { Up, Down, None };
-    enum Tool { ZoomIn, ZoomOut, Move, None };
-    enum MouseMoveDirection { Left, Up, Right, Down, None };
+    [Serializable()]
+    public enum Wheel { Up, Down, None };
+    [Serializable()]
+    public enum Tool { ZoomIn, ZoomOut, Move, None };
+    [Serializable()]
+    public enum MouseMoveDirection { Left, Up, Right, Down, None };
 }

@@ -130,6 +130,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="ShortCut\default.sce">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="PixelShader\FirstEffect.ps" />
     <None Include="IO\Project.xsd">
       <SubType>Designer</SubType>
