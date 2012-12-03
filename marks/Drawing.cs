@@ -50,7 +50,6 @@ namespace AP_HA
 
             // position
             Point canvasPos = e.GetPosition(canvas);
-            Console.WriteLine(canvasPos);
 
             // draw on active polyline
             Polyline activeLine = polylineStack.Peek();
