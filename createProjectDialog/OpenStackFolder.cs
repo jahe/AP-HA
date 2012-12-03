@@ -19,6 +19,7 @@ namespace AP_HA
 {
     public partial class CreateProjectDialog
     {
+
         private void openStackFolder(object sender, RoutedEventArgs e)         //CreateProjectDialog->Stapel öffnen
         {
             FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();

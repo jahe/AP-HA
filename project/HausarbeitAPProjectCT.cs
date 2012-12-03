@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.IO.Packaging;
 using System.Security.Permissions;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace AP_HA
 {       
@@ -48,13 +49,13 @@ namespace AP_HA
             return (HausarbeitAPProjectCT)x.Deserialize(stream);
         }
 
-        /**public void SaveToFile(string fileName)
+        public void SaveToFile(string fileName)
         {
             using (Stream s = System.IO.File.Create(fileName))
             {
                 SaveToStream(s);
             }
-        }**/
+        }
         public void SaveToStream(Stream stream)
         {
             XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
@@ -63,12 +64,8 @@ namespace AP_HA
 
         public void createZipFromStack(string sourcePath, string targetPath)
         {
-            
-            LoadingWindow loadingWindow = new LoadingWindow();
-            loadingWindow.progressBar.Maximum = totalLayers;
-            loadingWindow.Show();
             initFileListFromStack(sourcePath);
-
+            
             DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);
             string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName + ".zip");
 
@@ -86,11 +83,9 @@ namespace AP_HA
                     using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
                     {
                         CopyStream(fileStream, packagePartResource.GetStream());
-                    }
-                    loadingWindow.progressBar.Value = i;
+                    }                                        
                 }
             }
-            loadingWindow.Close();
         }
 
         private static void CopyStream(Stream source, Stream target)
@@ -104,7 +99,7 @@ namespace AP_HA
             }
         }
 
-        private void initFileListFromStack(string path)
+        public void initFileListFromStack(string path)
         {
             if (Directory.Exists(path))
             {
