@@ -110,6 +110,13 @@
                 <Button Name="btnCrop">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/crop.png" />
                 </Button>
+                <Separator Background="#FF888888" Margin="3,1"></Separator>
+                <Button Name="btnPen">
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/pen.png" />
+                </Button>
+                <Button Name="btnEraser">
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/eraser.png" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
 
