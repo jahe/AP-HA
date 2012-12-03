@@ -74,6 +74,10 @@
     </ApplicationDefinition>
     <Compile Include="createProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="createProjectDialog\OpenStackFolder.cs" />
+    <Compile Include="LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="marks\Drawing.cs" />
     <Compile Include="createWorkspace\Workspace.cs" />
     <Compile Include="MainWindow\menubar\OpenProject.cs" />
     <Compile Include="project\HausarbeitAPProjectCT.cs" />
@@ -109,6 +113,10 @@
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
     <Compile Include="util\ZipProcessor.cs" />
+    <Page Include="LoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,6 +156,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="icon\pen.png" />
+    <Resource Include="icon\eraser.png" />
     <Content Include="ShortCut\default.sce">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

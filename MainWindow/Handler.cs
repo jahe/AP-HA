@@ -97,7 +97,7 @@ namespace AP_HA
                             moveDir = MouseMoveDirection.Down;
                     }
 
-                    Trace.WriteLine(moveDir.ToString());
+                    //Trace.WriteLine(moveDir.ToString());
 
                     sc.register(moveDir);
                     shootScChanged();
