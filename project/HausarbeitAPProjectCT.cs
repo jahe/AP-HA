@@ -49,13 +49,13 @@ namespace AP_HA
             return (HausarbeitAPProjectCT)x.Deserialize(stream);
         }
 
-        /**public void SaveToFile(string fileName)
+        public void SaveToFile(string fileName)
         {
             using (Stream s = System.IO.File.Create(fileName))
             {
                 SaveToStream(s);
             }
-        }**/
+        }
         public void SaveToStream(Stream stream)
         {
             XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
@@ -99,7 +99,7 @@ namespace AP_HA
             }
         }
 
-        private void initFileListFromStack(string path)
+        public void initFileListFromStack(string path)
         {
             if (Directory.Exists(path))
             {
