@@ -202,9 +202,7 @@
   <ItemGroup>
     <Resource Include="icon\undo_selected.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="pictureStack\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="icon\undo_selected.png" />
   </ItemGroup>
