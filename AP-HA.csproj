@@ -157,6 +157,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Include="ShortCut\default.sce">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Resource Include="icon\pen.png" />
     <Resource Include="icon\eraser.png" />
     <Resource Include="PixelShader\FirstEffect.ps" />
