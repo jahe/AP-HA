@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.IO.Packaging;
-using System.Security.Permissions;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.IO;
+using System.ComponentModel;
 using System.Xml.Serialization;
-using System.Threading;
+using System.IO.Packaging;
 
 namespace AP_HA
 {       
@@ -18,8 +24,45 @@ namespace AP_HA
         private string[] filePaths;
 
         #region Properties
-        [XmlIgnore()]
+
+        public event PropertyChangedEventHandler ChangedProperty;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            var handler = ChangedProperty;
+
+            if (handler != null)
+            {
+                ChangedProperty(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        
         public string ProjectName { get; set; }
+
+        private int _imgHeight;      
+        [XmlIgnore()]
+        public int ImgHeight 
+        {
+            get { return _imgHeight; }
+            set
+            {
+                _imgHeight = value;
+                OnPropertyChanged("ImgHeight");
+            }
+        }
+
+        private int _imgWidth;
+        [XmlIgnore()]
+        public int ImgWidth 
+        {
+            get { return _imgWidth; }
+            private set
+            {
+                _imgWidth = value;
+                OnPropertyChanged("ImgWidth");
+            }
+        }
         #endregion
 
         #region Constructors
@@ -123,8 +166,8 @@ namespace AP_HA
                         TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
                         BitmapSource bmpSrc = decoder.Frames[0];
 
-                        height = bmpSrc.PixelHeight;
-                        width = bmpSrc.PixelWidth;
+                        ImgHeight = bmpSrc.PixelHeight;
+                        ImgWidth = bmpSrc.PixelWidth;
                     }
                     catch (Exception e)
                     {
