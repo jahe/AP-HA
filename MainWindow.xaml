@@ -230,6 +230,13 @@
                                     <TextBox Height="23" Name="markNameTextBox" DockPanel.Dock="Left" Width="135" Padding="1" Margin="5" />
                                     <Button Content="+" Width="20" Height="20" Name="addMarkToListbutton" FontWeight="Bold" Click="addMarkToListbutton_Click" />
                                 </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="White" FontWeight="Normal" Margin="5,8,20,0">
+                                        <TextBlock.Text>Markierungsdicke</TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBox Height="23" Name="penStrokeWidth" DockPanel.Dock="Left" Padding="1" Width="40" Margin="5" Text="20" />
+                                </StackPanel>
                             </StackPanel>
                         </Expander>
                     </Border>
