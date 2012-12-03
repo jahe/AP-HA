@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using System.Runtime.CompilerServices;
 
 namespace AP_HA
@@ -13,6 +15,7 @@ namespace AP_HA
         string name;
         bool visible;
         SolidColorBrush brushColor;
+        ArrayList polylines;
 
         public string Name
         {
@@ -32,12 +35,19 @@ namespace AP_HA
             set
             {
                 brushColor = value;
-                NotifyPropertyChanged("BrushColor");
+                NotifyPropertyChanged("BrushColor"); 
+                
+                // change color of existing polylines
+                foreach (Polyline pl in polylines)
+                {
+                    pl.Stroke = brushColor;
+                }
             }
         }
 
         public Mark()
         {
+            polylines = new ArrayList();
             Visible = true;
             BrushColor = getRandomColorBrush();
         }
@@ -58,6 +68,11 @@ namespace AP_HA
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+
+        public void AddPolyline(Polyline polyline)
+        {
+            polylines.Add(polyline);
         }
     }
 }
