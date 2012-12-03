@@ -25,6 +25,8 @@ namespace AP_HA
             {
                 stackImage = ImageFuncs.getImgFromPath(newProject.getPictureFromList(picNo));
                 imgControl.Source = stackImage;
+                canvas.Width = stackImage.PixelWidth;
+                canvas.Height = stackImage.PixelHeight;
                 debugTxtBox.Text = newProject.getPictureFromList(picNo);
             }
             catch (Exception e)
