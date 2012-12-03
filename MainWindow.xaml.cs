@@ -198,16 +198,22 @@ namespace AP_HA
             this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
             this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
 
-            String SceFilePath = rootAppFolder + @"\default.sce";
+            String SceFilePath = rootAppFolder + @"\ShortCut\default.sce";
 
-            if (!File.Exists(SceFilePath))
+            //if (!File.Exists(SceFilePath))
+            //{
+            //    File.Copy(rootAppFolder + @"\ShortCut\default.sce", SceFilePath);
+            //}
+            try
             {
-                File.Copy(rootAppFolder + @"\ShortCut\default.sce", SceFilePath);
+                scEngine = ShortCutEngine.Deserialize(SceFilePath);
+                registerShortcutFuncs();
+                ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
             }
-
-            scEngine = ShortCutEngine.Deserialize(SceFilePath);
-            registerShortcutFuncs();
-            ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void refreshSession()
