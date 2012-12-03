@@ -31,8 +31,13 @@ namespace AP_HA
             if (!penButtonDown)
                 return;
 
+            // position
             Point canvasPos = e.GetPosition(canvas);
             Console.WriteLine(canvasPos);
+
+            // active mark
+            Mark activeMark = (Mark) marksListBox.SelectedItem;
+            Console.WriteLine(activeMark.BrushColor);
         }
 
         private void penMouseLeftButtonUp(object sender, MouseEventArgs e)
