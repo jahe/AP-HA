@@ -35,7 +35,7 @@ namespace AP_HA
             Polyline myPolyline = new Polyline();
 
             myPolyline.Stroke = activeMark.BrushColor;
-            myPolyline.StrokeThickness = 2;
+            myPolyline.StrokeThickness = Convert.ToInt32(penStrokeThickness.Text);
             myPolyline.FillRule = FillRule.EvenOdd;
 
             // add path
@@ -50,7 +50,6 @@ namespace AP_HA
 
             // position
             Point canvasPos = e.GetPosition(canvas);
-            Console.WriteLine(canvasPos);
 
             // draw on active polyline
             Polyline activeLine = polylineStack.Peek();
