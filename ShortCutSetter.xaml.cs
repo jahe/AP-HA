@@ -24,7 +24,6 @@ namespace AP_HA
         private TextBox scText;
         private StackPanel btnPanel;
         private Button reset;
-        private Button cancel;
         private Button ok;
 
         public ShortCutSetter(ShortCut sc)
@@ -52,16 +51,12 @@ namespace AP_HA
             btnPanel.Orientation = Orientation.Horizontal;
             reset = new Button();
             reset.Content = "Zurücksetzen";
-            cancel = new Button();
-            cancel.Content = "Abbrechen";
             ok = new Button();
             ok.Content = "OK";
             reset.Click += OnReset;
-            cancel.Click += OnCancel;
             ok.Click += OnOk;
 
             btnPanel.Children.Add(reset);
-            btnPanel.Children.Add(cancel);
             btnPanel.Children.Add(ok);
 
             sPanel.Children.Add(header);
@@ -76,17 +71,15 @@ namespace AP_HA
             this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
         }
 
-        private void OnCancel(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void OnReset(object sender, RoutedEventArgs e)
         {
             sc.reset();
+            scText.Text = sc.ToString();
         }
+
         private void OnOk(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)

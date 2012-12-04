@@ -34,11 +34,10 @@ namespace AP_HA
 
                 item.Header = System.IO.Path.GetFileNameWithoutExtension(zip);
 
-                item.Click += new RoutedEventHandler(exitProgram); //TO DO Project erstellen =initializeImgList etc
+                item.Click += new RoutedEventHandler(exitProgram);      //TO DO Project erstellen =initializeImgList etc
 
                 menuSavedProjects.Items.Add(item);
             }
         }
     }
 }
-
