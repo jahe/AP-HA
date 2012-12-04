@@ -32,6 +32,14 @@ namespace AP_HA
             Name = name;
         }
 
+        public void reset()
+        {
+            Keys = new List<Key>();
+            MouseButtons = new List<MouseButton>();
+            MouseWheelDirection = Wheel.None;
+            MoveDirection = MouseMoveDirection.None;
+        }
+
         public override string ToString()
         {
             String retValue = "";

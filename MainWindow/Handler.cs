@@ -21,10 +21,7 @@ namespace AP_HA
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            this.debugTxtBox.Text = e.Key.ToString();
-
             sc.register(e.Key);
-
             shootScChanged();
         }
 
@@ -35,10 +32,7 @@ namespace AP_HA
 
         private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.debugTxtBox.Text = e.ChangedButton.ToString();
-
             sc.register(e.ChangedButton);
-
             shootScChanged();
         }
 

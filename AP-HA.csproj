@@ -87,7 +87,9 @@
     <Compile Include="project\HausarbeitAPProjectCT.cs" />
     <Compile Include="project\Project.cs" />
     <Compile Include="project\ProjectException.cs" />
-    <Compile Include="ShortCut\ShortCutSetter.cs" />
+    <Compile Include="ShortCutSetter.xaml.cs">
+      <DependentUpon>ShortCutSetter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="util\Enums.cs" />
     <Compile Include="MainWindow\Funcs.cs" />
     <Compile Include="MainWindow\Handler.cs" />
@@ -138,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="createProjectDialog\CreateProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShortCutSetter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
