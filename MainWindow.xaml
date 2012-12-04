@@ -13,13 +13,13 @@
         Background="#293955"
         WindowStartupLocation="CenterScreen">
 
-    <DockPanel LastChildFill="True">
+    <DockPanel>
         <DockPanel.DataContext>
             <Binding ElementName="This" />
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuCreateProject" Header="_Neues Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuOpenStack">
+                <MenuItem Name="menuCreateProject" Header="_Neuen Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuOpenStack">
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
@@ -30,6 +30,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <Separator />
                 <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
@@ -46,7 +47,13 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen" />
+                <MenuItem Name="menuActualProjects" Header="_Project aus Workspace öffnen" ToolTip="Öffnen eines offenen Projektes" MouseEnter="menuActualProjects_MouseEnter">
+                   
+                </MenuItem>
+                <MenuItem Name="menuSavedProjects" Header="_Zuletzt gespeicherte Projekte" ToolTip="Öffnen eines im Project-Ordner gespeichertes Projektes" MouseEnter="menuSavedProjects_MouseEnter">
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen. Workspace wird gelöscht" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
                 <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding StackIsLoaded}">
@@ -254,7 +261,7 @@
                         <Canvas.LayoutTransform>
                             <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
                         </Canvas.LayoutTransform>
-                        <Image Name="imgControl" Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth}"  Stretch="Uniform">
+                        <Image Name="imgControl" Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth }">
                             <Image.Effect>
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>

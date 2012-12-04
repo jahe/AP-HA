@@ -83,35 +83,28 @@ namespace AP_HA
         }
         #endregion
 
-        private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions; bei Fehler, Änderung der Borderbrush
+        private void cPDBtnOK_Click(object sender, RoutedEventArgs e)
         {
-            //DirectoryInfo d = System.IO.Directory.CreateDirectory(SaveProjectPath);
-            //string fileName = System.IO.Path.Combine(d.FullName, NewProjectName+".zip");
-            
             if (!Directory.Exists(StackPath))
             {
-                MessageBox.Show("Der angegebene Stapelpfad wurde nicht gefunden");
+                MessageBox.Show("Der angegebene Stapelpfad wurde nicht gefunden", "Achtung");
             }
             else if (Directory.GetFiles(StackPath, "*.tif", SearchOption.TopDirectoryOnly).Length < 1)
             {
-                MessageBox.Show("Der ausgewählte Stapelpfad enthält keine geeigneten Daten. \nTIFF benötigt");
+                MessageBox.Show("Der ausgewählte Stapelpfad enthält keine geeigneten Daten. \nTIFF benötigt", "Achtung");
             }
             else if (NewProjectName.Length <= 1)
             {
-                MessageBox.Show("Der angegebene Projektname ist zu kurz");
+                MessageBox.Show("Der angegebene Projektname ist zu kurz", "Achtung");
             }
-            //else if (!Directory.Exists(SaveProjectPath))
-            //{
-                //MessageBox.Show("Der angegebene Zielpfad wurde nicht gefunden");
-            //}
-            //else if (File.Exists(fileName))
-            //{
-                //MessageBox.Show("Der gewünschte Projektname existiert bereits in dem gewünschten Zielverzeichnis.\nBitte Namen oder Zielverzeichnis ändern");
-            //}
+            else if (Directory.Exists(@"C:\APHA\temp\" + NewProjectName))
+            {
+                MessageBox.Show("Es ist bereits ein anderes Projekt mit diesem Namen geöffnet.\nBitte wähle einen anderen Namen oder schliesse das andere Projekt", "Achtung");
+            }
             else
             {
                 DialogResult = true;
-            }           
-        }      
+            }
+        }
     }
 }

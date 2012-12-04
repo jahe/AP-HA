@@ -21,7 +21,20 @@ namespace AP_HA
     {
         private void exitProgram(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
         {
-            System.Windows.Application.Current.Shutdown();
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen sie die Anwendung beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
+                                  "Achtung",
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (Directory.Exists(@"C:\APHA\temp"))
+                {
+                    DataProcessor.deleteAllSubfolders(@"C:\APHA\temp");
+                }
+                System.Windows.Application.Current.Shutdown();
+            }            
         }
     }
 }

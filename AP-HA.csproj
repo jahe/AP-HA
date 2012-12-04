@@ -77,6 +77,8 @@
     <Compile Include="LoadingWindow.xaml.cs">
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\menubar\ActualProjectsList.cs" />
+    <Compile Include="MainWindow\menubar\SavedProjectsList.cs" />
     <Compile Include="MainWindow\menubar\SaveProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
     <Compile Include="marks\Drawing.cs" />
@@ -116,7 +118,7 @@
     <Compile Include="MainWindow\Zoom.cs" />
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="util\SingleRandom.cs" />
-    <Compile Include="util\ZipProcessor.cs" />
+    <Compile Include="util\DataProcessor.cs" />
     <Page Include="LoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

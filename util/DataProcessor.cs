@@ -11,11 +11,26 @@ using System.Windows.Forms;
 
 namespace AP_HA
 {
-    public class ZipProcessor
+    public class DataProcessor
     {
         public static void createFromDirectory(string sourcePath, string targetPath)
         {
             //TO DO Zipper implementieren
+        }
+
+        public static void deleteAllSubfolders(string directoryPath)
+        {
+            foreach (string directoryName in System.IO.Directory.GetDirectories(directoryPath))
+            {
+                try
+                {
+                    System.IO.Directory.Delete(directoryName, true);
+                }
+                catch
+                {
+                    //throw Exception ex; 
+                }
+            }
         }
 
         public static void extractToDirectory(string sourcePath, string targetPath)
