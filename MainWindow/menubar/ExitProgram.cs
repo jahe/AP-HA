@@ -21,7 +21,21 @@ namespace AP_HA
     {
         private void exitProgram(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
         {
-            System.Windows.Application.Current.Shutdown();
+            string strMeldung = "Wollen Sie die Anwendung beenden?";
+            DialogResult result = System.Windows.Forms.MessageBox.Show(strMeldung,
+                                  System.Windows.Forms.Application.ProductName,
+                                   MessageBoxButtons.OKCancel,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                if (Directory.Exists(@"C:\APHA\temp"))
+                {
+                    Workspace.deleteAllSubfolders(@"C:\APHA\temp");
+                }
+                System.Windows.Application.Current.Shutdown();
+            }            
         }
     }
 }
