@@ -16,7 +16,7 @@ namespace AP_HA
         #region Constructors
         public Workspace()
         {
-            
+            DataProcessor.deleteAllSubfolders(@"C:\APHA\temp");
         }
         public Workspace(string name)
         {

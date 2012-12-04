@@ -19,9 +19,9 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        private void exitProgram(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
+        private void menuExitProject_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen sie die Anwendung beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen das Projekt wirklich beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
                                   "Achtung",
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,
@@ -29,12 +29,21 @@ namespace AP_HA
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                if (Directory.Exists(workspaceFolder))
+                imgControl.Source = null;
+                if (Directory.Exists(Workspace.TempFolder))
                 {
-                    DataProcessor.deleteAllSubfolders(workspaceFolder);
+                    try
+                    {
+                        System.IO.Directory.Delete(Workspace.TempFolder, true);
+                    }
+                    catch
+                    {
+                        //throw Exception ex; 
+                    }
+
+                    refreshSession();
                 }
-                System.Windows.Application.Current.Shutdown();
-            }            
-        }
+            }                       
+        } 
     }
 }

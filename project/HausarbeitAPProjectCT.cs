@@ -108,24 +108,27 @@ namespace AP_HA
         }
 
         public void createZipFromStack(string sourcePath, string targetPath)
-        {         
-            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);
-            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName + ".zip");
+        {
+            Uri FileName;
+            PackagePart part;
+            
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
+            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName);
 
             using (Package package = Package.Open(projectZipPath, FileMode.Create))
             {
-                Uri FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
-                PackagePart part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
+                part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
                 this.SaveToStream(part.GetStream());
 
                 for (int i = 0; i < filePaths.Length; i++)
                 {
-                    Uri partUriResource = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
-                    PackagePart packagePartResource = package.CreatePart(partUriResource, System.Net.Mime.MediaTypeNames.Image.Tiff);
+                    FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                    part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
                     using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
                     {
-                        CopyStream(fileStream, packagePartResource.GetStream());
+                        CopyStream(fileStream, part.GetStream());
                     }                                        
                 }
             }
@@ -194,7 +197,7 @@ namespace AP_HA
             }
             else
             {
-                return "Fehler";
+                throw new ProjectException("Gewähltes Bild nicht im Stapel vorhanden\nNegativ oder größer als Stapel");
             }
         }
     }

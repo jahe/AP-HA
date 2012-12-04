@@ -42,6 +42,7 @@ namespace AP_HA
 
                     loadPicture(0);
                     stackSlider.Maximum = Project.totalLayers - 1;
+                    StackIsLoaded = true;
 
                     lw.Close();
                 }               

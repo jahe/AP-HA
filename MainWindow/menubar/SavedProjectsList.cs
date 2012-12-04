@@ -26,13 +26,13 @@ namespace AP_HA
         {
             menuSavedProjects.Items.Clear();
 
-            string[] files = Directory.GetFiles(@"C:\APHA\Projects\");
+            string[] files = Directory.GetFiles(@"C:\APHA\Projects\", "*.zip");
 
             foreach (string zip in files)
             {
                 MenuItem item = new MenuItem();
 
-                item.Header = System.IO.Path.GetFileName(zip);
+                item.Header = System.IO.Path.GetFileNameWithoutExtension(zip);
 
                 item.Click += new RoutedEventHandler(exitProgram); //TO DO Project erstellen =initializeImgList etc
 

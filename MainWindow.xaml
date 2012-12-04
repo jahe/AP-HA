@@ -41,16 +41,13 @@
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseProject" Header="_Projekt beenden" ToolTip="Aktuelles Projekt beenden" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuExitProject" Header="_Projekt beenden" ToolTip="Aktuelles Projekt beenden" IsEnabled="{Binding StackIsLoaded}" Click="menuExitProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Name="menuActualProjects" Header="_Project aus Workspace öffnen" ToolTip="Öffnen eines offenen Projektes" MouseEnter="menuActualProjects_MouseEnter">
-                   
-                </MenuItem>
-                <MenuItem Name="menuSavedProjects" Header="_Zuletzt gespeicherte Projekte" ToolTip="Öffnen eines im Project-Ordner gespeichertes Projektes" MouseEnter="menuSavedProjects_MouseEnter">
+                <MenuItem Name="menuSavedProjects" Header="_Zuletzt gespeicherte Projekte" ToolTip="Gespeicherte Projekte" MouseEnter="menuSavedProjects_MouseEnter">
                 </MenuItem>
                 <Separator />
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen. Workspace wird gelöscht" />

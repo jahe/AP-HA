@@ -27,7 +27,8 @@ namespace AP_HA
 
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                LoadingWindow lw = new LoadingWindow("Workspace aus Project-Datei wird erstellt");
+                LoadingWindow lw = new LoadingWindow("Workspace wird erstellt");
+                lw.Show();
                 //Workspace in temp anlegen
                 Workspace = new Workspace(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName));
                 //Workspace mit Dateien aus dem Zip füllen
@@ -37,6 +38,8 @@ namespace AP_HA
                 Project.initFileListFromStack(Workspace.TempFolder);
                 loadPicture(0);
                 stackSlider.Maximum = Project.totalLayers - 1;
+                StackIsLoaded = true;
+                lw.Close();
             }           
         }
     }

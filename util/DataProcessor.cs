@@ -6,6 +6,7 @@ using System.IO.Packaging;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace AP_HA
 {
@@ -31,26 +32,49 @@ namespace AP_HA
             }
         }
 
+        public void SaveToFile(string fileName)
+        {
+            using (Stream s = System.IO.File.Create(fileName))
+            {
+                SaveToStream(s);
+            }
+        }
+        public void SaveToStream(Stream stream)
+        {
+            XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
+            x.Serialize(stream, this);
+        }
+
+
         public static void extractToDirectory(string sourcePath, string targetPath)
         {
             HausarbeitAPProjectCT deserializedXMLFile;
+            Uri FileName;
+            PackagePart zippedFile;
+            Stream filestream;
+            string temppath;
+
             using (Package zip = Package.Open(sourcePath, FileMode.Open, FileAccess.Read)) //Zip-Datei zum lesen öffnen
             {
-                Uri FileName = PackUriHelper.CreatePartUri(new Uri("project.xml", UriKind.Relative)); // Pfad innerhalb des zip files ist eine Url
-                PackagePart zippedFile = zip.GetPart(FileName); // Referenz auf eine Datei in dem zip file
+                FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative)); // Pfad innerhalb des zip files ist eine Url
+                zippedFile = zip.GetPart(FileName); // Referenz auf eine Datei in dem zip file
+                filestream = zippedFile.GetStream();
                 deserializedXMLFile = HausarbeitAPProjectCT.CreateFromStream(zippedFile.GetStream()); // GetStream() liefert einen Stream, den wir einfach (wie z.b. einen FileStream) auslesen können
+                
+                temppath = Path.Combine(targetPath, "project.xml");
+                StreamToFile(filestream, temppath);
+
                 for (int i = 0; i < deserializedXMLFile.totalLayers; i++) //Für die Bilddaten machen wir praktisch das gleiche mit fortlaufenden Nummern.
                 {
                     FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif", UriKind.Relative));
                     zippedFile = zip.GetPart(FileName);
-                    Stream filestream = zippedFile.GetStream();
+                    filestream = zippedFile.GetStream();
 
-                    string temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
+                    temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
 
                     StreamToFile(filestream, temppath);
                 }
             }
-            //return null;
         }
 
         private static void StreamToFile(Stream inputStream, string outputFile)

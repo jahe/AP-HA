@@ -33,6 +33,7 @@ namespace AP_HA
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        private string workspaceFolder = @"C:\APHA\temp";
         HausarbeitAPProjectCT Project;
         Workspace Workspace;
 
@@ -42,6 +43,7 @@ namespace AP_HA
             InitializeComponent();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
+            DataProcessor.deleteAllSubfolders(workspaceFolder); //\temp\ leeren
             InitializeShortcuts();
         }
         #endregion
@@ -122,6 +124,8 @@ namespace AP_HA
         }
         #endregion        
         #endregion        
+
+        
 
         private void registerShortcutFuncs()
         {
@@ -229,6 +233,8 @@ namespace AP_HA
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
+            Project = new HausarbeitAPProjectCT();
+            Workspace = new Workspace();
 
            /** if (pictureStack != null)
             {
@@ -255,6 +261,6 @@ namespace AP_HA
         {
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
-        }       
+        }    
     }
 }
