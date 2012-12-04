@@ -30,6 +30,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <Separator />
                 <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
@@ -44,6 +45,12 @@
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="menuActualProjects" Header="_Project aus Workspace öffnen" ToolTip="Öffnen eines offenen Projektes" MouseEnter="menuActualProjects_MouseEnter">
+                   
+                </MenuItem>
+                <MenuItem Name="menuSavedProjects" Header="_Zuletzt gespeicherte Projekte" ToolTip="Öffnen eines im Project-Ordner gespeichertes Projektes" MouseEnter="menuSavedProjects_MouseEnter">
                 </MenuItem>
                 <Separator />
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen. Workspace wird gelöscht" />

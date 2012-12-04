@@ -32,7 +32,7 @@ namespace AP_HA
 
         public void createWorkspacefromZip(string zipPath)
         {
-            ZipProcessor.extractToDirectory(zipPath, TempFolder);
+            DataProcessor.extractToDirectory(zipPath, TempFolder);
         }
         
         public void copyStackFolder(string sourceFolder)
@@ -67,25 +67,6 @@ namespace AP_HA
                     DirectoryCopy(subdir.FullName, temppath, copySubDirs);
                 }
             }**/
-        }
-
-        public static void deleteAllSubfolders(string directoryPath)
-        {
-
-            //find subdirectorys in the current directory an delete them recursiv
-            foreach (string directoryName in System.IO.Directory.GetDirectories(directoryPath))
-            {
-                //deleteAllSubfolders(directoryName);
-                try
-                {
-                    //If no undeletable files are present the recursive search will be killed
-                    System.IO.Directory.Delete(directoryName, true);
-                }
-                catch
-                {
-                    //throw Exception ex; 
-                }
-            }
         }
     }
 }
