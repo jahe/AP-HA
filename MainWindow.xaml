@@ -14,7 +14,7 @@
         WindowStartupLocation="CenterScreen">
 
     <DockPanel>
-        <DockPanel.DataContext>
+        <DockPanel.DataContext >
             <Binding ElementName="This" />
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">

@@ -22,5 +22,11 @@ namespace AP_HA
         {
             InitializeComponent();
         }
+
+        public LoadingWindow(string text)
+        {
+            InitializeComponent();
+            loadingText.Content = text;
+        }
     }
 }

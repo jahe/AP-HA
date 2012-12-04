@@ -18,8 +18,6 @@ namespace AP_HA
 {
     public partial class MainWindow
     {
-        HausarbeitAPProjectCT newProject;
-        Workspace newWorkspace;
         private void menuOpenStack(object sender, RoutedEventArgs e)
         {
             CreateProjectDialog createProjectDialog = new CreateProjectDialog();
@@ -28,26 +26,30 @@ namespace AP_HA
             {
                 try
                 {
+                    LoadingWindow lw = new LoadingWindow("Neuer Stapel wird vorbereitet");
+                    lw.Show();
                     //Workspace in temp anlegen
-                    newWorkspace = new Workspace(createProjectDialog.NewProjectName);
+                    Workspace = new Workspace(createProjectDialog.NewProjectName);
                     //Bilder in Workspace kopieren und umbennen
-                    newWorkspace.createWorkspacefromStack(createProjectDialog.StackPath);
+                    Workspace.createWorkspacefromStack(createProjectDialog.StackPath);
 
                     //Project-Objekt erstellen und mit Daten aus dem tempfolder füllen                    
-                    newProject = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
-                    newProject.initFileListFromStack(newWorkspace.TempFolder);
+                    Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
+                    Project.initFileListFromStack(Workspace.TempFolder);
                     //XML Datei erstellen
-                    newProject.SaveToFile(newWorkspace.TempFolder + @"\project.xml");
+                    Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
                     //newProject.createZipFromStack(createProjectDialog.StackPath, newWorkspace.Name);
 
                     loadPicture(0);
-                    stackSlider.Maximum = newProject.totalLayers - 1;
+                    stackSlider.Maximum = Project.totalLayers - 1;
+
+                    lw.Close();
                 }               
                 catch (ProjectException pe)
                 {
                     System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + pe.Message);
                     //TO DO Programm refreshen
-                }               
+                }                
             }
         }
     }

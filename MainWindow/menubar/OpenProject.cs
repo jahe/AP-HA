@@ -27,13 +27,16 @@ namespace AP_HA
 
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                LoadingWindow lw = new LoadingWindow("Workspace aus Project-Datei wird erstellt");
                 //Workspace in temp anlegen
-                newWorkspace = new Workspace(newOpenFileDialog.FileName);
-                newWorkspace.createWorkspacefromZip(newOpenFileDialog.FileName);
-                newProject = new HausarbeitAPProjectCT(newOpenFileDialog.FileName);
-                newProject.initFileListFromStack(newWorkspace.TempFolder);
+                Workspace = new Workspace(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName));
+                //Workspace mit Dateien aus dem Zip füllen
+                Workspace.createWorkspacefromZip(newOpenFileDialog.FileName);
+                
+                Project = new HausarbeitAPProjectCT(newOpenFileDialog.FileName);
+                Project.initFileListFromStack(Workspace.TempFolder);
                 loadPicture(0);
-                stackSlider.Maximum = newProject.totalLayers - 1;
+                stackSlider.Maximum = Project.totalLayers - 1;
             }           
         }
     }

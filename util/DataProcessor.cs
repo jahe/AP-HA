@@ -7,8 +7,6 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 
-
-
 namespace AP_HA
 {
     public class DataProcessor
@@ -40,7 +38,7 @@ namespace AP_HA
             {
                 Uri FileName = PackUriHelper.CreatePartUri(new Uri("project.xml", UriKind.Relative)); // Pfad innerhalb des zip files ist eine Url
                 PackagePart zippedFile = zip.GetPart(FileName); // Referenz auf eine Datei in dem zip file
-                deserializedXMLFile = HausarbeitAPProjectCT.CreateFromStream(zippedFile.GetStream()); // GetStream() liefert einen Stream, den wir einfach (wie z.b. einen FileStream) auslesen können.
+                deserializedXMLFile = HausarbeitAPProjectCT.CreateFromStream(zippedFile.GetStream()); // GetStream() liefert einen Stream, den wir einfach (wie z.b. einen FileStream) auslesen können
                 for (int i = 0; i < deserializedXMLFile.totalLayers; i++) //Für die Bilddaten machen wir praktisch das gleiche mit fortlaufenden Nummern.
                 {
                     FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif", UriKind.Relative));
@@ -48,7 +46,6 @@ namespace AP_HA
                     Stream filestream = zippedFile.GetStream();
 
                     string temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
-                    //zippedFile.CopyTo(temppath, false);
 
                     StreamToFile(filestream, temppath);
                 }
@@ -64,7 +61,7 @@ namespace AP_HA
             if (String.IsNullOrEmpty(outputFile))
                 throw new ArgumentException("Argument null or empty.", "outputFile");
 
-            using (FileStream outputStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
+            using (FileStream outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.Write))
             {
                 int cnt = 0;
                 const int LEN = 4096;

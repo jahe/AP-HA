@@ -33,6 +33,8 @@ namespace AP_HA
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        HausarbeitAPProjectCT Project;
+        Workspace Workspace;
 
         #region Constructors
         public MainWindow()

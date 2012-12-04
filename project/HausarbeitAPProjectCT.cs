@@ -48,6 +48,7 @@ namespace AP_HA
             set
             {
                 _imgHeight = value;
+                height = value;
                 OnPropertyChanged("ImgHeight");
             }
         }
@@ -59,6 +60,7 @@ namespace AP_HA
             get { return _imgWidth; }
             private set
             {
+                width = value;
                 _imgWidth = value;
                 OnPropertyChanged("ImgWidth");
             }
@@ -127,8 +129,6 @@ namespace AP_HA
                     }                                        
                 }
             }
-
-            initFileListFromStack(targetPath);
         }
 
         private static void CopyStream(Stream source, Stream target)
@@ -168,6 +168,7 @@ namespace AP_HA
 
                         ImgHeight = bmpSrc.PixelHeight;
                         ImgWidth = bmpSrc.PixelWidth;
+
                     }
                     catch (Exception e)
                     {

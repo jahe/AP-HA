@@ -82,7 +82,7 @@
     <Compile Include="MainWindow\menubar\SaveProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
     <Compile Include="marks\Drawing.cs" />
-    <Compile Include="createWorkspace\Workspace.cs" />
+    <Compile Include="Workspace\Workspace.cs" />
     <Compile Include="MainWindow\menubar\OpenProject.cs" />
     <Compile Include="project\HausarbeitAPProjectCT.cs" />
     <Compile Include="project\Project.cs" />

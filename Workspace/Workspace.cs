@@ -9,7 +9,7 @@ namespace AP_HA
     {
         #region Properties
         public string Name { get; private set; }
-        private string TargetFolder = @"C:\APHA\temp\";
+        public  string TargetFolder = @"C:\APHA\temp\";
         public string TempFolder { get; private set; }
         #endregion
        
@@ -32,7 +32,8 @@ namespace AP_HA
 
         public void createWorkspacefromZip(string zipPath)
         {
-            DataProcessor.extractToDirectory(zipPath, TempFolder);
+            Directory.CreateDirectory(TempFolder);
+            DataProcessor.extractToDirectory(zipPath, TempFolder);           
         }
         
         public void copyStackFolder(string sourceFolder)

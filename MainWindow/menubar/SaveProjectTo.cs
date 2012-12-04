@@ -26,7 +26,7 @@ namespace AP_HA
 
             if (fBDResult == System.Windows.Forms.DialogResult.OK)
             {
-                newProject.createZipFromStack(newWorkspace.TempFolder, fBD.SelectedPath);
+                Project.createZipFromStack(Workspace.TempFolder, fBD.SelectedPath);
             }
         }
     }

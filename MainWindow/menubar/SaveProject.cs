@@ -20,8 +20,10 @@ namespace AP_HA
     {
         private void menuSaveProject_Click(object sender, RoutedEventArgs e)
         {
-            newProject.createZipFromStack(newWorkspace.TempFolder, @"C:\APHA\Projects");
-            newProject.initFileListFromStack(newWorkspace.TempFolder);
+            LoadingWindow lw = new LoadingWindow("Neues Projekt wird erstellt");
+            lw.Show();
+            Project.createZipFromStack(Workspace.TempFolder, @"C:\APHA\Projects\");
+            lw.Close();
         }
     }
 }
