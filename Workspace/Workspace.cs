@@ -1,27 +1,33 @@
 ﻿using System.Linq;
 using System.IO;
 using System.IO.Compression;
+using System;
 
 
 namespace AP_HA
 {
     public class Workspace
-    {        
+    {
+        public string TargetFolder = @"C:\APHA\workspace\";
+        private Random rd = new Random();
+        private int rdNo;
+
         #region Constructors
         public Workspace()
         {
-            DataProcessor.deleteAllSubfolders(@"C:\APHA\Workspace");
+            //DataProcessor.deleteAllSubfolders(@"C:\APHA\Workspace");
         }
         public Workspace(string name)
         {
+            rdNo = rd.Next(1, 1000);
             Name = name;
-            TempFolder = TargetFolder + Name;
+            TempFolder = TargetFolder + Name + rdNo.ToString();
         }
         #endregion
 
         #region Properties
         public string Name { get; private set; }
-        public string TargetFolder = @"C:\APHA\workspace\";
+        
         public string TempFolder { get; private set; }
         #endregion
 

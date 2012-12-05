@@ -67,7 +67,7 @@ namespace AP_HA
                 throw new ArgumentException("Argument null or empty.", "outputFile");
             }
                 
-            using (FileStream outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.Write))
+            using (FileStream outputStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
             {
                 int cnt = 0;
                 const int LEN = 4096;

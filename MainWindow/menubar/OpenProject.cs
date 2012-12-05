@@ -22,7 +22,6 @@ namespace AP_HA
     {
         private System.Timers.Timer timer = new System.Timers.Timer();
         
-
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog newOpenFileDialog = new OpenFileDialog();
