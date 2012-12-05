@@ -31,8 +31,12 @@ namespace AP_HA
             foreach (string zip in files)
             {
                 MenuItem item = new MenuItem();
+
                 item.Header = System.IO.Path.GetFileNameWithoutExtension(zip);
                 //item.Click += new EventHandler(openProject); //TO DO Project erstellen =initializeImgList etc
+                item.Click += new RoutedEventHandler(exitProgram); //TO DO Project erstellen =initializeImgList etc
+
+
                 menuSavedProjects.Items.Add(item);
             }
         }       

@@ -12,7 +12,9 @@
                 <Grid />
             </TabItem>
             <TabItem Name="ShortcutTab" Header="Short-Cuts" IsSelected="True">
-                
+                <Grid Name="mainGrid">
+                    
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
