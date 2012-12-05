@@ -16,14 +16,12 @@ using System;
 namespace AP_HA
 {
     public partial class MainWindow
-    {
-        BitmapSource stackImage;
-
+    {        
         public void loadPicture(int picNo)
         {
             try
             {
-                stackImage = ImageFuncs.getImgFromPath(Project.getPictureFromList(picNo));
+                BitmapSource stackImage = ImageFuncs.getImgFromPath(Project.getPictureFromList(picNo));
                 imgControl.Source = stackImage;
                 debugTxtBox.Text = Project.getPictureFromList(picNo);
             }

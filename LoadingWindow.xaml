@@ -1,11 +1,22 @@
 ﻿<Window x:Class="AP_HA.LoadingWindow"
+        x:Name="this"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LoadingWindow" Height="147" Width="300" WindowStyle="None"
-        Background="#45597C" WindowStartupLocation="CenterScreen" Topmost="True">
+        Title="LoadingWindow" Height="156" Width="300" WindowStyle="None"
+        Background="#45597C" WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize" WindowState="Normal">
+    
     <Grid Height="99">
-        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="12,69,0,0" Name="progressBar" VerticalAlignment="Top" Width="254" IsIndeterminate="True" />
+        <Grid.DataContext>
+            <Binding ElementName="this" />
+        </Grid.DataContext>
+        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="12,69,0,0" Name="progressBar" VerticalAlignment="Top" Width="254" Minimum="0" Value="{Binding ProgressbarValue}" Maximum="100" FontSize="345">
+            <ProgressBar.DataContext>
+                <Binding ElementName="this" />
+            </ProgressBar.DataContext>
+        </ProgressBar>
         <Label Content="Bitte warten" Height="28" HorizontalAlignment="Left" Margin="12,35,0,0" Name="label1" VerticalAlignment="Top" Foreground="White" Width="82" />
         <Label Content="TEXT" Foreground="White" Height="38" HorizontalAlignment="Left" Margin="10,0,0,0" Name="loadingText" VerticalAlignment="Top" Width="256" FontSize="18" />
+        <Label Content="{Binding PercentageNo}" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="214,77,0,0" Name="percentage" VerticalAlignment="Top" Width="36" />
+        <Label Content="%" Foreground="White" Height="28" HorizontalAlignment="Left" Margin="246,77,0,0" Name="label3" VerticalAlignment="Top" Width="19" />
     </Grid>
 </Window>

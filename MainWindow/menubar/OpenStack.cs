@@ -25,31 +25,21 @@ namespace AP_HA
             if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
                 try
-                {
-                    LoadingWindow lw = new LoadingWindow("Neuer Stapel wird vorbereitet");
-                    lw.Show();
-                    //Workspace in temp anlegen
+                {                   
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
-                    //Bilder in Workspace kopieren und umbennen
-                    Workspace.createWorkspacefromStack(createProjectDialog.StackPath);
-
-                    //Project-Objekt erstellen und mit Daten aus dem tempfolder füllen                    
+                    Workspace.createFromStack(createProjectDialog.StackPath);
+                    lw = new LoadingWindow("Neuer Stapel wird vorbereitet");                   
                     Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
                     Project.initFileListFromStack(Workspace.TempFolder);
-                    //XML Datei erstellen
                     Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
-                    //newProject.createZipFromStack(createProjectDialog.StackPath, newWorkspace.Name);
-
                     loadPicture(0);
                     stackSlider.Maximum = Project.totalLayers - 1;
                     StackIsLoaded = true;
-
-                    lw.Close();
                 }               
                 catch (ProjectException pe)
                 {
                     System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + pe.Message);
-                    //TO DO Programm refreshen
+                    refreshSession();
                 }                
             }
         }

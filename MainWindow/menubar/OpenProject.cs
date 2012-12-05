@@ -14,11 +14,15 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Threading;
 
 namespace AP_HA
 {
     public partial class MainWindow
     {
+        private System.Timers.Timer timer = new System.Timers.Timer();
+        
+
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog newOpenFileDialog = new OpenFileDialog();
@@ -27,20 +31,20 @@ namespace AP_HA
 
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                LoadingWindow lw = new LoadingWindow("Workspace wird erstellt");
-                lw.Show();
-                //Workspace in temp anlegen
-                Workspace = new Workspace(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName));
-                //Workspace mit Dateien aus dem Zip füllen
-                Workspace.createWorkspacefromZip(newOpenFileDialog.FileName);
-                
-                Project = new HausarbeitAPProjectCT(newOpenFileDialog.FileName);
-                Project.initFileListFromStack(Workspace.TempFolder);
-                loadPicture(0);
-                stackSlider.Maximum = Project.totalLayers - 1;
-                StackIsLoaded = true;
-                lw.Close();
+                openProject(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName), newOpenFileDialog.FileName);
             }           
+        }
+
+        public void openProject(string projectName, string sourcePath)
+        {           
+            Workspace = new Workspace(projectName);
+            Workspace.createFromZip(sourcePath);            
+            Project = new HausarbeitAPProjectCT(sourcePath);
+            Project.initFileListFromStack(Workspace.TempFolder);
+            loadPicture(0);
+            stackSlider.Maximum = Project.totalLayers - 1;
+            StackIsLoaded = true;
+            lw = new LoadingWindow("Workspace wird erstellt");
         }
     }
 }

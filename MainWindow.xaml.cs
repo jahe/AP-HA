@@ -34,8 +34,9 @@ namespace AP_HA
         private Settings settingsWindow;
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         private string workspaceFolder = @"C:\APHA\temp";
-        HausarbeitAPProjectCT Project;
-        Workspace Workspace;
+        private HausarbeitAPProjectCT Project;
+        private Workspace Workspace;
+        private LoadingWindow lw;
 
         #region Constructors
         public MainWindow()
@@ -85,7 +86,7 @@ namespace AP_HA
         #endregion
 
         #region Wenn Stapel geladen wurde
-        private bool _stackIsLoaded = true;
+        private bool _stackIsLoaded = false;
         public bool StackIsLoaded
         {
             get { return _stackIsLoaded; }
@@ -124,8 +125,6 @@ namespace AP_HA
         }
         #endregion        
         #endregion        
-
-        
 
         private void registerShortcutFuncs()
         {
@@ -229,17 +228,12 @@ namespace AP_HA
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
-            debugTxtBox.Text = "Bitte einen Stapel öffnen";
+            debugTxtBox.Text = "Bitte einen Stapel oder Projekt öffnen";
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
             Project = new HausarbeitAPProjectCT();
             Workspace = new Workspace();
-
-           /** if (pictureStack != null)
-            {
-                pictureStack.stackReset();
-            }**/
         }
 
         private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)

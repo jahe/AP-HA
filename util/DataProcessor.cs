@@ -10,13 +10,8 @@ using System.Xml.Serialization;
 
 namespace AP_HA
 {
-    public class DataProcessor
+    public static class DataProcessor
     {
-        public static void createFromDirectory(string sourcePath, string targetPath)
-        {
-            //TO DO Zipper implementieren
-        }
-
         public static void deleteAllSubfolders(string directoryPath)
         {
             foreach (string directoryName in System.IO.Directory.GetDirectories(directoryPath))
@@ -27,24 +22,10 @@ namespace AP_HA
                 }
                 catch
                 {
-                    //throw Exception ex; 
+                     
                 }
             }
         }
-
-        public void SaveToFile(string fileName)
-        {
-            using (Stream s = System.IO.File.Create(fileName))
-            {
-                SaveToStream(s);
-            }
-        }
-        public void SaveToStream(Stream stream)
-        {
-            XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
-            x.Serialize(stream, this);
-        }
-
 
         public static void extractToDirectory(string sourcePath, string targetPath)
         {
@@ -54,37 +35,38 @@ namespace AP_HA
             Stream filestream;
             string temppath;
 
-            using (Package zip = Package.Open(sourcePath, FileMode.Open, FileAccess.Read)) //Zip-Datei zum lesen öffnen
+            using (Package zip = Package.Open(sourcePath, FileMode.Open, FileAccess.Read))
             {
-                FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative)); // Pfad innerhalb des zip files ist eine Url
-                zippedFile = zip.GetPart(FileName); // Referenz auf eine Datei in dem zip file
+                FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative));
+                zippedFile = zip.GetPart(FileName);
                 filestream = zippedFile.GetStream();
-                deserializedXMLFile = HausarbeitAPProjectCT.CreateFromStream(zippedFile.GetStream()); // GetStream() liefert einen Stream, den wir einfach (wie z.b. einen FileStream) auslesen können
-                
+                deserializedXMLFile = HausarbeitAPProjectCT.createFromStream(zippedFile.GetStream());           
                 temppath = Path.Combine(targetPath, "project.xml");
-                StreamToFile(filestream, temppath);
+                streamToFile(filestream, temppath);
 
-                for (int i = 0; i < deserializedXMLFile.totalLayers; i++) //Für die Bilddaten machen wir praktisch das gleiche mit fortlaufenden Nummern.
+                for (int i = 0; i < deserializedXMLFile.totalLayers; i++)
                 {
                     FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif", UriKind.Relative));
                     zippedFile = zip.GetPart(FileName);
                     filestream = zippedFile.GetStream();
-
                     temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
-
-                    StreamToFile(filestream, temppath);
+                    streamToFile(filestream, temppath);
                 }
             }
         }
 
-        private static void StreamToFile(Stream inputStream, string outputFile)
+        private static void streamToFile(Stream inputStream, string outputFile)
         {
             if (inputStream == null)
+            {
                 throw new ArgumentNullException("inputStream");
+            }
 
             if (String.IsNullOrEmpty(outputFile))
+            {
                 throw new ArgumentException("Argument null or empty.", "outputFile");
-
+            }
+                
             using (FileStream outputStream = new FileStream(outputFile, FileMode.CreateNew, FileAccess.Write))
             {
                 int cnt = 0;
@@ -92,7 +74,9 @@ namespace AP_HA
                 byte[] buffer = new byte[LEN];
 
                 while ((cnt = inputStream.Read(buffer, 0, LEN)) != 0)
+                {
                     outputStream.Write(buffer, 0, cnt);
+                }                    
             }
         }
     }

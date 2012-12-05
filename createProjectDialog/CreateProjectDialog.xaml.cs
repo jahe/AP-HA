@@ -21,6 +21,14 @@ namespace AP_HA
     /// </summary>
     public partial class CreateProjectDialog : Window, INotifyPropertyChanged
     {
+        #region Constructors
+        public CreateProjectDialog()
+        {
+            InitializeComponent();
+            this.ShowDialog();
+        }
+        #endregion
+
         #region Properties für UI-Binding
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -73,14 +81,6 @@ namespace AP_HA
             }
         }
         #endregion
-        #endregion
-
-        #region Constructors
-        public CreateProjectDialog()
-        {
-            InitializeComponent();
-            this.ShowDialog();
-        }
         #endregion
 
         private void cPDBtnOK_Click(object sender, RoutedEventArgs e)

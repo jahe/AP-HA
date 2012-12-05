@@ -19,11 +19,9 @@ namespace AP_HA
     public partial class MainWindow
     {
         private void menuSaveProject_Click(object sender, RoutedEventArgs e)
-        {
-            LoadingWindow lw = new LoadingWindow("Neues Projekt wird erstellt");
-            lw.Show();
+        {            
             Project.createZipFromStack(Workspace.TempFolder, @"C:\APHA\Projects\");
-            lw.Close();
+            lw = new LoadingWindow("Neues Projekt wird erstellt");
         }
     }
 }

@@ -15,6 +15,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using System.IO.Packaging;
+using System.Windows.Forms;
 
 namespace AP_HA
 {       
@@ -22,6 +23,19 @@ namespace AP_HA
     {
         private List<string> filePathList;
         private string[] filePaths;
+
+        #region Constructors
+        public HausarbeitAPProjectCT()
+        {
+
+        }
+
+        public HausarbeitAPProjectCT(string name)
+        {
+            ProjectName = name;
+        }
+
+        #endregion
 
         #region Properties
 
@@ -67,28 +81,15 @@ namespace AP_HA
         }
         #endregion
 
-        #region Constructors
-        public HausarbeitAPProjectCT()
-        {
-
-        }
-
-        public HausarbeitAPProjectCT(string name)
-        {
-            ProjectName = name;
-        }
-
-        #endregion
-
-        public static HausarbeitAPProjectCT CreateFromFile(string fileName)
+        public static HausarbeitAPProjectCT createFromFile(string fileName)
         {
             using (Stream s = System.IO.File.OpenRead(fileName))
             {
-                return CreateFromStream(s);
+                return createFromStream(s);
             }
         }
 
-        public static HausarbeitAPProjectCT CreateFromStream(Stream stream)
+        public static HausarbeitAPProjectCT createFromStream(Stream stream)
         {
             XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
             return (HausarbeitAPProjectCT)x.Deserialize(stream);
@@ -115,26 +116,62 @@ namespace AP_HA
             DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
             string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName);
 
-            using (Package package = Package.Open(projectZipPath, FileMode.Create))
+            if (File.Exists(projectZipPath)) //Wenn die Zieldatei bereits besteht, Fragen ob Y/N/C  IN BEARBEITUNG
             {
-                FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
-                part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
-                this.SaveToStream(part.GetStream());
+                DialogResult result = System.Windows.Forms.MessageBox.Show("Es ist bereits eine Datei für dieses Projekt im Zielordner vorhanden\nMöchten sie die Datei überschreiben?",
+                                  "Achtung",
+                                   MessageBoxButtons.YesNoCancel,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2);
 
-                for (int i = 0; i < filePaths.Length; i++)
+                if (result == System.Windows.Forms.DialogResult.Yes)    //Wenn überschrieben werden darf
                 {
-                    FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
-                    part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
-
-                    using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                    using (Package package = Package.Open(projectZipPath, FileMode.Create))
                     {
-                        CopyStream(fileStream, part.GetStream());
-                    }                                        
+                        FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
+                        part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                        this.SaveToStream(part.GetStream());
+
+                        for (int i = 0; i < filePaths.Length; i++)
+                        {
+                            FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                            part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                            using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                            {
+                                copyStream(fileStream, part.GetStream());
+                            }
+                        }
+                    }
+                }
+                else if (result == System.Windows.Forms.DialogResult.No)
+                {
+
                 }
             }
+            else
+            {
+                using (Package package = Package.Open(projectZipPath, FileMode.CreateNew))
+                {
+                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
+                    part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                    this.SaveToStream(part.GetStream());
+
+                    for (int i = 0; i < filePaths.Length; i++)
+                    {
+                        FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                        part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                        using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                        {
+                            copyStream(fileStream, part.GetStream());
+                        }
+                    }
+                }
+            }                     
         }
 
-        private static void CopyStream(Stream source, Stream target)
+        private static void copyStream(Stream source, Stream target)
         {
             const int bufSize = 0x1000;
             byte[] buf = new byte[bufSize];

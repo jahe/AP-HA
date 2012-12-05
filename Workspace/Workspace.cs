@@ -25,12 +25,12 @@ namespace AP_HA
         }
         #endregion
 
-        public void createWorkspacefromStack (string stackFolderPath)
+        public void createFromStack (string stackFolderPath)
         {
             copyStackFolder(stackFolderPath);
         }
 
-        public void createWorkspacefromZip(string zipPath)
+        public void createFromZip(string zipPath)
         {
             Directory.CreateDirectory(TempFolder);
             DataProcessor.extractToDirectory(zipPath, TempFolder);           

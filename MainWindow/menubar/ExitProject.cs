@@ -30,11 +30,12 @@ namespace AP_HA
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
                 imgControl.Source = null;
+                
                 if (Directory.Exists(Workspace.TempFolder))
                 {
                     try
                     {
-                        System.IO.Directory.Delete(Workspace.TempFolder, true);
+                        DataProcessor.deleteAllSubfolders(Workspace.TempFolder);
                     }
                     catch
                     {
