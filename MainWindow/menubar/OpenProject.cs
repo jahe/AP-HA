@@ -35,14 +35,15 @@ namespace AP_HA
         }
 
         public void openProject(string projectName, string sourcePath)
-        {           
+        {
+            refreshSession();
             Workspace = new Workspace(projectName);
             Workspace.createFromZip(sourcePath);            
             Project = new HausarbeitAPProjectCT(sourcePath);
             Project.initFileListFromStack(Workspace.TempFolder);
             loadPicture(0);
             stackSlider.Maximum = Project.totalLayers - 1;
-            StackIsLoaded = true;
+            StackIsLoaded = true;           
             lw = new LoadingWindow("Workspace wird erstellt");
         }
     }

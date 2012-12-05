@@ -28,20 +28,8 @@ namespace AP_HA
                                    MessageBoxDefaultButton.Button2);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
-            {                
+            {
                 refreshSession();
-                
-                if (Directory.Exists(Workspace.TempFolder))
-                {
-                    try
-                    {
-                        DataProcessor.deleteAllSubfolders(Workspace.TempFolder);
-                    }
-                    catch
-                    {
-                        //throw Exception ex; 
-                    }
-                }
             }                       
         }
     }

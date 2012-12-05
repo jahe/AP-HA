@@ -233,7 +233,7 @@ namespace AP_HA
             debugTxtBox.Text = "Bitte einen Stapel oder Projekt öffnen";
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
-            zoomSlider.Value = 1.0;
+            zoomSlider.Value = 1.0;            
             DataProcessor.deleteAllSubfolders(workspaceFolder);
         }
 

@@ -7,6 +7,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Windows.Media.Imaging;
 
 namespace AP_HA
 {
@@ -20,7 +21,7 @@ namespace AP_HA
                 {
                     System.IO.Directory.Delete(directoryName, true);
                 }
-                catch(Exception exc)
+                catch
                 {
                     
                 }
@@ -78,6 +79,20 @@ namespace AP_HA
                     outputStream.Write(buffer, 0, cnt);
                 }                    
             }
+        }
+
+        public static Bitmap BitmapFromBitmapSource(BitmapSource bitmapsource)
+        {
+            Bitmap bitmap;
+
+           using (MemoryStream outStream = new MemoryStream())
+           {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapsource));
+                enc.Save(outStream);
+                bitmap = new Bitmap(outStream);
+            }
+            return bitmap; 	  	
         }
     }
 }

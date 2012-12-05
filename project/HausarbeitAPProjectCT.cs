@@ -125,7 +125,7 @@ namespace AP_HA
                                    MessageBoxIcon.Question,
                                    MessageBoxDefaultButton.Button2);
 
-                if (result == System.Windows.Forms.DialogResult.Yes)    //Wenn überschrieben werden darf
+                if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     using (Package package = Package.Open(projectZipPath, FileMode.Create))
                     {

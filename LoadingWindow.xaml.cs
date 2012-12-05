@@ -95,7 +95,7 @@ namespace AP_HA
             }
             else
             {
-                int nextRd = rd.Next(1, 5);
+                int nextRd = rd.Next(1, 8);
                 int addPercentage = ProgressbarValue + nextRd;  
 
                 if (addPercentage < 100)

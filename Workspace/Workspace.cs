@@ -15,10 +15,11 @@ namespace AP_HA
         #region Constructors
         public Workspace()
         {
-            //DataProcessor.deleteAllSubfolders(@"C:\APHA\Workspace");
+            DataProcessor.deleteAllSubfolders(TargetFolder);
         }
         public Workspace(string name)
         {
+            DataProcessor.deleteAllSubfolders(TargetFolder);
             rdNo = rd.Next(1, 1000);
             Name = name;
             TempFolder = TargetFolder + Name + rdNo.ToString();
@@ -31,10 +32,7 @@ namespace AP_HA
         public string TempFolder { get; private set; }
         #endregion
 
-        public void createFromStack (string stackFolderPath)
-        {
-            copyStackFolder(stackFolderPath);
-        }
+
 
         public void createFromZip(string zipPath)
         {
@@ -62,6 +60,9 @@ namespace AP_HA
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(TempFolder, i.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".tif");
+                file.CopyTo(temppath, false);
+
+                temppath = Path.Combine(TempFolder, i.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".bmp");
                 file.CopyTo(temppath, false);
                 i++;
             }

@@ -27,7 +27,7 @@ namespace AP_HA
                 try
                 {                   
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
-                    Workspace.createFromStack(createProjectDialog.StackPath);
+                    Workspace.copyStackFolder(createProjectDialog.StackPath);
                     lw = new LoadingWindow("Neuer Stapel wird vorbereitet");                   
                     Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName+".zip");
                     Project.initFileListFromStack(Workspace.TempFolder);
