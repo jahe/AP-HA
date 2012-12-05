@@ -26,7 +26,7 @@ namespace AP_HA
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog newOpenFileDialog = new OpenFileDialog();
-            newOpenFileDialog.InitialDirectory = "c:\\";
+            newOpenFileDialog.InitialDirectory = @"C:\APHA\Projects\";
             newOpenFileDialog.Filter = "zip files (*.zip)|*.zip";
 
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)

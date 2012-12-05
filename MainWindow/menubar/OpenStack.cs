@@ -29,18 +29,19 @@ namespace AP_HA
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
                     Workspace.createFromStack(createProjectDialog.StackPath);
                     lw = new LoadingWindow("Neuer Stapel wird vorbereitet");                   
-                    Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
+                    Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName+".zip");
                     Project.initFileListFromStack(Workspace.TempFolder);
                     Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
                     loadPicture(0);
                     stackSlider.Maximum = Project.totalLayers - 1;
+                    stackSlider.Value = 0;
                     StackIsLoaded = true;
                 }               
-                catch (ProjectException pe)
+                catch (Exception exc)
                 {
-                    System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + pe.Message);
+                    System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + exc.Message);
                     refreshSession();
-                }                
+                } 
             }
         }
     }

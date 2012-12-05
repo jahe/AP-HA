@@ -23,6 +23,7 @@ namespace AP_HA
     {
         private List<string> filePathList;
         private string[] filePaths;
+        private LoadingWindow lw;
 
         #region Constructors
         public HausarbeitAPProjectCT()
@@ -108,7 +109,7 @@ namespace AP_HA
             x.Serialize(stream, this);
         }
 
-        public void createZipFromStack(string sourcePath, string targetPath)
+        public void createZipFromWorkspace(string sourcePath, string targetPath)
         {
             Uri FileName;
             PackagePart part;
@@ -143,32 +144,38 @@ namespace AP_HA
                             }
                         }
                     }
+                    lw = new LoadingWindow("Projekt wird gespeichert");
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
                 {
+                    SaveFileDialog sFD = new SaveFileDialog();
+                    sFD.InitialDirectory = d.FullName;
+                    sFD.FileName = System.IO.Path.GetFileNameWithoutExtension(projectZipPath);
+                    sFD.Filter = "zip files (*.zip)|*.zip";
 
-                }
-            }
-            else
-            {
-                using (Package package = Package.Open(projectZipPath, FileMode.CreateNew))
-                {
-                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
-                    part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
-                    this.SaveToStream(part.GetStream());
-
-                    for (int i = 0; i < filePaths.Length; i++)
+                    if (sFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
-                        part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
-
-                        using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                        using (Package package = Package.Open(sFD.FileName, FileMode.Create))
                         {
-                            copyStream(fileStream, part.GetStream());
+                            FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
+                            part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                            this.SaveToStream(part.GetStream());
+
+                            for (int i = 0; i < filePaths.Length; i++)
+                            {
+                                FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                                part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                                using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                                {
+                                    copyStream(fileStream, part.GetStream());
+                                }
+                            }
                         }
+                        lw = new LoadingWindow("Projekt wird gespeichert");
                     }
                 }
-            }                     
+            }                   
         }
 
         private static void copyStream(Stream source, Stream target)

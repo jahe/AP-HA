@@ -20,8 +20,8 @@ namespace AP_HA
     {
         private void menuSaveProject_Click(object sender, RoutedEventArgs e)
         {            
-            Project.createZipFromStack(Workspace.TempFolder, @"C:\APHA\Projects\");
-            lw = new LoadingWindow("Neues Projekt wird erstellt");
+            Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\");
+            refreshSession();
         }
     }
 }

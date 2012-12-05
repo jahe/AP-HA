@@ -20,9 +20,9 @@ namespace AP_HA
                 {
                     System.IO.Directory.Delete(directoryName, true);
                 }
-                catch
+                catch(Exception exc)
                 {
-                     
+                    
                 }
             }
         }

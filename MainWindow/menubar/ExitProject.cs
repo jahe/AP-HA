@@ -21,15 +21,15 @@ namespace AP_HA
     {
         private void menuExitProject_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen das Projekt wirklich beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen Sie das Projekt wirklich beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
                                   "Achtung",
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,
                                    MessageBoxDefaultButton.Button2);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                imgControl.Source = null;
+            {                
+                refreshSession();
                 
                 if (Directory.Exists(Workspace.TempFolder))
                 {
@@ -41,10 +41,8 @@ namespace AP_HA
                     {
                         //throw Exception ex; 
                     }
-
-                    refreshSession();
                 }
             }                       
-        } 
+        }
     }
 }

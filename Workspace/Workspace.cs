@@ -6,23 +6,23 @@ using System.IO.Compression;
 namespace AP_HA
 {
     public class Workspace
-    {
-        #region Properties
-        public string Name { get; private set; }
-        public  string TargetFolder = @"C:\APHA\temp\";
-        public string TempFolder { get; private set; }
-        #endregion
-       
+    {        
         #region Constructors
         public Workspace()
         {
-            DataProcessor.deleteAllSubfolders(@"C:\APHA\temp");
+            DataProcessor.deleteAllSubfolders(@"C:\APHA\Workspace");
         }
         public Workspace(string name)
         {
             Name = name;
             TempFolder = TargetFolder + Name;
         }
+        #endregion
+
+        #region Properties
+        public string Name { get; private set; }
+        public string TargetFolder = @"C:\APHA\workspace\";
+        public string TempFolder { get; private set; }
         #endregion
 
         public void createFromStack (string stackFolderPath)
@@ -59,15 +59,6 @@ namespace AP_HA
                 file.CopyTo(temppath, false);
                 i++;
             }
-   
-            /**if (copySubDirs)
-            {
-                foreach (DirectoryInfo subdir in dirs)
-                {
-                    string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
-                }
-            }**/
         }
     }
 }

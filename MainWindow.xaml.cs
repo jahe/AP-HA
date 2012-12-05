@@ -33,7 +33,7 @@ namespace AP_HA
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-        private string workspaceFolder = @"C:\APHA\temp";
+        private string workspaceFolder = @"C:\APHA\workspace";
         private HausarbeitAPProjectCT Project;
         private Workspace Workspace;
         private LoadingWindow lw;
@@ -44,7 +44,7 @@ namespace AP_HA
             InitializeComponent();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
-            DataProcessor.deleteAllSubfolders(workspaceFolder); //\temp\ leeren
+            DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
             InitializeShortcuts();
         }
         #endregion
@@ -224,6 +224,8 @@ namespace AP_HA
         private void refreshSession()
         {
             //AdjustControls.IsEnabled = false;
+            Project = new HausarbeitAPProjectCT();
+            Workspace = new Workspace();
             stackSlider.Value = 0;
             StackIsLoaded = false;
             StackIsCutted = false;
@@ -232,8 +234,7 @@ namespace AP_HA
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
-            Project = new HausarbeitAPProjectCT();
-            Workspace = new Workspace();
+            DataProcessor.deleteAllSubfolders(workspaceFolder);
         }
 
         private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)
