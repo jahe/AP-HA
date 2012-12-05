@@ -21,8 +21,12 @@ namespace AP_HA
 {       
     public partial class HausarbeitAPProjectCT
     {
-        private List<string> filePathList;
-        private string[] filePaths;
+        private List<string> filePathListTIFF;
+        private string[] filePathsTIFF;
+
+        private List<string> filePathListBMP;
+        private string[] filePathsBMP;
+
         private LoadingWindow lw;
 
         #region Constructors
@@ -133,12 +137,23 @@ namespace AP_HA
                         part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
                         this.SaveToStream(part.GetStream());
 
-                        for (int i = 0; i < filePaths.Length; i++)
+                        for (int i = 0; i < filePathsTIFF.Length; i++)
                         {
                             FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
                             part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
-                            using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                            using (FileStream fileStream = new FileStream(filePathsTIFF[i], FileMode.Open, FileAccess.Read))
+                            {
+                                copyStream(fileStream, part.GetStream());
+                            }
+                        }
+
+                        for (int i = 0; i < filePathsBMP.Length; i++)
+                        {
+                            FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".bmp"), UriKind.Relative));
+                            part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+
+                            using (FileStream fileStream = new FileStream(filePathsBMP[i], FileMode.Open, FileAccess.Read))
                             {
                                 copyStream(fileStream, part.GetStream());
                             }
@@ -161,12 +176,12 @@ namespace AP_HA
                             part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
                             this.SaveToStream(part.GetStream());
 
-                            for (int i = 0; i < filePaths.Length; i++)
+                            for (int i = 0; i < filePathsTIFF.Length; i++)
                             {
                                 FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
                                 part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
 
-                                using (FileStream fileStream = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read))
+                                using (FileStream fileStream = new FileStream(filePathsTIFF[i], FileMode.Open, FileAccess.Read))
                                 {
                                     copyStream(fileStream, part.GetStream());
                                 }
@@ -193,19 +208,29 @@ namespace AP_HA
         {
             if (Directory.Exists(path))
             {
-                filePathList = new List<string>();
-                filePaths = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
+                filePathListTIFF = new List<string>();
+                filePathsTIFF = System.IO.Directory.GetFiles(path, "*.tif", SearchOption.TopDirectoryOnly);
 
-                for (int i = 0; i < filePaths.Length; i++)
+                for (int i = 0; i < filePathsTIFF.Length; i++)
                 {
-                    filePathList.Add(filePaths[i].ToString());
+                    filePathListTIFF.Add(filePathsTIFF[i].ToString());
                 }
 
-                filePathList.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
+                filePathListTIFF.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
 
-                if (filePathList.Count() != 0)
+                filePathListBMP = new List<string>();
+                filePathsBMP = System.IO.Directory.GetFiles(path, "*.bmp", SearchOption.TopDirectoryOnly);
+
+                for (int i = 0; i < filePathsBMP.Length; i++)
                 {
-                    totalLayers = filePathList.Count();
+                    filePathListBMP.Add(filePathsBMP[i].ToString());
+                }
+
+                filePathListBMP.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
+
+                if (filePathListTIFF.Count() != 0)
+                {
+                    totalLayers = filePathListTIFF.Count();
 
                     try
                     {
@@ -235,9 +260,9 @@ namespace AP_HA
 
         public string getPictureFromList(int picNo)
         {
-            if (picNo < filePathList.Count() && picNo >= 0)
+            if (picNo < filePathListTIFF.Count() && picNo >= 0)
             {
-                return this.filePathList[picNo];
+                return this.filePathListTIFF[picNo];
             }
             else
             {

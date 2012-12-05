@@ -25,7 +25,8 @@ namespace AP_HA
             if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
                 try
-                {                   
+                {       
+                    //Neuen Ordner in Workspace erstellen
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
                     Workspace.copyStackFolder(createProjectDialog.StackPath);
                     lw = new LoadingWindow("Neuer Stapel wird vorbereitet");                   
@@ -39,8 +40,8 @@ namespace AP_HA
                 }               
                 catch (Exception exc)
                 {
-                    System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + exc.Message);
-                    refreshSession();
+                    System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + exc.Message + exc.StackTrace);
+                    //refreshSession();
                 } 
             }
         }
