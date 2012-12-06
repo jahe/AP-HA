@@ -66,9 +66,9 @@
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Name="menuShowCutted" Header="_Gespeicherte -Beschneidung- anzeigen " Click="btnShowCutted_Click" ToolTip="Gespeicherten Ausschnitt anzeigen" IsEnabled="{Binding StackIsCutted}">
+                    <MenuItem Name="menuShowCutted" Header="_Gespeicherte -Beschneidung- anzeigen " Click="btnShowCutted_Click" ToolTip="Gespeicherten Ausschnitt anzeigen" IsEnabled="{Binding StackIsLoaded}">
                         <MenuItem.Icon>
-                            <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
+                            <Image Source="/AP-HA;component/Icon/showCutted.ico" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />

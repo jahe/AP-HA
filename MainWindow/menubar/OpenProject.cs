@@ -31,7 +31,9 @@ namespace AP_HA
                 //Project = new HausarbeitAPProjectCT(sourcePath);
                 Project.initFileListFromStack(Workspace.TempFolder);
                 loadPicture(0);
+                stackSlider.Minimum = 0;
                 stackSlider.Maximum = Project.totalLayers - 1;
+                stackSlider.Value = 0;
                 StackIsLoaded = true;
                 this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.ProjectName);
             }
