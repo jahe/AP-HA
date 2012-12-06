@@ -89,5 +89,16 @@ namespace AP_HA
                 }                    
             }
         }
+
+        public static BitmapSource getImgFromPath(string path)
+        {
+            BitmapSource img;
+            Stream imgStreamSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            img = decoder.Frames[0];
+
+            return img;
+        }
     }
 }

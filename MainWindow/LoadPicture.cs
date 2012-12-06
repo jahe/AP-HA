@@ -21,7 +21,7 @@ namespace AP_HA
         {
             try
             {
-                BitmapSource stackImage = ImageFuncs.getImgFromPath(Project.getPictureFromList(picNo));
+                BitmapSource stackImage = DataProcessor.getImgFromPath(Project.getPictureFromList(picNo));
                 imgControl.Source = stackImage;
                 StatusText = System.IO.Path.GetFileName(Project.getPictureFromList(picNo)) +" ("+picNo.ToString()+" von " + (Project.totalLayers - 1) + ")";
             }
