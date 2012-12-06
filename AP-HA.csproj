@@ -75,9 +75,10 @@
     <Compile Include="CreateProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="CreateProjectDialog\OpenStackFolder.cs" />
     <Compile Include="MainWindow\menubar\ExitProject.cs" />
-    <Compile Include="MainWindow\menubar\SavedProjectsList.cs" />
+    <Compile Include="MainWindow\menubar\SaveCuttingsToProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
+    <Compile Include="MainWindow\menubar\ShowCutted.cs" />
     <Compile Include="Marks\Drawing.cs" />
     <Compile Include="Workspace\Workspace.cs" />
     <Compile Include="MainWindow\menubar\OpenProject.cs" />
@@ -200,7 +201,9 @@
   <ItemGroup>
     <Resource Include="Icon\undo_selected.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\showCutted.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\undo_selected.png" />
   </ItemGroup>

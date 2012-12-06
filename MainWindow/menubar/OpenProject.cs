@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Forms;
+using System.Threading;
+using System.IO;
 
 namespace AP_HA
 {
@@ -24,8 +26,9 @@ namespace AP_HA
             try
             {               
                 Workspace = new Workspace(projectName);
-                Workspace.createFromZip(sourcePath);
-                Project = new HausarbeitAPProjectCT(sourcePath);
+                Workspace.createFromZip(sourcePath);               
+                Project = HausarbeitAPProjectCT.createFromFile(Path.Combine(Workspace.TempFolder, "project.xml"));
+                //Project = new HausarbeitAPProjectCT(sourcePath);
                 Project.initFileListFromStack(Workspace.TempFolder);
                 loadPicture(0);
                 stackSlider.Maximum = Project.totalLayers - 1;
@@ -34,7 +37,7 @@ namespace AP_HA
             }
             catch (Exception exc)
             {
-                System.Windows.Forms.MessageBox.Show("Das Projekt konnte nicht geöffnet werden\n" + exc.Message);
+                System.Windows.Forms.MessageBox.Show("Das Projekt konnte nicht geöffnet werden\n" + exc.Message + exc.InnerException, "Achtung");
             }
         }
     }

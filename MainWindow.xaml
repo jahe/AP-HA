@@ -47,9 +47,6 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Name="menuSavedProjects" Header="_Zuletzt gespeicherte Projekte" ToolTip="Gespeicherte Projekte" MouseEnter="menuSavedProjects_MouseEnter">
-                </MenuItem>
-                <Separator />
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen. Workspace wird gelöscht" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
@@ -63,11 +60,16 @@
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
                         </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator />
+                    </MenuItem>                  
                     <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsCutted}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="menuSaveCuttingsToProject" Header="_Aktuelle Cuttings speichern" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsCutted}" Click="menuSaveCuttingsToProject_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/AP-HA;component/icon/safeProject.ico" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -101,7 +103,12 @@
                 <Button  Name="btnCutBackToOriginal" Width="22" Height="22" Click="backToOriginalCut" IsEnabled="{Binding StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
-
+                <Button  Name="btnShowCutted" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" Click="btnShowCutted_Click">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/Icon/showCutted.ico" />
+                </Button>
+                <Button  Name="btnSaveCuttingsToProject" Width="22" Height="22" IsEnabled="{Binding StackIsCutted}" Click="menuSaveCuttingsToProject_Click">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
+                </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
                 <Button Name="btnZoomIn"  Click="btnZoomIn_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/zoom-in.png" />

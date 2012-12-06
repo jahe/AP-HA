@@ -29,7 +29,7 @@ namespace AP_HA
 
         public HausarbeitAPProjectCT(string name)
         {
-            ProjectName = name;
+            ProjectName = Path.GetFileNameWithoutExtension(name);
         }
 
         #endregion
@@ -78,6 +78,14 @@ namespace AP_HA
         }
         #endregion
 
+        public static HausarbeitAPProjectCT createFromFile(string fileName)
+        {
+            using (Stream s = System.IO.File.OpenRead(fileName))
+            {
+                return createFromStream(s);
+            }
+        }
+
         public static HausarbeitAPProjectCT createFromStream(Stream stream)
         {
             XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
@@ -100,7 +108,7 @@ namespace AP_HA
         public void createZipFromWorkspace(string sourcePath, string targetPath)
         {            
             DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
-            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName);
+            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName+".zip");
 
             if (File.Exists(projectZipPath)) //Wenn die Zieldatei bereits besteht
             {

@@ -254,6 +254,6 @@ namespace AP_HA
         {
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
-        }    
+        }           
     }
 }

@@ -40,6 +40,7 @@ namespace AP_HA
         public void copyStackFolder(string sourceFolder)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceFolder);
+            int n = 0;
           
             if (!dir.Exists)
             {                
@@ -51,24 +52,23 @@ namespace AP_HA
                 Directory.CreateDirectory(TempFolder);
             }
 
-            FileInfo[] files = dir.GetFiles("*.tif", SearchOption.TopDirectoryOnly);
-            List<FileInfo> filePathList = new List<FileInfo>();
+            FileInfo[] tiffFiles = dir.GetFiles("*.tif", SearchOption.TopDirectoryOnly);
+            List<FileInfo> tiffFilePathList = new List<FileInfo>();
 
-            for (int i = 0; i < files.Length; i++)
+            for (int i = 0; i < tiffFiles.Length; i++)
             {
-                filePathList.Add(files[i]);
+                tiffFilePathList.Add(tiffFiles[i]);
             }
 
-            filePathList.Sort((a, b) => new StringSorter(a.ToString()).CompareTo(new StringSorter(b.ToString())));
+            tiffFilePathList.Sort((a, b) => new StringSorter(a.ToString()).CompareTo(new StringSorter(b.ToString())));
             
-            int n = 0;
-            foreach (FileInfo file in filePathList)
+            
+            foreach (FileInfo file in tiffFilePathList)
             {
-                string temppath = Path.Combine(TempFolder, n.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".tif");
-                file.CopyTo(temppath, false);
-
-                temppath = Path.Combine(TempFolder, n.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".bmp");
-                file.CopyTo(temppath, false);
+                string temppathTIFF = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".tif");
+                string temppathBMP = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".bmp");
+                file.CopyTo(temppathTIFF, false);                
+                file.CopyTo(temppathBMP, false);
                 n++;
             }
         }

@@ -16,7 +16,7 @@ namespace AP_HA
                 {                  
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
                     Workspace.copyStackFolder(createProjectDialog.StackPath);
-                    Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName+".zip");
+                    Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
                     Project.initFileListFromStack(Workspace.TempFolder);
                     Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
                     loadPicture(0);
