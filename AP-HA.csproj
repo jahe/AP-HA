@@ -98,7 +98,6 @@
     <Compile Include="Marks\Mark.cs" />
     <Compile Include="Marks\Marks.cs" />
     <Compile Include="MainWindow\menubar\BackToOriginalCut.cs" />
-    <Compile Include="MainWindow\menubar\CloseFolder.cs" />
     <Compile Include="MainWindow\menubar\CutAfterCursor.cs" />
     <Compile Include="MainWindow\menubar\CutBeforeCursor.cs" />
     <Compile Include="MainWindow\menubar\ExitProgram.cs" />

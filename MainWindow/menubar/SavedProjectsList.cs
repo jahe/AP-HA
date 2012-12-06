@@ -18,7 +18,7 @@ namespace AP_HA
                 MenuItem item = new MenuItem();
 
                 item.Header = System.IO.Path.GetFileNameWithoutExtension(zip);
-                item.Click += new EventHandler(openProject); //TO DO Project erstellen =initializeImgList etc
+                //item.Click += new EventHandler(openProject); //TO DO Project erstellen =initializeImgList etc
                 menuSavedProjects.Items.Add(item);
             }
         }       

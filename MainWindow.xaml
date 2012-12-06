@@ -79,16 +79,16 @@
 
         <ToolBarTray Name="toolBarTray1" Background="#9CAAC1" DockPanel.Dock="Top" Margin="0,0,0,5">
             <ToolBar Name="toolBar0" Background="#BCC7D8" Margin="0,1,0,1">
-                <Button Name="btnCreateProject" Width="22" Height="22" >
+                <Button Name="btnCreateProject" Width="22" Height="22" Click="menuOpenStack">
                     <Image Width="14" Height="14" Source="/AP-HA;component/icon/createProject.ico" ToolTip="{Binding ToolTip, ElementName=menuCreateProject}"></Image>
                 </Button>
-                <Button Name="btnOpenStack" Width="22" Height="22"  >
+                <Button Name="btnOpenProject" Width="22" Height="22" Click="menuOpenProject_Click" >
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}">
+                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}" Click="menuSaveProject_Click">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
                 </Button>
-                <Button  Name="btnCloseFolder" Width="22" Height="22" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                <Button  Name="btnCloseFolder" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}" Click="menuExitProject_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
