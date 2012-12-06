@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Runtime.CompilerServices;
 
 namespace AP_HA
 {

@@ -1,17 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System;
+using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System;
 
 namespace AP_HA
 {

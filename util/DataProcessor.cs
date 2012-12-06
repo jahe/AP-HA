@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO.Packaging;
 using System.IO;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Xml.Serialization;
+using System.IO.Packaging;
 using System.Windows.Media.Imaging;
 
 namespace AP_HA
