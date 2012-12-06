@@ -26,26 +26,25 @@ namespace AP_HA
         {
             using (Package zip = Package.Open(sourcePath, FileMode.Open, FileAccess.Read))
             {
-                Uri FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative));
-                PackagePart zippedFile = zip.GetPart(FileName);
-                Stream filestream = zippedFile.GetStream();
-                HausarbeitAPProjectCT deserializedXMLFile = HausarbeitAPProjectCT.createFromStream(zippedFile.GetStream());
-                string temppath = Path.Combine(targetPath, "project.xml");
-                streamToFile(filestream, temppath);
+                Uri FileNameXML = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative));
+                PackagePart zippedFileXML = zip.GetPart(FileNameXML);
+                Stream filestreamXML = zippedFileXML.GetStream();
+                HausarbeitAPProjectCT deserializedXMLFile = HausarbeitAPProjectCT.createFromStream(zippedFileXML.GetStream());
+                string temppathXML = Path.Combine(targetPath, "project.xml");
+                streamToFile(filestreamXML, temppathXML);
 
                 for (int i = 0; i < deserializedXMLFile.totalLayers; i++)
                 {
-                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif", UriKind.Relative));
-                    zippedFile = zip.GetPart(FileName);
-                    filestream = zippedFile.GetStream();
-                    temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
-                    streamToFile(filestream, temppath);
-
-                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp", UriKind.Relative));
-                    zippedFile = zip.GetPart(FileName);
-                    filestream = zippedFile.GetStream();
-                    temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp");
-                    streamToFile(filestream, temppath);
+                    Uri FileNameTIFF = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif", UriKind.Relative));
+                    Uri FileNameBMP = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp", UriKind.Relative));
+                    PackagePart zippedFileTIFF = zip.GetPart(FileNameTIFF);
+                    PackagePart zippedFileBMP = zip.GetPart(FileNameBMP);
+                    Stream filestreamTIFF = zippedFileTIFF.GetStream();
+                    Stream filestreamBMP = zippedFileBMP.GetStream();
+                    string temppathTIFF = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
+                    string temppathBMP = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp");
+                    streamToFile(filestreamTIFF, temppathTIFF);                   
+                    streamToFile(filestreamBMP, temppathBMP);
                 }
             }
         }
