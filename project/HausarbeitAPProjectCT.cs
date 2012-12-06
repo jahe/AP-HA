@@ -78,7 +78,6 @@ namespace AP_HA
         }
         #endregion
 
-
         public static HausarbeitAPProjectCT createFromStream(Stream stream)
         {
             XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));

@@ -24,19 +24,13 @@ namespace AP_HA
 
         public static void extractToDirectory(string sourcePath, string targetPath)
         {
-            HausarbeitAPProjectCT deserializedXMLFile;
-            Uri FileName;
-            PackagePart zippedFile;
-            Stream filestream;
-            string temppath;
-
             using (Package zip = Package.Open(sourcePath, FileMode.Open, FileAccess.Read))
             {
-                FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative));
-                zippedFile = zip.GetPart(FileName);
-                filestream = zippedFile.GetStream();
-                deserializedXMLFile = HausarbeitAPProjectCT.createFromStream(zippedFile.GetStream());           
-                temppath = Path.Combine(targetPath, "project.xml");
+                Uri FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative));
+                PackagePart zippedFile = zip.GetPart(FileName);
+                Stream filestream = zippedFile.GetStream();
+                HausarbeitAPProjectCT deserializedXMLFile = HausarbeitAPProjectCT.createFromStream(zippedFile.GetStream());
+                string temppath = Path.Combine(targetPath, "project.xml");
                 streamToFile(filestream, temppath);
 
                 for (int i = 0; i < deserializedXMLFile.totalLayers; i++)
@@ -46,10 +40,7 @@ namespace AP_HA
                     filestream = zippedFile.GetStream();
                     temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
                     streamToFile(filestream, temppath);
-                }
 
-                for (int i = 0; i < deserializedXMLFile.totalLayers; i++)
-                {
                     FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp", UriKind.Relative));
                     zippedFile = zip.GetPart(FileName);
                     filestream = zippedFile.GetStream();
