@@ -28,7 +28,6 @@ namespace AP_HA
                 Workspace = new Workspace(projectName);
                 Workspace.createFromZip(sourcePath);               
                 Project = HausarbeitAPProjectCT.createFromFile(Path.Combine(Workspace.TempFolder, "project.xml"));
-                //Project = new HausarbeitAPProjectCT(sourcePath);
                 Project.initFileListFromStack(Workspace.TempFolder);
                 loadPicture(0);
                 stackSlider.Minimum = 0;

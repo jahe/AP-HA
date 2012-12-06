@@ -20,6 +20,7 @@ namespace AP_HA
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         private string workspaceFolder = @"C:\APHA\workspace";
         private HausarbeitAPProjectCT Project;
+        HausarbeitAPSectionCT Section;
         private Workspace Workspace;
 
         #region Constructors
