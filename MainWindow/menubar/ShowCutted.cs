@@ -6,9 +6,16 @@ namespace AP_HA
     {
         private void btnShowCutted_Click(object sender, RoutedEventArgs e)
         {
-            stackSlider.Value = Project.section.z;
-            stackSlider.Minimum = Project.section.z;
-            stackSlider.Maximum = Project.section.z + Project.section.depth;
+            if (Project.section == null)
+            {
+                MessageBox.Show("Für dieses Projekt wurde noch keine Section gespeichert");
+            }
+            else
+            {
+                stackSlider.Value = Project.section.z;
+                stackSlider.Minimum = Project.section.z;
+                stackSlider.Maximum = Project.section.z + Project.section.depth;
+            }            
         }
     }
 }
