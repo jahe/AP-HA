@@ -23,7 +23,7 @@ namespace AP_HA
             {
                 BitmapSource stackImage = ImageFuncs.getImgFromPath(Project.getPictureFromList(picNo));
                 imgControl.Source = stackImage;
-                debugTxtBox.Text = Project.getPictureFromList(picNo);
+                StatusText = System.IO.Path.GetFileName(Project.getPictureFromList(picNo)) +" ("+picNo.ToString()+" von " + (Project.totalLayers - 1) + ")";
             }
             catch (Exception e)
             {

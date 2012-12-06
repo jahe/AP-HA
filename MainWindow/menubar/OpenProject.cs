@@ -24,6 +24,7 @@ namespace AP_HA
         
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
+            StatusText = "Projekt wird geöffnet";
             OpenFileDialog newOpenFileDialog = new OpenFileDialog();
             newOpenFileDialog.InitialDirectory = @"C:\APHA\Projects\";
             newOpenFileDialog.Filter = "zip files (*.zip)|*.zip";
@@ -36,13 +37,11 @@ namespace AP_HA
 
         public void openProject(string projectName, string sourcePath)
         {
+            
             try
-            {
-                refreshSession();
-                lw = new LoadingWindow("Neuer Workspace wird erstellt");
+            {               
                 Workspace = new Workspace(projectName);
                 Workspace.createFromZip(sourcePath);
-                lw = new LoadingWindow("Projektdaten werden geladen");
                 Project = new HausarbeitAPProjectCT(sourcePath);
                 Project.initFileListFromStack(Workspace.TempFolder);
                 loadPicture(0);

@@ -20,16 +20,15 @@ namespace AP_HA
     {
         private void menuOpenStack(object sender, RoutedEventArgs e)
         {
+            StatusText = "Neuer Workspace wird erstellt";
             CreateProjectDialog createProjectDialog = new CreateProjectDialog();
 
             if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
                 try
-                {
-                    lw = new LoadingWindow("Neuer Workspace wird erstellt");                  
+                {                  
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
                     Workspace.copyStackFolder(createProjectDialog.StackPath);
-                    lw = new LoadingWindow("Bildstapeldaten werden geladen");                  
                     Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName+".zip");
                     Project.initFileListFromStack(Workspace.TempFolder);
                     Project.SaveToFile(Workspace.TempFolder + @"\project.xml");

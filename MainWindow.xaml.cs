@@ -36,7 +36,6 @@ namespace AP_HA
         private string workspaceFolder = @"C:\APHA\workspace";
         private HausarbeitAPProjectCT Project;
         private Workspace Workspace;
-        private LoadingWindow lw;
 
         #region Constructors
         public MainWindow()
@@ -95,6 +94,19 @@ namespace AP_HA
                 _stackIsLoaded = value;
                 OnPropertyChanged("StackIsLoaded");
                 CutableRight = value;
+            }
+        }
+        #endregion
+
+        #region Text füt Statusbox
+        private string _statusText;
+        public string StatusText
+        {
+            get { return _statusText; }
+            set
+            {
+                _statusText = value;
+                OnPropertyChanged("StatusText");
             }
         }
         #endregion
@@ -224,13 +236,13 @@ namespace AP_HA
         private void refreshSession()
         {
             //AdjustControls.IsEnabled = false;
-            Project = new HausarbeitAPProjectCT();
-            Workspace = new Workspace();
             stackSlider.Value = 0;
+            Project = new HausarbeitAPProjectCT();
+            Workspace = new Workspace();           
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
-            debugTxtBox.Text = "Bitte einen Stapel oder Projekt öffnen";
+            StatusText = "Bitte einen Stapel oder Projekt öffnen";
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
