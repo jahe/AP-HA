@@ -114,8 +114,44 @@ namespace AP_HA
             x.Serialize(stream, this);
         }
 
+        public void createZipFromWorkspace(string sourcePath, string targetPath)
+        {            
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
+            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName);
+
+            if (File.Exists(projectZipPath)) //Wenn die Zieldatei bereits besteht
+            {
+                DialogResult result = System.Windows.Forms.MessageBox.Show("Es ist bereits eine Datei für dieses Projekt im Zielordner vorhanden\nMöchten sie die Datei überschreiben?",
+                                  "Achtung",
+                                   MessageBoxButtons.YesNoCancel,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2);
+
+                if (result == System.Windows.Forms.DialogResult.Yes) //Wenn Zip überschrieben werden soll
+                {
+                    copyDataToZip(projectZipPath);
+                }
+                else if (result == System.Windows.Forms.DialogResult.No) //Wenn neuer Zielort gewählt werden soll
+                {
+                    SaveFileDialog sFD = new SaveFileDialog();
+                    sFD.InitialDirectory = d.FullName;
+                    sFD.FileName = System.IO.Path.GetFileNameWithoutExtension(projectZipPath);
+                    sFD.Filter = "zip files (*.zip)|*.zip";
+
+                    if (sFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        copyDataToZip(sFD.FileName);
+                    }
+                }                
+            }
+            else //Wenn keine Datei mit dem Name existiert
+            {                
+                copyDataToZip(projectZipPath);
+            }   
+        }
+
         private void copyDataToZip(string destinationPath)
-        {           
+        {
             using (Package package = Package.Open(destinationPath, FileMode.Create))
             {
                 FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
@@ -146,49 +182,12 @@ namespace AP_HA
             }
         }
 
-        public void createZipFromWorkspace(string sourcePath, string targetPath)
-        {
-            
-            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
-            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName);
-
-            if (File.Exists(projectZipPath)) //Wenn die Zieldatei bereits besteht, Fragen ob Y/N/C  IN BEARBEITUNG
-            {
-                DialogResult result = System.Windows.Forms.MessageBox.Show("Es ist bereits eine Datei für dieses Projekt im Zielordner vorhanden\nMöchten sie die Datei überschreiben?",
-                                  "Achtung",
-                                   MessageBoxButtons.YesNoCancel,
-                                   MessageBoxIcon.Question,
-                                   MessageBoxDefaultButton.Button2);
-
-                if (result == System.Windows.Forms.DialogResult.Yes) //Wenn Zip überschrieben werden soll
-                {
-                    copyDataToZip(projectZipPath);
-                }
-                else if (result == System.Windows.Forms.DialogResult.No) //Wenn neuer Zielort gewählt werden soll
-                {
-                    SaveFileDialog sFD = new SaveFileDialog();
-                    sFD.InitialDirectory = d.FullName;
-                    sFD.FileName = System.IO.Path.GetFileNameWithoutExtension(projectZipPath);
-                    sFD.Filter = "zip files (*.zip)|*.zip";
-
-                    if (sFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        copyDataToZip(sFD.FileName);
-                    }
-                }                
-            }
-            else
-            {
-                //Wenn keine Datei mit dem Name existiert
-                copyDataToZip(projectZipPath);
-            }   
-        }
-
         private static void copyStream(Stream source, Stream target)
         {
             const int bufSize = 0x1000;
             byte[] buf = new byte[bufSize];
             int bytesRead = 0;
+
             while ((bytesRead = source.Read(buf, 0, bufSize)) > 0)
             {
                 target.Write(buf, 0, bytesRead);
@@ -207,8 +206,6 @@ namespace AP_HA
                     filePathListTIFF.Add(filePathsTIFF[i].ToString());
                 }
 
-                filePathListTIFF.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
-
                 filePathListBMP = new List<string>();
                 filePathsBMP = System.IO.Directory.GetFiles(path, "*.bmp", SearchOption.TopDirectoryOnly);
 
@@ -216,8 +213,6 @@ namespace AP_HA
                 {
                     filePathListBMP.Add(filePathsBMP[i].ToString());
                 }
-
-                filePathListBMP.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
 
                 if (filePathListBMP.Count == 0)
                 {

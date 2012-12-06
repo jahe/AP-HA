@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System;
+using System.Collections.Generic;
 
 
 namespace AP_HA
@@ -32,7 +33,6 @@ namespace AP_HA
         public string TempFolder { get; private set; }
         #endregion
 
-
         public void createFromZip(string zipPath)
         {
             Directory.CreateDirectory(TempFolder);
@@ -44,8 +44,7 @@ namespace AP_HA
             DirectoryInfo dir = new DirectoryInfo(sourceFolder);
           
             if (!dir.Exists)
-            {
-                
+            {                
                 throw new DirectoryNotFoundException("Der Quellpfad wurde nicht gefunden:\n" + sourceFolder);
             }
 
@@ -55,15 +54,24 @@ namespace AP_HA
             }
 
             FileInfo[] files = dir.GetFiles("*.tif", SearchOption.TopDirectoryOnly);
-            int i = 0;
-            foreach (FileInfo file in files)
+            List<FileInfo> filePathList = new List<FileInfo>();
+
+            for (int i = 0; i < files.Length; i++)
             {
-                string temppath = Path.Combine(TempFolder, i.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".tif");
+                filePathList.Add(files[i]);
+            }
+
+            filePathList.Sort((a, b) => new StringSorter(a.ToString()).CompareTo(new StringSorter(b.ToString())));
+            
+            int n = 0;
+            foreach (FileInfo file in filePathList)
+            {
+                string temppath = Path.Combine(TempFolder, n.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".tif");
                 file.CopyTo(temppath, false);
 
-                temppath = Path.Combine(TempFolder, i.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".bmp");
+                temppath = Path.Combine(TempFolder, n.ToString("D" + files.Count().ToString("D").Length.ToString()) + ".bmp");
                 file.CopyTo(temppath, false);
-                i++;
+                n++;
             }
         }
     }
