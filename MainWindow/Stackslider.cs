@@ -49,8 +49,9 @@ namespace AP_HA
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (!stackSlider.IsEnabled)
+            {
                 return;
-
+            }
             stackSlider.Value += zoomSpeed * e.Delta / Math.Abs(e.Delta);
         }
     }

@@ -41,7 +41,7 @@ namespace AP_HA
                 catch (Exception exc)
                 {
                     System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + exc.Message + exc.StackTrace);
-                    //refreshSession();
+                    refreshSession();
                 } 
             }
         }

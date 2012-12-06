@@ -21,9 +21,9 @@ namespace AP_HA
                 {
                     System.IO.Directory.Delete(directoryName, true);
                 }
-                catch
+                catch(Exception exc)
                 {
-                    
+                    //MessageBox.Show("Datei konnte nicht gelöscht werden\n"+exc.Message);
                 }
             }
         }

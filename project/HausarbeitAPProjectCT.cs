@@ -87,13 +87,6 @@ namespace AP_HA
         }
         #endregion
 
-        public static HausarbeitAPProjectCT createFromFile(string fileName)
-        {
-            using (Stream s = System.IO.File.OpenRead(fileName))
-            {
-                return createFromStream(s);
-            }
-        }
 
         public static HausarbeitAPProjectCT createFromStream(Stream stream)
         {

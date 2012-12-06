@@ -19,9 +19,7 @@ using System.Threading;
 namespace AP_HA
 {
     public partial class MainWindow
-    {
-        private System.Timers.Timer timer = new System.Timers.Timer();
-        
+    {        
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
             StatusText = "Projekt wird geöffnet";
@@ -36,8 +34,7 @@ namespace AP_HA
         }
 
         public void openProject(string projectName, string sourcePath)
-        {
-            
+        {           
             try
             {               
                 Workspace = new Workspace(projectName);
