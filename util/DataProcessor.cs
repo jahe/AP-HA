@@ -53,6 +53,15 @@ namespace AP_HA
                     temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif");
                     streamToFile(filestream, temppath);
                 }
+
+                for (int i = 0; i < deserializedXMLFile.totalLayers; i++)
+                {
+                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp", UriKind.Relative));
+                    zippedFile = zip.GetPart(FileName);
+                    filestream = zippedFile.GetStream();
+                    temppath = Path.Combine(targetPath, i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".bmp");
+                    streamToFile(filestream, temppath);
+                }
             }
         }
 
@@ -79,20 +88,6 @@ namespace AP_HA
                     outputStream.Write(buffer, 0, cnt);
                 }                    
             }
-        }
-
-        public static Bitmap BitmapFromBitmapSource(BitmapSource bitmapsource)
-        {
-            Bitmap bitmap;
-
-           using (MemoryStream outStream = new MemoryStream())
-           {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(bitmapsource));
-                enc.Save(outStream);
-                bitmap = new Bitmap(outStream);
-            }
-            return bitmap; 	  	
         }
     }
 }

@@ -25,11 +25,11 @@ namespace AP_HA
             if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
                 try
-                {       
-                    //Neuen Ordner in Workspace erstellen
+                {
+                    lw = new LoadingWindow("Neuer Workspace wird erstellt");                  
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
                     Workspace.copyStackFolder(createProjectDialog.StackPath);
-                    lw = new LoadingWindow("Neuer Stapel wird vorbereitet");                   
+                    lw = new LoadingWindow("Bildstapeldaten werden geladen");                  
                     Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName+".zip");
                     Project.initFileListFromStack(Workspace.TempFolder);
                     Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
@@ -37,6 +37,7 @@ namespace AP_HA
                     stackSlider.Maximum = Project.totalLayers - 1;
                     stackSlider.Value = 0;
                     StackIsLoaded = true;
+                    this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.ProjectName);
                 }               
                 catch (Exception exc)
                 {

@@ -131,6 +131,7 @@ namespace AP_HA
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
+                    lw = new LoadingWindow("Projekt wird gespeichert");
                     using (Package package = Package.Open(projectZipPath, FileMode.Create))
                     {
                         FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
@@ -158,8 +159,7 @@ namespace AP_HA
                                 copyStream(fileStream, part.GetStream());
                             }
                         }
-                    }
-                    lw = new LoadingWindow("Projekt wird gespeichert");
+                    }                    
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
                 {
@@ -186,8 +186,51 @@ namespace AP_HA
                                     copyStream(fileStream, part.GetStream());
                                 }
                             }
+                            for (int i = 0; i < filePathsBMP.Length; i++)
+                            {
+                                FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".bmp"), UriKind.Relative));
+                                part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+
+                                using (FileStream fileStream = new FileStream(filePathsBMP[i], FileMode.Open, FileAccess.Read))
+                                {
+                                    copyStream(fileStream, part.GetStream());
+                                }
+                            }
                         }
                         lw = new LoadingWindow("Projekt wird gespeichert");
+                    }
+                }
+                
+                }
+            else
+            {
+                lw = new LoadingWindow("Projekt wird gespeichert");
+                using (Package package = Package.Open(projectZipPath, FileMode.Create))
+                {
+                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
+                    part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                    this.SaveToStream(part.GetStream());
+
+                    for (int i = 0; i < filePathsTIFF.Length; i++)
+                    {
+                        FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                        part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
+
+                        using (FileStream fileStream = new FileStream(filePathsTIFF[i], FileMode.Open, FileAccess.Read))
+                        {
+                            copyStream(fileStream, part.GetStream());
+                        }
+                    }
+
+                    for (int i = 0; i < filePathsBMP.Length; i++)
+                    {
+                        FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".bmp"), UriKind.Relative));
+                        part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+
+                        using (FileStream fileStream = new FileStream(filePathsBMP[i], FileMode.Open, FileAccess.Read))
+                        {
+                            copyStream(fileStream, part.GetStream());
+                        }
                     }
                 }
             }                   
@@ -227,6 +270,11 @@ namespace AP_HA
                 }
 
                 filePathListBMP.Sort((a, b) => new StringSorter(a).CompareTo(new StringSorter(b)));
+
+                if (filePathListBMP.Count == 0)
+                {
+                    throw new ProjectException("Die gewählte Projektdatei enthält keine Bitmaps");
+                }
 
                 if (filePathListTIFF.Count() != 0)
                 {

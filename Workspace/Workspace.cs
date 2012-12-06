@@ -42,11 +42,11 @@ namespace AP_HA
         public void copyStackFolder(string sourceFolder)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceFolder);
-            DirectoryInfo[] d = dir.GetDirectories();
           
             if (!dir.Exists)
             {
-                //throw new DirectoryNotFoundException("Der Quellpfad wurde nicht gefunden:\n" + sourceFolder);
+                
+                throw new DirectoryNotFoundException("Der Quellpfad wurde nicht gefunden:\n" + sourceFolder);
             }
 
             if (!Directory.Exists(TempFolder))

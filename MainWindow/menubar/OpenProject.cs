@@ -36,15 +36,24 @@ namespace AP_HA
 
         public void openProject(string projectName, string sourcePath)
         {
-            refreshSession();
-            Workspace = new Workspace(projectName);
-            Workspace.createFromZip(sourcePath);            
-            Project = new HausarbeitAPProjectCT(sourcePath);
-            Project.initFileListFromStack(Workspace.TempFolder);
-            loadPicture(0);
-            stackSlider.Maximum = Project.totalLayers - 1;
-            StackIsLoaded = true;           
-            lw = new LoadingWindow("Workspace wird erstellt");
+            try
+            {
+                refreshSession();
+                lw = new LoadingWindow("Neuer Workspace wird erstellt");
+                Workspace = new Workspace(projectName);
+                Workspace.createFromZip(sourcePath);
+                lw = new LoadingWindow("Projektdaten werden geladen");
+                Project = new HausarbeitAPProjectCT(sourcePath);
+                Project.initFileListFromStack(Workspace.TempFolder);
+                loadPicture(0);
+                stackSlider.Maximum = Project.totalLayers - 1;
+                StackIsLoaded = true;
+                this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.ProjectName);
+            }
+            catch (Exception exc)
+            {
+                System.Windows.Forms.MessageBox.Show("Das Projekt konnte nicht geöffnet werden\n" + exc.Message);
+            }
         }
     }
 }

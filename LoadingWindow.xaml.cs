@@ -23,6 +23,7 @@ namespace AP_HA
     public partial class LoadingWindow : Window, INotifyPropertyChanged
     {        
         private DispatcherTimer dt;
+        private DispatcherTimer dt2;
         private Random rd = new Random();
         private int i = 0;
 
@@ -64,48 +65,23 @@ namespace AP_HA
                 OnPropertyChanged("ProgressbarValue");
             }
         }
-
-        private string _percentageNo = "1";
-        public string PercentageNo
-        {
-            get { return _percentageNo; }
-            set
-            {
-                _percentageNo = value;
-                OnPropertyChanged("PercentageNo");
-            }
-        }
         #endregion
 
         #region Progressbar
-        private void startProgressbar()
+        public void startProgressbar()
         {
             dt = new DispatcherTimer();
-            dt.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            dt.Interval = new TimeSpan(0, 0, 0, 0, 1500);
             dt.Start();
             dt.Tick += new EventHandler(dt_Tick);
         }
 
         private void dt_Tick(object sender, EventArgs e)
         {
-            if (i > 40)
-            {
-                dt.Stop();
-                DialogResult = true;
-            }
-            else
-            {
-                int nextRd = rd.Next(1, 8);
-                int addPercentage = ProgressbarValue + nextRd;  
-
-                if (addPercentage < 100)
-                {
-                    ProgressbarValue = ProgressbarValue + nextRd;
-                    PercentageNo = ProgressbarValue.ToString();                   
-                }
-                i++;
-            }
+            dt.Stop();
+            DialogResult = true;
         }
+
         #endregion
     }
 }
