@@ -270,11 +270,11 @@
             <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
                 <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#eee">
                     <!--<Canvas Width="{Binding ImgWidth}" Height="{Binding ImgHeight}" x:Name="canvas" Background="#fff" Focusable="True">-->
-                    <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True">
+                    <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True" >
                         <Canvas.LayoutTransform>
                             <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
                         </Canvas.LayoutTransform>
-                        <Image Name="imgControl" Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth }">
+                        <Image Name="imgControl" Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth }" >
                             <Image.Effect>
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>

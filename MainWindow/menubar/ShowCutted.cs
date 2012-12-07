@@ -15,6 +15,7 @@ namespace AP_HA
                 stackSlider.Value = Project.section.z;
                 stackSlider.Minimum = Project.section.z;
                 stackSlider.Maximum = Project.section.z + Project.section.depth;
+                loadPicture((int)stackSlider.Value);
             }            
         }
     }

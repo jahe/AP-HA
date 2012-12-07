@@ -8,6 +8,7 @@ namespace AP_HA
         {
             stackSlider.Minimum = 0;
             stackSlider.Maximum = Project.totalLayers - 1;
+            loadPicture((int)stackSlider.Value);
             StackIsCutted = false;
         }
     }

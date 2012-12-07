@@ -28,11 +28,11 @@ namespace AP_HA
                 Workspace = new Workspace(projectName);
                 Workspace.createFromZip(sourcePath);               
                 Project = HausarbeitAPProjectCT.createFromFile(Path.Combine(Workspace.TempFolder, "project.xml"));
-                Project.initFileListFromStack(Workspace.TempFolder);
-                loadPicture(0);
+                Project.initFileListFromStack(Workspace.TempFolder);                
                 stackSlider.Minimum = 0;
                 stackSlider.Maximum = Project.totalLayers - 1;
                 stackSlider.Value = 0;
+                loadPicture(0);
                 StackIsLoaded = true;
                 this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.ProjectName);
             }

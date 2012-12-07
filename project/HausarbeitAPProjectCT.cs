@@ -105,7 +105,7 @@ namespace AP_HA
             x.Serialize(stream, this);
         }
 
-        public void createZipFromWorkspace(string sourcePath, string targetPath)
+        public bool createZipFromWorkspace(string sourcePath, string targetPath)
         {            
             DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
             string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName+".zip");
@@ -121,6 +121,7 @@ namespace AP_HA
                 if (result == System.Windows.Forms.DialogResult.Yes) //Wenn Zip überschrieben werden soll
                 {
                     copyDataToZip(projectZipPath);
+                    return true;
                 }
                 else if (result == System.Windows.Forms.DialogResult.No) //Wenn neuer Zielort gewählt werden soll
                 {
@@ -131,13 +132,20 @@ namespace AP_HA
 
                     if (sFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        copyDataToZip(sFD.FileName);
+                        copyDataToZip(sFD.FileName);                        
                     }
-                }                
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Das Projekt wurde nicht gespeichert", "Achtung");
+                    return false;                   
+                }
             }
             else //Wenn keine Datei mit dem Name existiert
             {                
                 copyDataToZip(projectZipPath);
+                return true;
             }   
         }
 
@@ -214,20 +222,20 @@ namespace AP_HA
                 {
                     totalLayers = filePathListTIFF.Count();
 
-                    try
-                    {
-                        FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
-                        TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-                        BitmapSource bmpSrc = decoder.Frames[0];
+                    //try
+                    //{
+                    //    FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    //    TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                    //    BitmapSource bmpSrc = decoder.Frames[0];
 
-                        ImgHeight = bmpSrc.PixelHeight;
-                        ImgWidth = bmpSrc.PixelWidth;
+                    //    ImgHeight = bmpSrc.PixelHeight;
+                    //    ImgWidth = bmpSrc.PixelWidth;
 
-                    }
-                    catch (Exception e)
-                    {
-                        throw new ProjectException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
-                    }
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    throw new ProjectException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
+                    //}
                 }
                 else
                 {

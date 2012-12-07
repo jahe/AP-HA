@@ -7,8 +7,11 @@ namespace AP_HA
         private void menuSaveProject_Click(object sender, RoutedEventArgs e)
         {
             StatusText = "Aktuelles Projekt wird gespeichert";
-            Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\");
-            refreshSession();
+            
+            if(Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\"))
+            {
+                refreshSession();
+            }
         }
     }
 }
