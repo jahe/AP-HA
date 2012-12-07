@@ -221,6 +221,8 @@ namespace AP_HA
 
         private void refreshSession()
         {
+            canvas.Width = 0;
+            canvas.Height = 0;
             //AdjustControls.IsEnabled = false;
             stackSlider.Value = 0;
             Project = new HausarbeitAPProjectCT();
@@ -255,6 +257,8 @@ namespace AP_HA
         {
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
+
+            scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
         }           
     }
 }
