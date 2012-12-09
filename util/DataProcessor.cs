@@ -26,13 +26,12 @@ namespace AP_HA
         {
             using (Package zip = Package.Open(sourcePath, FileMode.Open, FileAccess.Read))
             {
-                Uri FileNameXML = PackUriHelper.CreatePartUri(new Uri(".\\" + "project.xml", UriKind.Relative));
+                Uri FileNameXML = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
                 PackagePart zippedFileXML = zip.GetPart(FileNameXML);
                 Stream filestreamXML = zippedFileXML.GetStream();
                 HausarbeitAPProjectCT deserializedXMLFile = HausarbeitAPProjectCT.createFromStream(zippedFileXML.GetStream());
                 string temppathXML = Path.Combine(targetPath, "project.xml");
                 streamToFile(filestreamXML, temppathXML);
-
                 for (int i = 0; i < deserializedXMLFile.totalLayers; i++)
                 {
                     Uri FileNameTIFF = PackUriHelper.CreatePartUri(new Uri(".\\" + i.ToString("D" + deserializedXMLFile.totalLayers.ToString("D").Length.ToString()) + ".tif", UriKind.Relative));

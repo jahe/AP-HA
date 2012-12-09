@@ -23,7 +23,7 @@ namespace AP_HA
                     stackSlider.Value = 0;
                     loadPicture(0);
                     StackIsLoaded = true;
-                    this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.ProjectName);
+                    this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.name);
                 }               
                 catch (Exception exc)
                 {

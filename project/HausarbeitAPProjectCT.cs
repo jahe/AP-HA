@@ -29,7 +29,7 @@ namespace AP_HA
 
         public HausarbeitAPProjectCT(string name)
         {
-            ProjectName = Path.GetFileNameWithoutExtension(name);
+            this.name = Path.GetFileNameWithoutExtension(name);
         }
 
         #endregion
@@ -48,8 +48,8 @@ namespace AP_HA
             }
         }
 
-        
-        public string ProjectName { get; set; }
+        [XmlIgnore()]
+        //public string ProjectName { get; set; }
 
         private int _imgHeight;      
         [XmlIgnore()]
@@ -108,7 +108,7 @@ namespace AP_HA
         public bool createZipFromWorkspace(string sourcePath, string targetPath)
         {            
             DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
-            string projectZipPath = System.IO.Path.Combine(d.FullName, ProjectName+".zip");
+            string projectZipPath = System.IO.Path.Combine(d.FullName, name+".zip");
 
             if (File.Exists(projectZipPath)) //Wenn die Zieldatei bereits besteht
             {
@@ -160,7 +160,7 @@ namespace AP_HA
                 for (int i = 0; i < filePathsTIFF.Length; i++)
                 {
                     FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
-                    part = package.CreatePart(FileName, System.Net.Mime.MediaTypeNames.Image.Tiff);
+                    part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
 
                     using (FileStream fileStream = new FileStream(filePathsTIFF[i], FileMode.Open, FileAccess.Read))
                     {
@@ -216,6 +216,11 @@ namespace AP_HA
                 if (filePathListBMP.Count == 0)
                 {
                     throw new ProjectException("Die gewählte Projektdatei enthält keine Bitmaps");
+                }
+
+                if (filePathListBMP.Count != filePathListTIFF.Count)
+                {
+                    throw new ProjectException("Differenz von TIF und BMP-Dateien in Projektdatei");
                 }
 
                 if (filePathListTIFF.Count() != 0)

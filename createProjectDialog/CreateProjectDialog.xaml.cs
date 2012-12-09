@@ -69,6 +69,19 @@ namespace AP_HA
             }
         }
         #endregion
+
+        #region Beschreibung für neues Projekt
+        private string _newProjectDescritpion;
+        public string NewProjectDescritpion
+        {
+            get { return _newProjectDescritpion; }
+            set
+            {
+                _newProjectDescritpion = value;
+                OnPropertyChanged("NewProjectDescription");
+            }
+        }
+        #endregion
         #endregion
 
         private void cPDBtnOK_Click(object sender, RoutedEventArgs e)
