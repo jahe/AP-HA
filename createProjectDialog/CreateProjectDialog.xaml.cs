@@ -71,13 +71,13 @@ namespace AP_HA
         #endregion
 
         #region Beschreibung für neues Projekt
-        private string _newProjectDescritpion;
-        public string NewProjectDescritpion
+        private string _newProjectDescription;
+        public string NewProjectDescription
         {
-            get { return _newProjectDescritpion; }
+            get { return _newProjectDescription; }
             set
             {
-                _newProjectDescritpion = value;
+                _newProjectDescription = value;
                 OnPropertyChanged("NewProjectDescription");
             }
         }

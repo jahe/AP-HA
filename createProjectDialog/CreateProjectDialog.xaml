@@ -32,7 +32,7 @@
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="White" Background="#FF45597C" Height="22" Padding="3">Sie können eine Beschreibung hinzufügen:</Label>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Name="cPDTBxProjectNDescription" Width="150" Margin="3" Height="23" Text="{Binding NewProjectDescritption}"/>
+                            <TextBox Name="cPDTBxProjectDescription" Width="150" Margin="3" Height="23" Text="{Binding NewProjectDescription}"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"></StackPanel>

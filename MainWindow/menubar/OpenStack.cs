@@ -17,6 +17,7 @@ namespace AP_HA
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
                     Workspace.copyStackFolder(createProjectDialog.StackPath);
                     Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
+                    Project.description = createProjectDialog.NewProjectDescription;
                     Project.initFileListFromStack(Workspace.TempFolder);
                     Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
                     stackSlider.Maximum = Project.totalLayers - 1;

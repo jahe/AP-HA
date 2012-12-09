@@ -97,6 +97,19 @@ namespace AP_HA
         }
         #endregion
 
+        #region Text füt Projectbox
+        private string _projectText;
+        public string ProjectText
+        {
+            get { return _projectText; }
+            set
+            {
+                _statusText = value;
+                OnPropertyChanged("ProjectBox");
+            }
+        }
+        #endregion
+
         #region Status Bilder am Anfang können ausgeblendet werden
         private bool _cutableLeft = false;
         public bool CutableLeft

@@ -48,9 +48,6 @@ namespace AP_HA
             }
         }
 
-        [XmlIgnore()]
-        //public string ProjectName { get; set; }
-
         private int _imgHeight;      
         [XmlIgnore()]
         public int ImgHeight 
