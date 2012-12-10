@@ -32,6 +32,7 @@ namespace AP_HA
 
         private void InitializePresentation()
         {
+            mainGrid.Children.Remove(grid);
             grid = new Grid();
 
             RowDefinition row0 = new RowDefinition();
@@ -79,19 +80,31 @@ namespace AP_HA
                     Button setShortcut = new Button();
                     setShortcut.Tag = sc;
                     setShortcut.Content = "Neu";
-                    setShortcut.Click += new RoutedEventHandler(setShortcut_Click);
+                    setShortcut.Click += setShortcut_Click;
+                    Grid.SetColumn(setShortcut, 2);
+                    Grid.SetRow(setShortcut, scEngine.ShortCuts.IndexOf(sc) + 1);
 
                     grid.Children.Add(funcName);
                     grid.Children.Add(shortcutText);
+                    grid.Children.Add(setShortcut);
                 }
             }
 
-            ShortcutTab.Content = grid;
+            mainGrid.Children.Add(grid);
         }
 
         private void setShortcut_Click(object sender, RoutedEventArgs e)
         {
             ShortCut sc = (ShortCut)((Button)sender).Tag;
+            ShortCutSetter scs = new ShortCutSetter(sc);
+            scs.ShowDialog();
+
+            updateShortcuts();
+        }
+
+        private void updateShortcuts()
+        {
+            InitializePresentation();
         }
     }
 }

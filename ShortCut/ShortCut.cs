@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace AP_HA
@@ -30,6 +29,14 @@ namespace AP_HA
             : this()
         {
             Name = name;
+        }
+
+        public void reset()
+        {
+            Keys = new List<Key>();
+            MouseButtons = new List<MouseButton>();
+            MouseWheelDirection = Wheel.None;
+            MoveDirection = MouseMoveDirection.None;
         }
 
         public override string ToString()

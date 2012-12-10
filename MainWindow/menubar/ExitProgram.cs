@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using Microsoft.Win32;
 using System.Windows.Forms;
 
 namespace AP_HA
@@ -21,7 +8,20 @@ namespace AP_HA
     {
         private void exitProgram(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
         {
-            System.Windows.Application.Current.Shutdown();
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen sie die Anwendung beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
+                                  "Achtung",
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (Directory.Exists(workspaceFolder))
+                {
+                    DataProcessor.deleteAllSubfolders(workspaceFolder);
+                }
+                System.Windows.Application.Current.Shutdown();
+            }            
         }
     }
 }

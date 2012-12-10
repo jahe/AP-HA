@@ -13,13 +13,13 @@
         Background="#293955"
         WindowStartupLocation="CenterScreen">
 
-    <DockPanel LastChildFill="True">
-        <DockPanel.DataContext>
+    <DockPanel>
+        <DockPanel.DataContext >
             <Binding ElementName="This" />
         </DockPanel.DataContext>
         <Menu DockPanel.Dock="Top" IsMainMenu="True">
             <MenuItem Header="_Datei">
-                <MenuItem Name="menuCreateProject" Header="_Neues Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuOpenStack">
+                <MenuItem Name="menuCreateProject" Header="_Neuen Stapel zum Bearbeiten öffnen" ToolTip="Neues Projekt erstellen" Click="menuOpenStack">
                     <MenuItem.Icon>
                         <Image Source="/AP-HA;component/icon/createProject.ico"></Image>
                     </MenuItem.Icon>
@@ -30,6 +30,7 @@
                         <Image  Width="20" Height="20" Source="/AP-HA;component/icon/openFolder.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <Separator />
                 <MenuItem Name="menuSaveProject" Header="_Projekt speichern" ToolTip="Aktuelles Projekt speichern" IsEnabled="{Binding StackIsLoaded}" Click="menuSaveProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
@@ -40,13 +41,13 @@
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/safeProject.ico"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menuCloseProject" Header="_Projekt beenden" ToolTip="Aktuelles Projekt beenden" IsEnabled="{Binding StackIsLoaded}">
+                <MenuItem Name="menuExitProject" Header="_Projekt beenden" ToolTip="Aktuelles Projekt beenden" IsEnabled="{Binding StackIsLoaded}" Click="menuExitProject_Click">
                     <MenuItem.Icon>
                         <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen" />
+                <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen. Workspace wird gelöscht" />
             </MenuItem>
             <MenuItem Name="menuEdit" Header="_Bearbeiten">
                 <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding StackIsLoaded}">
@@ -60,10 +61,20 @@
                             <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator />
-                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsCutted}">
+                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsLoaded}">
                         <MenuItem.Icon>
                             <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="menuShowCutted" Header="_Gespeicherte -Beschneidung- anzeigen " Click="btnShowCutted_Click" ToolTip="Gespeicherten Ausschnitt anzeigen" IsEnabled="{Binding StackIsLoaded}">
+                        <MenuItem.Icon>
+                            <Image Source="/AP-HA;component/Icon/showCutted.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="menuSaveCuttingsToProject" Header="_Aktuelle Cuttings speichern" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsCutted}" Click="menuSaveCuttingsToProject_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/AP-HA;component/icon/safeProject.ico" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -75,16 +86,16 @@
 
         <ToolBarTray Name="toolBarTray1" Background="#9CAAC1" DockPanel.Dock="Top" Margin="0,0,0,5">
             <ToolBar Name="toolBar0" Background="#BCC7D8" Margin="0,1,0,1">
-                <Button Name="btnCreateProject" Width="22" Height="22" >
+                <Button Name="btnCreateProject" Width="22" Height="22" Click="menuOpenStack">
                     <Image Width="14" Height="14" Source="/AP-HA;component/icon/createProject.ico" ToolTip="{Binding ToolTip, ElementName=menuCreateProject}"></Image>
                 </Button>
-                <Button Name="btnOpenStack" Width="22" Height="22"  >
+                <Button Name="btnOpenProject" Width="22" Height="22" Click="menuOpenProject_Click" >
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/openFolder.ico" ToolTip="{Binding ToolTip, ElementName=menuOpenFolder}"></Image>
                 </Button>
-                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}">
+                <Button  Name="btnSaveProject" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuSaveProject}" Click="menuSaveProject_Click">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
                 </Button>
-                <Button  Name="btnCloseFolder" Width="22" Height="22" Click="closeFolder_Click" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}">
+                <Button  Name="btnCloseFolder" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuCloseFolder}" Click="menuExitProject_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/closeFolder.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
@@ -94,10 +105,15 @@
                 <Button  Name="btnCutAfter" Width="22" Height="22" Click="cutAfterCursor" IsEnabled="{Binding CutableRight}" ToolTip="{Binding Path=ToolTip, ElementName=menuCutAfterCursor}">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonAfter.png" />
                 </Button>
-                <Button  Name="btnCutBackToOriginal" Width="22" Height="22" Click="backToOriginalCut" IsEnabled="{Binding StackIsCutted}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
+                <Button  Name="btnCutBackToOriginal" Width="22" Height="22" Click="backToOriginalCut" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
-
+                <Button  Name="btnShowCutted" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" Click="btnShowCutted_Click" ToolTip="Gespeicherten Ausschnitt anzeigen">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/Icon/showCutted.ico" />
+                </Button>
+                <Button  Name="btnSaveCuttingsToProject" Width="22" Height="22" IsEnabled="{Binding StackIsCutted}" Click="menuSaveCuttingsToProject_Click" ToolTip="Speichert die aktuellen Section Einstellungen">
+                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
+                </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
                 <Button Name="btnZoomIn"  Click="btnZoomIn_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/zoom-in.png" />
@@ -122,9 +138,14 @@
         </ToolBarTray>
 
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
-            <StatusBarItem>
-                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="Bitte einen Stapel öffnen"></TextBlock>
-            </StatusBarItem>
+           
+                <StatusBarItem>
+                    <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding StatusText}"></TextBlock>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock Name="projectDescritptionTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding ProjectText}" HorizontalAlignment="Right"></TextBlock>
+                </StatusBarItem>
+          
         </StatusBar>
         <Border DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5" Background="#45597C">
             <Slider  Height="22" Name="stackSlider" Margin="5,4,5,0" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" Background="#45597C" AutoToolTipPlacement="TopLeft" ToolTip="Scrollen durch den Stapel" AutoToolTipPrecision="0">
@@ -157,7 +178,7 @@
 
                     <Separator />
 
-                    <Border BorderThickness="0" CornerRadius="5" Margin="5">
+                    <Border BorderThickness="0" CornerRadius="5" Margin="6">
                         <Expander IsExpanded="False" Margin="0" BorderThickness="0">
                             <Expander.Header>
                                 <TextBlock Foreground="White">
@@ -190,6 +211,8 @@
                             </StackPanel>
                         </Expander>
                     </Border>
+
+
                 </StackPanel>
             </Border>
         </StackPanel>
@@ -242,6 +265,7 @@
                     </Border>
                 </StackPanel>
             </Border>
+            <StackPanel IsEnabled="{Binding StackIsLoaded}" Name="stackPanel1" Orientation="Vertical"></StackPanel>
         </StackPanel>
 
         <!-- ######################## -->
@@ -250,11 +274,12 @@
         <Border BorderThickness="2" BorderBrush="#999" CornerRadius="3">
             <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
                 <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#eee">
+                    <!--<Canvas Width="{Binding ImgWidth}" Height="{Binding ImgHeight}" x:Name="canvas" Background="#fff" Focusable="True">-->
                     <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True">
                         <Canvas.LayoutTransform>
                             <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
                         </Canvas.LayoutTransform>
-                        <Image Name="imgControl" Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth}"  Stretch="Uniform">
+                        <Image Name="imgControl"  Height="{Binding ElementName=canvas, Path=ActualHeight}" Width="{Binding ElementName=canvas, Path=ActualWidth }" >
                             <Image.Effect>
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>

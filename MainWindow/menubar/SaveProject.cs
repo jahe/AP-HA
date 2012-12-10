@@ -1,18 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using System.Windows.Forms;
+﻿using System.Windows;
 
 namespace AP_HA
 {
@@ -20,7 +6,12 @@ namespace AP_HA
     {
         private void menuSaveProject_Click(object sender, RoutedEventArgs e)
         {
-            newProject.createZipFromStack(newWorkspace.TempFolder, @"C:\APHA\Projects");
+            StatusText = "Aktuelles Projekt wird gespeichert";
+            
+            if(Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\"))
+            {
+                refreshSession();
+            }
         }
     }
 }

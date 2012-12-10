@@ -1,32 +1,22 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System;
+using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System;
 
 namespace AP_HA
 {
     public partial class MainWindow
-    {
-        BitmapSource stackImage;
-
+    {        
         public void loadPicture(int picNo)
         {
             try
             {
-                stackImage = ImageFuncs.getImgFromPath(newProject.getPictureFromList(picNo));
+                BitmapSource stackImage = DataProcessor.getImgFromPath(Project.getPictureFromList(picNo));
+                canvas.Width = stackImage.PixelWidth;
+                canvas.Height = stackImage.PixelHeight;
                 imgControl.Source = stackImage;
-
-                //debugTxtBox.Text = pictureStack.getPictureFromList(picNo);
+                StatusText = System.IO.Path.GetFileName(Project.getPictureFromList(picNo)) +" | Bild: "+picNo.ToString()+"/" + (Project.totalLayers - 1) + 
+                            " Gesamtbildern. | Aktuelle Ansicht von: " + (int)stackSlider.Minimum +" bis " + (int)stackSlider.Maximum +" |";
+                
             }
             catch (Exception e)
             {

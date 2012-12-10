@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.ComponentModel;
 using System.IO;
-using System.ComponentModel;
+using System.Windows;
 
 namespace AP_HA
 {
@@ -21,6 +9,14 @@ namespace AP_HA
     /// </summary>
     public partial class CreateProjectDialog : Window, INotifyPropertyChanged
     {
+        #region Constructors
+        public CreateProjectDialog()
+        {
+            InitializeComponent();
+            this.ShowDialog();
+        }
+        #endregion
+
         #region Properties für UI-Binding
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -73,45 +69,43 @@ namespace AP_HA
             }
         }
         #endregion
-        #endregion
 
-        #region Constructors
-        public CreateProjectDialog()
+        #region Beschreibung für neues Projekt
+        private string _newProjectDescription;
+        public string NewProjectDescription
         {
-            InitializeComponent();
-            this.ShowDialog();
+            get { return _newProjectDescription; }
+            set
+            {
+                _newProjectDescription = value;
+                OnPropertyChanged("NewProjectDescription");
+            }
         }
         #endregion
+        #endregion
 
-        private void cPDBtnOK_Click(object sender, RoutedEventArgs e) //Fehlererkennung evtl über Exceptions; bei Fehler, Änderung der Borderbrush
+        private void cPDBtnOK_Click(object sender, RoutedEventArgs e)
         {
-            //DirectoryInfo d = System.IO.Directory.CreateDirectory(SaveProjectPath);
-            //string fileName = System.IO.Path.Combine(d.FullName, NewProjectName+".zip");
-            
             if (!Directory.Exists(StackPath))
             {
-                MessageBox.Show("Der angegebene Stapelpfad wurde nicht gefunden");
+                MessageBox.Show("Der angegebene Stapelpfad wurde nicht gefunden", "Achtung");
             }
             else if (Directory.GetFiles(StackPath, "*.tif", SearchOption.TopDirectoryOnly).Length < 1)
             {
-                MessageBox.Show("Der ausgewählte Stapelpfad enthält keine geeigneten Daten. \nTIFF benötigt");
+                MessageBox.Show("Der ausgewählte Stapelpfad enthält keine geeigneten Daten. \nTIFF benötigt", "Achtung");
             }
             else if (NewProjectName.Length <= 1)
             {
-                MessageBox.Show("Der angegebene Projektname ist zu kurz");
+                MessageBox.Show("Der angegebene Projektname ist zu kurz", "Achtung");
             }
-            //else if (!Directory.Exists(SaveProjectPath))
-            //{
-                //MessageBox.Show("Der angegebene Zielpfad wurde nicht gefunden");
-            //}
-            //else if (File.Exists(fileName))
-            //{
-                //MessageBox.Show("Der gewünschte Projektname existiert bereits in dem gewünschten Zielverzeichnis.\nBitte Namen oder Zielverzeichnis ändern");
-            //}
+            else if (Directory.Exists(@"C:\APHA\temp\" + NewProjectName))
+            {
+                MessageBox.Show("Es ist bereits ein anderes Projekt mit diesem Namen geöffnet.\nBitte wähle einen anderen Namen oder schliesse das andere Projekt", "Achtung");
+            }
             else
             {
                 DialogResult = true;
-            }           
-        }      
+            }
+        }
     }
 }

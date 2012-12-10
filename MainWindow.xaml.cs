@@ -1,23 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Diagnostics;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Shapes;
+using System.Windows.Controls;
 //using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AP_HA
 {
@@ -33,6 +20,10 @@ namespace AP_HA
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        private string workspaceFolder = @"C:\APHA\workspace";
+        private HausarbeitAPProjectCT Project;
+        HausarbeitAPSectionCT Section;
+        private Workspace Workspace;
 
         #region Constructors
         public MainWindow()
@@ -40,6 +31,7 @@ namespace AP_HA
             InitializeComponent();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
+            DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
             InitializeShortcuts();
         }
         #endregion
@@ -81,7 +73,7 @@ namespace AP_HA
         #endregion
 
         #region Wenn Stapel geladen wurde
-        private bool _stackIsLoaded = true;
+        private bool _stackIsLoaded = false;
         public bool StackIsLoaded
         {
             get { return _stackIsLoaded; }
@@ -90,6 +82,32 @@ namespace AP_HA
                 _stackIsLoaded = value;
                 OnPropertyChanged("StackIsLoaded");
                 CutableRight = value;
+            }
+        }
+        #endregion
+
+        #region Text füt Statusbox
+        private string _statusText;
+        public string StatusText
+        {
+            get { return _statusText; }
+            set
+            {
+                _statusText = value;
+                OnPropertyChanged("StatusText");
+            }
+        }
+        #endregion
+
+        #region Text füt Projectbox
+        private string _projectText;
+        public string ProjectText
+        {
+            get { return _projectText; }
+            set
+            {
+                _projectText = value;
+                OnPropertyChanged("ProjectText");
             }
         }
         #endregion
@@ -198,34 +216,43 @@ namespace AP_HA
             this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
             this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
 
-            String SceFilePath = rootAppFolder + @"\default.sce";
+            String SceFilePath = rootAppFolder + @"\ShortCut\default.sce";
 
-            if (!File.Exists(SceFilePath))
+            //if (!File.Exists(SceFilePath))
+            //{
+            //    File.Copy(rootAppFolder + @"\ShortCut\default.sce", SceFilePath);
+            //}
+            try
             {
-                File.Copy(rootAppFolder + @"\ShortCut\default.sce", SceFilePath);
+                scEngine = ShortCutEngine.Deserialize(SceFilePath);
+                registerShortcutFuncs();
+                ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
             }
-
-            scEngine = ShortCutEngine.Deserialize(SceFilePath);
-            registerShortcutFuncs();
-            ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void refreshSession()
         {
+            canvas.Width = 0;
+            canvas.Height = 0;
             //AdjustControls.IsEnabled = false;
             stackSlider.Value = 0;
+            Project = new HausarbeitAPProjectCT();
+            Workspace = new Workspace();
+            Section = null;
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
-            debugTxtBox.Text = "Bitte einen Stapel öffnen";
+            StatusText = "Bitte einen Stapel oder Projekt öffnen";
+            ProjectText = "";
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
-
-           /** if (pictureStack != null)
-            {
-                pictureStack.stackReset();
-            }**/
+            this.Title = "JPBM-BodyViewer";
+            DataProcessor.deleteAllSubfolders(workspaceFolder);
         }
 
         private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)
@@ -247,6 +274,8 @@ namespace AP_HA
         {
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
-        }
+
+            scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+        }                 
     }
 }
