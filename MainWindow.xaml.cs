@@ -300,12 +300,12 @@ namespace AP_HA
                 {
                     Project.section = new HausarbeitAPSectionCT();
                 }
-                    Project.section = new HausarbeitAPSectionCT();
                     Project.section.x = (int)Canvas.GetLeft(cropRectangle);
                     Project.section.y = (int)Canvas.GetTop(cropRectangle);
                     Project.section.width = (int)cropRectangle.Width;
                     Project.section.height = (int)cropRectangle.Height;
                     cropRectangle.Visibility = Visibility.Collapsed;
+                    loadPicture((int)stackSlider.Value);
                                 
             }
             catch(Exception exc)

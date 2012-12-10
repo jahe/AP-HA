@@ -285,16 +285,17 @@
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>
                         </Image>
-                        <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown" Foreground="Red">
-                            <DockPanel>
-                                <Button Content="CROP" DockPanel.Dock="Bottom" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
-                            </DockPanel>
-                        </GroupBox>
-                        <InkCanvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
-                            <Rectangle Fill="#33CC66" Width="2in"       Height="1in"
+                        
+                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+                            <Rectangle Fill="#33CC66" Width="2in" Height="1in"
                                        Canvas.Top="25" Canvas.Left="50" 
                                        StrokeThickness="6px" Stroke="Orange" />
-                        </InkCanvas>
+                            <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown" Foreground="Red">
+                                <DockPanel>
+                                    <Button Content="CROP" DockPanel.Dock="Bottom" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
+                                </DockPanel>
+                            </GroupBox>
+                        </Canvas>
                     </Canvas>
                 </Border>
             </ScrollViewer>
