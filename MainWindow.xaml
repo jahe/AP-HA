@@ -138,14 +138,14 @@
         </ToolBarTray>
 
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
-           
-                <StatusBarItem>
-                    <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding StatusText}"></TextBlock>
-                </StatusBarItem>
-                <StatusBarItem>
-                    <TextBlock Name="projectDescritptionTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding ProjectText}" HorizontalAlignment="Right"></TextBlock>
-                </StatusBarItem>
-          
+
+            <StatusBarItem>
+                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding StatusText}"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="projectDescritptionTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding ProjectText}" HorizontalAlignment="Right"></TextBlock>
+            </StatusBarItem>
+
         </StatusBar>
         <Border DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5" Background="#45597C">
             <Slider  Height="22" Name="stackSlider" Margin="5,4,5,0" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" Background="#45597C" AutoToolTipPlacement="TopLeft" ToolTip="Scrollen durch den Stapel" AutoToolTipPrecision="0">
@@ -263,6 +263,7 @@
                             </StackPanel>
                         </Expander>
                     </Border>
+                    <Button Click="btnSave_Click" Content="Render This on C:" />
                 </StackPanel>
             </Border>
             <StackPanel IsEnabled="{Binding StackIsLoaded}" Name="stackPanel1" Orientation="Vertical"></StackPanel>
@@ -284,6 +285,11 @@
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>
                         </Image>
+                        <InkCanvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+                            <Rectangle Fill="#33CC66" Width="2in"       Height="1in"
+                                       Canvas.Top="25" Canvas.Left="50" 
+                                       StrokeThickness="6px" Stroke="Orange" />
+                        </InkCanvas>
                     </Canvas>
                 </Border>
             </ScrollViewer>

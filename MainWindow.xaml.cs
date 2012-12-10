@@ -4,6 +4,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.IO;
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -276,6 +279,39 @@ namespace AP_HA
             settingsWindow.ShowDialog();
 
             scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
-        }                 
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            int Height = (int)this.markCanvas.ActualHeight;
+            int Width = (int)this.markCanvas.ActualWidth;
+
+            RenderTargetBitmap bmp = new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
+            bmp.Render(this.markCanvas);
+
+            string file = rootAppFolder + @"\render.bmp";
+
+            string Extension = System.IO.Path.GetExtension(file).ToLower();
+
+            BitmapEncoder encoder;
+            encoder = new BmpBitmapEncoder();
+            /*
+            if (Extension == ".gif")
+                encoder = new GifBitmapEncoder();
+            else if (Extension == ".png")
+                encoder = new PngBitmapEncoder();
+            else if (Extension == ".jpg")
+                encoder = new JpegBitmapEncoder();
+            else
+                return;
+             * */
+
+            encoder.Frames.Add(BitmapFrame.Create(bmp));
+
+            using (Stream stm = File.Create(file))
+            {
+                encoder.Save(stm);
+            }
+        }
     }
 }
