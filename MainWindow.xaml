@@ -131,8 +131,8 @@
                 <Button Name="btnPen" Click="btnPen_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/pen.png" />
                 </Button>
-                <Button Name="btnEraser" Click="btnEraser_Click">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/eraser.png" />
+                <Button Name="btnUndo" Click="btnUndo_Click">
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/undo.png" />
                 </Button>
             </ToolBar>
         </ToolBarTray>

@@ -17,9 +17,13 @@ namespace AP_HA
             tool = Tool.Pen;
         }
 
-        private void btnEraser_Click(object sender, RoutedEventArgs e)
+        private void btnUndo_Click(object sender, RoutedEventArgs e)
         {
-            tool = Tool.ZoomOut;
+            if (polylineStack.Count <= 0)
+                return;
+
+            Polyline lastPolyline = polylineStack.Pop();
+            canvas.Children.Remove(lastPolyline);
         }
 
         private void penMouseLeftButtonDown(object sender, MouseEventArgs e)
