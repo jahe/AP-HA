@@ -281,6 +281,28 @@ namespace AP_HA
         private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             tool = Tool.None;
+        }
+
+        private void cropBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Project.section == null)
+                {
+                    Project.section = new HausarbeitAPSectionCT();
+                }
+                    Project.section = new HausarbeitAPSectionCT();
+                    Project.section.x = (int)Canvas.GetLeft(cropRectangle);
+                    Project.section.y = (int)Canvas.GetTop(cropRectangle);
+                    Project.section.width = (int)cropRectangle.Width;
+                    Project.section.height = (int)cropRectangle.Height;
+                    cropRectangle.Visibility = Visibility.Collapsed;
+                                
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show(exc.Message + exc.InnerException);
+            }
         }                      
     }
 }

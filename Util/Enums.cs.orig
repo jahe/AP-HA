@@ -1,0 +1,15 @@
+﻿using System;
+
+namespace AP_HA
+{
+    [Serializable()]
+    public enum Wheel { Up, Down, None };
+    [Serializable()]
+<<<<<<< HEAD
+    public enum Tool { CropSize, CropLocation, Pen, Eraser, ZoomIn, ZoomOut, Move, None };
+=======
+    public enum Tool { Pen, ZoomIn, ZoomOut, Move, None };
+>>>>>>> d5f6055b6de859f14734f580fbbfe22e14788335
+    [Serializable()]
+    public enum MouseMoveDirection { Left, Up, Right, Down, None };
+}

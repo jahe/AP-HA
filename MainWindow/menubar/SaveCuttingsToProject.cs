@@ -8,7 +8,7 @@ namespace AP_HA
     {
         private void menuSaveCuttingsToProject_Click(object sender, RoutedEventArgs e)
         {
-            if (Project.section != null || Section != null)
+            if (Project.section != null)
             {
                 DialogResult result = System.Windows.Forms.MessageBox.Show("Es wurde bereits eine Section im aktuellen Projekt erstellt\nMöchten sie die Section ersetzen?",
                                   "Achtung",
@@ -35,10 +35,12 @@ namespace AP_HA
         {
             try
             {
-                Section = new HausarbeitAPSectionCT();
-                Section.z = (int)stackSlider.Minimum;
-                Section.depth = (int)stackSlider.Maximum - Section.z;
-                Project.section = Section;
+                if (Project.section == null)
+                {
+                    Project.section = new HausarbeitAPSectionCT();
+                }
+                Project.section.z = (int)stackSlider.Minimum;
+                Project.section.depth = (int)stackSlider.Maximum - Project.section.z;
             }
             catch (Exception exc)
             {

@@ -131,21 +131,21 @@
                 <Button Name="btnPen" Click="btnPen_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/pen.png" />
                 </Button>
-                <Button Name="btnUndo" Click="btnUndo_Click">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/undo.png" />
+                <Button Name="btnEraser">
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/eraser.png" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
 
         <StatusBar DockPanel.Dock="Bottom" Name="statusBar" Background="LightGray">
-           
-                <StatusBarItem>
-                    <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding StatusText}"></TextBlock>
-                </StatusBarItem>
-                <StatusBarItem>
-                    <TextBlock Name="projectDescritptionTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding ProjectText}" HorizontalAlignment="Right"></TextBlock>
-                </StatusBarItem>
-          
+
+            <StatusBarItem>
+                <TextBlock Name="debugTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding StatusText}"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Name="projectDescritptionTxtBox" Foreground="Red" TextAlignment="Right" Text="{Binding ProjectText}" HorizontalAlignment="Right"></TextBlock>
+            </StatusBarItem>
+
         </StatusBar>
         <Border DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="#999" CornerRadius="3" Margin="5" Background="#45597C">
             <Slider  Height="22" Name="stackSlider" Margin="5,4,5,0" ValueChanged="stackSlider_ValueChanged" IsEnabled="{Binding StackIsLoaded}" SmallChange="1" Foreground="Blue" Background="#45597C" AutoToolTipPlacement="TopLeft" ToolTip="Scrollen durch den Stapel" AutoToolTipPrecision="0">
@@ -286,7 +286,7 @@
                         </Image>
                         <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown" Foreground="Red">
                             <DockPanel>
-                                <Button Content="+" DockPanel.Dock="Bottom" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
+                                <Button Content="CROP" DockPanel.Dock="Bottom" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
                             </DockPanel>
                         </GroupBox>
                     </Canvas>

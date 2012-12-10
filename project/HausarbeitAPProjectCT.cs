@@ -224,20 +224,20 @@ namespace AP_HA
                 {
                     totalLayers = filePathListTIFF.Count();
 
-                    //try
-                    //{
-                    //    FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
-                    //    TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-                    //    BitmapSource bmpSrc = decoder.Frames[0];
+                    try
+                    {
+                        FileStream imgStream = new FileStream(this.getPictureFromList(0), FileMode.Open, FileAccess.Read, FileShare.Read);
+                        TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                        BitmapSource bmpSrc = decoder.Frames[0];
 
-                    //    ImgHeight = bmpSrc.PixelHeight;
-                    //    ImgWidth = bmpSrc.PixelWidth;
+                        ImgHeight = bmpSrc.PixelHeight;
+                        ImgWidth = bmpSrc.PixelWidth;
 
-                    //}
-                    //catch (Exception e)
-                    //{
-                    //    throw new ProjectException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
-                    //}
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ProjectException("Fehler bei der Bildstapelverarbeitung\n" + e.Message);
+                    }
                 }
                 else
                 {
