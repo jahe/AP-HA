@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -11,7 +13,7 @@ namespace AP_HA
         string name;
         bool visible;
         SolidColorBrush brushColor;
-        ArrayList polylines;
+        ArrayList layerPolylines;
 
         public string Name
         {
@@ -22,7 +24,15 @@ namespace AP_HA
         public bool Visible
         {
             get { return visible; }
-            set { visible = value; }
+            set {
+                visible = value;
+
+                // change visibility of existing polylines
+                foreach (KeyValuePair<int, Polyline> lpl in layerPolylines)
+                {
+                    lpl.Value.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
+                }
+            }
         }
 
         public SolidColorBrush BrushColor
@@ -34,16 +44,16 @@ namespace AP_HA
                 NotifyPropertyChanged("BrushColor"); 
                 
                 // change color of existing polylines
-                foreach (Polyline pl in polylines)
+                foreach (KeyValuePair<int, Polyline> lpl in layerPolylines)
                 {
-                    pl.Stroke = brushColor;
+                    lpl.Value.Stroke = brushColor;
                 }
             }
         }
 
         public Mark()
         {
-            polylines = new ArrayList();
+            layerPolylines = new ArrayList();
             Visible = true;
             BrushColor = getRandomColorBrush();
         }
@@ -66,9 +76,15 @@ namespace AP_HA
             }
         }
 
-        public void AddPolyline(Polyline polyline)
+        public ArrayList GetLayerPolylines()
         {
-            polylines.Add(polyline);
+            return layerPolylines;
+        }
+
+        public void AddPolyline(int layer, Polyline polyline)
+        {
+            KeyValuePair<int, Polyline> layerPolyline = new KeyValuePair<int, Polyline>(layer, polyline);
+            layerPolylines.Add(layerPolyline);
         }
     }
 }
