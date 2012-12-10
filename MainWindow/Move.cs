@@ -43,6 +43,10 @@ namespace AP_HA
                     penMouseLeftButtonDown(sender, e);
                     break;
 
+                case Tool.CropLocation:
+                    tool = Tool.CropSize;
+                    break;
+
                 default:
                     break;
             }
@@ -50,8 +54,6 @@ namespace AP_HA
 
         private void scrollViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            
-
             switch (tool)
             {
                 case Tool.Move:
@@ -71,6 +73,19 @@ namespace AP_HA
 
                 case Tool.Pen:
                     penMouseMove(sender, e);
+                    break;
+
+                case Tool.CropLocation:
+                    Point mousePos2 = e.GetPosition(imgControl);
+
+                    Canvas.SetLeft(cropRectangle, mousePos2.X - cropRectangle.ActualWidth/2);
+                    Canvas.SetTop(cropRectangle, mousePos2.Y - cropRectangle.ActualHeight/2);
+                    break;
+
+                case Tool.CropSize:
+                    Point mousePos3 = e.GetPosition(imgControl);
+                    cropRectangle.Width = 200;
+                    cropRectangle.Height = 200;
                     break;
 
                 default:

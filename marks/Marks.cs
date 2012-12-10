@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace AP_HA
 {
@@ -76,6 +77,28 @@ namespace AP_HA
                     lpl.Value.Visibility = lpl.Key == layer ? Visibility.Visible : Visibility.Hidden;
                 }
             }
+        }
+
+        private HausarbeitAPLabelCT[] getLabels()
+        {
+            ArrayList result = new ArrayList();
+
+            foreach (Mark mark in marks)
+            {
+                foreach (KeyValuePair<int,Polyline> lpl in mark.GetLayerPolylines())
+                {
+                    HausarbeitAPLabelCT label = new HausarbeitAPLabelCT();
+
+                    label.id = lpl.Key;
+                    label.title = mark.Name;
+                    label.description = "not implemented";
+                    label.color = Convert.ToInt32(mark.BrushColor.Color);
+
+                    result.Add(label);
+                }
+            }
+
+            return (HausarbeitAPLabelCT[])result.ToArray(typeof(HausarbeitAPLabelCT));
         }
     }
 }

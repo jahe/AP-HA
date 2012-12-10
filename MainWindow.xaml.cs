@@ -280,6 +280,10 @@ namespace AP_HA
 
             scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
         }
+        private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            tool = Tool.None;
+        }                      
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
