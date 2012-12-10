@@ -295,6 +295,7 @@
                                     <Button Content="CROP" DockPanel.Dock="Bottom" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
                                 </DockPanel>
                             </GroupBox>
+                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
                         </Canvas>
                     </Canvas>
                 </Border>
