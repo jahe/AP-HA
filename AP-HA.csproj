@@ -74,6 +74,7 @@
     </ApplicationDefinition>
     <Compile Include="CreateProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="CreateProjectDialog\OpenStackFolder.cs" />
+    <Compile Include="MainWindow\menubar\CropImage.cs" />
     <Compile Include="MainWindow\menubar\ExitProject.cs" />
     <Compile Include="MainWindow\menubar\SaveCuttingsToProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProject.cs" />

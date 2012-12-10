@@ -276,6 +276,11 @@ namespace AP_HA
             settingsWindow.ShowDialog();
 
             scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
-        }                 
+        }
+
+        private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            tool = Tool.None;
+        }                      
     }
 }
