@@ -43,8 +43,8 @@ namespace AP_HA
                     penMouseLeftButtonDown(sender, e);
                     break;
 
-                case Tool.Crop:
-                    tool = Tool.None;   //To DO Größe soll geändert werden
+                case Tool.CropLocation:
+                    tool = Tool.CropSize;
                     break;
 
                 default:
@@ -75,11 +75,17 @@ namespace AP_HA
                     penMouseMove(sender, e);
                     break;
 
-                case Tool.Crop:
+                case Tool.CropLocation:
                     Point mousePos2 = e.GetPosition(imgControl);
 
                     Canvas.SetLeft(cropRectangle, mousePos2.X - cropRectangle.ActualWidth/2);
                     Canvas.SetTop(cropRectangle, mousePos2.Y - cropRectangle.ActualHeight/2);
+                    break;
+
+                case Tool.CropSize:
+                    Point mousePos3 = e.GetPosition(imgControl);
+                    cropRectangle.Width = 200;
+                    cropRectangle.Height = 200;
                     break;
 
                 default:

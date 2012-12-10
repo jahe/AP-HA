@@ -284,7 +284,10 @@
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>
                         </Image>
-                        <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown">
+                        <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown" Foreground="Red">
+                            <DockPanel>
+                                <Button Content="+" DockPanel.Dock="Bottom" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
+                            </DockPanel>
                         </GroupBox>
                     </Canvas>
                 </Border>

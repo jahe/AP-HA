@@ -6,7 +6,7 @@ namespace AP_HA
     {
         private void btnCrop_Click(object sender, RoutedEventArgs e)
         {
-            tool = Tool.Crop;
+            tool = Tool.CropLocation;
             if (cropRectangle.Visibility != Visibility.Visible)
             {
                 cropRectangle.Visibility = Visibility.Visible;
