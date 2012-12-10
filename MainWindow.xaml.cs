@@ -278,7 +278,14 @@ namespace AP_HA
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
 
-            scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+            try
+            {
+                scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
         private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {

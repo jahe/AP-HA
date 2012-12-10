@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Shapes;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.IO;
+//using System.Xml.Serialization;
 
 namespace AP_HA
 {
@@ -23,34 +16,31 @@ namespace AP_HA
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        enum Tool { ZoomIn, ZoomOut, Move, None };
-
-        enum Wheel { Up, Down, None };
-        enum MouseMovement { Left, Up, Right, Down, None };
-
+        private delegate void ShortCutHandler(object sender, ShortCutEventArgs e);
+        private event ShortCutHandler ShortCutChanged;
+        private ShortCutEngine scEngine;
+        private ShortCut sc;
         private Tool? tool = Tool.Move;
-        private List<Key> keys;
-        private List<MouseButton> mouseButtons;
-        private Wheel mouseWheel;
+        private Settings settingsWindow;
+        private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        private string workspaceFolder = @"C:\APHA\workspace";
+        private HausarbeitAPProjectCT Project;
+        HausarbeitAPSectionCT Section;
+        private Workspace Workspace;
 
+        #region Constructors
         public MainWindow()
         {
             InitializeComponent();
             InitializeMarks();
-
-            keys = new List<Key>();
-            mouseButtons = new List<MouseButton>();
-            mouseWheel = Wheel.None;
-
-            this.KeyDown += new KeyEventHandler(OnKeyDown);                         // KeyDown Event abonieren
-            this.KeyUp += new KeyEventHandler(OnKeyUp);                             // KeyUp Event abonieren
-            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown); // MouseDown Event abonieren
-            this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);   // MouseUp Event abonieren
-            this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
+            //createDefaultSce(@"C:\Users\admin\Desktop");
+            DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
+            InitializeShortcuts();
         }
+        #endregion
 
         #region Properties für UI-Binding
-        
+
         /// <summary>
         /// Event, was default-mäßig von XAML abonniert wird
         /// und somit geänderte Property-Werte mitbekommt
@@ -85,6 +75,46 @@ namespace AP_HA
         }
         #endregion
 
+        #region Wenn Stapel geladen wurde
+        private bool _stackIsLoaded = false;
+        public bool StackIsLoaded
+        {
+            get { return _stackIsLoaded; }
+            set
+            {
+                _stackIsLoaded = value;
+                OnPropertyChanged("StackIsLoaded");
+                CutableRight = value;
+            }
+        }
+        #endregion
+
+        #region Text füt Statusbox
+        private string _statusText;
+        public string StatusText
+        {
+            get { return _statusText; }
+            set
+            {
+                _statusText = value;
+                OnPropertyChanged("StatusText");
+            }
+        }
+        #endregion
+
+        #region Text füt Projectbox
+        private string _projectText;
+        public string ProjectText
+        {
+            get { return _projectText; }
+            set
+            {
+                _projectText = value;
+                OnPropertyChanged("ProjectText");
+            }
+        }
+        #endregion
+
         #region Status Bilder am Anfang können ausgeblendet werden
         private bool _cutableLeft = false;
         public bool CutableLeft
@@ -112,22 +142,120 @@ namespace AP_HA
         #endregion        
         #endregion        
 
+        private void registerShortcutFuncs()
+        {
+            if (scEngine != null)
+            {
+                // HIER VLLT NOCH ALLE EVENTS DER SCs DEABONNIEREN ( also = null setzen )
+                scEngine.getShortcutFromName("Zoom In").Execute += zoomIn;
+                scEngine.getShortcutFromName("Zoom Out").Execute += zoomOut;
+                scEngine.getShortcutFromName("Scroll In").Execute += scrollIn;
+                scEngine.getShortcutFromName("Scroll Out").Execute += scrollOut;
+                scEngine.getShortcutFromName("Increase Brightness").Execute += incBrightness;
+                scEngine.getShortcutFromName("Decrease Brightness").Execute += decBrightness;
+                scEngine.getShortcutFromName("Increase Contrast").Execute +=  incContrast;
+                scEngine.getShortcutFromName("Decrease Contrast").Execute += decContrast;
+            }
+        }
+
+        private static void createDefaultSce(String destFolderPath)
+        {
+            ShortCutEngine tempSce = new ShortCutEngine();
+
+            // ********* Shortcuts erzeugen ***********
+            ShortCut zoomInSc = new ShortCut("Zoom In");
+            zoomInSc.register(Key.LeftCtrl);
+            zoomInSc.register(Wheel.Up);
+
+            ShortCut zoomOutSc = new ShortCut("Zoom Out");
+            zoomOutSc.register(Key.LeftCtrl);
+            zoomOutSc.register(Wheel.Down);
+
+            ShortCut scrollInSc = new ShortCut("Scroll In");
+            scrollInSc.register(Key.LeftCtrl);
+            scrollInSc.register(MouseMoveDirection.Up);
+
+            ShortCut scrollOutSc = new ShortCut("Scroll Out");
+            scrollOutSc.register(Key.LeftCtrl);
+            scrollOutSc.register(MouseMoveDirection.Down);
+
+            ShortCut incBrightnessSc = new ShortCut("Increase Brightness");
+            incBrightnessSc.register(Key.B);
+            incBrightnessSc.register(Wheel.Up);
+
+            ShortCut decBrightnessSc = new ShortCut("Decrease Brightness");
+            decBrightnessSc.register(Key.B);
+            decBrightnessSc.register(Wheel.Down);
+
+            ShortCut incContrastSc = new ShortCut("Increase Contrast");
+            incContrastSc.register(Key.C);
+            incContrastSc.register(Wheel.Up);
+
+            ShortCut decContrastSc = new ShortCut("Decrease Contrast");
+            decContrastSc.register(Key.C);
+            decContrastSc.register(Wheel.Down);
+
+            // ***** Shortcuts der Engine hinzufügen *****
+            tempSce.addShortCut(zoomInSc);
+            tempSce.addShortCut(zoomOutSc);
+            tempSce.addShortCut(scrollInSc);
+            tempSce.addShortCut(scrollOutSc);
+            tempSce.addShortCut(incBrightnessSc);
+            tempSce.addShortCut(decBrightnessSc);
+            tempSce.addShortCut(incContrastSc);
+            tempSce.addShortCut(decContrastSc);
+
+            tempSce.Serialize(destFolderPath + @"\default.sce");
+        }
+
+        private void InitializeShortcuts()
+        {
+            sc = new ShortCut();    // actual Shortcut, der gerade im MainWindow gedrückt/aktiv ist
+            
+            this.PreviewKeyDown += new KeyEventHandler(OnKeyDown);
+            this.PreviewKeyUp += new KeyEventHandler(OnKeyUp);
+            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown);
+            this.PreviewMouseUp += new MouseButtonEventHandler(OnPreviewMouseUp);
+            this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
+            this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
+
+            String SceFilePath = rootAppFolder + @"\ShortCut\default.sce";
+
+            //if (!File.Exists(SceFilePath))
+            //{
+            //    File.Copy(rootAppFolder + @"\ShortCut\default.sce", SceFilePath);
+            //}
+            try
+            {
+                scEngine = ShortCutEngine.Deserialize(SceFilePath);
+                registerShortcutFuncs();
+                ShortCutChanged += new ShortCutHandler(scEngine.onShortCutChanged);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void refreshSession()
         {
+            canvas.Width = 0;
+            canvas.Height = 0;
             //AdjustControls.IsEnabled = false;
             stackSlider.Value = 0;
+            Project = new HausarbeitAPProjectCT();
+            Workspace = new Workspace();
+            Section = null;
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
-            debugTxtBox.Text = "Bitte einen Stapel öffnen";
+            StatusText = "Bitte einen Stapel oder Projekt öffnen";
+            ProjectText = "";
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
-
-            if (pictureStack != null)
-            {
-                pictureStack.stackReset();
-            }
+            this.Title = "JPBM-BodyViewer";
+            DataProcessor.deleteAllSubfolders(workspaceFolder);
         }
 
         private void ResetBrightnessBtn_Click(object sender, RoutedEventArgs e)
@@ -145,60 +273,52 @@ namespace AP_HA
             zoomSlider.Value = 1.0;
         }
 
-        private void ResetBrightnessBtn_Click(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            this.debugTxtBox.Text = e.Key.ToString();
-
-            if (!keys.Contains(e.Key))
-                keys.Add(e.Key);
-        }
-
-        private void OnKeyUp(object sender, KeyEventArgs e)
-        {
-            this.debugTxtBox.Text = e.Key.ToString();
-
-            keys.Remove(e.Key);
-        }
-
-        private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.debugTxtBox.Text = e.ChangedButton.ToString();
-
-            if (!mouseButtons.Contains(e.ChangedButton))
-                mouseButtons.Add(e.ChangedButton);
-        }
-
-        private void OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            mouseButtons.Remove(e.ChangedButton);
-        }
-
-        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (e.Delta > 0)
-                mouseWheel = Wheel.Up;
-            else if (e.Delta < 0)
-                mouseWheel = Wheel.Down;
-            else
-                mouseWheel = Wheel.None;
-
-            this.debugTxtBox.Text = mouseWheel.ToString();
-<<<<<<< HEAD
-        }
-
         private void menuMouseSettings_Click(object sender, RoutedEventArgs e)
         {
-            Settings settingWindow = new Settings();
-            settingWindow.Show();
+            settingsWindow = new Settings(scEngine);
+            settingsWindow.ShowDialog();
 
+            scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+        }
+
+<<<<<<< HEAD
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            int Height = (int)this.markCanvas.ActualHeight;
+            int Width = (int)this.markCanvas.ActualWidth;
+
+            RenderTargetBitmap bmp = new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
+            bmp.Render(this.markCanvas);
+
+            string file = rootAppFolder + @"\render.bmp";
+
+            string Extension = System.IO.Path.GetExtension(file).ToLower();
+
+            BitmapEncoder encoder;
+            encoder = new BmpBitmapEncoder();
+            /*
+            if (Extension == ".gif")
+                encoder = new GifBitmapEncoder();
+            else if (Extension == ".png")
+                encoder = new PngBitmapEncoder();
+            else if (Extension == ".jpg")
+                encoder = new JpegBitmapEncoder();
+            else
+                return;
+             * */
+
+            encoder.Frames.Add(BitmapFrame.Create(bmp));
+
+            using (Stream stm = File.Create(file))
+            {
+                encoder.Save(stm);
+            }
         }
 =======
-        }       
->>>>>>> c4489b0a8f536d5a427802c400a89cd1c20975a7
+        private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            tool = Tool.None;
+        }                      
+>>>>>>> 860481b58057f96de7b542fbe4bdaa8a6d28ee37
     }
 }
