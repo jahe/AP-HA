@@ -93,9 +93,6 @@ namespace AP_HA
 
         private void updateLabels()
         {
-            Console.WriteLine("project: " + Project);
-            Console.WriteLine("stack is loaded: " + Project);
-
             if (Project == null)
                 return;
 
@@ -114,7 +111,6 @@ namespace AP_HA
             }
 
             Project.labels = (HausarbeitAPLabelCT[])result.ToArray(typeof(HausarbeitAPLabelCT));
-            Console.WriteLine(Project.labels);
         }
     }
 }
