@@ -290,11 +290,11 @@
                                 <Button Content="+" DockPanel.Dock="Bottom" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
                             </DockPanel>
                         </GroupBox>
-                        <InkCanvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
                             <Rectangle Fill="#33CC66" Width="2in"       Height="1in"
                                        Canvas.Top="25" Canvas.Left="50" 
                                        StrokeThickness="6px" Stroke="Orange" />
-                        </InkCanvas>
+                        </Canvas>
                     </Canvas>
                 </Border>
             </ScrollViewer>
