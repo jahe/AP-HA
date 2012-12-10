@@ -263,6 +263,7 @@
                             </StackPanel>
                         </Expander>
                     </Border>
+                    <Button Click="btnSave_Click" Content="Render This on C:" />
                 </StackPanel>
             </Border>
             <StackPanel IsEnabled="{Binding StackIsLoaded}" Name="stackPanel1" Orientation="Vertical"></StackPanel>
@@ -289,6 +290,11 @@
                                 <Button Content="CROP" DockPanel.Dock="Bottom" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
                             </DockPanel>
                         </GroupBox>
+                        <InkCanvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+                            <Rectangle Fill="#33CC66" Width="2in"       Height="1in"
+                                       Canvas.Top="25" Canvas.Left="50" 
+                                       StrokeThickness="6px" Stroke="Orange" />
+                        </InkCanvas>
                     </Canvas>
                 </Border>
             </ScrollViewer>
