@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace AP_HA
 {
@@ -64,6 +65,17 @@ namespace AP_HA
             Button button = ((Button) sender);
             Mark mark = button.DataContext as Mark;
             marks.Remove(mark);
+        }
+
+        private void displayLayerMarks(int layer)
+        {
+            foreach (Mark mark in marks)
+            {
+                foreach (KeyValuePair<int, Polyline> lpl in mark.GetLayerPolylines())
+                {
+                    lpl.Value.Visibility = lpl.Key == layer ? Visibility.Visible : Visibility.Hidden;
+                }
+            }
         }
     }
 }

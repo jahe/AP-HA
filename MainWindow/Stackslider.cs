@@ -13,6 +13,7 @@ namespace AP_HA
             try
             {
                 loadPicture((int)stackSlider.Value);
+                displayLayerMarks((int)stackSlider.Value);
             }
             catch (Exception ex)
             {

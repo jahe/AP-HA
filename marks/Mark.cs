@@ -76,6 +76,11 @@ namespace AP_HA
             }
         }
 
+        public ArrayList GetLayerPolylines()
+        {
+            return layerPolylines;
+        }
+
         public void AddPolyline(int layer, Polyline polyline)
         {
             KeyValuePair<int, Polyline> layerPolyline = new KeyValuePair<int, Polyline>(layer, polyline);
