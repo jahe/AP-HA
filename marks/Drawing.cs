@@ -19,7 +19,11 @@ namespace AP_HA
 
         private void btnUndo_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Undo");
+            if (polylineStack.Count <= 0)
+                return;
+
+            Polyline lastPolyline = polylineStack.Pop();
+            canvas.Children.Remove(lastPolyline);
         }
 
         private void penMouseLeftButtonDown(object sender, MouseEventArgs e)
