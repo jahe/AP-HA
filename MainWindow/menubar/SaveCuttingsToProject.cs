@@ -37,7 +37,7 @@ namespace AP_HA
             {
                 Section = new HausarbeitAPSectionCT();
                 Section.z = (int)stackSlider.Minimum;
-                Section.depth = (int)stackSlider.Maximum;
+                Section.depth = (int)stackSlider.Maximum - Section.z;
                 Project.section = Section;
             }
             catch (Exception exc)

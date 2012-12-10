@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shapes;
+using System.Windows.Controls;
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -104,8 +106,8 @@ namespace AP_HA
             get { return _projectText; }
             set
             {
-                _statusText = value;
-                OnPropertyChanged("ProjectBox");
+                _projectText = value;
+                OnPropertyChanged("ProjectText");
             }
         }
         #endregion
@@ -239,11 +241,13 @@ namespace AP_HA
             //AdjustControls.IsEnabled = false;
             stackSlider.Value = 0;
             Project = new HausarbeitAPProjectCT();
-            Workspace = new Workspace();           
+            Workspace = new Workspace();
+            Section = null;
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
             StatusText = "Bitte einen Stapel oder Projekt öffnen";
+            ProjectText = "";
             BrightnessSlider.Value = 0.0;
             ContrastSlider.Value = 1.0;
             zoomSlider.Value = 1.0;
@@ -272,6 +276,6 @@ namespace AP_HA
             settingsWindow.ShowDialog();
 
             scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
-        }           
+        }                 
     }
 }
