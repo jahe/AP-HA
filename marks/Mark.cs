@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -12,7 +13,7 @@ namespace AP_HA
         string name;
         bool visible;
         SolidColorBrush brushColor;
-        ArrayList polylines;
+        ArrayList layerPolylines;
 
         public string Name
         {
@@ -27,9 +28,9 @@ namespace AP_HA
                 visible = value;
 
                 // change visibility of existing polylines
-                foreach (Polyline pl in polylines)
+                foreach (KeyValuePair<int, Polyline> lpl in layerPolylines)
                 {
-                    pl.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
+                    lpl.Value.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
                 }
             }
         }
@@ -43,16 +44,16 @@ namespace AP_HA
                 NotifyPropertyChanged("BrushColor"); 
                 
                 // change color of existing polylines
-                foreach (Polyline pl in polylines)
+                foreach (KeyValuePair<int, Polyline> lpl in layerPolylines)
                 {
-                    pl.Stroke = brushColor;
+                    lpl.Value.Stroke = brushColor;
                 }
             }
         }
 
         public Mark()
         {
-            polylines = new ArrayList();
+            layerPolylines = new ArrayList();
             Visible = true;
             BrushColor = getRandomColorBrush();
         }
@@ -75,9 +76,10 @@ namespace AP_HA
             }
         }
 
-        public void AddPolyline(Polyline polyline)
+        public void AddPolyline(int layer, Polyline polyline)
         {
-            polylines.Add(polyline);
+            KeyValuePair<int, Polyline> layerPolyline = new KeyValuePair<int, Polyline>(layer, polyline);
+            layerPolylines.Add(layerPolyline);
         }
     }
 }

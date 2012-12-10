@@ -31,13 +31,15 @@ namespace AP_HA
 
             // create polyline
             Polyline myPolyline = new Polyline();
-
+            
             myPolyline.Stroke = activeMark.BrushColor;
             myPolyline.StrokeThickness = Convert.ToInt32(penStrokeThickness.Text);
             myPolyline.FillRule = FillRule.EvenOdd;
 
             // add polyline
-            activeMark.AddPolyline(myPolyline);
+            int activeLayer = Convert.ToInt32(stackSlider.Value);
+
+            activeMark.AddPolyline(activeLayer, myPolyline);
             polylineStack.Push(myPolyline);
             canvas.Children.Add(myPolyline);
         }
