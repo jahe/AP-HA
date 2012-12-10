@@ -17,9 +17,9 @@ namespace AP_HA
             tool = Tool.Pen;
         }
 
-        private void btnEraser_Click(object sender, RoutedEventArgs e)
+        private void btnUndo_Click(object sender, RoutedEventArgs e)
         {
-            tool = Tool.ZoomOut;
+            Console.WriteLine("Undo");
         }
 
         private void penMouseLeftButtonDown(object sender, MouseEventArgs e)
