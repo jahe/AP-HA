@@ -102,15 +102,22 @@ namespace AP_HA
             {
                 HausarbeitAPLabelCT label = new HausarbeitAPLabelCT();
 
-                label.id = SingleRandom.Instance.Next(1337);
+                label.id = SingleRandom.Instance.Next(1337 * 42);
                 label.title = mark.Name;
                 label.description = "not implemented";
-                //label.color = int.Parse(mark.BrushColor.Color.ToString(), System.Globalization.NumberStyles.HexNumber);
-
+                label.color = colorToInt(mark.BrushColor.Color);
+                
                 result.Add(label);
             }
 
             Project.labels = (HausarbeitAPLabelCT[])result.ToArray(typeof(HausarbeitAPLabelCT));
+        }
+
+        private int colorToInt(Color input)
+        {
+            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(input.A, input.R, input.G, input.B);
+            string hexColor = System.Drawing.ColorTranslator.ToHtml(myColor).Substring(1);
+            return Convert.ToInt32(hexColor, 16);
         }
     }
 }
