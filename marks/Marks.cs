@@ -24,6 +24,9 @@ namespace AP_HA
 
             // binding
             marksListBox.ItemsSource = marks;
+
+            // update labels in project
+            updateLabels();
         }
 
         private void addMarkToListbutton_Click(object sender, RoutedEventArgs e)
@@ -35,6 +38,9 @@ namespace AP_HA
                 marks.Add(new Mark() { Name = name });
                 markNameTextBox.Clear();
             }
+
+            // update labels in project
+            updateLabels();
         }
 
         private void changeMarkColor(object sender, RoutedEventArgs e)
@@ -44,6 +50,9 @@ namespace AP_HA
             Rectangle rect = ((Rectangle)sender);
             Mark mark = rect.DataContext as Mark;
             mark.BrushColor = new SolidColorBrush(newColor);
+
+            // update labels in project
+            updateLabels();
         }
 
         private Color getColorFromDialog()
@@ -66,6 +75,9 @@ namespace AP_HA
             Button button = ((Button) sender);
             Mark mark = button.DataContext as Mark;
             marks.Remove(mark);
+
+            // update labels in project
+            updateLabels();
         }
 
         private void displayLayerMarks(int layer)
@@ -79,26 +91,30 @@ namespace AP_HA
             }
         }
 
-        private HausarbeitAPLabelCT[] getLabels()
+        private void updateLabels()
         {
+            Console.WriteLine("project: " + Project);
+            Console.WriteLine("stack is loaded: " + Project);
+
+            if (Project == null)
+                return;
+
             ArrayList result = new ArrayList();
 
             foreach (Mark mark in marks)
             {
-                foreach (KeyValuePair<int,Polyline> lpl in mark.GetLayerPolylines())
-                {
-                    HausarbeitAPLabelCT label = new HausarbeitAPLabelCT();
+                HausarbeitAPLabelCT label = new HausarbeitAPLabelCT();
 
-                    label.id = lpl.Key;
-                    label.title = mark.Name;
-                    label.description = "not implemented";
-                    label.color = Convert.ToInt32(mark.BrushColor.Color);
+                label.id = SingleRandom.Instance.Next(1337);
+                label.title = mark.Name;
+                label.description = "not implemented";
+                //label.color = int.Parse(mark.BrushColor.Color.ToString(), System.Globalization.NumberStyles.HexNumber);
 
-                    result.Add(label);
-                }
+                result.Add(label);
             }
 
-            return (HausarbeitAPLabelCT[])result.ToArray(typeof(HausarbeitAPLabelCT));
+            Project.labels = (HausarbeitAPLabelCT[])result.ToArray(typeof(HausarbeitAPLabelCT));
+            Console.WriteLine(Project.labels);
         }
     }
 }

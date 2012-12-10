@@ -37,7 +37,10 @@ namespace AP_HA
                     ProjectText = "";
                     openProjectFile();
                 }
-            }      
+            }
+
+            // update labels in project
+            updateLabels();
         }
 
         private void openProjectFile()
