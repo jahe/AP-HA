@@ -246,7 +246,6 @@
                             </StackPanel>
                         </Expander>
                     </Border>
-                    <Button Click="btnSave_Click" Content="Render This on C:" />
                 </StackPanel>
             </Border>
             <StackPanel IsEnabled="{Binding StackIsLoaded}" Name="stackPanel1" Orientation="Vertical"></StackPanel>
