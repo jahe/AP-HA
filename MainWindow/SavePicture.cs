@@ -12,6 +12,9 @@ namespace AP_HA
     {
         public void savePicture(int picNo)
         {
+            if (polylineStack.Count == 0)
+                return;
+            
             int Height = (int)this.markCanvas.ActualHeight;
             int Width = (int)this.markCanvas.ActualWidth;
 
@@ -27,6 +30,8 @@ namespace AP_HA
             {
                 encoder.Save(stm);
             }
+
+            polylineStack.Clear();
         }
     }
 }
