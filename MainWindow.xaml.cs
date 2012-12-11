@@ -329,7 +329,6 @@ namespace AP_HA
             if(tool != Tool.CropSize)
             {
                 tool = Tool.CropSize;
-                cropRectangle.Cursor = Cursors.SizeNWSE;
             }           
         }
 
@@ -340,8 +339,6 @@ namespace AP_HA
                 tool = Tool.None;
             } 
         }
-
-                              
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {

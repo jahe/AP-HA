@@ -34,7 +34,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical"></StackPanel>
                         <Separator />
-                        <Button Content="OK"  Height="23" Name="cPDBtnOK" Width="75" Click="cPDBtnOK_Click" HorizontalAlignment="Right" />
+                        <Button Content="OK"  Height="23" Name="cPDBtnOK" Width="75" Click="cPDBtnOK_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0" />
                 </StackPanel>
             </DockPanel>
         </Border>           
