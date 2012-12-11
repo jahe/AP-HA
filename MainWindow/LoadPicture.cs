@@ -29,7 +29,9 @@ namespace AP_HA
                     imgControl.Source = stackImage;
                     StatusText = System.IO.Path.GetFileName(Project.getPictureFromList(picNo)) + " | Bild: " + picNo.ToString() + "/" + (Project.totalLayers - 1) +
                                 " Gesamtbildern. | Aktuelle Ansicht von: " + (int)stackSlider.Minimum + " bis " + (int)stackSlider.Maximum + " |";
-                }               
+                }
+
+                alignMarksBySection();
             }
             catch (Exception e)
             {
