@@ -2,7 +2,7 @@
         x:Name="this"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Neues Projekt erstellen" Height="261" Width="492" Background="#FF293955" Focusable="False" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+        Title="Neues Projekt erstellen" Height="246" Width="492" Background="#FF293955" Focusable="False" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
     <Grid>
         
         <Border DockPanel.Dock="Top" BorderThickness="1,1,1,0" BorderBrush="#999" CornerRadius="3" Margin="5">
@@ -10,9 +10,6 @@
                 <DockPanel.DataContext>
                     <Binding ElementName="this" />
                 </DockPanel.DataContext>
-                <StatusBar DockPanel.Dock="Bottom" Height="18">
-                    <Label Name="status" Content="Bereit" Padding="0" FontSize="10"></Label>
-                </StatusBar>
                 <StackPanel DockPanel.Dock="Left" Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="White" Background="#FF45597C" Height="22" Padding="3">Bitte Stapel auswählen</Label>

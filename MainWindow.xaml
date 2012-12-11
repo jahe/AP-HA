@@ -191,7 +191,7 @@
                     <Separator />
 
                     <Border BorderThickness="0" CornerRadius="5" Margin="5">
-                        <Expander IsExpanded="False" Margin="0" BorderThickness="0">
+                        <Expander Name="zoomExpander" IsExpanded="False" Margin="0" BorderThickness="0">
                             <Expander.Header>
                                 <TextBlock Foreground="White">
                             <TextBlock.Text>
@@ -288,7 +288,7 @@
         <!-- ######################## -->
         <Border BorderThickness="2" BorderBrush="#999" CornerRadius="3">
             <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
-                <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#eee">
+                <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#FFD9D9D9">
                     <!--<Canvas Width="{Binding ImgWidth}" Height="{Binding ImgHeight}" x:Name="canvas" Background="#fff" Focusable="True">-->
                     <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True">
                         <Canvas.LayoutTransform>
@@ -304,7 +304,7 @@
                             
                             <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0">
                                 <DockPanel LastChildFill="True">
-                                    <Button DockPanel.Dock="Top" Height="20" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Bottom" Click="cropBtnLocate" BorderThickness="0">
+                                    <Button DockPanel.Dock="Top" Height="20" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Bottom" Click="cropBtnLocate" BorderThickness="0">
                                         <Image Source="/AP-HA;component/Icon/64px-Cursor-design1-move.ico"></Image>
                                     </Button>
                                     <GroupBox Header="Bitte Bereich auswählen" Name="cropArea" BorderThickness="2" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp">

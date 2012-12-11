@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -259,6 +258,7 @@ namespace AP_HA
             Workspace = new Workspace();
             StackIsLoaded = false;
             StackIsCutted = false;
+            SectionView = false;
             imgControl.Source = null;
             StatusText = "Bitte einen Stapel oder Projekt öffnen";
             ProjectText = "";
@@ -314,28 +314,7 @@ namespace AP_HA
             } 
         }
 
-        private void cropBtn_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (Project.section == null)
-                {
-                    Project.section = new HausarbeitAPSectionCT();
-                }
-                    
-                Project.section.x = (int)Canvas.GetLeft(cropRectangle);
-                Project.section.y = (int)Canvas.GetTop(cropRectangle);
-                Project.section.width = (int)cropRectangle.Width;
-                Project.section.height = (int)cropRectangle.Height;
-                cropRectangle.Visibility = Visibility.Collapsed;
-                SectionView = true;
-                loadPicture((int)stackSlider.Value);                                
-            }
-            catch(Exception exc)
-            {
-                MessageBox.Show(exc.Message + exc.InnerException);
-            }
-        }                      
+                              
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {

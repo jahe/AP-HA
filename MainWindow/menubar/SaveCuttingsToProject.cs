@@ -39,6 +39,7 @@ namespace AP_HA
                 {
                     Project.section = new HausarbeitAPSectionCT();
                 }
+
                 Project.section.z = (int)stackSlider.Minimum;
                 Project.section.depth = (int)stackSlider.Maximum - Project.section.z;
             }

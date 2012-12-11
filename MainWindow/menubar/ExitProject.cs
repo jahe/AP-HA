@@ -15,6 +15,7 @@ namespace AP_HA
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
+                SectionView = false;
                 refreshSession();
             }                       
         }

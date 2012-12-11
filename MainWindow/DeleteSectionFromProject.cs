@@ -19,6 +19,7 @@ namespace AP_HA
 
                 if (result == System.Windows.Forms.DialogResult.Yes) //Wenn Section gelöscht werden soll
                 {
+                    showOriginalStack();
                     Project.section = null;
                 }
             }

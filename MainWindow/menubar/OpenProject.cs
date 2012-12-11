@@ -68,6 +68,8 @@ namespace AP_HA
                 stackSlider.Maximum = Project.totalLayers - 1;
                 loadPicture(0);
                 StackIsLoaded = true;
+                SectionView = false;
+                ProjectText = Project.description;
                 this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.name);
             }
             catch (Exception exc)

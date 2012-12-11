@@ -31,6 +31,7 @@ namespace AP_HA
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
                 {
+                    refreshSession();
                     openStack();
                 }
             }
@@ -44,29 +45,33 @@ namespace AP_HA
             refreshSession();
             StatusText = "Neuer Workspace wird erstellt";
             CreateProjectDialog createProjectDialog = new CreateProjectDialog();
-            try
+
+            if (createProjectDialog.DialogResult.HasValue && createProjectDialog.DialogResult.Value)
             {
-                Workspace = new Workspace(createProjectDialog.NewProjectName);
-                Workspace.copyStackFolder(createProjectDialog.StackPath);
-                Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
-                Project.description = createProjectDialog.NewProjectDescription;
-                Project.initFileListFromStack(Workspace.TempFolder);
-                Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
-                //Project.section = new HausarbeitAPSectionCT();
-                //Project.section.width = Project.width;
-                //Project.section.height = Project.height;
-                //Project.section.x = 0;
-                //Project.section.y = 0;
-                ProjectText = Project.description;
-                stackSlider.Maximum = Project.totalLayers - 1;
-                stackSlider.Value = 0;
-                loadPicture(0);
-                StackIsLoaded = true;
-                this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.name);
+                try
+                {
+                    Workspace = new Workspace(createProjectDialog.NewProjectName);
+                    Workspace.copyStackFolder(createProjectDialog.StackPath);
+                    Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
+                    Project.description = createProjectDialog.NewProjectDescription;
+                    Project.initFileListFromStack(Workspace.TempFolder);
+                    Project.SaveToFile(Workspace.TempFolder + @"\project.xml");
+                    ProjectText = Project.description;
+                    stackSlider.Maximum = Project.totalLayers - 1;
+                    stackSlider.Value = 0;
+                    loadPicture(0);
+                    StackIsLoaded = true;
+                    SectionView = false;
+                    this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.name);
+                }
+                catch (Exception exc)
+                {
+                    System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + exc.Message + exc.StackTrace);
+                    refreshSession();
+                }
             }
-            catch (Exception exc)
+            else
             {
-                System.Windows.MessageBox.Show("Das Projekt konnte nicht erstellt werden\n" + exc.Message + exc.StackTrace);
                 refreshSession();
             }
         }

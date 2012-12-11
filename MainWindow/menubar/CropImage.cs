@@ -10,10 +10,14 @@ namespace AP_HA
             tool = Tool.CropLocation;
             if (cropRectangle.Visibility != Visibility.Visible)
             {
+                zoomSlider.Value = 1.0;
+                zoomExpander.IsExpanded = false;
+                zoomExpander.IsEnabled = false;
                 cropRectangle.Visibility = Visibility.Visible;
             }
             else
             {
+                zoomExpander.IsEnabled = true;
                 cropRectangle.Visibility = Visibility.Collapsed;                
             }                    
         } 

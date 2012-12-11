@@ -6,6 +6,11 @@ namespace AP_HA
     {
         private void backToOriginalCut(object sender, RoutedEventArgs e)  //Menü->Bearbeiten
         {
+            showOriginalStack();
+        }
+
+        private void showOriginalStack()
+        {
             SectionView = false;
             stackSlider.Minimum = 0;
             stackSlider.Maximum = Project.totalLayers - 1;
