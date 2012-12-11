@@ -49,36 +49,6 @@
                 <Separator />
                 <MenuItem Name="menuExitProgram" Header="_Beenden" Click="exitProgram" ToolTip="Programm schliessen. Workspace wird gelöscht" />
             </MenuItem>
-            <MenuItem Name="menuEdit" Header="_Bearbeiten">
-                <MenuItem Name="menuCutStack" Header="_Stapelgröße" IsEnabled="{Binding StackIsLoaded}">
-                    <MenuItem Name="menuCutBeforeCursor" Header="_Bilder links entfernen" Click="cutBeforeCursor" ToolTip="Alle Bilder vor aktuellem Bild ausblenden" IsEnabled="{Binding Path=CutableLeft}">
-                        <MenuItem.Icon>
-                            <Image Source="/AP-HA;component/icon/CutButtonBefore.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Name="menuCutAfterCursor" Header="_Bilder rechts entfernen" Click="cutAfterCursor" ToolTip="Alle Bilder nach aktuellem Bild ausblenden" IsEnabled="{Binding CutableRight}">
-                        <MenuItem.Icon>
-                            <Image Source="/AP-HA;component/icon/CutButtonAfter.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Name="menuBackToOriginalCut" Header="_Ganzen Stapel anzeigen" Click="backToOriginalCut" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsLoaded}">
-                        <MenuItem.Icon>
-                            <Image Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Name="menuShowCutted" Header="_Gespeicherte -Beschneidung- anzeigen " Click="btnShowCutted_Click" ToolTip="Gespeicherten Ausschnitt anzeigen" IsEnabled="{Binding StackIsLoaded}">
-                        <MenuItem.Icon>
-                            <Image Source="/AP-HA;component/Icon/showCutted.ico" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator />
-                    <MenuItem Name="menuSaveCuttingsToProject" Header="_Aktuelle Cuttings speichern" ToolTip="Gesamten Stapel anzeigen" IsEnabled="{Binding StackIsCutted}" Click="menuSaveCuttingsToProject_Click">
-                        <MenuItem.Icon>
-                            <Image Source="/AP-HA;component/icon/safeProject.ico" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-            </MenuItem>
             <MenuItem Header="_Einstellungen">
                 <MenuItem Name="menuMouseSettings" Header="_Maus" Click="menuMouseSettings_Click" />
             </MenuItem>
@@ -304,7 +274,7 @@
                                 <DockPanel LastChildFill="True">
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                                         <Button  Content="+" Height="20" HorizontalAlignment="Left" Margin="2" Click="cropBtnLocate" BorderThickness="0" Width="25" Background="#FF6B7386" Foreground="White" FontWeight="Bold" FontSize="15" Padding="0" />
-                                        <Button Background="#A3FF0000" BorderThickness="0" Content="x" FontSize="12" Margin="2" FontWeight="Bold" Foreground="White" Height="20" Padding="0" Width="25" HorizontalAlignment="Center" />
+                                        <Button Background="#A3FF0000" BorderThickness="0" Content="x" FontSize="12" Margin="2" FontWeight="Bold" Foreground="White" Height="20" Padding="0" Width="25" Click="cropBtnClose" />
                                     </StackPanel>
                                     <GroupBox Header="Bitte Bereich auswählen" Name="cropArea" BorderThickness="1" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp" BorderBrush="Red">
                                         <Button Content="CROP" Height="20" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="cropBtn_Click" Background="#9E263453" Foreground="White" BorderThickness="0" Width="39"></Button>
