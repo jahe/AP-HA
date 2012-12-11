@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Drawing;
 
 namespace AP_HA
 {
@@ -67,9 +68,14 @@ namespace AP_HA
             foreach (FileInfo file in tiffFilePathList)
             {
                 string temppathTIFF = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".tif");
+                file.CopyTo(temppathTIFF, false);
+
+                System.Windows.Media.Imaging.BitmapSource tiffSource = DataProcessor.getImgFromPath(temppathTIFF);
+
+                Bitmap blankBMP = new Bitmap(tiffSource.PixelWidth, tiffSource.PixelHeight);
                 string temppathBMP = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".bmp");
-                file.CopyTo(temppathTIFF, false);                
-                file.CopyTo(temppathBMP, false);
+                                
+                blankBMP.Save(temppathBMP);
                 n++;
             }
         }

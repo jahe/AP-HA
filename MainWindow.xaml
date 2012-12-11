@@ -108,11 +108,8 @@
                 <Button  Name="btnCutBackToOriginal" Width="22" Height="22" Click="backToOriginalCut" IsEnabled="{Binding StackIsLoaded}" ToolTip="{Binding Path=ToolTip, ElementName=menuBackToOriginalCut}">
                     <Image Width="15" Height="15" Source="/AP-HA;component/icon/CutButtonBackToOriginal.png" />
                 </Button>
-                <Button  Name="btnShowCutted" Width="22" Height="22" IsEnabled="{Binding StackIsLoaded}" Click="btnShowCutted_Click" ToolTip="Gespeicherten Ausschnitt anzeigen">
-                    <Image Width="15" Height="15" Source="/AP-HA;component/Icon/showCutted.ico" />
-                </Button>
-                <Button  Name="btnSaveCuttingsToProject" Width="22" Height="22" IsEnabled="{Binding StackIsCutted}" Click="menuSaveCuttingsToProject_Click" ToolTip="Speichert die aktuellen Section Einstellungen">
-                    <Image Width="15" Height="15" Source="/AP-HA;component/icon/safeProject.ico" />
+                <Button Name="btnCrop" Click="btnCrop_Click" IsEnabled="{Binding StackIsLoaded}">
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/crop.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
                 <Button Name="btnZoomIn"  Click="btnZoomIn_Click">
@@ -123,9 +120,6 @@
                 </Button>
                 <Button Name="btnMove" Click="btnMove_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/cursor_move.png" />
-                </Button>
-                <Button Name="btnCrop" Click="btnCrop_Click">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/crop.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
                 <Button Name="btnPen" Click="btnPen_Click">
@@ -223,9 +217,11 @@
                             </TextBlock.Text>
                                 </TextBlock>
                             </Expander.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Width="50" Height="20" />
-                                <Button Width="50" Height="20" />
+                            <StackPanel Orientation="Vertical" Margin="0,3">
+                                <Button Content="Anzeigen"  Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="btnShowCutted_Click" ToolTip="Zeigt die im Projekt gespeicherte Section an"/>
+                                <Button Content="Ausblenden" IsEnabled="{Binding SectionView}" Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="backToOriginalCut" ToolTip="Zeigt den gesamten Stapel ohne Section an"/>
+                                <Button Content="Speichern" Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="menuSaveCuttingsToProject_Click" ToolTip="Fügt die aktuelle Section dem Projekt hinzu" />
+                                <Button Content="Löschen" Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="deleteSectionFromProject" />
                             </StackPanel>
                         </Expander>
                     </Border>
@@ -308,7 +304,7 @@
                             
                             <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0">
                                 <DockPanel LastChildFill="True">
-                                    <Button DockPanel.Dock="Top" Height="20" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0">
+                                    <Button DockPanel.Dock="Top" Height="20" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Bottom" Click="cropBtnLocate" BorderThickness="0">
                                         <Image Source="/AP-HA;component/Icon/64px-Cursor-design1-move.ico"></Image>
                                     </Button>
                                     <GroupBox Header="Bitte Bereich auswählen" Name="cropArea" BorderThickness="2" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp">

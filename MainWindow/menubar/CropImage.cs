@@ -14,8 +14,7 @@ namespace AP_HA
             }
             else
             {
-                cropRectangle.Visibility = Visibility.Collapsed;
-                
+                cropRectangle.Visibility = Visibility.Collapsed;                
             }                    
         } 
     }

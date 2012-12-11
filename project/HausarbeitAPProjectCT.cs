@@ -139,7 +139,7 @@ namespace AP_HA
                     return false;                   
                 }
             }
-            else //Wenn keine Datei mit dem Name existiert
+            else //Wenn keine Datei mit dem Namen existiert
             {                
                 copyDataToZip(projectZipPath);
                 return true;

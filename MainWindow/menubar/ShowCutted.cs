@@ -8,13 +8,17 @@ namespace AP_HA
         {
             if (Project.section == null)
             {
-                MessageBox.Show("Für dieses Projekt wurde noch keine Section gespeichert");
+                MessageBox.Show("Für dieses Projekt wurde noch keine Section angelegt", "Achtung");
             }
             else
             {
-                stackSlider.Value = Project.section.z;
-                stackSlider.Minimum = Project.section.z;
-                stackSlider.Maximum = Project.section.depth + Project.section.z;
+                if(Project.section != null)
+                {
+                    stackSlider.Value = Project.section.z;
+                    stackSlider.Minimum = Project.section.z;
+                    stackSlider.Maximum = Project.section.depth + Project.section.z;
+                }
+                SectionView = true;                
                 loadPicture((int)stackSlider.Value);
             }            
         }

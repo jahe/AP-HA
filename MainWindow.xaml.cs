@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Shapes;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -25,7 +25,6 @@ namespace AP_HA
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         private string workspaceFolder = @"C:\APHA\workspace";
         private HausarbeitAPProjectCT Project;
-        HausarbeitAPSectionCT Section;
         private Workspace Workspace;
 
         #region Constructors
@@ -71,6 +70,19 @@ namespace AP_HA
             {
                 _stackIsCutted = value;
                 OnPropertyChanged("StackIsCutted");
+            }
+        }
+        #endregion
+
+        #region Status Section wird angezeigt
+        private bool _sectionView = false;
+        public bool SectionView
+        {
+            get { return _sectionView; }
+            set
+            {
+                _sectionView = value;
+                OnPropertyChanged("SectionView");
             }
         }
         #endregion
@@ -245,7 +257,6 @@ namespace AP_HA
             stackSlider.Value = 0;
             Project = new HausarbeitAPProjectCT();
             Workspace = new Workspace();
-            Section = null;
             StackIsLoaded = false;
             StackIsCutted = false;
             imgControl.Source = null;
@@ -311,13 +322,14 @@ namespace AP_HA
                 {
                     Project.section = new HausarbeitAPSectionCT();
                 }
-                    Project.section.x = (int)Canvas.GetLeft(cropArea);
-                    Project.section.y = (int)Canvas.GetTop(cropArea);
-                    Project.section.width = (int)cropArea.ActualWidth;
-                    Project.section.height = (int)cropArea.ActualHeight;
-                    cropRectangle.Visibility = Visibility.Collapsed;
-                    loadPicture((int)stackSlider.Value);
-                                
+                    
+                Project.section.x = (int)Canvas.GetLeft(cropRectangle);
+                Project.section.y = (int)Canvas.GetTop(cropRectangle);
+                Project.section.width = (int)cropRectangle.Width;
+                Project.section.height = (int)cropRectangle.Height;
+                cropRectangle.Visibility = Visibility.Collapsed;
+                SectionView = true;
+                loadPicture((int)stackSlider.Value);                                
             }
             catch(Exception exc)
             {
@@ -358,11 +370,9 @@ namespace AP_HA
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void cropBtnLocate(object sender, RoutedEventArgs e)
         {
             tool = Tool.CropLocation;
-        }
-
-        
+        }       
     }
 }
