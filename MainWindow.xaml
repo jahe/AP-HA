@@ -112,12 +112,12 @@
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/crop.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
-                <Button Name="btnZoomIn"  Click="btnZoomIn_Click">
+                <!--<Button Name="btnZoomIn"  Click="btnZoomIn_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/zoom-in.png" />
                 </Button>
                 <Button Name="btnZoomOut" Click="btnZoomOut_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/zoom-out.png" />
-                </Button>
+                </Button>-->
                 <Button Name="btnMove" Click="btnMove_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/cursor_move.png" />
                 </Button>
@@ -286,10 +286,11 @@
         <!-- #      Dock.CENTER     # -->
         <!-- ######################## -->
         <Border BorderThickness="2" BorderBrush="#999" CornerRadius="3">
-            <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewer_PreviewMouseLeftButtonDown" MouseMove="scrollViewer_MouseMove" MouseLeftButtonUp="scrollViewer_MouseLeftButtonUp" PreviewMouseLeftButtonUp="scrollViewer_MouseLeftButtonUp">
+            <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="scrollViewerClick" MouseMove="scrollViewerMove" PreviewMouseLeftButtonUp="scrollViewerButtonUp">
                 <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#FFD9D9D9">
                     <!--<Canvas Width="{Binding ImgWidth}" Height="{Binding ImgHeight}" x:Name="canvas" Background="#fff" Focusable="True">-->
-                    <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True">
+                    <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True"
+                            MouseLeftButtonDown="canvasClick" MouseMove="canvasMove" MouseLeftButtonUp="canvasButtonUp">
                         <Canvas.LayoutTransform>
                             <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
                         </Canvas.LayoutTransform>
@@ -298,7 +299,7 @@
                                 <apha:FirstEffect Contrast="{Binding ElementName=ContrastSlider, Path=Value}" Brightness="{Binding ElementName=BrightnessSlider, Path=Value}"/>
                             </Image.Effect>
                         </Image>
-
+                        
                         <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
                             <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0">
                                 <DockPanel LastChildFill="True">

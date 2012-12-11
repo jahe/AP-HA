@@ -114,7 +114,6 @@
     <Compile Include="ShortCut\ShortCutEngine.cs" />
     <Compile Include="ShortCut\ShortCutEventArgs.cs" />
     <Compile Include="MainWindow\Move.cs" />
-    <Compile Include="MainWindow\Zoom.cs" />
     <Compile Include="MainWindow\Stackslider.cs" />
     <Compile Include="Util\SingleRandom.cs" />
     <Compile Include="Util\DataProcessor.cs" />

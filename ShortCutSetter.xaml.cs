@@ -25,6 +25,7 @@ namespace AP_HA
         private StackPanel btnPanel;
         private Button reset;
         private Button ok;
+        private ComboBox mouseMoveCB;
 
         public ShortCutSetter(ShortCut sc)
         {
@@ -44,8 +45,18 @@ namespace AP_HA
             header.FontWeight = FontWeights.Bold;
             header.Text = "Neuer Shortcut:";
 
+            StackPanel scsPanel = new StackPanel();
+            scsPanel.Orientation = Orientation.Horizontal;
+
             scText = new TextBox();
             scText.IsEnabled = false;
+
+            mouseMoveCB = new ComboBox();
+            mouseMoveCB.Items.Add(MouseMoveDirection.None);
+            mouseMoveCB.Items.Add(MouseMoveDirection.Up);
+
+            scsPanel.Children.Add(scText);
+            scsPanel.Children.Add(mouseMoveCB);
 
             btnPanel = new StackPanel();
             btnPanel.Orientation = Orientation.Horizontal;
@@ -60,7 +71,7 @@ namespace AP_HA
             btnPanel.Children.Add(ok);
 
             sPanel.Children.Add(header);
-            sPanel.Children.Add(scText);
+            sPanel.Children.Add(scsPanel);
             sPanel.Children.Add(btnPanel);
 
             this.AddChild(sPanel);
@@ -68,7 +79,13 @@ namespace AP_HA
             this.PreviewKeyDown += new KeyEventHandler(OnKeyDown);
             this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown);
             this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
-            this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
+            //this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
+            mouseMoveCB.SelectionChanged += new SelectionChangedEventHandler(OnMmSelectChanged);
+        }
+
+        private void OnMmSelectChanged(object sender, SelectionChangedEventArgs e)
+        {
+            sc.register((MouseMoveDirection) mouseMoveCB.SelectedItem);
         }
 
         private void OnReset(object sender, RoutedEventArgs e)
