@@ -220,7 +220,6 @@
                             <StackPanel Orientation="Vertical" Margin="0,3">
                                 <Button Content="Anzeigen"  Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="btnShowCutted_Click" ToolTip="Zeigt die im Projekt gespeicherte Section an"/>
                                 <Button Content="Ausblenden" IsEnabled="{Binding SectionView}" Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="backToOriginalCut" ToolTip="Zeigt den gesamten Stapel ohne Section an"/>
-                                <Button Content="Speichern" Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="menuSaveCuttingsToProject_Click" ToolTip="Fügt die aktuelle Section dem Projekt hinzu" />
                                 <Button Content="Löschen" Width="70" Height="20" Margin="0,3" HorizontalAlignment="Left" Click="deleteSectionFromProject" />
                             </StackPanel>
                         </Expander>
@@ -301,23 +300,18 @@
                         </Image>
 
                         <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
-                            
                             <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0">
                                 <DockPanel LastChildFill="True">
-                                    <Button DockPanel.Dock="Top" Height="20" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Bottom" Click="cropBtnLocate" BorderThickness="0">
-                                        <Image Source="/AP-HA;component/Icon/64px-Cursor-design1-move.ico"></Image>
-                                    </Button>
-                                    <GroupBox Header="Bitte Bereich auswählen" Name="cropArea" BorderThickness="2" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp">
-                                        <Button Content="CROP" Height="20" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
-                                        <GroupBox.BorderBrush>
-                                            <LinearGradientBrush/>
-                                        </GroupBox.BorderBrush>
+                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                        <Button  Content="+" Height="20" HorizontalAlignment="Left" Margin="2" Click="cropBtnLocate" BorderThickness="0" Width="25" Background="#FF6B7386" Foreground="White" FontWeight="Bold" FontSize="15" Padding="0" />
+                                        <Button Background="#A3FF0000" BorderThickness="0" Content="x" FontSize="12" Margin="2" FontWeight="Bold" Foreground="White" Height="20" Padding="0" Width="25" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                    <GroupBox Header="Bitte Bereich auswählen" Name="cropArea" BorderThickness="1" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp" BorderBrush="Red">
+                                        <Button Content="CROP" Height="20" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="cropBtn_Click" Background="#9E263453" Foreground="White" BorderThickness="0" Width="39"></Button>
                                     </GroupBox>
                                 </DockPanel>
                             </GroupBox>
                         </Canvas>
-
-
                     </Canvas>
                 </Border>
             </ScrollViewer>

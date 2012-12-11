@@ -81,15 +81,15 @@ namespace AP_HA
                     break;
 
                 case Tool.CropLocation:
-                    Point mousePos2 = e.GetPosition(imgControl);                   
+                    Point mousePos2 = e.GetPosition(imgControl);
                     Canvas.SetLeft(cropRectangle, mousePos2.X);
                     Canvas.SetTop(cropRectangle, mousePos2.Y);
                     break;
 
                 case Tool.CropSize:
                     Point mousePos3 = e.GetPosition(imgControl);
-                    cropRectangle.Width = mousePos3.X - Canvas.GetLeft(cropRectangle);
-                    cropRectangle.Height = mousePos3.Y - Canvas.GetLeft(cropRectangle);
+                    cropRectangle.Width = mousePos3.X - Canvas.GetLeft(cropRectangle) + 13;
+                    cropRectangle.Height = mousePos3.Y - Canvas.GetTop(cropRectangle) + 7;
                     break;
 
                 default:

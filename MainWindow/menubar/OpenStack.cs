@@ -35,7 +35,6 @@ namespace AP_HA
                     openStack();
                 }
             }
-
             // update labels in project
             updateLabels();
         }

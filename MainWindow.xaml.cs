@@ -351,7 +351,15 @@ namespace AP_HA
 
         private void cropBtnLocate(object sender, RoutedEventArgs e)
         {
-            tool = Tool.CropLocation;
+            if (tool != Tool.CropLocation)
+            {
+                tool = Tool.CropLocation;
+            }
+            else
+            {
+                tool = Tool.None;
+            }
+            
         }       
     }
 }

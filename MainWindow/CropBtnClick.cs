@@ -21,7 +21,7 @@ namespace AP_HA
                 {
                     DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section informationen hinterlegt\nMöchten sie die Section überschreiben?",
                                   "Achtung",
-                                   MessageBoxButtons.YesNoCancel,
+                                   MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,
                                    MessageBoxDefaultButton.Button2);
 
