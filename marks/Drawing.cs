@@ -15,6 +15,7 @@ namespace AP_HA
         private void btnPen_Click(object sender, RoutedEventArgs e)
         {
             tool = Tool.Pen;
+            showOriginalStack();
         }
 
         private void btnUndo_Click(object sender, RoutedEventArgs e)
