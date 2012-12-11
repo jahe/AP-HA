@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AP-HA", "AP-HA.csproj", "{7970B9AE-7C09-48E0-B7A8-BD976782177E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "..\Setup1\Setup1.vdproj", "{24835C0C-2A51-4E16-9171-9A59C99F7CE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,8 @@ Global
 		{7970B9AE-7C09-48E0-B7A8-BD976782177E}.Debug|x86.Build.0 = Debug|x86
 		{7970B9AE-7C09-48E0-B7A8-BD976782177E}.Release|x86.ActiveCfg = Release|x86
 		{7970B9AE-7C09-48E0-B7A8-BD976782177E}.Release|x86.Build.0 = Release|x86
+		{24835C0C-2A51-4E16-9171-9A59C99F7CE0}.Debug|x86.ActiveCfg = Debug
+		{24835C0C-2A51-4E16-9171-9A59C99F7CE0}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
