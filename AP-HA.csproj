@@ -82,6 +82,7 @@
     <Compile Include="MainWindow\menubar\SaveProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
     <Compile Include="MainWindow\menubar\ShowCutted.cs" />
+    <Compile Include="MainWindow\SavePicture.cs" />
     <Compile Include="Marks\Drawing.cs" />
     <Compile Include="Workspace\Workspace.cs" />
     <Compile Include="MainWindow\menubar\OpenProject.cs" />

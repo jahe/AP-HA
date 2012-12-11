@@ -12,8 +12,9 @@ namespace AP_HA
         {
             try
             {
-                loadPicture((int)stackSlider.Value);
-                displayLayerMarks((int)stackSlider.Value);
+                savePicture((int)e.OldValue);
+                loadPicture((int)e.NewValue);
+                displayLayerMarks((int)e.NewValue);
             }
             catch (Exception ex)
             {

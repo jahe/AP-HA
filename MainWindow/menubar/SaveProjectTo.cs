@@ -13,6 +13,8 @@ namespace AP_HA
 
             if (fBDResult == System.Windows.Forms.DialogResult.OK)
             {
+                savePicture((int)stackSlider.Value);
+
                 Project.createZipFromWorkspace(Workspace.TempFolder, fBD.SelectedPath);
             }
         }
