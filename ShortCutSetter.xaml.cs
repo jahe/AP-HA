@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
 
 namespace AP_HA
 {
@@ -26,6 +27,7 @@ namespace AP_HA
         private Button reset;
         private Button ok;
         private ComboBox mouseMoveCB;
+        private Button btnDownSection;
 
         public ShortCutSetter(ShortCut sc)
         {
@@ -49,13 +51,29 @@ namespace AP_HA
             scsPanel.Orientation = Orientation.Horizontal;
 
             scText = new TextBox();
-            scText.IsEnabled = false;
+            scText.FontSize = 30;
+            scText.Margin = new Thickness(5,20,5,20);
+            scText.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+            scText.IsManipulationEnabled = false;
+
+            btnDownSection = new Button();
+            btnDownSection.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.WhiteSmoke);
+            btnDownSection.Width = 40;
+            btnDownSection.Height = 40;
+            btnDownSection.IsEnabled = true;
+
+            Label mmLbl = new Label();
+            mmLbl.Content = "Maus Bewegung: ";
 
             mouseMoveCB = new ComboBox();
             mouseMoveCB.Items.Add(MouseMoveDirection.None);
             mouseMoveCB.Items.Add(MouseMoveDirection.Up);
+            mouseMoveCB.Items.Add(MouseMoveDirection.Down);
+            mouseMoveCB.Items.Add(MouseMoveDirection.Left);
+            mouseMoveCB.Items.Add(MouseMoveDirection.Right);
+            mouseMoveCB.SelectedIndex = 0;
 
-            scsPanel.Children.Add(scText);
+            scsPanel.Children.Add(mmLbl);
             scsPanel.Children.Add(mouseMoveCB);
 
             btnPanel = new StackPanel();
@@ -71,13 +89,15 @@ namespace AP_HA
             btnPanel.Children.Add(ok);
 
             sPanel.Children.Add(header);
+            sPanel.Children.Add(scText);
+            sPanel.Children.Add(btnDownSection);
             sPanel.Children.Add(scsPanel);
             sPanel.Children.Add(btnPanel);
 
             this.AddChild(sPanel);
 
             this.PreviewKeyDown += new KeyEventHandler(OnKeyDown);
-            this.PreviewMouseDown += new MouseButtonEventHandler(OnPreviewMouseDown);
+            btnDownSection.PreviewMouseDown += new MouseButtonEventHandler(OnMouseDown);
             this.PreviewMouseWheel += new MouseWheelEventHandler(OnPreviewMouseWheel);
             //this.PreviewMouseMove += new MouseEventHandler(OnPreviewMouseMove);
             mouseMoveCB.SelectionChanged += new SelectionChangedEventHandler(OnMmSelectChanged);
@@ -86,11 +106,13 @@ namespace AP_HA
         private void OnMmSelectChanged(object sender, SelectionChangedEventArgs e)
         {
             sc.register((MouseMoveDirection) mouseMoveCB.SelectedItem);
+            scText.Text = sc.ToString();
         }
 
         private void OnReset(object sender, RoutedEventArgs e)
         {
             sc.reset();
+            mouseMoveCB.SelectedIndex = 0;
             scText.Text = sc.ToString();
         }
 
@@ -105,7 +127,7 @@ namespace AP_HA
             scText.Text = sc.ToString();
         }
 
-        private void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             sc.register(e.ChangedButton);
             scText.Text = sc.ToString();
@@ -123,11 +145,11 @@ namespace AP_HA
             scText.Text = sc.ToString();
         }
 
-        private Point? lastMovePoint;
+        private System.Windows.Point? lastMovePoint;
 
         private void OnPreviewMouseMove(object sender, MouseEventArgs e)
         {
-            Point mousePos = e.GetPosition(this);
+            System.Windows.Point mousePos = e.GetPosition(this);
 
             if (lastMovePoint != null)
             {
