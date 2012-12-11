@@ -34,6 +34,7 @@ namespace AP_HA
             //createDefaultSce(@"C:\Users\admin\Desktop");
             DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
             InitializeShortcuts();
+            this.Closed += new EventHandler(MainWindow_Closed);
         }
         #endregion
 
@@ -152,6 +153,28 @@ namespace AP_HA
         }
         #endregion        
         #endregion        
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            // Events von den Shortcuts lösen, damit die SC-Engine serialisierbar ist
+            scEngine.getShortcutFromName("Zoom In").Execute -= zoomIn;
+            scEngine.getShortcutFromName("Zoom Out").Execute -= zoomOut;
+            scEngine.getShortcutFromName("Scroll In").Execute -= scrollIn;
+            scEngine.getShortcutFromName("Scroll Out").Execute -= scrollOut;
+            scEngine.getShortcutFromName("Increase Brightness").Execute -= incBrightness;
+            scEngine.getShortcutFromName("Decrease Brightness").Execute -= decBrightness;
+            scEngine.getShortcutFromName("Increase Contrast").Execute -= incContrast;
+            scEngine.getShortcutFromName("Decrease Contrast").Execute -= decContrast;
+
+            try
+            {
+                scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
 
         private void registerShortcutFuncs()
         {
@@ -288,15 +311,18 @@ namespace AP_HA
         {
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
-
+            /*
             try
             {
-                scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+                scEngine = null;
+                tempSce.Serialize(rootAppFolder + @"\ShortCut\default.sce");
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
+            scEngine = tempSce;
+             * */
         }
         private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
