@@ -12,10 +12,13 @@ namespace AP_HA
             }
             else
             {
-                if(Project.section != null)
+                if(Project.section.z > 0)
                 {
                     stackSlider.Value = Project.section.z;
-                    stackSlider.Minimum = Project.section.z;
+                    stackSlider.Minimum = Project.section.z;                   
+                }
+                if(Project.section.depth > 0 && Project.section.z > 0)
+                {
                     stackSlider.Maximum = Project.section.depth + Project.section.z;
                 }
                 SectionView = true;                
