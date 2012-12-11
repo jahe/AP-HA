@@ -135,9 +135,9 @@ namespace AP_HA
 
         private Color intToColor(int input)
         {
-            string hexColor = string.Format("{0:x}", input);
+            string hexColor = string.Format("{0:x}", input).PadLeft(6, '0');
             System.Drawing.Color myColor = System.Drawing.ColorTranslator.FromHtml("#" + hexColor);
-            return System.Windows.Media.Color.FromArgb(myColor.A, myColor.R, myColor.G, myColor.B);
+            return Color.FromArgb(myColor.A, myColor.R, myColor.G, myColor.B);
         }
     }
 }
