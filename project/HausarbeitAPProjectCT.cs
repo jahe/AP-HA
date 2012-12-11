@@ -12,11 +12,11 @@ namespace AP_HA
 {       
     public partial class HausarbeitAPProjectCT
     {
-        private List<string> filePathListTIFF;
-        private string[] filePathsTIFF;
+        public List<string> filePathListTIFF;
+        public string[] filePathsTIFF;
 
-        private List<string> filePathListBMP;
-        private string[] filePathsBMP;
+        public List<string> filePathListBMP;
+        public string[] filePathsBMP;
 
         Uri FileName;
         PackagePart part;
