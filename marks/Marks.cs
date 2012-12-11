@@ -124,6 +124,8 @@ namespace AP_HA
                 mark.BrushColor.Color = intToColor(label.color);
                 marks.Add(mark);
             }
+
+            marksListBox.SelectedIndex = 0;
         }
 
         private int colorToInt(Color input)
