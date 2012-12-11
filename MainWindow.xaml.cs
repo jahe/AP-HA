@@ -289,7 +289,18 @@ namespace AP_HA
         }
         private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            tool = Tool.None;
+            if(tool != Tool.CropSize)
+            {
+                tool = Tool.CropSize;
+            }           
+        }
+
+        private void GroupBox_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (tool == Tool.CropSize)
+            {
+                tool = Tool.None;
+            } 
         }
 
         private void cropBtn_Click(object sender, RoutedEventArgs e)
@@ -300,10 +311,10 @@ namespace AP_HA
                 {
                     Project.section = new HausarbeitAPSectionCT();
                 }
-                    Project.section.x = (int)Canvas.GetLeft(cropRectangle);
-                    Project.section.y = (int)Canvas.GetTop(cropRectangle);
-                    Project.section.width = (int)cropRectangle.Width;
-                    Project.section.height = (int)cropRectangle.Height;
+                    Project.section.x = (int)Canvas.GetLeft(cropArea);
+                    Project.section.y = (int)Canvas.GetTop(cropArea);
+                    Project.section.width = (int)cropArea.ActualWidth;
+                    Project.section.height = (int)cropArea.ActualHeight;
                     cropRectangle.Visibility = Visibility.Collapsed;
                     loadPicture((int)stackSlider.Value);
                                 
@@ -346,5 +357,12 @@ namespace AP_HA
                 encoder.Save(stm);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            tool = Tool.CropLocation;
+        }
+
+        
     }
 }

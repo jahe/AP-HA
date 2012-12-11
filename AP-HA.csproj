@@ -248,6 +248,12 @@
   <ItemGroup>
     <Resource Include="Icon\undo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Unbenannt.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\64px-Cursor-design1-move.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\xsd.exe" /c /language:CS "$(ProjectDir)IO\Project.xsd" /outputdir:"$(ProjectDir)IO" /namespace:AP_HA /edb"</PreBuildEvent>

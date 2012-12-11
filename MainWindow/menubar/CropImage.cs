@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace AP_HA
 {
@@ -14,8 +15,8 @@ namespace AP_HA
             else
             {
                 cropRectangle.Visibility = Visibility.Collapsed;
-            }
-                    
+                
+            }                    
         } 
     }
 }

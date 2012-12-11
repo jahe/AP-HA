@@ -131,8 +131,8 @@
                 <Button Name="btnPen" Click="btnPen_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/pen.png" />
                 </Button>
-                <Button Name="btnUndo" Click="btnUndo_Click">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/undo.png" />
+                <Button Name="btnEraser">
+                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/eraser.png" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
@@ -286,18 +286,28 @@
                             </Image.Effect>
                         </Image>
 <<<<<<< HEAD
-                        <InkCanvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
-                            <Rectangle Fill="#33CC66" Width="2in"       Height="1in"
+                        
+                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+                            <Rectangle Fill="#33CC66" Width="2in" Height="1in"
                                        Canvas.Top="25" Canvas.Left="50" 
                                        StrokeThickness="6px" Stroke="Orange" />
-                        </InkCanvas>
+                            <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown" Foreground="Red">
+                                <DockPanel>
+                                    <Button Content="CROP" DockPanel.Dock="Bottom" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="cropBtn_Click"></Button>
+                                </DockPanel>
+                            </GroupBox>
 =======
                         <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" Header="Bitte bereich auswählen" MouseDown="cropRectangle_MouseDown" Foreground="Red">
                             <DockPanel>
                                 <Button Content="+" DockPanel.Dock="Bottom" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
                             </DockPanel>
                         </GroupBox>
->>>>>>> 860481b58057f96de7b542fbe4bdaa8a6d28ee37
+                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+                            <Rectangle Fill="#33CC66" Width="2in"       Height="1in"
+                                       Canvas.Top="25" Canvas.Left="50" 
+                                       StrokeThickness="6px" Stroke="Orange" />
+>>>>>>> e046fd975488a848b9048d9fb91a704106103391
+                        </Canvas>
                     </Canvas>
                 </Border>
             </ScrollViewer>
