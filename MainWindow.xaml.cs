@@ -329,6 +329,7 @@ namespace AP_HA
             if(tool != Tool.CropSize)
             {
                 tool = Tool.CropSize;
+                cropRectangle.Cursor = Cursors.SizeNWSE;
             }           
         }
 
