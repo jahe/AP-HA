@@ -113,11 +113,33 @@ namespace AP_HA
             Project.labels = (HausarbeitAPLabelCT[])result.ToArray(typeof(HausarbeitAPLabelCT));
         }
 
+        private void loadLabels()
+        {
+            marks.Clear();
+
+            foreach (HausarbeitAPLabelCT label in Project.labels)
+            {
+                Mark mark = new Mark();
+                mark.Name = label.title;
+                mark.BrushColor.Color = intToColor(label.color);
+                marks.Add(mark);
+            }
+
+            marksListBox.SelectedIndex = 0;
+        }
+
         private int colorToInt(Color input)
         {
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(input.A, input.R, input.G, input.B);
             string hexColor = System.Drawing.ColorTranslator.ToHtml(myColor).Substring(1);
             return Convert.ToInt32(hexColor, 16);
+        }
+
+        private Color intToColor(int input)
+        {
+            string hexColor = string.Format("{0:x}", input).PadLeft(6, '0');
+            System.Drawing.Color myColor = System.Drawing.ColorTranslator.FromHtml("#" + hexColor);
+            return Color.FromArgb(myColor.A, myColor.R, myColor.G, myColor.B);
         }
     }
 }

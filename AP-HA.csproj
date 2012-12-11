@@ -161,7 +161,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="ShortCut\default.sce">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Resource Include="Icon\pen.png" />
     <Resource Include="PixelShader\FirstEffect.ps" />

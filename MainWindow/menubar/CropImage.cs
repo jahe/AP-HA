@@ -7,6 +7,11 @@ namespace AP_HA
     {
         private void btnCrop_Click(object sender, RoutedEventArgs e)
         {
+            showCropBox();                    
+        }
+
+        private void showCropBox()
+        {
             tool = Tool.CropLocation;
 
             if (cropRectangle.Visibility != Visibility.Visible)
@@ -21,8 +26,8 @@ namespace AP_HA
             else
             {
                 zoomExpander.IsEnabled = true;
-                cropRectangle.Visibility = Visibility.Collapsed;                
-            }                    
-        } 
+                cropRectangle.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

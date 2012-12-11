@@ -16,7 +16,7 @@ namespace AP_HA
                     cutImgsBefore();
                 }
 
-                if (Project.section.z > 0)
+                else if (Project.section.z > 0)
                 {
                     DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section Informationen hinterlegt\nMöchten sie die Section überschreiben?",
                                   "Achtung",

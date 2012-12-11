@@ -39,8 +39,8 @@ namespace AP_HA
                 }
             }
 
-            // update labels in project
-            updateLabels();
+            // load labels in project
+            loadLabels();
         }
 
         private void openProjectFile()
