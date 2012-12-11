@@ -15,9 +15,6 @@ namespace AP_HA
         private void btnPen_Click(object sender, RoutedEventArgs e)
         {
             tool = Tool.Pen;
-
-            if (Project != null)
-                showOriginalStack();
         }
 
         private void btnUndo_Click(object sender, RoutedEventArgs e)
@@ -48,7 +45,7 @@ namespace AP_HA
 
             activeMark.AddPolyline(activeLayer, myPolyline);
             polylineStack.Push(myPolyline);
-            canvas.Children.Add(myPolyline);
+            markCanvas.Children.Add(myPolyline);
         }
 
         private void penMouseMove(object sender, MouseEventArgs e)
@@ -57,7 +54,7 @@ namespace AP_HA
                 return;
 
             // position
-            Point canvasPos = e.GetPosition(canvas);
+            Point canvasPos = e.GetPosition(markCanvas);
 
             // draw on active polyline
             Polyline activeLine = polylineStack.Peek();

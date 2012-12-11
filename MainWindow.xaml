@@ -260,7 +260,7 @@
                 <Border x:Name="canvasWrapper" BorderBrush="Black" BorderThickness="0" Background="#FFD9D9D9">
                     <!--<Canvas Width="{Binding ImgWidth}" Height="{Binding ImgHeight}" x:Name="canvas" Background="#fff" Focusable="True">-->
                     <Canvas Width="0" Height="0" x:Name="canvas" Background="#fff" Focusable="True"
-                            MouseLeftButtonDown="canvasClick" MouseMove="canvasMove" MouseLeftButtonUp="canvasButtonUp">
+                            MouseLeftButtonDown="canvasClick" MouseMove="canvasMove" MouseLeftButtonUp="canvasButtonUp" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True">
                         <Canvas.LayoutTransform>
                             <ScaleTransform x:Name="canvasScaler" ScaleX="{Binding ElementName=zoomSlider, Path=Value}" ScaleY="{Binding ElementName=zoomSlider, Path=Value}"/>
                         </Canvas.LayoutTransform>
@@ -270,14 +270,14 @@
                             </Image.Effect>
                         </Image>
                         
-                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
-                            <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0">
+                        <Canvas Background="Transparent" Name="markCanvas" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0" Panel.ZIndex="999999999">
                                 <DockPanel LastChildFill="True">
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                                         <Button  Content="+" Height="20" HorizontalAlignment="Left" Margin="2" Click="cropBtnLocate" BorderThickness="0" Width="25" Background="#FF6B7386" Foreground="White" FontWeight="Bold" FontSize="15" Padding="0" />
                                         <Button Background="#A3FF0000" BorderThickness="0" Content="x" FontSize="12" Margin="2" FontWeight="Bold" Foreground="White" Height="20" Padding="0" Width="25" Click="cropBtnClose" />
                                     </StackPanel>
-                                    <GroupBox Header="Bitte Bereich auswählen" Name="cropArea" BorderThickness="1" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp" BorderBrush="Red">
+                                    <GroupBox  Name="cropArea" BorderThickness="0" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp" BorderBrush="Red" Background="#50FFFFFF">
                                         <Button Content="CROP" Height="20" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="cropBtn_Click" Background="#9E263453" Foreground="White" BorderThickness="0" Width="39"></Button>
                                     </GroupBox>
                                 </DockPanel>

@@ -141,5 +141,14 @@ namespace AP_HA
             System.Drawing.Color myColor = System.Drawing.ColorTranslator.FromHtml("#" + hexColor);
             return Color.FromArgb(myColor.A, myColor.R, myColor.G, myColor.B);
         }
+
+        private void alignMarksBySection()
+        {
+            double xDiff = SectionView ? Project.section.x * -1.0 : 0;
+            double yDiff = SectionView ? Project.section.y * -1.0 : 0;
+            
+            Canvas.SetLeft(markCanvas, xDiff);
+            Canvas.SetTop(markCanvas, yDiff);
+        }
     }
 }
