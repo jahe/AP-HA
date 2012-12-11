@@ -48,9 +48,9 @@ namespace AP_HA
                 //    cropRectangle.Cursor = Cursors.Arrow;
                 //    break;
 
-                //case Tool.CropSize:
-                //    tool = Tool.None;
-                //    break;
+                case Tool.CropSize:
+                    tool = Tool.None;
+                    break;
 
                 default:
                     break;
@@ -81,9 +81,9 @@ namespace AP_HA
                     cropRectangle.Cursor = Cursors.Arrow;
                     break;
 
-                case Tool.CropSize:
-                    tool = Tool.None;
-                    break;
+                //case Tool.CropSize:
+                //    tool = Tool.None;
+                //    break;
 
                 default:
                     break;
@@ -113,11 +113,11 @@ namespace AP_HA
                 //    penMouseMove(sender, e);
                 //    break;
 
-                //case Tool.CropLocation:
-                //    Point mousePos2 = e.GetPosition(imgControl);
-                //    Canvas.SetLeft(cropRectangle, mousePos2.X);
-                //    Canvas.SetTop(cropRectangle, mousePos2.Y);
-                //    break;
+                case Tool.CropLocation:
+                    Point mousePos2 = e.GetPosition(imgControl);
+                    Canvas.SetLeft(cropRectangle, mousePos2.X);
+                    Canvas.SetTop(cropRectangle, mousePos2.Y);
+                    break;
 
                 //case Tool.CropSize:
                 //    Point mousePos3 = e.GetPosition(imgControl);
@@ -153,11 +153,11 @@ namespace AP_HA
                     penMouseMove(sender, e);
                     break;
 
-                case Tool.CropLocation:
-                    Point mousePos2 = e.GetPosition(imgControl);
-                    Canvas.SetLeft(cropRectangle, mousePos2.X);
-                    Canvas.SetTop(cropRectangle, mousePos2.Y);
-                    break;
+                //case Tool.CropLocation:
+                //    Point mousePos2 = e.GetPosition(imgControl);
+                //    Canvas.SetLeft(cropRectangle, mousePos2.X);
+                //    Canvas.SetTop(cropRectangle, mousePos2.Y);
+                //    break;
 
                 case Tool.CropSize:
                     Point mousePos3 = e.GetPosition(imgControl);

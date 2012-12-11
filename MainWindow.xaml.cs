@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Collections.Generic;
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -25,11 +26,13 @@ namespace AP_HA
         private string workspaceFolder = @"C:\APHA\workspace";
         private HausarbeitAPProjectCT Project;
         private Workspace Workspace;
+        private String windowSizeFilePath = rootAppFolder + @"\windowsize.dat";
 
         #region Constructors
         public MainWindow()
         {
             InitializeComponent();
+            InitializeWindowSize();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
             DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
@@ -154,8 +157,44 @@ namespace AP_HA
         #endregion        
         #endregion        
 
+        private void InitializeWindowSize()
+        {
+            if (File.Exists(windowSizeFilePath))
+            {
+                StreamReader file = new StreamReader(windowSizeFilePath);
+                Size windowSize = new Size();
+                List<String> lines = new List<String>();
+                String line = "";
+
+                for (int i = 0; i < 2 && (line = file.ReadLine()) != null; i++)
+                {
+                    lines.Add(line);
+                }
+
+                file.Close();
+
+                try
+                {
+                    windowSize.Width = Double.Parse(lines[0]);
+                    windowSize.Height = Double.Parse(lines[1]);
+
+                    this.Width = windowSize.Width;
+                    this.Height = windowSize.Height;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            }
+        }
+
         private void MainWindow_Closed(object sender, EventArgs e)
         {
+            // MainWindow Größe in "windowsize.dat" abspeichern
+            StreamWriter sizeFile = new StreamWriter(windowSizeFilePath);
+            sizeFile.Write(this.ActualWidth + "\r\n" + this.ActualHeight);
+            sizeFile.Close();
+
             // Events von den Shortcuts lösen, damit die SC-Engine serialisierbar ist
             scEngine.getShortcutFromName("Zoom In").Execute -= zoomIn;
             scEngine.getShortcutFromName("Zoom Out").Execute -= zoomOut;
@@ -329,6 +368,7 @@ namespace AP_HA
             if(tool != Tool.CropSize)
             {
                 tool = Tool.CropSize;
+                cropRectangle.Cursor = Cursors.SizeNWSE;
             }           
         }
 
