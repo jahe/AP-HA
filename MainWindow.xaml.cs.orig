@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Shapes;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Collections.Generic;
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -25,17 +25,19 @@ namespace AP_HA
         private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         private string workspaceFolder = @"C:\APHA\workspace";
         private HausarbeitAPProjectCT Project;
-        HausarbeitAPSectionCT Section;
         private Workspace Workspace;
+        private String windowSizeFilePath = rootAppFolder + @"\windowsize.dat";
 
         #region Constructors
         public MainWindow()
         {
             InitializeComponent();
+            InitializeWindowSize();
             InitializeMarks();
             //createDefaultSce(@"C:\Users\admin\Desktop");
             DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
             InitializeShortcuts();
+            this.Closed += new EventHandler(MainWindow_Closed);
         }
         #endregion
 
@@ -71,6 +73,19 @@ namespace AP_HA
             {
                 _stackIsCutted = value;
                 OnPropertyChanged("StackIsCutted");
+            }
+        }
+        #endregion
+
+        #region Status Section wird angezeigt
+        private bool _sectionView = false;
+        public bool SectionView
+        {
+            get { return _sectionView; }
+            set
+            {
+                _sectionView = value;
+                OnPropertyChanged("SectionView");
             }
         }
         #endregion
@@ -141,6 +156,64 @@ namespace AP_HA
         }
         #endregion        
         #endregion        
+
+        private void InitializeWindowSize()
+        {
+            if (File.Exists(windowSizeFilePath))
+            {
+                StreamReader file = new StreamReader(windowSizeFilePath);
+                Size windowSize = new Size();
+                List<String> lines = new List<String>();
+                String line = "";
+
+                for (int i = 0; i < 2 && (line = file.ReadLine()) != null; i++)
+                {
+                    lines.Add(line);
+                }
+
+                file.Close();
+
+                try
+                {
+                    windowSize.Width = Double.Parse(lines[0]);
+                    windowSize.Height = Double.Parse(lines[1]);
+
+                    this.Width = windowSize.Width;
+                    this.Height = windowSize.Height;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            }
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            // MainWindow Größe in "windowsize.dat" abspeichern
+            StreamWriter sizeFile = new StreamWriter(windowSizeFilePath);
+            sizeFile.Write(this.ActualWidth + "\r\n" + this.ActualHeight);
+            sizeFile.Close();
+
+            // Events von den Shortcuts lösen, damit die SC-Engine serialisierbar ist
+            scEngine.getShortcutFromName("Zoom In").Execute -= zoomIn;
+            scEngine.getShortcutFromName("Zoom Out").Execute -= zoomOut;
+            scEngine.getShortcutFromName("Scroll In").Execute -= scrollIn;
+            scEngine.getShortcutFromName("Scroll Out").Execute -= scrollOut;
+            scEngine.getShortcutFromName("Increase Brightness").Execute -= incBrightness;
+            scEngine.getShortcutFromName("Decrease Brightness").Execute -= decBrightness;
+            scEngine.getShortcutFromName("Increase Contrast").Execute -= incContrast;
+            scEngine.getShortcutFromName("Decrease Contrast").Execute -= decContrast;
+
+            try
+            {
+                scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
 
         private void registerShortcutFuncs()
         {
@@ -245,9 +318,9 @@ namespace AP_HA
             stackSlider.Value = 0;
             Project = new HausarbeitAPProjectCT();
             Workspace = new Workspace();
-            Section = null;
             StackIsLoaded = false;
             StackIsCutted = false;
+            SectionView = false;
             imgControl.Source = null;
             StatusText = "Bitte einen Stapel oder Projekt öffnen";
             ProjectText = "";
@@ -277,8 +350,33 @@ namespace AP_HA
         {
             settingsWindow = new Settings(scEngine);
             settingsWindow.ShowDialog();
+            /*
+            try
+            {
+                scEngine = null;
+                tempSce.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            scEngine = tempSce;
+             * */
+        }
+        private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(tool != Tool.CropSize)
+            {
+                tool = Tool.CropSize;
+            }           
+        }
 
-            scEngine.Serialize(rootAppFolder + @"\ShortCut\default.sce");
+        private void GroupBox_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (tool == Tool.CropSize)
+            {
+                tool = Tool.None;
+            } 
         }
 
 <<<<<<< HEAD
@@ -314,11 +412,25 @@ namespace AP_HA
                 encoder.Save(stm);
             }
         }
+
 =======
-        private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
+>>>>>>> 8fa3d72410008e1969b4d055e0a622f0cfb7eca7
+        private void cropBtnLocate(object sender, RoutedEventArgs e)
         {
-            tool = Tool.None;
-        }                      
->>>>>>> 860481b58057f96de7b542fbe4bdaa8a6d28ee37
+            if (tool != Tool.CropLocation)
+            {
+                tool = Tool.CropLocation;
+            }
+            else
+            {
+                tool = Tool.None;
+            }
+            
+        }
+
+        private void cropBtnClose(object sender, RoutedEventArgs e)
+        {
+            showCropBox();
+        }       
     }
 }

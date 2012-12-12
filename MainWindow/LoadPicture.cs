@@ -13,9 +13,9 @@ namespace AP_HA
         {
             try
             {
+                BitmapSource stackImage = DataProcessor.getImgFromPath(Project.getPictureFromList(picNo));
                 if (SectionView)
-                {
-                    BitmapSource stackImage = DataProcessor.getImgFromPath(Project.getPictureFromList(picNo));
+                {          
                     Int32Rect rect = new Int32Rect(Project.section.x, Project.section.y, Project.section.width, Project.section.height);
                     CroppedBitmap cb = new CroppedBitmap(stackImage, rect);
                     canvas.Width = cb.PixelWidth;
@@ -26,7 +26,6 @@ namespace AP_HA
                 }
                 else if (!SectionView)
                 {
-                    BitmapSource stackImage = DataProcessor.getImgFromPath(Project.getPictureFromList(picNo));
                     canvas.Width = stackImage.PixelWidth;
                     canvas.Height = stackImage.PixelHeight;
                     imgControl.Source = stackImage;

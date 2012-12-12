@@ -25,7 +25,7 @@ namespace AP_HA
                                    MessageBoxIcon.Question,
                                    MessageBoxDefaultButton.Button2);
 
-                    if (result == System.Windows.Forms.DialogResult.Yes) //Wenn Zip überschrieben werden soll
+                    if (result == System.Windows.Forms.DialogResult.Yes) //Wenn section überschrieben werden soll
                     {
                         cropIt();
                     }
