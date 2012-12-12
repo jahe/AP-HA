@@ -73,8 +73,15 @@ namespace AP_HA
                 System.Windows.Media.Imaging.BitmapSource tiffSource = DataProcessor.getImgFromPath(temppathTIFF);
 
                 Bitmap blankBMP = new Bitmap(tiffSource.PixelWidth, tiffSource.PixelHeight);
+
+                using (Graphics grp = Graphics.FromImage(blankBMP)) 
+                {
+                    SolidBrush brush = new SolidBrush(Color.Black);
+                    grp.FillRectangle(brush, 0, 0, tiffSource.PixelWidth, tiffSource.PixelHeight);
+                }
+
                 string temppathBMP = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".bmp");
-                                
+                
                 blankBMP.Save(temppathBMP);
                 n++;
             }

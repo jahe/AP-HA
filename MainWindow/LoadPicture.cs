@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Collections.Generic;
+using System.IO;
+using System.Drawing;
 
 namespace AP_HA
 {
@@ -30,6 +33,7 @@ namespace AP_HA
                 StatusText = System.IO.Path.GetFileName(Project.getPictureFromList(picNo)) + " | Bild: " + picNo.ToString() + "/" + (Project.totalLayers - 1) +
                                 " Gesamtbildern. | Aktuelle Ansicht von: " + (int)stackSlider.Minimum + " bis " + (int)stackSlider.Maximum + " |";
 
+                loadSavedMarks(picNo);
                 alignMarksBySection();
             }
             catch (Exception e)
@@ -37,6 +41,14 @@ namespace AP_HA
                 MessageBox.Show("Fehler bei der Bild(de)codierung\n" + e.Message + "\nAktueller Stapel muss geschlossen werden");
                 refreshSession();
             }
+        }
+
+        public void loadSavedMarks(int picNo)
+        {
+            string path = Path.Combine(Workspace.TempFolder, picNo.ToString("D" + Project.filePathListBMP.Count.ToString("D").Length) + ".bmp");
+            Console.WriteLine(path);
+            BitmapSource bitmapSource = DataProcessor.getBmpFromPath(path);
+            //savedMarks.Source = bitmapSource;
         }
     }
 }

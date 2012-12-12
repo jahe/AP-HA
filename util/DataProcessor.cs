@@ -2,6 +2,8 @@
 using System.IO;
 using System.IO.Packaging;
 using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.Windows;
 
 namespace AP_HA
 {
@@ -75,13 +77,30 @@ namespace AP_HA
 
         public static BitmapSource getImgFromPath(string path)
         {
-            BitmapSource img;
             Stream imgStreamSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-
             TiffBitmapDecoder decoder = new TiffBitmapDecoder(imgStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            img = decoder.Frames[0];
+            return decoder.Frames[0];
+        }
 
-            return img;
+        public static BitmapSource getBmpFromPath(string path)
+        {
+            // Stream-Variante
+            Stream imgStreamSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            BmpBitmapDecoder decoder = new BmpBitmapDecoder(imgStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            
+            // Uri-Variante
+            //Uri imgUri = new Uri(path);
+            //BmpBitmapDecoder decoder = new BmpBitmapDecoder(imgUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            
+            return decoder.Frames[0];
+        }
+
+        public static BitmapSource BitmapSourceFromBitmap(Bitmap bitmap)
+        {
+            BitmapSource bitSrc = null;
+            var hBitmap = bitmap.GetHbitmap();
+            bitSrc = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            return bitSrc;
         }
     }
 }
