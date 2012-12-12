@@ -24,7 +24,7 @@ namespace AP_HA
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
         private static String rootAppFolder = SpecialDirectories.MyDocuments + @"\JBPMBodyViewer";
-        private string workspaceFolder = SpecialDirectories.MyDocuments + @"\JBPMBodyViewer\Workspace";
+        private string workspaceFolder = rootAppFolder + @"\Workspace";
         private HausarbeitAPProjectCT Project;
         private Workspace Workspace;
         private String windowSizeFilePath = rootAppFolder + @"\Settings\windowsize.dat";

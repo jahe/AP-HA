@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 
 namespace AP_HA
-{       
+{
     public partial class HausarbeitAPProjectCT
     {
         [XmlIgnore()]
@@ -51,9 +51,9 @@ namespace AP_HA
             }
         }
 
-        private int _imgHeight;      
+        private int _imgHeight;
         [XmlIgnore()]
-        public int ImgHeight 
+        public int ImgHeight
         {
             get { return _imgHeight; }
             set
@@ -66,7 +66,7 @@ namespace AP_HA
 
         private int _imgWidth;
         [XmlIgnore()]
-        public int ImgWidth 
+        public int ImgWidth
         {
             get { return _imgWidth; }
             private set
@@ -106,9 +106,9 @@ namespace AP_HA
         }
 
         public bool createZipFromWorkspace(string sourcePath, string targetPath)
-        {            
-            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);            
-            string projectZipPath = System.IO.Path.Combine(d.FullName, name+".zip");
+        {
+            DirectoryInfo d = System.IO.Directory.CreateDirectory(targetPath);
+            string projectZipPath = System.IO.Path.Combine(d.FullName, name + ".zip");
 
             if (File.Exists(projectZipPath)) //Wenn die Zieldatei bereits besteht
             {
@@ -132,52 +132,59 @@ namespace AP_HA
 
                     if (sFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        copyDataToZip(sFD.FileName);                        
+                        copyDataToZip(sFD.FileName);
                     }
                     return true;
                 }
                 else
                 {
                     MessageBox.Show("Das Projekt wurde nicht gespeichert", "Achtung");
-                    return false;                   
+                    return false;
                 }
             }
             else //Wenn keine Datei mit dem Namen existiert
-            {                
+            {
                 copyDataToZip(projectZipPath);
                 return true;
-            }   
+            }
         }
 
         private void copyDataToZip(string destinationPath)
         {
-            using (Package package = Package.Open(destinationPath, FileMode.Create))
+            try
             {
-                FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
-                part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
-                this.SaveToStream(part.GetStream());
-
-                for (int i = 0; i < filePathsTIFF.Length; i++)
+                using (Package package = Package.Open(destinationPath, FileMode.Create))
                 {
-                    FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                    FileName = PackUriHelper.CreatePartUri(new Uri(".\\project.xml", UriKind.Relative));
                     part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+                    this.SaveToStream(part.GetStream());
 
-                    using (FileStream fileStream = new FileStream(filePathsTIFF[i], FileMode.Open, FileAccess.Read))
+                    for (int i = 0; i < filePathsTIFF.Length; i++)
                     {
-                        copyStream(fileStream, part.GetStream());
+                        FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".tif"), UriKind.Relative));
+                        part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+
+                        using (FileStream fileStream = new FileStream(filePathsTIFF[i], FileMode.Open, FileAccess.Read))
+                        {
+                            copyStream(fileStream, part.GetStream());
+                        }
+                    }
+
+                    for (int i = 0; i < filePathsBMP.Length; i++)
+                    {
+                        FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".bmp"), UriKind.Relative));
+                        part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
+
+                        using (FileStream fileStream = new FileStream(filePathsBMP[i], FileMode.Open, FileAccess.Read))
+                        {
+                            copyStream(fileStream, part.GetStream());
+                        }
                     }
                 }
-
-                for (int i = 0; i < filePathsBMP.Length; i++)
-                {
-                    FileName = PackUriHelper.CreatePartUri(new Uri((i.ToString("D" + totalLayers.ToString("D").Length.ToString()) + ".bmp"), UriKind.Relative));
-                    part = package.CreatePart(FileName, String.Empty, CompressionOption.Maximum);
-
-                    using (FileStream fileStream = new FileStream(filePathsBMP[i], FileMode.Open, FileAccess.Read))
-                    {
-                        copyStream(fileStream, part.GetStream());
-                    }
-                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Die Datei konnte nicht an diesem Ort gespeichert werden\n" +exc.Message);
             }
         }
 

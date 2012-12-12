@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace AP_HA
 {
     public partial class MainWindow
-    {        
+    {
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
             if (!StackIsLoaded)
@@ -30,23 +30,22 @@ namespace AP_HA
                     Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\");
                     StatusText = "Projekt wird geöffnet";
                     openProjectFile();
+                    loadLabels();
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
                 {
                     StatusText = "Projekt wird geöffnet";
                     ProjectText = "";
                     openProjectFile();
+                    loadLabels();
                 }
             }
-
-            // load labels in project
-            loadLabels();
         }
 
         private void openProjectFile()
         {
             OpenFileDialog newOpenFileDialog = new OpenFileDialog();
-            newOpenFileDialog.InitialDirectory = @"C:\APHA\Projects\";
+            newOpenFileDialog.InitialDirectory = rootAppFolder + @"\Projects";
             newOpenFileDialog.Filter = "zip files (*.zip)|*.zip";
 
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -56,14 +55,14 @@ namespace AP_HA
         }
 
         private void openProject(string projectName, string sourcePath)
-        {           
+        {
             try
             {
                 refreshSession();
                 Workspace = new Workspace(projectName);
-                Workspace.createFromZip(sourcePath);               
+                Workspace.createFromZip(sourcePath);
                 Project = HausarbeitAPProjectCT.createFromFile(Path.Combine(Workspace.TempFolder, "project.xml"));
-                Project.initFileListFromStack(Workspace.TempFolder);                
+                Project.initFileListFromStack(Workspace.TempFolder);
                 stackSlider.Minimum = 0;
                 stackSlider.Maximum = Project.totalLayers - 1;
                 loadPicture(0);
