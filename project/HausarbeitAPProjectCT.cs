@@ -12,10 +12,13 @@ namespace AP_HA
 {       
     public partial class HausarbeitAPProjectCT
     {
+        [XmlIgnore()]
         public List<string> filePathListTIFF;
+        [XmlIgnore()]
         public string[] filePathsTIFF;
-
+        [XmlIgnore()]
         public List<string> filePathListBMP;
+        [XmlIgnore()]
         public string[] filePathsBMP;
 
         Uri FileName;

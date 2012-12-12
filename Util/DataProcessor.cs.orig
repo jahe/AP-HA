@@ -19,7 +19,7 @@ namespace AP_HA
                 }
                 catch(Exception exc)
                 {
-                    MessageBox.Show("Datei konnte nicht gelöscht werden\n"+exc.Message);
+                    //MessageBox.Show("Datei konnte nicht gelöscht werden\n"+exc.Message);
                 }
             }
         }
@@ -82,6 +82,21 @@ namespace AP_HA
             return decoder.Frames[0];
         }
 
+<<<<<<< HEAD
+        public static BitmapSource getBmpFromPath(string path)
+        {
+            // Stream-Variante
+            //Stream imgStreamSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            //BmpBitmapDecoder decoder = new BmpBitmapDecoder(imgStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                   
+            Uri imgUri = new Uri(path, UriKind.RelativeOrAbsolute);
+            BmpBitmapDecoder decoder = new BmpBitmapDecoder(imgUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            
+            return decoder.Frames[0];
+        }
+
+=======
+>>>>>>> a4d7a108b3c9e46530145f541a639ce85e4e1284
         public static BitmapSource BitmapSourceFromBitmap(Bitmap bitmap)
         {
             BitmapSource bitSrc = null;
