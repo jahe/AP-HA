@@ -8,20 +8,33 @@ namespace AP_HA
     {
         private void exitProgram(object sender, RoutedEventArgs e)        //Menü->Datei->Beenden
         {
-            DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen sie die Anwendung beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
+            if (StackIsLoaded)
+            {
+                DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen sie die Anwendung beenden?\nAlle nicht gespeicherte Projekte gehen verloren!",
                                   "Achtung",
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,
                                    MessageBoxDefaultButton.Button2);
 
-            if (result == System.Windows.Forms.DialogResult.Yes)
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (Directory.Exists(workspaceFolder))
+                    {
+                        DataProcessor.deleteAllSubfolders(workspaceFolder);
+                    }
+
+                    System.Windows.Application.Current.Shutdown();
+                }
+            }
+            else
             {
                 if (Directory.Exists(workspaceFolder))
                 {
                     DataProcessor.deleteAllSubfolders(workspaceFolder);
                 }
+
                 System.Windows.Application.Current.Shutdown();
-            }            
+            }
         }
     }
 }
