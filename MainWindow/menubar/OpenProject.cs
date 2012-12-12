@@ -38,9 +38,6 @@ namespace AP_HA
                     openProjectFile();
                 }
             }
-
-            // load labels in project
-            loadLabels();
         }
 
         private void openProjectFile()
@@ -52,6 +49,8 @@ namespace AP_HA
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 openProject(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName), newOpenFileDialog.FileName);
+                // load labels in project
+                loadLabels();
             }
         }
 
