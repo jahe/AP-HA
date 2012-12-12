@@ -17,7 +17,7 @@ namespace AP_HA
                 }
                 else if (Project.section.depth > 0)
                 {
-                    DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section informationen für 'depth' hinterlegt\nMöchten sie die Daten überschreiben?",
+                    DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section Informationen für 'depth' hinterlegt\nMöchten sie die Daten überschreiben?",
                                   "Achtung",
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,

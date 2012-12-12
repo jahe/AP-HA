@@ -215,6 +215,8 @@ namespace AP_HA
             {
                 MessageBox.Show(exc.Message);
             }
+
+
         }
 
         private void registerShortcutFuncs()
@@ -391,7 +393,6 @@ namespace AP_HA
             {
                 tool = Tool.None;
             }
-            
         }
 
         private void cropBtnClose(object sender, RoutedEventArgs e)

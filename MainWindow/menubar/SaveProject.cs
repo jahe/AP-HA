@@ -6,7 +6,7 @@ namespace AP_HA
     {
         private void menuSaveProject_Click(object sender, RoutedEventArgs e)
         {
-            debugTxtBox.Text = "Aktuelles Projekt wird gespeichert";
+            StatusText = "Aktuelles Projekt wird gespeichert";
             ProjectText = "";
 
             savePicture((int)stackSlider.Value);
