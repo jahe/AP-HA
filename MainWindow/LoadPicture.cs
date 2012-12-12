@@ -4,6 +4,8 @@ using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.IO;
 using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Interop;
 
 namespace AP_HA
 {
@@ -45,9 +47,19 @@ namespace AP_HA
 
         public void loadSavedMarks(int picNo)
         {
-            string path = Path.Combine(Workspace.TempFolder, picNo.ToString("D" + Project.filePathListBMP.Count.ToString("D").Length) + ".bmp");
-            Uri imgUri = new Uri(path, UriKind.RelativeOrAbsolute);
-            savedMarks.Source = new BitmapImage(imgUri);
+            string path = Path.Combine(Workspace.TempFolder, picNo.ToString("D" + Project.filePathListBMP.Count.ToString("D").Length) + @".bmp");
+            //Uri imgUri = new Uri(path, UriKind.RelativeOrAbsolute);
+            //savedMarks.Source = new BitmapImage(imgUri);
+
+            BitmapSource bmpSource;
+            Bitmap bmp;
+
+            bmp = new Bitmap(path);
+            bmp.MakeTransparent(System.Drawing.Color.Black);
+            bmpSource = Imaging.CreateBitmapSourceFromHBitmap(bmp.GetHbitmap(), IntPtr.Zero,Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+
+            //BitmapSource bmpSource = new BitmapImage(new Uri(path));
+            savedMarks.Source = bmpSource;
         }
     }
 }
