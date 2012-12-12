@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Drawing;
+using Microsoft.VisualBasic.FileIO;
 
 namespace AP_HA
 {
     public class Workspace
-    {
-        public string TargetFolder = @"C:\APHA\workspace\";
+    {       
+        private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        public string TargetFolder = SpecialDirectories.MyDocuments + @"\JBPMBodyViewer\Workspace\";
         private Random rd = new Random();
         private int rdNo;
 
@@ -54,7 +56,7 @@ namespace AP_HA
                 Directory.CreateDirectory(TempFolder);
             }
 
-            FileInfo[] tiffFiles = dir.GetFiles("*.tif", SearchOption.TopDirectoryOnly);
+            FileInfo[] tiffFiles = dir.GetFiles("*.tif", System.IO.SearchOption.TopDirectoryOnly);
             List<FileInfo> tiffFilePathList = new List<FileInfo>();
 
             for (int i = 0; i < tiffFiles.Length; i++)
@@ -63,8 +65,7 @@ namespace AP_HA
             }
 
             tiffFilePathList.Sort((a, b) => new StringSorter(a.ToString()).CompareTo(new StringSorter(b.ToString())));
-            
-            
+                        
             foreach (FileInfo file in tiffFilePathList)
             {
                 string temppathTIFF = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".tif");

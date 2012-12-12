@@ -5,13 +5,12 @@ namespace AP_HA
 {
     public partial class CreateProjectDialog
     {
-
         private void openStackFolder(object sender, RoutedEventArgs e)         //CreateProjectDialog->Stapel öffnen
         {
             FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Neuen Bildstapel auswählen";
             openFolderDialog.ShowNewFolderButton = false;
-            openFolderDialog.SelectedPath = @"C:\APHA\";
+            openFolderDialog.SelectedPath = @"C:\";
 
             DialogResult oFDResult = openFolderDialog.ShowDialog();
 
@@ -19,10 +18,6 @@ namespace AP_HA
             {
                 StackPath = openFolderDialog.SelectedPath;
                 NewProjectName = System.IO.Path.GetFileName(StackPath);
-            }
-            else
-            {
-                //Es wurde kein Ordner ausgewählt
             }
         }
     }

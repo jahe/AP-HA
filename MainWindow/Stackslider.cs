@@ -26,24 +26,15 @@ namespace AP_HA
             {
                 CutableLeft = false;
             }
-            /**else if (stackSlider.Value == (double)pictureStack.PictureAmount - 1)
+            else if (stackSlider.Value == (double)Project.totalLayers - 1)
             {
                 CutableRight = false;
-            }**/
+            }
             else
             {
                 CutableLeft = true;
                 CutableRight = true;
             }
-        }
-
-        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (!stackSlider.IsEnabled)
-            {
-                return;
-            }
-            stackSlider.Value += zoomSpeed * e.Delta / Math.Abs(e.Delta);
         }
     }
 }

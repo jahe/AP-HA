@@ -12,7 +12,9 @@ namespace AP_HA
         {
             if (!StackIsLoaded)
             {
-                openStack();
+                StatusText = "Workspace wird erstellt";
+                ProjectText = "";
+                openStack();               
             }
             else
             {
@@ -26,7 +28,7 @@ namespace AP_HA
                 {
                     StatusText = "Projekt wird gespeichert";
                     ProjectText = "";
-                    Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\");
+                    Project.createZipFromWorkspace(Workspace.TempFolder, rootAppFolder + @"\Projects");
                     openStack();
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
@@ -35,7 +37,7 @@ namespace AP_HA
                     openStack();
                 }
             }
-            // update labels in project
+
             updateLabels();
         }
 

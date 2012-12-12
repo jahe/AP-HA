@@ -7,14 +7,16 @@ namespace AP_HA
     {
         private void menuSaveProjectAs_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fBD = new FolderBrowserDialog();
-            DialogResult fBDResult = new DialogResult();
-            fBD.ShowDialog();
+            saveToFolder();
+        }
 
-            if (fBDResult == System.Windows.Forms.DialogResult.OK)
+        private void saveToFolder()
+        {
+            FolderBrowserDialog fBD = new FolderBrowserDialog();
+
+            if (fBD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 savePicture((int)stackSlider.Value);
-
                 Project.createZipFromWorkspace(Workspace.TempFolder, fBD.SelectedPath);
             }
         }

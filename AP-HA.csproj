@@ -51,6 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -72,7 +73,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CreateProjectDialog\ChooseSaveFolder.cs" />
     <Compile Include="CreateProjectDialog\OpenStackFolder.cs" />
     <Compile Include="MainWindow\CropBtnClick.cs" />
     <Compile Include="MainWindow\DeleteSectionFromProject.cs" />

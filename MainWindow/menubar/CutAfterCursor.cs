@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Forms;
-using System;
 
 namespace AP_HA
 {
@@ -15,10 +15,9 @@ namespace AP_HA
                     Project.section = new HausarbeitAPSectionCT();
                     cutImgsAfter();
                 }
-
-                if (Project.section.depth > 0)
+                else if (Project.section.depth > 0)
                 {
-                    DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section informationen hinterlegt\nMöchten sie die Section überschreiben?",
+                    DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section Informationen für 'depth' hinterlegt\nMöchten sie die Daten überschreiben?",
                                   "Achtung",
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,

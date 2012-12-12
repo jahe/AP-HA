@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
+using Microsoft.VisualBasic.FileIO;
 //using System.Xml.Serialization;
 
 namespace AP_HA
@@ -22,11 +23,11 @@ namespace AP_HA
         private ShortCut sc;
         private Tool? tool = Tool.Move;
         private Settings settingsWindow;
-        private static String rootAppFolder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-        private string workspaceFolder = @"C:\APHA\workspace";
+        private static String rootAppFolder = SpecialDirectories.MyDocuments + @"\JBPMBodyViewer";
+        private string workspaceFolder = rootAppFolder + @"\Workspace";
         private HausarbeitAPProjectCT Project;
         private Workspace Workspace;
-        private String windowSizeFilePath = rootAppFolder + @"\windowsize.dat";
+        private String windowSizeFilePath = rootAppFolder + @"\Settings\windowsize.dat";
 
         #region Constructors
         public MainWindow()
@@ -37,6 +38,7 @@ namespace AP_HA
             //createDefaultSce(@"C:\Users\admin\Desktop");
             DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
             InitializeShortcuts();
+            StatusText = "Bitte Bildstapel oder Projekt öffnen";
             this.Closed += new EventHandler(MainWindow_Closed);
         }
         #endregion
@@ -213,6 +215,8 @@ namespace AP_HA
             {
                 MessageBox.Show(exc.Message);
             }
+
+
         }
 
         private void registerShortcutFuncs()
@@ -389,7 +393,6 @@ namespace AP_HA
             {
                 tool = Tool.None;
             }
-            
         }
 
         private void cropBtnClose(object sender, RoutedEventArgs e)
