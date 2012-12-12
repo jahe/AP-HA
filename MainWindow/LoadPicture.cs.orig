@@ -1,0 +1,57 @@
+﻿using System;
+using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Collections.Generic;
+using System.IO;
+using System.Drawing;
+
+namespace AP_HA
+{
+    public partial class MainWindow
+    {        
+        public void loadPicture(int picNo)
+        {
+            try
+            {
+                BitmapSource stackImage = DataProcessor.getImgFromPath(Project.getPictureFromList(picNo));
+
+                if (SectionView)
+                {          
+                    Int32Rect rect = new Int32Rect(Project.section.x, Project.section.y, Project.section.width, Project.section.height);
+                    CroppedBitmap cb = new CroppedBitmap(stackImage, rect);
+                    canvas.Width = cb.PixelWidth;
+                    canvas.Height = cb.PixelHeight;
+                    imgControl.Source = cb;
+                }
+                else if (!SectionView)
+                {
+                    canvas.Width = stackImage.PixelWidth;
+                    canvas.Height = stackImage.PixelHeight;
+                    imgControl.Source = stackImage;                    
+                }
+
+<<<<<<< HEAD
+                StatusText = System.IO.Path.GetFileName(Project.getPictureFromList(picNo)) + " | Bild: " + picNo.ToString() + "/" + (Project.totalLayers - 1) +
+                                " Gesamtbildern. | Aktuelle Ansicht von: " + (int)stackSlider.Minimum + " bis " + (int)stackSlider.Maximum + " |";
+
+=======
+                loadSavedMarks(picNo);
+>>>>>>> d208212389fef16d191e9fbc49d6c5afc2c3c160
+                alignMarksBySection();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Fehler bei der Bild(de)codierung\n" + e.Message + "\nAktueller Stapel muss geschlossen werden");
+                refreshSession();
+            }
+        }
+
+        public void loadSavedMarks(int picNo)
+        {
+            string path = Path.Combine(Workspace.TempFolder, picNo.ToString("D" + Project.filePathListBMP.Count.ToString("D").Length) + ".bmp");
+            Console.WriteLine(path);
+            BitmapSource bitmapSource = DataProcessor.getBmpFromPath(path);
+            //savedMarks.Source = bitmapSource;
+        }
+    }
+}
