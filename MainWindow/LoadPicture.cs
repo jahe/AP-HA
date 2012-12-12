@@ -46,9 +46,8 @@ namespace AP_HA
         public void loadSavedMarks(int picNo)
         {
             string path = Path.Combine(Workspace.TempFolder, picNo.ToString("D" + Project.filePathListBMP.Count.ToString("D").Length) + ".bmp");
-            Console.WriteLine(path);
-            BitmapSource bitmapSource = DataProcessor.getBmpFromPath(path);
-            //savedMarks.Source = bitmapSource;
+            Uri imgUri = new Uri(path, UriKind.RelativeOrAbsolute);
+            savedMarks.Source = new BitmapImage(imgUri);
         }
     }
 }

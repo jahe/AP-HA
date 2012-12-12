@@ -82,18 +82,6 @@ namespace AP_HA
             return decoder.Frames[0];
         }
 
-        public static BitmapSource getBmpFromPath(string path)
-        {
-            // Stream-Variante
-            //Stream imgStreamSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            //BmpBitmapDecoder decoder = new BmpBitmapDecoder(imgStreamSource, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-                   
-            Uri imgUri = new Uri(path, UriKind.RelativeOrAbsolute);
-            BmpBitmapDecoder decoder = new BmpBitmapDecoder(imgUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            
-            return decoder.Frames[0];
-        }
-
         public static BitmapSource BitmapSourceFromBitmap(Bitmap bitmap)
         {
             BitmapSource bitSrc = null;
