@@ -12,15 +12,6 @@ namespace AP_HA
 {
     public partial class HausarbeitAPProjectCT
     {
-        [XmlIgnore()]
-        public List<string> filePathListTIFF;
-        [XmlIgnore()]
-        public string[] filePathsTIFF;
-        [XmlIgnore()]
-        public List<string> filePathListBMP;
-        [XmlIgnore()]
-        public string[] filePathsBMP;
-
         Uri FileName;
         PackagePart part;
 
@@ -50,6 +41,15 @@ namespace AP_HA
                 ChangedProperty(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        [XmlIgnore()]
+        public List<string> filePathListTIFF;
+        [XmlIgnore()]
+        public string[] filePathsTIFF;
+        [XmlIgnore()]
+        public List<string> filePathListBMP;
+        [XmlIgnore()]
+        public string[] filePathsBMP;
 
         private int _imgHeight;
         [XmlIgnore()]
@@ -184,7 +184,7 @@ namespace AP_HA
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Die Datei konnte nicht an diesem Ort gespeichert werden\n" +exc.Message);
+                MessageBox.Show("Die Datei konnte nicht an diesem Ort gespeichert werden\n" + exc.Message);
             }
         }
 
@@ -242,7 +242,6 @@ namespace AP_HA
 
                         ImgHeight = bmpSrc.PixelHeight;
                         ImgWidth = bmpSrc.PixelWidth;
-
                     }
                     catch (Exception e)
                     {

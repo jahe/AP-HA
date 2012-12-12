@@ -43,11 +43,6 @@ namespace AP_HA
                 //    penMouseLeftButtonDown(sender, e);
                 //    break;
 
-                //case Tool.CropLocation:
-                //    tool = Tool.None;
-                //    cropRectangle.Cursor = Cursors.Arrow;
-                //    break;
-
                 case Tool.CropSize:
                     tool = Tool.None;
                     break;
@@ -80,10 +75,6 @@ namespace AP_HA
                     tool = Tool.None;
                     cropRectangle.Cursor = Cursors.Arrow;
                     break;
-
-                //case Tool.CropSize:
-                //    tool = Tool.None;
-                //    break;
 
                 default:
                     break;
@@ -119,12 +110,6 @@ namespace AP_HA
                     Canvas.SetTop(cropRectangle, mousePos2.Y);
                     break;
 
-                //case Tool.CropSize:
-                //    Point mousePos3 = e.GetPosition(imgControl);
-                //    cropRectangle.Width = mousePos3.X - Canvas.GetLeft(cropRectangle) + 13;
-                //    cropRectangle.Height = mousePos3.Y - Canvas.GetTop(cropRectangle) + 7;
-                //    break;
-
                 default:
                     break;
             }
@@ -153,15 +138,9 @@ namespace AP_HA
                     penMouseMove(sender, e);
                     break;
 
-                //case Tool.CropLocation:
-                //    Point mousePos2 = e.GetPosition(imgControl);
-                //    Canvas.SetLeft(cropRectangle, mousePos2.X);
-                //    Canvas.SetTop(cropRectangle, mousePos2.Y);
-                //    break;
-
                 case Tool.CropSize:
                     Point mousePos3 = e.GetPosition(imgControl);
-                    
+
                     double width = mousePos3.X - Canvas.GetLeft(cropRectangle) + 13;
 
                     if (width > 100)
@@ -190,10 +169,6 @@ namespace AP_HA
                     scrollViewer.ReleaseMouseCapture();
                     lastPoint = null;
                     break;
-
-                //case Tool.Pen:
-                //    penMouseLeftButtonUp(sender, e);
-                //    break;
 
                 default:
                     break;

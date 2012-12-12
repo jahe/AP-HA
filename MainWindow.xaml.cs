@@ -38,6 +38,7 @@ namespace AP_HA
             //createDefaultSce(@"C:\Users\admin\Desktop");
             DataProcessor.deleteAllSubfolders(workspaceFolder); //\Workspace\ leeren
             InitializeShortcuts();
+            StatusText = "Bitte Bildstapel oder Projekt öffnen";
             this.Closed += new EventHandler(MainWindow_Closed);
         }
         #endregion

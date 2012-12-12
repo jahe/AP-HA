@@ -19,7 +19,7 @@ namespace AP_HA
                 }
                 else
                 {
-                    DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section informationen hinterlegt\nMöchten sie die Section überschreiben?",
+                    DialogResult result = System.Windows.Forms.MessageBox.Show("Es sind bereits Section Informationen für 'crop' hinterlegt\nMöchten sie die Daten überschreiben?",
                                   "Achtung",
                                    MessageBoxButtons.YesNo,
                                    MessageBoxIcon.Question,

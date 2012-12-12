@@ -18,10 +18,10 @@ namespace AP_HA
         {
             _strings = new List<string>();
             _numbers = new List<int>();
-            
+
             int position = 0;
             bool isNumber = false;
-            
+
             while (position < str.Length)
             {
                 int len = 0;
@@ -30,7 +30,7 @@ namespace AP_HA
                 {
                     len++;
                 }
-                
+
                 if (isNumber)
                 {
                     _numbers.Add(int.Parse(str.Substring(position, len)));
@@ -57,16 +57,16 @@ namespace AP_HA
                 if (result != 0)
                 {
                     return result;
-                } 
+                }
 
                 if (index < _numbers.Count && index < other._numbers.Count)
                 {
                     result = _numbers[index].CompareTo(other._numbers[index]);
-                    
+
                     if (result != 0)
                     {
                         return result;
-                    } 
+                    }
                 }
 
                 index++;

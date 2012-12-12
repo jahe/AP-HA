@@ -14,6 +14,7 @@ namespace AP_HA
                 StatusText = "Projekt wird geöffnet";
                 ProjectText = "";
                 openProjectFile();
+                loadLabels();
             }
             else
             {

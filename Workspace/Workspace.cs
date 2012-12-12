@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Drawing;
 using Microsoft.VisualBasic.FileIO;
 
 namespace AP_HA
@@ -65,8 +65,7 @@ namespace AP_HA
             }
 
             tiffFilePathList.Sort((a, b) => new StringSorter(a.ToString()).CompareTo(new StringSorter(b.ToString())));
-            
-            
+                        
             foreach (FileInfo file in tiffFilePathList)
             {
                 string temppathTIFF = Path.Combine(TempFolder, n.ToString("D" + tiffFiles.Count().ToString("D").Length.ToString()) + ".tif");
