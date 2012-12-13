@@ -12,8 +12,8 @@ namespace AP_HA
             if (polylineStack.Count == 0)
                 return;
             
-            int Height = (int)this.markCanvas.ActualHeight;
-            int Width = (int)this.markCanvas.ActualWidth;
+            int Height = (int)this.Project.height;
+            int Width = (int)this.Project.width;
 
             RenderTargetBitmap bmp = new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
             bmp.Render(this.markCanvas);
@@ -29,6 +29,7 @@ namespace AP_HA
             }
 
             polylineStack.Clear();
+            markCanvas.Children.RemoveRange(2, markCanvas.Children.Count - 2);
         }
     }
 }
