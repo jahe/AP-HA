@@ -8,7 +8,6 @@ namespace AP_HA
         {
             StatusText = "Aktuelles Projekt wird gespeichert";
             ProjectText = "";
-
             savePicture((int)stackSlider.Value);
 
             if(Project.createZipFromWorkspace(Workspace.TempFolder, rootAppFolder + @"\Projects"))

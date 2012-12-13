@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AP_HA
 {
@@ -86,7 +82,6 @@ namespace AP_HA
                 sc.register(moveDir);
                 shootScChanged();
                 sc.register(MouseMoveDirection.None);
-
                 lastMovePoint = mousePos;
             }
             else
