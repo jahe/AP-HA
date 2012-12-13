@@ -367,6 +367,7 @@ namespace AP_HA
             scEngine = tempSce;
              * */
         }
+
         private void cropRectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if(tool != Tool.CropSize)
