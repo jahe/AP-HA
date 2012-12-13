@@ -99,6 +99,7 @@ namespace AP_HA
                 SaveToStream(s);
             }
         }
+
         public void SaveToStream(Stream stream)
         {
             XmlSerializer x = new XmlSerializer(typeof(HausarbeitAPProjectCT));
