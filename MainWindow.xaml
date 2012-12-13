@@ -271,10 +271,10 @@
                             <Image Name="savedMarks" />
                             <GroupBox Canvas.Left="-153" Canvas.Top="-157" Height="196" Name="cropRectangle" Width="255" Visibility="Collapsed" BorderThickness="0" Panel.ZIndex="999999999">
                                 <DockPanel LastChildFill="True">
-                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                    <!--<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                                         <Button  Content="+" Height="20" HorizontalAlignment="Left" Margin="2" Click="cropBtnLocate" BorderThickness="0" Width="25" Background="#FF6B7386" Foreground="White" FontWeight="Bold" FontSize="15" Padding="0" />
                                         <Button Background="#A3FF0000" BorderThickness="0" Content="x" FontSize="12" Margin="2" FontWeight="Bold" Foreground="White" Height="20" Padding="0" Width="25" Click="cropBtnClose" />
-                                    </StackPanel>
+                                    </StackPanel>-->
                                     <GroupBox  Name="cropArea" BorderThickness="0" MouseDown="cropRectangle_MouseDown"  Foreground="Red" MouseUp="GroupBox_MouseUp" BorderBrush="Red" Background="#50FFFFFF">
                                         <Button Content="CROP" Height="20" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="cropBtn_Click" Background="#9E263453" Foreground="White" BorderThickness="0" Width="39"></Button>
                                     </GroupBox>

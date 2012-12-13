@@ -21,12 +21,16 @@ namespace AP_HA
                     CroppedBitmap cb = new CroppedBitmap(stackImage, rect);
                     canvas.Width = cb.PixelWidth;
                     canvas.Height = cb.PixelHeight;
+                    markCanvas.Width = Project.width;
+                    markCanvas.Width = Project.height;
                     imgControl.Source = cb;
                 }
                 else if (!SectionView)
                 {
                     canvas.Width = stackImage.PixelWidth;
                     canvas.Height = stackImage.PixelHeight;
+                    markCanvas.Width = Project.width;
+                    markCanvas.Width = Project.height;
                     imgControl.Source = stackImage;                    
                 }
 

@@ -12,6 +12,7 @@ namespace AP_HA
         {
             try
             {
+                SectionView = false;
                 savePicture((int)e.OldValue);
                 loadPicture((int)e.NewValue);
                 displayLayerMarks((int)e.NewValue);
