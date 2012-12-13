@@ -23,7 +23,7 @@ namespace AP_HA
                 return;
 
             Polyline lastPolyline = polylineStack.Pop();
-            canvas.Children.Remove(lastPolyline);
+            markCanvas.Children.Remove(lastPolyline);
         }
 
         private void penMouseLeftButtonDown(object sender, MouseEventArgs e)

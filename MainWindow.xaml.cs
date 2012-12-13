@@ -399,6 +399,6 @@ namespace AP_HA
         private void cropBtnClose(object sender, RoutedEventArgs e)
         {
             showCropBox();
-        }       
+        }  
     }
 }
