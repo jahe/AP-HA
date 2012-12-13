@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Media.Imaging;
-using System.Collections.Generic;
-using System.IO;
 using System.Drawing;
-using System.Windows.Media;
+using System.IO;
+using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 
 namespace AP_HA
 {

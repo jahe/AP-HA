@@ -6,15 +6,16 @@ using System.Windows.Forms;
 namespace AP_HA
 {
     public partial class MainWindow
-    {
+    {        
         private void menuOpenProject_Click(object sender, RoutedEventArgs e)
         {
             if (!StackIsLoaded)
             {
                 StatusText = "Projekt wird geöffnet";
                 ProjectText = "";
-                openProjectFile();
-                loadLabels();
+
+                if (openProjectFile())
+                    loadLabels();
             }
             else
             {
@@ -30,20 +31,22 @@ namespace AP_HA
                     ProjectText = "";
                     Project.createZipFromWorkspace(Workspace.TempFolder, @"C:\APHA\Projects\");
                     StatusText = "Projekt wird geöffnet";
-                    openProjectFile();
-                    loadLabels();
+                    
+                    if (openProjectFile())
+                        loadLabels();
                 }
                 else if (result == System.Windows.Forms.DialogResult.No)
                 {
                     StatusText = "Projekt wird geöffnet";
                     ProjectText = "";
-                    openProjectFile();
-                    loadLabels();
+                    
+                    if (openProjectFile())
+                        loadLabels();
                 }
-            }
+            }          
         }
 
-        private void openProjectFile()
+        private bool openProjectFile()
         {
             OpenFileDialog newOpenFileDialog = new OpenFileDialog();
             newOpenFileDialog.InitialDirectory = rootAppFolder + @"\Projects";
@@ -51,32 +54,31 @@ namespace AP_HA
 
             if (newOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                openProject(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName), newOpenFileDialog.FileName);
-                // load labels in project
-                loadLabels();
+                try
+                {
+                    refreshSession();
+                    Workspace = new Workspace(System.IO.Path.GetFileNameWithoutExtension(newOpenFileDialog.SafeFileName));
+                    Workspace.createFromZip(newOpenFileDialog.FileName);
+                    Project = HausarbeitAPProjectCT.createFromFile(Path.Combine(Workspace.TempFolder, "project.xml"));
+                    Project.initFileListFromStack(Workspace.TempFolder);
+                    stackSlider.Minimum = 0;
+                    stackSlider.Maximum = Project.totalLayers - 1;
+                    loadPicture(0);
+                    StackIsLoaded = true;
+                    SectionView = false;
+                    ProjectText = Project.description;
+                    this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.name);
+                    return true;
+                }
+                catch (Exception exc)
+                {
+                    System.Windows.Forms.MessageBox.Show("Das Projekt konnte nicht geöffnet werden\n" + exc.Message + exc.InnerException, "Achtung");
+                    return false;
+                }
             }
-        }
-
-        private void openProject(string projectName, string sourcePath)
-        {
-            try
+            else
             {
-                refreshSession();
-                Workspace = new Workspace(projectName);
-                Workspace.createFromZip(sourcePath);
-                Project = HausarbeitAPProjectCT.createFromFile(Path.Combine(Workspace.TempFolder, "project.xml"));
-                Project.initFileListFromStack(Workspace.TempFolder);
-                stackSlider.Minimum = 0;
-                stackSlider.Maximum = Project.totalLayers - 1;
-                loadPicture(0);
-                StackIsLoaded = true;
-                SectionView = false;
-                ProjectText = Project.description;
-                this.Title = System.IO.Path.GetFileNameWithoutExtension(Project.name);
-            }
-            catch (Exception exc)
-            {
-                System.Windows.Forms.MessageBox.Show("Das Projekt konnte nicht geöffnet werden\n" + exc.Message + exc.InnerException, "Achtung");
+                return false;
             }
         }
     }
