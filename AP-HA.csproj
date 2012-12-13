@@ -78,7 +78,6 @@
     <Compile Include="MainWindow\DeleteSectionFromProject.cs" />
     <Compile Include="MainWindow\menubar\CropImage.cs" />
     <Compile Include="MainWindow\menubar\ExitProject.cs" />
-    <Compile Include="MainWindow\menubar\SaveCuttingsToProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProject.cs" />
     <Compile Include="MainWindow\menubar\SaveProjectTo.cs" />
     <Compile Include="MainWindow\menubar\ShowCutted.cs" />
