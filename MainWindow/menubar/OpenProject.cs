@@ -43,8 +43,7 @@ namespace AP_HA
                     if (openProjectFile())
                         loadLabels();
                 }
-            }
-           
+            }          
         }
 
         private bool openProjectFile()

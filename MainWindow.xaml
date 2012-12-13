@@ -88,14 +88,14 @@
                 <Button Name="btnZoomOut" Click="btnZoomOut_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/zoom-out.png" />
                 </Button>-->
-                <Button Name="btnMove" Click="btnMove_Click">
+                <Button IsEnabled="{Binding StackIsLoaded}" Name="btnMove" Click="btnMove_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/cursor_move.png" />
                 </Button>
                 <Separator Background="#FF888888" Margin="3,1"></Separator>
-                <Button Name="btnPen" Click="btnPen_Click">
-                    <Image Width="17" Height="17" Source="/AP-HA;component/icon/pen.png" />
+                <Button IsEnabled="{Binding StackIsLoaded}" Name="btnPen" Click="btnPen_Click">
+                    <Image  Width="17" Height="17" Source="/AP-HA;component/icon/pen.png" />
                 </Button>
-                <Button Name="btnUndo" Click="btnUndo_Click">
+                <Button IsEnabled="{Binding StackIsLoaded}" Name="btnUndo" Click="btnUndo_Click">
                     <Image Width="17" Height="17" Source="/AP-HA;component/icon/undo.png" />
                 </Button>
             </ToolBar>

@@ -52,7 +52,7 @@ namespace AP_HA
                 try
                 {
                     Workspace = new Workspace(createProjectDialog.NewProjectName);
-                    Workspace.copyStackFolder(createProjectDialog.StackPath);
+                    Workspace.createFromPictureStack(createProjectDialog.StackPath);
                     Project = new HausarbeitAPProjectCT(createProjectDialog.NewProjectName);
                     Project.description = createProjectDialog.NewProjectDescription;
                     Project.initFileListFromStack(Workspace.TempFolder);

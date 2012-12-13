@@ -41,7 +41,7 @@ namespace AP_HA
             DataProcessor.extractToDirectory(zipPath, TempFolder);           
         }
         
-        public void copyStackFolder(string sourceFolder)
+        public void createFromPictureStack(string sourceFolder)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceFolder);
             int n = 0;
